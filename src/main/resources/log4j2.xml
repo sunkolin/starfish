@@ -1,0 +1,88 @@
+<Configuration status="WARN" monitorInterval="1800">
+    <properties>
+        <property name="log_home">/opt/logs/sunny</property>
+    </properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT" follow="false">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} %msg%n"/>
+        </Console>
+
+        <RollingFile name="RootAppender" fileName="${log_home}/root.log" filePattern="${log_home}/debug-%d{yyyy-MM-dd}.log">
+            <Filters>
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="NEUTRAL"/>
+            </Filters>
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="DebugAppender" fileName="${log_home}/debug.log" filePattern="${log_home}/debug-%d{yyyy-MM-dd}.log">
+            <Filters>
+                <ThresholdFilter level="info" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="InfoAppender" fileName="${log_home}/info.log" filePattern="${log_home}/info-%d{yyyy-MM-dd}.log">
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="WarnAppender" fileName="${log_home}/warn.log" filePattern="${log_home}/warn-%d{yyyy-MM-dd}.log">
+            <Filters>
+                <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="ErrorAppender" fileName="${log_home}/error.log" filePattern="${log_home}/error-%d{yyyy-MM-dd}.log">
+            <Filters>
+                <ThresholdFilter level="fatal" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="FatalAppender" fileName="${log_home}/fatal.log" filePattern="${log_home}/fatal-%d{yyyy-MM-dd}.log">
+            <Filters>
+                <ThresholdFilter level="fatal" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RootAppender"/>
+            <AppenderRef ref="DebugAppender"/>
+            <AppenderRef ref="InfoAppender"/>
+            <AppenderRef ref="WarnAppender"/>
+            <AppenderRef ref="ErrorAppender"/>
+            <AppenderRef ref="FatalAppender"/>
+        </Root>
+    </Loggers>
+
+</Configuration> 
