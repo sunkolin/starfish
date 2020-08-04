@@ -1,6 +1,6 @@
 <Configuration status="WARN" monitorInterval="1800">
     <properties>
-        <property name="log_home">/opt/logs/sunny</property>
+        <property name="log_home">/opt/logs/starfish</property>
     </properties>
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT" follow="false">

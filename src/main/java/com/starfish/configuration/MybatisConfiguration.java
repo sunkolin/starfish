@@ -19,7 +19,7 @@ import java.util.Properties;
 
 @Deprecated
 @Configuration
-@MapperScan(basePackages = {"com.sunny.**.dao"})
+@MapperScan(basePackages = {"com.starfish.**.dao"})
 public class MybatisConfiguration {
 
     private static Logger logger = LoggerFactory.getLogger(MybatisConfiguration.class);

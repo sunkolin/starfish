@@ -17,7 +17,7 @@ public class ValidatorTest {
     public void emailTest() {
         boolean result = true;
         try {
-            Validator.validateEmail("sunny@qq.com", -1, "邮箱格式不正确");
+            Validator.validateEmail("starfish@qq.com", -1, "邮箱格式不正确");
         } catch (Exception e) {
             result = false;
         }

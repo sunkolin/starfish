@@ -65,4 +65,9 @@ public class Constant {
      */
     public static final String REQUEST_START_TIME = "REQUEST_START_TIME";
 
+    /**
+     * 框架版本
+     */
+    public static final String FRAMEWORK_VERSION = "1.0.0-SNAPSHOT";
+
 }

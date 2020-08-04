@@ -40,9 +40,9 @@ public class CommonUtilTest {
 
     @Test
     public void testExistClass() {
-        assertTrue( CommonUtil.existClass("com.sunny.util.CommonUtil"));
+        assertTrue( CommonUtil.existClass("com.starfish.util.CommonUtil"));
 
-        assertFalse(CommonUtil.existClass("com.sunny.util.CommonUtil2"));
+        assertFalse(CommonUtil.existClass("com.starfish.util.CommonUtil2"));
     }
 
     @Test
