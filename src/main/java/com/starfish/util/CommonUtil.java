@@ -314,4 +314,14 @@ public final class CommonUtil {
         return ThreadLocalRandom.current().nextLong(min, max);
     }
 
+    /**
+     * 移除特殊字符
+     *
+     * @param string 字符串
+     * @return 结果
+     */
+    public static String removeSpecialCharacter(String string) {
+        return string.replace("\\", "").replace("/", "").replace("*", "").replace("?", "").replace("\"", "").replace(":", "").replace("<", "").replace(">", "").replace("|", "");
+    }
+
 }
