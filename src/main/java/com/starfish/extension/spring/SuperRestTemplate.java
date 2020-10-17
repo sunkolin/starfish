@@ -32,7 +32,7 @@ public class SuperRestTemplate extends RestTemplate {
         supportJavascript(messageConverters);
     }
 
-    public SuperRestTemplate buildSuperRestTemplate() {
+    public static SuperRestTemplate buildSuperRestTemplate() {
         return new SuperRestTemplate();
     }
 
