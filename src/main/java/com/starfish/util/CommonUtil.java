@@ -8,10 +8,12 @@ import com.starfish.enums.ResultEnum;
 import com.starfish.exception.CustomException;
 import com.starfish.model.Result;
 import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.util.Strings;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -33,6 +36,11 @@ import java.util.concurrent.ThreadLocalRandom;
 @SuppressWarnings(value = "unused")
 @Slf4j
 public final class CommonUtil {
+
+    /**
+     * 问好
+     */
+    public static final String QUESTION_MARK = "?";
 
     /**
      * sensitive words list
@@ -322,6 +330,56 @@ public final class CommonUtil {
      */
     public static String removeSpecialCharacter(String string) {
         return string.replace("\\", "").replace("/", "").replace("*", "").replace("?", "").replace("\"", "").replace(":", "").replace("<", "").replace(">", "").replace("|", "");
+    }
+
+    /**
+     * 截取第一个字符串，
+     *
+     * @param string1 字符串1，例如http//:www.baidu.com/xxx.png?a=123456
+     * @param string2 字符串2，例如?
+     * @return 结果，例如http//:www.baidu.com/xxx.png
+     */
+    public static String substring(String string1, String string2) {
+        int index = string1.indexOf(string2);
+        if (index != -1) {
+            return string1.substring(0, index);
+        }
+        return string1;
+    }
+
+    /**
+     * 拼接参数到链接后
+     *
+     * @param url    链接地址
+     * @param params 参数
+     * @return 结果
+     */
+    public static String contact(String url, Map<String, Object> params) {
+        // 参数为空，则直接返回url
+        if (CollectionUtils.isEmpty(params)) {
+            return url == null ? "" : url;
+        }
+
+        // 参数不为空，拼接k=v字符串
+        String paramsString = Joiner.on("&").useForNull("").withKeyValueSeparator("=").join(params);
+
+        // 链接为空，直接返回拼接的字符串
+        if (Strings.isNullOrEmpty(url)) {
+            return paramsString;
+        }
+
+        // 链接不为空，拼接字符串
+        if (url.contains("?")) {
+            url = url.concat("&").concat(paramsString);
+        } else {
+            url = url.concat("?").concat(paramsString);
+        }
+
+        return url;
+    }
+
+    public static String contact(Map<String, Object> params) {
+        return contact("", params);
     }
 
 }

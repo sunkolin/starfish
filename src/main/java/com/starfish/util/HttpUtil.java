@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Strings;
 import com.starfish.enums.ResultEnum;
 import com.starfish.exception.CustomException;
-import com.starfish.extension.spring.RestTemplateTool;
 import com.starfish.model.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -71,7 +70,7 @@ public class HttpUtil {
         // 判断是否可以访问
         boolean result = false;
         try {
-            RestTemplate restTemplate = RestTemplateTool.buildRestTemplate();
+            RestTemplate restTemplate = new RestTemplate();
             HttpHeaders httpHeaders = restTemplate.headForHeaders(url);
             String contentType = httpHeaders.getFirst("Content-Type");
             log.info("check media url result,response contentType={}", contentType);
