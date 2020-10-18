@@ -22,6 +22,16 @@ public class CookieUtil {
     public static transient String PATH = "/";
 
     /**
+     * EMPTY
+     */
+    public static transient String EMPTY = "";
+
+    /**
+     * 域名根据.分隔的长度
+     */
+    public static transient int DOMAIN_LENGTH = 2;
+
+    /**
      * cookie默认过期时间
      */
     public static final int DEFAULT_MAX_AGE = 7 * 24 * 60 * 60 * 1000;
@@ -39,7 +49,7 @@ public class CookieUtil {
      * @return cookie值
      */
     public static String getCookie(HttpServletRequest request, String name) {
-        String result = "";
+        String result = EMPTY;
         Cookie[] cookieArray = request.getCookies();
         if (cookieArray != null) {
             for (Cookie cookie : cookieArray) {
@@ -149,7 +159,7 @@ public class CookieUtil {
 
     public static String getDomain(String domain) {
         String[] splits = domain.split("\\.");
-        if (splits.length >= 2) {
+        if (splits.length >= DOMAIN_LENGTH) {
             return "." + splits[splits.length - 2] + "." + splits[splits.length - 1];
         }
         return domain;

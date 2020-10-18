@@ -187,19 +187,19 @@ public class CompressUtil {
      * 计算相对路径
      */
     private static String calculateRelativePath(String basePath, String filePath) {
-        String relativePath = "";
+        StringBuilder relativePath = new StringBuilder();
 
         File file = new File(filePath);
         File baseFile = new File(basePath);
         while (!file.getAbsolutePath().equalsIgnoreCase(baseFile.getAbsolutePath())) {
-            relativePath = file.getName() + File.separator + relativePath;
+            relativePath.insert(0, file.getName() + File.separator);
             file = file.getParentFile();
         }
-        if (relativePath.endsWith(File.separator)) {
-            relativePath = relativePath.substring(0, relativePath.length() - 1);
+        if (relativePath.toString().endsWith(File.separator)) {
+            relativePath = new StringBuilder(relativePath.substring(0, relativePath.length() - 1));
         }
 
-        return relativePath;
+        return relativePath.toString();
     }
 
     /**
