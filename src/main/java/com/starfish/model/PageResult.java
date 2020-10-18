@@ -13,10 +13,11 @@ import java.util.List;
  * @since 2015-04-13
  */
 @Data
+@SuppressWarnings(value = "serial,unused")
 public class PageResult<T> implements Serializable {
 
     /**
-     * total count，is not necessary
+     * total count，optional
      */
     private Long total;
 

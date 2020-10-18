@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * general model
+ * BasicModel
  *
  * @author sunny
  * @version 1.0.0

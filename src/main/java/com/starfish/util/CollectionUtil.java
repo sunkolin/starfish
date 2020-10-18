@@ -21,6 +21,7 @@ import java.util.*;
  * @version 1.0.0
  * @since 2016-05-17
  */
+@SuppressWarnings(value = "unused")
 @Slf4j
 public class CollectionUtil {
 
@@ -32,7 +33,7 @@ public class CollectionUtil {
      * @param <T>   T
      * @return 排序后的数组
      */
-    public static <T extends Comparable> T[] sort(T[] array, final String order) {
+    public static <T extends Comparable<T>> T[] sort(T[] array, final String order) {
         //排序
         Arrays.sort(array);
 
@@ -159,7 +160,7 @@ public class CollectionUtil {
      * @return 排序后的列表
      */
     public static <T> List<T> sort(List<T> list, String order, Comparator<? super T> comparator) {
-        Collections.sort(list, comparator);
+        list.sort(comparator);
         if (SortConstant.DESC.equalsIgnoreCase(order)) {
             Collections.reverse(list);
         }
@@ -244,7 +245,7 @@ public class CollectionUtil {
 
         //自定义排序
         ArrayList<Map.Entry<K, V>> list = new ArrayList<>(map.entrySet());
-        Collections.sort(list, comparator);
+        list.sort(comparator);
 
         //反转
         if (SortConstant.DESC.equalsIgnoreCase(order)) {
@@ -267,13 +268,7 @@ public class CollectionUtil {
      */
     public static void remove(Map<String, ?> map, String key) {
         Validator.validateNotNull(map, -1, "map must not be null");
-        Iterator<String> iterator = map.keySet().iterator();
-        while (iterator.hasNext()) {
-            String k = iterator.next();
-            if (k != null && k.contains(key)) {
-                iterator.remove();
-            }
-        }
+        map.keySet().removeIf(k -> k != null && k.contains(key));
     }
 
     @SuppressWarnings("unchecked")

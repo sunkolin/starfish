@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -45,10 +44,10 @@ public final class CommonUtil {
     /**
      * sensitive words list
      */
-    private static List<String> sensitiveWordList = new ArrayList<>();
+    private static final List<String> SENSITIVE_WORD_LIST;
 
     static {
-        sensitiveWordList = FileUtil.readLines("classpath:words.txt");
+        SENSITIVE_WORD_LIST = FileUtil.readLines("classpath:words.txt");
     }
 
     /**
@@ -91,6 +90,7 @@ public final class CommonUtil {
         for (StackTraceElement element : elements) {
             if (element.getMethodName().equals(methodName)) {
                 find = true;
+                break;
             }
         }
         if (!find) {
@@ -125,7 +125,7 @@ public final class CommonUtil {
     public static String getResourceParentPath(Class<?> cls) {
         String path = cls.getResource("").getPath();
         path = path.replace("%20", " ");
-        if (path.startsWith("/")) {
+        if (path.startsWith(File.separator)) {
             path = path.substring(1);
         }
         return path;
@@ -218,38 +218,12 @@ public final class CommonUtil {
         // default flag is false
         boolean flag = false;
         for (String word : words) {
-            if (sensitiveWordList.contains(word)) {
+            if (SENSITIVE_WORD_LIST.contains(word)) {
                 flag = true;
                 break;
             }
         }
         return flag;
-    }
-
-    /**
-     * get the mobile location
-     * 查询手机号地址
-     * 已经失效了
-     *
-     * @param mobile the mobile number
-     * @return the address,format : mobile##corporation##province##city
-     */
-    @Deprecated
-    public static String getMobileLocation(String mobile) {
-        //call remote interface
-        String result = new RestTemplate().getForObject("http://virtual.paipai.com/extinfo/GetMobileProductInfo?amount=10000&callname=getPhoneNumInfoExtCallback&mobile=" + mobile, String.class);
-
-        //process the result,the result format is :
-        // getPhoneNumInfoExtCallback({mobile:'15850781443',province:'江苏',isp:'中国移动',stock:'1',amount:'10000',maxprice:'0',minprice:'0',cityname:'南京'});
-        //<!--[if !IE]>|xGv00|6741027ad78d9b06f5642b25ebcb1536<![endif]-->
-        result = result.replace("getPhoneNumInfoExtCallback(", "");
-        result = result.substring(0, result.lastIndexOf(");"));
-
-        JSONObject jsonObject = JSON.parseObject(result);
-        result = Joiner.on("##").join(jsonObject.getString("mobile"), jsonObject.getString("isp"), jsonObject.getString("province"), jsonObject.getString("cityname"));
-
-        //return
-        return result;
     }
 
     /**
@@ -261,16 +235,15 @@ public final class CommonUtil {
     public static String weather(String cityName) {
         String url = "http://apis.baidu.com/apistore/weatherservice/recentweathers?cityname={cityName}";
         url = url.replace("{cityName}", cityName);
-//        url = url.replace("{cityId}",cityId);
 
         //设置请求头 apiKey
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("apikey", Constant.BAIDU_API_KEY);
-        HttpEntity httpEntity = new HttpEntity(httpHeaders);
+        HttpEntity<String> httpEntity = new HttpEntity<>(httpHeaders);
 
-        ResponseEntity data = restTemplate.exchange(url, HttpMethod.GET, httpEntity, String.class);
-        String jsonResult = (String) data.getBody();
+        ResponseEntity<String> data = restTemplate.exchange(url, HttpMethod.GET, httpEntity, String.class);
+        String jsonResult = data.getBody();
         System.out.println(jsonResult);
         return jsonResult;
     }

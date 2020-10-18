@@ -36,13 +36,13 @@ public class BeanUtil {
     }
 
     private static void getClass(Class<?> clazz, HashMap<String, Object> map, Object obj) {
-        if (clazz.getSimpleName().equals("Object")) {
+        if ("Object".equals(clazz.getSimpleName())) {
             return;
         }
 
         //取得所有字段，包括公共、保护、默认（包）访问和私有字段 ，但是不包含集成的地段
         Field[] fields = clazz.getDeclaredFields();
-        if (fields == null || fields.length <= 0) {
+        if (fields.length <= 0) {
             throw new CustomException(ResultEnum.FIELD_COUNT_IS_ZERO);
         }
 
