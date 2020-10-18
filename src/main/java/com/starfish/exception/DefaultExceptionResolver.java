@@ -21,6 +21,7 @@ import java.util.Map;
  * @version 1.0.0
  * @since 2015-12-02
  */
+@SuppressWarnings(value = "serial,unused")
 @Component
 public class DefaultExceptionResolver implements HandlerExceptionResolver {
 
@@ -29,9 +30,9 @@ public class DefaultExceptionResolver implements HandlerExceptionResolver {
     @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         Map<String, String> map = new HashMap<>();
-        Enumeration parameterNames = request.getParameterNames();
+        Enumeration<String> parameterNames = request.getParameterNames();
         while (parameterNames.hasMoreElements()) {
-            String key = parameterNames.nextElement().toString();
+            String key = parameterNames.nextElement();
             String value = request.getParameter(key);
             map.put(key, value);
         }

@@ -2,13 +2,15 @@ package com.starfish.exception;
 
 import com.starfish.enums.ResultEnum;
 
+import java.io.Serializable;
+
 /**
  * @author sunny
  * @version 1.0.0
  * @since 2013-5-7
  */
 @SuppressWarnings(value = "serial,unused")
-public class CustomException extends RuntimeException {
+public class CustomException extends RuntimeException implements Serializable {
 
     /**
      * code
