@@ -22,8 +22,8 @@ public class TimeBasedResult<T> extends Result<T> implements Serializable {
     private long requestTime;
 
     /**
-     * 请求时长，单位毫秒
+     * 请求耗时，单位毫秒
      */
-    private long time;
+    private long elapsedTime;
 
 }

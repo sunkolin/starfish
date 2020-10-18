@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
  * @since 2019-07-03
  */
 @ControllerAdvice
-public class TimeBasedResultAdvice implements ResponseBodyAdvice<TimeBasedResult> {
+public class TimeBasedResultAdvice implements ResponseBodyAdvice<TimeBasedResult<Object>> {
 
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
@@ -29,7 +29,7 @@ public class TimeBasedResultAdvice implements ResponseBodyAdvice<TimeBasedResult
     }
 
     @Override
-    public TimeBasedResult beforeBodyWrite(TimeBasedResult body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
+    public TimeBasedResult<Object> beforeBodyWrite(TimeBasedResult<Object> body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
         ServletServerHttpRequest servletServerHttpRequest = (ServletServerHttpRequest) request;
         HttpServletRequest httpServletRequest = servletServerHttpRequest.getServletRequest();
 
@@ -37,7 +37,7 @@ public class TimeBasedResultAdvice implements ResponseBodyAdvice<TimeBasedResult
         Long endTime = System.currentTimeMillis();
 
         body.setRequestTime(startTime);
-        body.setTime(endTime - startTime);
+        body.setElapsedTime(endTime - startTime);
 
         return body;
     }
