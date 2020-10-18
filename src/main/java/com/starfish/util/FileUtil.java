@@ -36,9 +36,9 @@ import java.util.concurrent.*;
 @Slf4j
 public final class FileUtil {
 
-    private static ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("file-util-thread-pool-factory").build();
+    private static final ThreadFactory NAMED_THREAD_FACTORY = new ThreadFactoryBuilder().setNameFormat("file-util-thread-pool-factory").build();
 
-    private static ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 100, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), namedThreadFactory);
+    private static final ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(10, 100, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), NAMED_THREAD_FACTORY);
 
     /**
      * 获取文件大小
@@ -295,7 +295,7 @@ public final class FileUtil {
         for (int i = 0; i < count; i++) {
             String partFileName = Strings.padStart(String.valueOf(i + 1), countLen, '0') + ".part";
             parts.add(partFileName);
-            Future<Boolean> future = executor.submit(new SplitCallable(byteSize, i * byteSize, partFileName, file, targetPath));
+            Future<Boolean> future = EXECUTOR.submit(new SplitCallable(byteSize, i * byteSize, partFileName, file, targetPath));
             futures.add(future);
         }
 
