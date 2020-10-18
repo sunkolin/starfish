@@ -20,9 +20,9 @@ public enum DeleteStatusEnum {
      */
     NOT_DELETE(2, "not_delete", "未删除");
 
-    private Integer code;
-    private String name;
-    private String message;
+    private final Integer code;
+    private final String name;
+    private final String message;
 
     /**
      * @param code    code

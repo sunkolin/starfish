@@ -39,9 +39,9 @@ public enum ResultEnum {
 
     ;
 
-    private Integer code;
-    private String name;
-    private String message;
+    private final Integer code;
+    private final String name;
+    private final String message;
 
     /**
      * @param code    code

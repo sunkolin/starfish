@@ -1,4 +1,4 @@
-package com.starfish.context;
+package com.starfish.extension;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  */
 @Data
 @Component
-public class Applications {
+public class SuperApplication {
 
     @Value("${spring.application.name}")
     private String name;

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @since 2015-06-02
  */
 @SuppressWarnings(value = "unused")
-public abstract class UserRequestContext {
+public abstract class AbstractUserRequestContext {
 
     public static HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
@@ -32,9 +32,9 @@ public abstract class UserRequestContext {
         return (T) (RequestContextHolder.getRequestAttributes()).getAttribute(name, RequestAttributes.SCOPE_REQUEST);
     }
 
-    public static Long getId() {
+    public static Long getUserId() {
         UserHolder userHolder = getAttribute(Constant.USER_HOLDER_KEY);
-        return userHolder.getId();
+        return userHolder.getUserId();
     }
 
     public static String getNickname() {
@@ -50,11 +50,6 @@ public abstract class UserRequestContext {
     public static String getRole() {
         UserHolder userHolder = getAttribute(Constant.USER_HOLDER_KEY);
         return userHolder.getRole();
-    }
-
-    public static Object getObject() {
-        UserHolder userHolder = getAttribute(Constant.USER_HOLDER_KEY);
-        return userHolder.getObject();
     }
 
 }
