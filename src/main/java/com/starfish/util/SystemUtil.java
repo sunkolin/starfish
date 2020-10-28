@@ -64,8 +64,8 @@ public class SystemUtil {
         double loadAverage = 0.0D;
 
         try {
-            OperatingSystemMXBean operatingSystemMXBean = ManagementFactory.getOperatingSystemMXBean();
-            loadAverage = operatingSystemMXBean.getSystemLoadAverage();
+            OperatingSystemMXBean operatingSystemMxBean = ManagementFactory.getOperatingSystemMXBean();
+            loadAverage = operatingSystemMxBean.getSystemLoadAverage();
         } catch (Exception e) {
             log.error("getLoadAverage error.", e);
         }

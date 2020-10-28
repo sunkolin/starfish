@@ -1,4 +1,4 @@
-package com.starfish.util;
+package com.starfish.module.mail;
 
 import com.alibaba.fastjson.JSON;
 import com.starfish.constant.MailConstant;
@@ -13,13 +13,13 @@ import java.util.Date;
 import java.util.Properties;
 
 /**
- * MailUtil
+ * Mails
  *
  * @author sunny
  * @since 2012-9-11
  */
 @Slf4j
-public class MailUtil {
+public class Mail {
 
     /**
      * 发送邮件

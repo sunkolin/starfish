@@ -18,8 +18,12 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -353,6 +357,32 @@ public final class CommonUtil {
 
     public static String contact(Map<String, Object> params) {
         return contact("", params);
+    }
+
+    /**
+     * 获取本机网络地址
+     *
+     * @return 结果
+     * @throws Exception 异常
+     */
+    public static String getHostAddress() throws Exception {
+        String result = "";
+
+        Enumeration<NetworkInterface> allNetInterfaces = NetworkInterface.getNetworkInterfaces();
+        while (allNetInterfaces.hasMoreElements()) {
+            NetworkInterface netInterface = allNetInterfaces.nextElement();
+            Enumeration<InetAddress> addresses = netInterface.getInetAddresses();
+            while (addresses.hasMoreElements()) {
+                InetAddress tmp = addresses.nextElement();
+                if (tmp instanceof Inet4Address && tmp.isSiteLocalAddress()
+                        && !tmp.isLoopbackAddress() && !tmp.getHostAddress().contains(":")) {
+                    result = tmp.getHostAddress();
+                    break;
+                }
+            }
+        }
+
+        return result;
     }
 
 }

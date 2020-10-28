@@ -1,13 +1,13 @@
-package com.starfish.util;
+package com.starfish.module.id;
 
 /**
- * IdentityCardUtil
+ * IdentityCards
  *
  * @author sunny
  * @version 1.0.0
  * @since 2019-08-07
  */
-public class IdentityCardUtil {
+public class IdentityCard {
 
     /**
      * 根据身份证获取生日

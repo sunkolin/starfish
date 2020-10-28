@@ -1,4 +1,4 @@
-package com.starfish.util;
+package com.starfish.module.extension;
 
 import com.alibaba.fastjson.JSON;
 import com.google.protobuf.InvalidProtocolBufferException;

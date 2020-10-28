@@ -1,4 +1,4 @@
-package com.starfish.util;
+package com.starfish.module.cache;
 
 import org.ehcache.Cache;
 import org.ehcache.CacheManager;
@@ -17,7 +17,7 @@ import org.ehcache.config.builders.ResourcePoolsBuilder;
 @SuppressWarnings("unused")
 public class EhcacheUtil {
 
-    private static CacheManager cacheManager = CacheManagerBuilder.newCacheManagerBuilder()
+    private static final CacheManager CACHE_MANAGER = CacheManagerBuilder.newCacheManagerBuilder()
             .withCache("customCache", CacheConfigurationBuilder.newCacheConfigurationBuilder(String.class, String.class,
                     ResourcePoolsBuilder.heap(100)).build()).build(true);
 
@@ -33,15 +33,15 @@ public class EhcacheUtil {
      * @param <V>       V
      */
     private static <K, V> Cache<K, V> getCache(String cacheName, Class<K> keyType, Class<V> valueType) {
-        Cache<K, V> cache = cacheManager.getCache(cacheName, keyType, valueType);
+        Cache<K, V> cache = CACHE_MANAGER.getCache(cacheName, keyType, valueType);
         if (cache == null) {
             synchronized (LOCKER) {
-                cache = cacheManager.getCache(cacheName, keyType, valueType);
+                cache = CACHE_MANAGER.getCache(cacheName, keyType, valueType);
                 if (cache == null) {
                     CacheConfiguration<K, V> cacheConfiguration = CacheConfigurationBuilder.newCacheConfigurationBuilder(keyType, valueType,
                             ResourcePoolsBuilder.heap(100)).build();
-                    cacheManager.createCache(cacheName, cacheConfiguration);
-                    cache = cacheManager.getCache(cacheName, keyType, valueType);
+                    CACHE_MANAGER.createCache(cacheName, cacheConfiguration);
+                    cache = CACHE_MANAGER.getCache(cacheName, keyType, valueType);
                 }
             }
         }

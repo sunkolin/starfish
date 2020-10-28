@@ -16,6 +16,7 @@ import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * HttpUtil
@@ -29,21 +30,20 @@ import java.util.HashMap;
 public class HttpUtil {
 
     /**
-     * 淘宝短网址
+     * 淘宝查询IP地址接口
      */
     private static final String TAOBAO_INTERFACE_URL = "http://ip.taobao.com/service/getIpInfo.php?ip=";
 
     /**
-     * 新浪短网址
+     * 新浪查询IP地址接口
      */
     private static final String SINA_INTERFACE_URL = "http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=";
 
-    /**
-     * 搜狐短网址，不是很好用
-     */
-    public static final String SOHU_INTERFACE_URL = "http://pv.sohu.com/cityjson?ie=utf-8&cip=";
+    private static final String APPLICATION_OCTET_STREAM = "application/octet-stream";
 
-    private static final HashMap<String, String> STREAM_TYPE = new HashMap<>();
+    private static final String APPLICATION_X_MPEG_URL = "application/x-mpegURL";
+
+    private static final Map<String, String> STREAM_TYPE = new HashMap<>();
 
     static {
         initStreamType();
@@ -78,8 +78,8 @@ public class HttpUtil {
             if (!Strings.isNullOrEmpty(contentType)) {
                 if (contentType.startsWith("video")
                         || contentType.startsWith("audio")
-                        || contentType.equalsIgnoreCase("application/octet-stream")
-                        || contentType.equalsIgnoreCase("application/x-mpegURL")) {
+                        || contentType.equalsIgnoreCase(APPLICATION_OCTET_STREAM)
+                        || contentType.equalsIgnoreCase(APPLICATION_X_MPEG_URL)) {
                     result = true;
                 }
             }

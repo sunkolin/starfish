@@ -1,7 +1,7 @@
 package com.starfish.util;
 
-import com.starfish.extension.slf4j.FormattingTuple;
-import com.starfish.extension.slf4j.MessageFormatter;
+import com.starfish.module.extension.slf4j.FormattingTuple;
+import com.starfish.module.extension.slf4j.MessageFormatter;
 import org.apache.commons.lang.text.StrBuilder;
 
 import java.util.Locale;
@@ -300,7 +300,7 @@ public class StringUtil {
     public static String trimString(String string, String value) {
         String result = string;
         if (string.startsWith(value)) {
-            result = string.substring(1, string.length());
+            result = string.substring(1);
         }
         if (string.endsWith(value)) {
             result = string.substring(0, string.length() - 1);

@@ -11,6 +11,7 @@ import com.starfish.model.Result;
  * @version 1.0.0
  * @since 2019-07-11
  */
+@SuppressWarnings(value = "unused")
 public class Results {
 
     /**

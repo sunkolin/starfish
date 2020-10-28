@@ -1,4 +1,4 @@
-package com.starfish.util;
+package com.starfish.module.redis;
 
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
