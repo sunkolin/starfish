@@ -1,5 +1,6 @@
 package com.starfish.util;
 
+import com.starfish.module.cache.Ehcache;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -15,18 +16,18 @@ public class EhcacheToolTest {
 
     @Test
     public void test() {
-        String userCount = EhcacheUtil.get("commonCache", String.class, String.class, "userCount");
+        String userCount = Ehcache.get("commonCache", String.class, String.class, "userCount");
         assertEquals(userCount, null);
 
         //设置用户数量100
-        EhcacheUtil.put("commonCache", String.class, String.class, "userCount", "100");
+        Ehcache.put("commonCache", String.class, String.class, "userCount", "100");
 
-        userCount = EhcacheUtil.get("commonCache", String.class, String.class, "userCount");
+        userCount = Ehcache.get("commonCache", String.class, String.class, "userCount");
         assertEquals("100", userCount);
 
         // 清除
-        EhcacheUtil.clear("commonCache", String.class, String.class);
-        userCount = EhcacheUtil.get("commonCache", String.class, String.class, "userCount");
+        Ehcache.clear("commonCache", String.class, String.class);
+        userCount = Ehcache.get("commonCache", String.class, String.class, "userCount");
         assertEquals(userCount, null);
     }
 

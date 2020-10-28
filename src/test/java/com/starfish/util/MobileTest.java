@@ -1,5 +1,6 @@
 package com.starfish.util;
 
+import com.starfish.module.mobile.Mobile;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -11,15 +12,15 @@ import static org.junit.Assert.*;
  * @version 1.0.0
  * @since 2015-01-21
  */
-public class MobileUtilTest {
+public class MobileTest {
 
     @Test
     public void isMobileTest() {
-        assertTrue(MobileUtil.isMobile("18610815188"));
+        assertTrue(Mobile.isMobile("18610815188"));
 
-        assertTrue(MobileUtil.isMobile("13496215263"));
+        assertTrue(Mobile.isMobile("13496215263"));
 
-        assertTrue(MobileUtil.isMobile("13912345678"));
+        assertTrue(Mobile.isMobile("13912345678"));
     }
 
 }

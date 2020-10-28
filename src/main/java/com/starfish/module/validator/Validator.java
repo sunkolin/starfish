@@ -1,4 +1,4 @@
-package com.starfish.validator;
+package com.starfish.module.validator;
 
 import com.starfish.exception.CustomException;
 

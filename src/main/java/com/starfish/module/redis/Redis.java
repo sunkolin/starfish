@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * RedisComponent
+ * Redis
  *
  * @author sunny
  * @version 1.0.0
@@ -19,11 +19,11 @@ import java.util.Map;
  */
 @SuppressWarnings(value = "unused")
 @Slf4j
-public class RedisUtil {
+public class Redis {
 
     private ShardedJedisPool pool;
 
-    public RedisUtil(ShardedJedisPool pool) {
+    public Redis(ShardedJedisPool pool) {
         this.pool = pool;
     }
 
