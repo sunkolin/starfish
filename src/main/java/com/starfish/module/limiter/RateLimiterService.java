@@ -1,4 +1,4 @@
-package com.starfish.service;
+package com.starfish.module.limiter;
 
 /**
  * RateLimiterService

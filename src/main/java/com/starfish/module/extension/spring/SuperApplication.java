@@ -1,4 +1,4 @@
-package com.starfish.extension.spring;
+package com.starfish.module.extension.spring;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

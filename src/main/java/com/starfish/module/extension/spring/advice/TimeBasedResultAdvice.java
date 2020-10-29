@@ -1,4 +1,4 @@
-package com.starfish.extension.spring.advice;
+package com.starfish.module.extension.spring.advice;
 
 import com.starfish.constant.Constant;
 import com.starfish.model.TimeBasedResult;

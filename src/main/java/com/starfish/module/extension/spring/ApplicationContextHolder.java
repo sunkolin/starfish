@@ -1,4 +1,4 @@
-package com.starfish.extension.spring;
+package com.starfish.module.extension.spring;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

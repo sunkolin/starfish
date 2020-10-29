@@ -21,7 +21,7 @@
  * OF CONTRACT, TORT OR OTHERWISE,  ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.starfish.extension.slf4j;
+package com.starfish.module.extension.slf4j;
 
 import java.text.MessageFormat;
 import java.util.HashMap;

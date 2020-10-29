@@ -1,4 +1,4 @@
-package com.starfish.extension.spring;
+package com.starfish.module.extension.spring;
 
 import com.starfish.util.CommonUtil;
 import org.springframework.http.*;

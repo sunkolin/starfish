@@ -1,4 +1,4 @@
-package com.starfish.extension.spring.interceptor;
+package com.starfish.module.extension.spring.interceptor;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

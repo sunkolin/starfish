@@ -1,10 +1,10 @@
-package com.starfish.extension.spring;
+package com.starfish.module.extension.spring;
 
 import com.starfish.enums.ResultEnum;
 import com.starfish.exception.CustomException;
 import com.starfish.util.FileUtil;
 import com.starfish.util.StringUtil;
-import com.starfish.validator.Validator;
+import com.starfish.module.validator.Validator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 

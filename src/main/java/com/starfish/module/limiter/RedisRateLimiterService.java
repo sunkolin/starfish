@@ -1,4 +1,4 @@
-package com.starfish.service.impl;
+package com.starfish.module.limiter;
 
 import com.google.common.collect.ImmutableList;
 import lombok.extern.slf4j.Slf4j;

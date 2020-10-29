@@ -1,4 +1,4 @@
-package com.starfish.extension.slf4j;
+package com.starfish.module.extension.slf4j;
 
 /**
  * Holds the results of formatting done by {@link MessageFormatter}.
