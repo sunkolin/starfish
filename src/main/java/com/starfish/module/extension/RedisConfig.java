@@ -1,4 +1,4 @@
-package com.starfish.configuration;
+package com.starfish.module.extension;
 
 import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
 import org.springframework.beans.factory.annotation.Value;

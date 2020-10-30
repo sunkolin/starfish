@@ -1,4 +1,4 @@
-package com.starfish.configuration;
+package com.starfish.module.extension;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

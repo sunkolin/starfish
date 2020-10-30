@@ -1,4 +1,4 @@
-package com.starfish.configuration;
+package com.starfish.module.extension;
 
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;

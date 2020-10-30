@@ -1,4 +1,4 @@
-package com.starfish.configuration;
+package com.starfish.module.executor;
 
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ import java.util.concurrent.RejectedExecutionHandler;
  */
 @Slf4j
 @Configuration
-@ConditionalOnProperty(value = {"application.executor.enabled"}, matchIfMissing = true)
+@ConditionalOnProperty(value = {"application.executor.enabled"}, matchIfMissing = false)
 @EnableConfigurationProperties({ExecutorProperties.class})
 public class ExecutorAutoConfiguration {
 
