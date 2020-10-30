@@ -176,42 +176,6 @@ public final class CommonUtil {
     }
 
     /**
-     * 获取身份证信息
-     *
-     * @param idCard id card
-     * @return the info
-     */
-    public static String getIdCardInfo(String idCard) {
-        return new RestTemplate().getForObject("http://apistore.baidu.com/microservice/icardinfo?id=" + idCard, String.class);
-    }
-
-    /**
-     * get short url,use dwz short url service
-     * 获取短网址，使用百度短网址服务
-     *
-     * @param url short url
-     * @return data
-     */
-    public static Result<Object> getShortUrl(String url) {
-        Result<Object> result = new Result<>();
-        //call remote service
-        String data = new RestTemplate().getForObject("http://www.dwz.cn/create.php?url=" + url, String.class);
-
-        //process return data {"tinyurl":"http://www.dwz.cn/yes","status":0,"longurl":"http://www.baidu.com","err_msg":""}
-        JSONObject jsonObject = JSON.parseObject(data);
-        if (0 == jsonObject.getIntValue("status")) {
-            result.setStatus(0);
-            result.setBody(jsonObject.getString("tinyurl"));
-        } else {
-            result.setStatus(-1);
-            result.setMessage(jsonObject.getString("err_msg"));
-        }
-        log.info("result {}", JSON.toJSONString(result));
-        //return
-        return result;
-    }
-
-    /**
      * check sensitive words
      * 判断给定的字符串是否包含敏感词
      *
@@ -228,28 +192,6 @@ public final class CommonUtil {
             }
         }
         return flag;
-    }
-
-    /**
-     * 查询天气
-     *
-     * @param cityName 城市名称
-     * @return 结果
-     */
-    public static String weather(String cityName) {
-        String url = "http://apis.baidu.com/apistore/weatherservice/recentweathers?cityname={cityName}";
-        url = url.replace("{cityName}", cityName);
-
-        //设置请求头 apiKey
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("apikey", Constant.BAIDU_API_KEY);
-        HttpEntity<String> httpEntity = new HttpEntity<>(httpHeaders);
-
-        ResponseEntity<String> data = restTemplate.exchange(url, HttpMethod.GET, httpEntity, String.class);
-        String jsonResult = data.getBody();
-        System.out.println(jsonResult);
-        return jsonResult;
     }
 
     /**

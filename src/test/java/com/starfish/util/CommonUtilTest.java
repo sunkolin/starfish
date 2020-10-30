@@ -1,5 +1,6 @@
 package com.starfish.util;
 
+import com.starfish.module.weather.Weather;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public class CommonUtilTest {
     @Test
     public void weather() {
         String city = "北京";
-        String result = CommonUtil.weather(city);
+        String result = Weather.getWeather(city);
         assertNotNull(result);
     }
 

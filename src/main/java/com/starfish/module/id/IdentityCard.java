@@ -1,7 +1,9 @@
 package com.starfish.module.id;
 
+import org.springframework.web.client.RestTemplate;
+
 /**
- * IdentityCards
+ * IdentityCard
  *
  * @author sunny
  * @version 1.0.0
@@ -17,6 +19,16 @@ public class IdentityCard {
      */
     public static String getBirthday(String identityCard) {
         return identityCard.substring(6, 14);
+    }
+
+    /**
+     * 获取身份证信息
+     *
+     * @param idCard id card
+     * @return the info
+     */
+    public static String getIdCardInfo(String idCard) {
+        return new RestTemplate().getForObject("http://apistore.baidu.com/microservice/icardinfo?id=" + idCard, String.class);
     }
 
 }
