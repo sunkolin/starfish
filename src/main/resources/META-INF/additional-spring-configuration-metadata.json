@@ -1,0 +1,34 @@
+{
+  "properties": [
+    {
+      "name": "application.executor.enabled",
+      "type": "java.lang.String",
+      "description": "Description for application.executor.enabled."
+    },
+    {
+      "name": "application.executor.corePoolSize",
+      "type": "java.lang.String",
+      "description": "Description for application.executor.corePoolSize."
+    },
+    {
+      "name": "application.executor.maxPoolSize",
+      "type": "java.lang.String",
+      "description": "Description for application.executor.maxPoolSize."
+    },
+    {
+      "name": "application.executor.queueCapacity",
+      "type": "java.lang.String",
+      "description": "Description for application.executor.queueCapacity."
+    },
+    {
+      "name": "application.executor.keepAliveSeconds",
+      "type": "java.lang.String",
+      "description": "Description for application.executor.keepAliveSeconds."
+    },
+    {
+      "name": "application.executor.rejectedExecutionHandler",
+      "type": "java.lang.String",
+      "description": "Description for application.executor.rejectedExecutionHandler."
+    }
+  ]
+}
