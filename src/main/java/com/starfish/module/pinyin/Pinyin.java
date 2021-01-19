@@ -2,7 +2,6 @@ package com.starfish.module.pinyin;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Function;
 
 /**
  * Pinyin
@@ -43,6 +42,7 @@ public class Pinyin {
      * 按首字母排序，支持类型ChineseKeyValue与String，List中数据不可为null
      *
      * @param list 列表
+     * @param <T>  T
      * @return 结果
      */
     public static <T> List<T> sort(List<T> list) {

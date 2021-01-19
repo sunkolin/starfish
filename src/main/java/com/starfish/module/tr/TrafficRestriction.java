@@ -16,6 +16,7 @@ public final class TrafficRestriction {
      * 尾号限行 TODO
      * 接口文档：http://xianxing.loopon.cn/home/api
      *
+     * @param cityName 城市名称
      * @return 结果
      */
     public static List<Integer> getTrafficRestriction(String cityName) {

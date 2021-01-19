@@ -5,12 +5,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.scripting.support.ResourceScriptSource;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -22,14 +24,14 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Service
-public class RedisRateLimiterService {
+public class RedisRateLimiter implements RateLimiter{
 
     @Resource
     private RedisTemplate redisTemplate;
 
     private DefaultRedisScript<Long> defaultRedisScript;
 
-    private StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
+    private final RedisSerializer<String> stringRedisSerializer = new StringRedisSerializer();
 
     @PostConstruct
     public void init() {
@@ -54,6 +56,12 @@ public class RedisRateLimiterService {
                 log.error("RedisRateLimiterService acquire error,key={},qps={},timestamp={}", key, qps, timestamp, e);
             }
         }
+    }
+
+    @Override
+    public boolean tryAcquire() {
+        // TODO
+        return false;
     }
 
 }

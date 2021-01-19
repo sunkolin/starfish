@@ -2,13 +2,8 @@ package com.starfish.context;
 
 import lombok.Data;
 
-import java.util.Date;
-
 /**
- * UserHolder 相对于UserContext更方便 但是必须在controller中使用
- * 需要配置在mvc:annotation-driven中配置mvc:argument-resolvers，com.sunny.context.ConstantSignUserHolderResolver
- * 在controller中直接
- * public Result select(UserHolder userHolder)
+ * UserHolder
  *
  * @author sunny
  * @version 1.0.0
@@ -32,15 +27,5 @@ public class UserHolder {
      * 昵称
      */
     private String nickname;
-
-    /**
-     * 角色
-     */
-    private String role;
-
-    /**
-     * 当前时间
-     */
-    private Date createTime = new Date();
 
 }
