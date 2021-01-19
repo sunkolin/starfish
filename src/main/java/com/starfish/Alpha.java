@@ -2,9 +2,6 @@ package com.starfish;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Alpha
  *
@@ -15,14 +12,8 @@ import java.util.List;
 @Slf4j
 public class Alpha {
 
-    public static void main(String[] args) throws Exception {
-        List<String> list = new ArrayList<>();
+    public static void main(String[] args) {
 
-        for (String s : list){
-            System.out.println(s);
-            System.out.println("abc");
-        }
-        System.out.println(1234);
     }
 
 }

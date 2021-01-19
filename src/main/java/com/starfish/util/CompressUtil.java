@@ -2,6 +2,7 @@ package com.starfish.util;
 
 import com.starfish.enums.ResultEnum;
 import com.starfish.exception.CustomException;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StreamUtils;
@@ -107,37 +108,6 @@ public class CompressUtil {
         }
     }
 
-    static class Entry {
-
-        private String basePath;
-        private String filePath;
-        private String relativePath;
-
-        public String getBasePath() {
-            return basePath;
-        }
-
-        public void setBasePath(String basePath) {
-            this.basePath = basePath;
-        }
-
-        public String getFilePath() {
-            return filePath;
-        }
-
-        public void setFilePath(String filePath) {
-            this.filePath = filePath;
-        }
-
-        public String getRelativePath() {
-            return relativePath;
-        }
-
-        public void setRelativePath(String relativePath) {
-            this.relativePath = relativePath;
-        }
-    }
-
     private static void addEntry(ZipOutputStream zos, String filePath, String relativePath) {
         try {
             ZipEntry entry = new ZipEntry(relativePath);
@@ -207,6 +177,15 @@ public class CompressUtil {
      */
     private static boolean isEndsWithZip(String fileName) {
         return !StringUtils.isEmpty(fileName) && fileName.trim().toLowerCase().endsWith(".zip");
+    }
+
+    @Data
+    private static class Entry {
+
+        private String basePath;
+        private String filePath;
+        private String relativePath;
+
     }
 
 }
