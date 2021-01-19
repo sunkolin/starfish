@@ -13,36 +13,56 @@ public enum RoleEnum {
     /**
      * 游客
      */
-    GUEST(1, "guest", "游客"),
+    GUEST(1, "guest", "游客", "游客"),
 
     /**
      * 普通
      */
-    USER(2, "user", "普通用户"),
+    USER(2, "user", "普通用户", "普通用户"),
 
     /**
      * 管理
      */
-    ADMIN(3, "admin", "管理员"),
+    ADMIN(3, "admin", "管理员", "管理员"),
 
     /**
      * 超级
      */
-    SUPER(4, "super", "超级管理员"),
+    SUPER(4, "super", "超级管理员", "超级管理员"),
 
     ;
 
+    /**
+     * 数字编码
+     */
     private final Integer code;
+
+    /**
+     * 英文编码
+     */
+    private final String englishCode;
+
+    /**
+     * 中文名称
+     */
     private final String name;
+
+    /**
+     * 中文描述
+     */
     private final String message;
 
     /**
-     * @param code    code
-     * @param name    name
-     * @param message message
+     * RoleEnum
+     *
+     * @param code        code
+     * @param englishCode englishCode
+     * @param name        name
+     * @param message     message
      */
-    RoleEnum(Integer code, String name, String message) {
+    RoleEnum(Integer code, String englishCode, String name, String message) {
         this.code = code;
+        this.englishCode = englishCode;
         this.name = name;
         this.message = message;
     }
@@ -54,6 +74,15 @@ public enum RoleEnum {
      */
     public Integer getCode() {
         return this.code;
+    }
+
+    /**
+     * get english code
+     *
+     * @return englishCode
+     */
+    public String getEnglishCode() {
+        return this.englishCode;
     }
 
     /**
@@ -95,14 +124,14 @@ public enum RoleEnum {
     /**
      * get the enum by name
      *
-     * @param name name
+     * @param englishCode englishCode
      * @return the enum
      */
-    public static RoleEnum get(String name) {
+    public static RoleEnum get(String englishCode) {
         RoleEnum[] values = RoleEnum.values();
         RoleEnum v = null;
         for (RoleEnum value : values) {
-            if (value.getName().equalsIgnoreCase(name)) {
+            if (value.getEnglishCode().equalsIgnoreCase(englishCode)) {
                 v = value;
                 break;
             }
@@ -111,23 +140,23 @@ public enum RoleEnum {
     }
 
     /**
-     * 判断此编码的枚举是否存在
+     * verify the code exist exist or not exist
      *
-     * @param code 编码
-     * @return 结果
+     * @param code code
+     * @return result
      */
     public static boolean exist(Integer code) {
         return get(code) != null;
     }
 
     /**
-     * 判断此名称枚举是否存在
+     * verify the english code exist or not exist
      *
-     * @param name 名称
-     * @return 结果
+     * @param englishCode english code
+     * @return result
      */
-    public static boolean exist(String name) {
-        return get(name) != null;
+    public static boolean exist(String englishCode) {
+        return get(englishCode) != null;
     }
 
 }

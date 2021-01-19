@@ -2,8 +2,8 @@ package com.starfish.util;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
-import com.starfish.constant.SortConstant;
 import com.starfish.enums.ResultEnum;
+import com.starfish.enums.SortEnum;
 import com.starfish.exception.CustomException;
 import com.starfish.module.validator.Validator;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +38,7 @@ public class CollectionUtil {
         Arrays.sort(array);
 
         //反转
-        if (SortConstant.DESC.equalsIgnoreCase(order)) {
+        if (SortEnum.DESC.getEnglishCode().equalsIgnoreCase(order)) {
             List<T> list = Arrays.asList(array);
             Collections.reverse(list);
             list.toArray(array);
@@ -62,7 +62,7 @@ public class CollectionUtil {
         Arrays.sort(array, comparator);
 
         //反转，转数组，反转
-        if (SortConstant.DESC.equalsIgnoreCase(order)) {
+        if (SortEnum.DESC.getEnglishCode().equalsIgnoreCase(order)) {
             List<T> list = Arrays.asList(array);
             Collections.reverse(list);
             list.toArray(array);
@@ -144,7 +144,7 @@ public class CollectionUtil {
      */
     public static <T extends Comparable<? super T>> List<T> sort(List<T> list, String order) {
         Collections.sort(list);
-        if (SortConstant.DESC.equalsIgnoreCase(order)) {
+        if (SortEnum.DESC.getEnglishCode().equalsIgnoreCase(order)) {
             Collections.reverse(list);
         }
         return list;
@@ -161,7 +161,7 @@ public class CollectionUtil {
      */
     public static <T> List<T> sort(List<T> list, String order, Comparator<? super T> comparator) {
         list.sort(comparator);
-        if (SortConstant.DESC.equalsIgnoreCase(order)) {
+        if (SortEnum.DESC.getEnglishCode().equalsIgnoreCase(order)) {
             Collections.reverse(list);
         }
         return list;
@@ -218,7 +218,7 @@ public class CollectionUtil {
         Collections.sort(list);
 
         //反转
-        if (SortConstant.DESC.equalsIgnoreCase(order)) {
+        if (SortEnum.DESC.getEnglishCode().equalsIgnoreCase(order)) {
             Collections.reverse(list);
         }
 
@@ -248,7 +248,7 @@ public class CollectionUtil {
         list.sort(comparator);
 
         //反转
-        if (SortConstant.DESC.equalsIgnoreCase(order)) {
+        if (SortEnum.DESC.getEnglishCode().equalsIgnoreCase(order)) {
             Collections.reverse(list);
         }
 

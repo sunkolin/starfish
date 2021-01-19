@@ -39,18 +39,52 @@ public enum ResultEnum {
 
     ;
 
+    /**
+     * 数字编码
+     */
     private final Integer code;
+
+    /**
+     * 英文编码
+     */
+    private final String englishCode;
+
+    /**
+     * 中文名称
+     */
     private final String name;
+
+    /**
+     * 中文描述
+     */
     private final String message;
 
     /**
-     * @param code    code
-     * @param name    name
-     * @param message message
+     * ResultEnum
+     *
+     * @param code        code
+     * @param englishCode englishCode
+     * @param name        name
+     * @param message     message
      */
-    ResultEnum(Integer code, String name, String message) {
+    ResultEnum(Integer code, String englishCode, String name, String message) {
         this.code = code;
+        this.englishCode = englishCode;
         this.name = name;
+        this.message = message;
+    }
+
+    /**
+     * ResultEnum
+     *
+     * @param code        code
+     * @param englishCode englishCode
+     * @param message     message
+     */
+    ResultEnum(Integer code, String englishCode, String message) {
+        this.code = code;
+        this.englishCode = englishCode;
+        this.name = "";
         this.message = message;
     }
 
@@ -61,6 +95,15 @@ public enum ResultEnum {
      */
     public Integer getCode() {
         return this.code;
+    }
+
+    /**
+     * get english code
+     *
+     * @return englishCode
+     */
+    public String getEnglishCode() {
+        return this.englishCode;
     }
 
     /**
@@ -102,14 +145,14 @@ public enum ResultEnum {
     /**
      * get the enum by name
      *
-     * @param name name
+     * @param englishCode englishCode
      * @return the enum
      */
-    public static ResultEnum get(String name) {
+    public static ResultEnum get(String englishCode) {
         ResultEnum[] values = ResultEnum.values();
         ResultEnum v = null;
         for (ResultEnum value : values) {
-            if (value.getName().equalsIgnoreCase(name)) {
+            if (value.getEnglishCode().equalsIgnoreCase(englishCode)) {
                 v = value;
                 break;
             }
@@ -118,23 +161,23 @@ public enum ResultEnum {
     }
 
     /**
-     * 判断此编码的枚举是否存在
+     * verify the code exist exist or not exist
      *
-     * @param code 编码
-     * @return 结果
+     * @param code code
+     * @return result
      */
     public static boolean exist(Integer code) {
         return get(code) != null;
     }
 
     /**
-     * 判断此名称枚举是否存在
+     * verify the english code exist or not exist
      *
-     * @param name 名称
-     * @return 结果
+     * @param englishCode english code
+     * @return result
      */
-    public static boolean exist(String name) {
-        return get(name) != null;
+    public static boolean exist(String englishCode) {
+        return get(englishCode) != null;
     }
 
 }

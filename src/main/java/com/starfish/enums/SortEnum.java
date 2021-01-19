@@ -1,31 +1,24 @@
 package com.starfish.enums;
 
 /**
- * 星期枚举
+ * 排序枚举
  *
  * @author sunny
  * @version 1.0.0
  * @since 2014-07-07
  */
 @SuppressWarnings(value = "unused")
-public enum WeekEnum {
+public enum SortEnum {
 
     /**
-     * 周一
+     * 升序
      */
-    MONDAY(1, "monday", "周一", "周一"),
+    ASC(1, "asc", "升序", "升序"),
 
-    TUESDAY(2, "tuesday", "周二", "周二"),
-
-    WEDNESDAY(3, "wednesday", "周三", "周三"),
-
-    THURSDAY(4, "thursday", "周四", "周四"),
-
-    FRIDAY(5, "friday", "周五", "周五"),
-
-    SATURDAY(6, "saturday", "周六", "周六"),
-
-    SUNDAY(7, "sunday", "周日", "周日"),
+    /**
+     * 降序
+     */
+    DESC(2, "desc", "降序", "降序"),
 
     ;
 
@@ -50,14 +43,14 @@ public enum WeekEnum {
     private final String message;
 
     /**
-     * WeekEnum
+     * SortEnum
      *
      * @param code        code
      * @param englishCode englishCode
      * @param name        name
      * @param message     message
      */
-    WeekEnum(Integer code, String englishCode, String name, String message) {
+    SortEnum(Integer code, String englishCode, String name, String message) {
         this.code = code;
         this.englishCode = englishCode;
         this.name = name;
@@ -106,10 +99,10 @@ public enum WeekEnum {
      * @param code code
      * @return the enum
      */
-    public static WeekEnum get(Integer code) {
-        WeekEnum[] values = WeekEnum.values();
-        WeekEnum v = null;
-        for (WeekEnum value : values) {
+    public static SortEnum get(Integer code) {
+        SortEnum[] values = SortEnum.values();
+        SortEnum v = null;
+        for (SortEnum value : values) {
             if (value.getCode().equals(code)) {
                 v = value;
                 break;
@@ -124,10 +117,10 @@ public enum WeekEnum {
      * @param englishCode englishCode
      * @return the enum
      */
-    public static WeekEnum get(String englishCode) {
-        WeekEnum[] values = WeekEnum.values();
-        WeekEnum v = null;
-        for (WeekEnum value : values) {
+    public static SortEnum get(String englishCode) {
+        SortEnum[] values = SortEnum.values();
+        SortEnum v = null;
+        for (SortEnum value : values) {
             if (value.getEnglishCode().equalsIgnoreCase(englishCode)) {
                 v = value;
                 break;

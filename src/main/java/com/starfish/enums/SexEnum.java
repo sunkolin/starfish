@@ -15,42 +15,57 @@ public enum SexEnum {
     /**
      * 男
      */
-    MAN(1, "man", "男"),
+    MAN(1, "man", "男", "男"),
 
     /**
      * 女
      */
-    WOMAN(2, "woman", "女"),
-
-    /**
-     * 其他
-     */
-    OTHER(3, "other", "其他"),
+    WOMAN(2, "woman", "女", "女"),
 
     /**
      * 保密
      */
-    SECRET(4, "secret", "保密"),
+    SECRET(3, "secret", "保密", "保密"),
 
     ;
 
+    /**
+     * 数字编码
+     */
     private final Integer code;
+
+    /**
+     * 英文编码
+     */
+    private final String englishCode;
+
+    /**
+     * 中文名称
+     */
     private final String name;
+
+    /**
+     * 中文描述
+     */
     private final String message;
 
     /**
-     * @param code    code
-     * @param name    name
-     * @param message message
+     * SexEnum
+     *
+     * @param code        code
+     * @param englishCode englishCode
+     * @param name        name
+     * @param message     message
      */
-    SexEnum(Integer code, String name, String message) {
+    SexEnum(Integer code, String englishCode, String name, String message) {
         this.code = code;
+        this.englishCode = englishCode;
         this.name = name;
         this.message = message;
     }
 
     /**
-     * get the enum code
+     * get the code of the enum
      *
      * @return code
      */
@@ -59,7 +74,16 @@ public enum SexEnum {
     }
 
     /**
-     * get the enum name
+     * get english code
+     *
+     * @return englishCode
+     */
+    public String getEnglishCode() {
+        return this.englishCode;
+    }
+
+    /**
+     * get the name of the enum
      *
      * @return name
      */
@@ -68,7 +92,7 @@ public enum SexEnum {
     }
 
     /**
-     * get the message
+     * get the message of the enum
      *
      * @return message
      */
@@ -97,14 +121,14 @@ public enum SexEnum {
     /**
      * get the enum by name
      *
-     * @param name name
+     * @param englishCode englishCode
      * @return the enum
      */
-    public static SexEnum get(String name) {
+    public static SexEnum get(String englishCode) {
         SexEnum[] values = SexEnum.values();
         SexEnum v = null;
         for (SexEnum value : values) {
-            if (value.getName().equalsIgnoreCase(name)) {
+            if (value.getEnglishCode().equalsIgnoreCase(englishCode)) {
                 v = value;
                 break;
             }
@@ -113,23 +137,24 @@ public enum SexEnum {
     }
 
     /**
-     * 判断此编码的枚举是否存在
+     * verify the code exist exist or not exist
      *
-     * @param code 编码
-     * @return 结果
+     * @param code code
+     * @return result
      */
     public static boolean exist(Integer code) {
         return get(code) != null;
     }
 
     /**
-     * 判断此名称枚举是否存在
+     * verify the english code exist or not exist
      *
-     * @param name 名称
-     * @return 结果
+     * @param englishCode english code
+     * @return result
      */
-    public static boolean exist(String name) {
-        return get(name) != null;
+    public static boolean exist(String englishCode) {
+        return get(englishCode) != null;
     }
+
 
 }
