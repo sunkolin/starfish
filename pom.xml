@@ -193,32 +193,6 @@
         <!--        </dependency>-->
         <!--required dependency-->
 
-        <!-- java web -->
-<!--        <dependency>-->
-<!--            <groupId>javax.servlet</groupId>-->
-<!--            <artifactId>servlet-api</artifactId>-->
-<!--            <version>2.5</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>javax.servlet</groupId>-->
-<!--            <artifactId>jsp-api</artifactId>-->
-<!--            <version>2.0</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>javax.servlet</groupId>-->
-<!--            <artifactId>jstl</artifactId>-->
-<!--            <version>1.2</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>taglibs</groupId>-->
-<!--            <artifactId>standard</artifactId>-->
-<!--            <version>1.1.2</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
         <!--apache commons ,the latest stable release of commons-lang is 3.1-->
         <dependency>
             <groupId>commons-beanutils</groupId>
