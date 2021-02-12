@@ -21,7 +21,7 @@ import java.util.Map;
 @Slf4j
 public class Redis {
 
-    private ShardedJedisPool pool;
+    private final ShardedJedisPool pool;
 
     public Redis(ShardedJedisPool pool) {
         this.pool = pool;
@@ -42,7 +42,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis get value failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
         return value;
     }
@@ -61,7 +63,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis set value failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
     }
 
@@ -79,7 +83,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis append value failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
     }
 
@@ -96,7 +102,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis del failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
     }
 
@@ -118,7 +126,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis get object failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
         return cls.cast(object);
     }
@@ -137,7 +147,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis set object failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
     }
 
@@ -162,7 +174,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis get list failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
         return list;
     }
@@ -183,7 +197,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis get list index failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
         return value;
     }
@@ -203,7 +219,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis get list size failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
         return size;
     }
@@ -223,7 +241,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis set list index failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
     }
 
@@ -244,7 +264,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis set list failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
     }
 
@@ -264,7 +286,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis append list failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
     }
 
@@ -289,7 +313,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis del list index failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
     }
 
@@ -313,7 +339,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis set map failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
     }
 
@@ -338,7 +366,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis append map failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
         return res;
     }
@@ -360,7 +390,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis set map specific field failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
         return res;
     }
@@ -380,7 +412,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis get map failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
         return map;
     }
@@ -401,7 +435,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis get map specific field failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
         return value;
     }
@@ -432,7 +468,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis get map specific fields failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
         return list;
     }
@@ -452,7 +490,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis get map size failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
         return size;
     }
@@ -471,7 +511,9 @@ public class Redis {
         } catch (Exception e) {
             log.error("redis del map specific failed", e);
         } finally {
-            pool.returnResource(redis);
+            if (redis != null) {
+                redis.close();
+            }
         }
     }
 
