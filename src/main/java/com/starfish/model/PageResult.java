@@ -13,7 +13,7 @@ import java.util.List;
  * @since 2015-04-13
  */
 @Data
-@SuppressWarnings(value = "serial,unused")
+@SuppressWarnings(value = "unused")
 public class PageResult<T> implements Serializable {
 
     /**

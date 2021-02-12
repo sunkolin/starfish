@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @version 1.0.0
  * @since 2012-7-23
  */
-@SuppressWarnings(value = "serial,unused")
+@SuppressWarnings(value = "unused")
 public class Result<T> implements Serializable {
 
     /**

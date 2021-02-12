@@ -16,7 +16,7 @@ import java.util.Date;
  * @version 1.0.0
  * @since 2013-3-11
  */
-@SuppressWarnings(value = "serial,unused")
+@SuppressWarnings(value = "unused")
 public class BasicModel implements Serializable {
 
     /**
