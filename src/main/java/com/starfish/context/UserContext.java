@@ -33,18 +33,18 @@ public class UserContext {
     }
 
     public static Long getUserId() {
-        UserHolder userHolder = getAttribute(Constant.USER_HOLDER_KEY);
-        return userHolder.getUserId();
+        User user = getAttribute(Constant.USER_HOLDER_KEY);
+        return user.getUserId();
     }
 
     public static String getNickname() {
-        UserHolder userHolder = getAttribute(Constant.USER_HOLDER_KEY);
-        return userHolder.getNickname();
+        User user = getAttribute(Constant.USER_HOLDER_KEY);
+        return user.getNickname();
     }
 
     public static String getUsername() {
-        UserHolder userHolder = getAttribute(Constant.USER_HOLDER_KEY);
-        return userHolder.getUsername();
+        User user = getAttribute(Constant.USER_HOLDER_KEY);
+        return user.getUsername();
     }
 
 }

@@ -2,6 +2,8 @@ package com.starfish.context;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * UserHolder
  *
@@ -11,7 +13,7 @@ import lombok.Data;
  */
 @Data
 @SuppressWarnings(value = "unused")
-public class UserHolder {
+public class User implements Serializable {
 
     /**
      * 主键
@@ -21,11 +23,11 @@ public class UserHolder {
     /**
      * 用户名
      */
-    private String username;
+    private String userName;
 
     /**
      * 昵称
      */
-    private String nickname;
+    private String nickName;
 
 }

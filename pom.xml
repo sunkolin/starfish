@@ -355,12 +355,17 @@
             <version>3.5.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.13.0</version>
+        </dependency>
+
         <!--以下是sample包使用到的依赖-->
         <!--apache commons ,the latest stable release of commons-lang is 3.1-->
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-            <version>1.10</version>
         </dependency>
 
         <!--test scope-->
