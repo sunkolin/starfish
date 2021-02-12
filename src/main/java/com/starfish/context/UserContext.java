@@ -37,14 +37,14 @@ public class UserContext {
         return user.getUserId();
     }
 
-    public static String getNickname() {
-        User user = getAttribute(Constant.USER_HOLDER_KEY);
-        return user.getNickname();
-    }
-
     public static String getUsername() {
         User user = getAttribute(Constant.USER_HOLDER_KEY);
-        return user.getUsername();
+        return user.getUserName();
+    }
+
+    public static String getNickname() {
+        User user = getAttribute(Constant.USER_HOLDER_KEY);
+        return user.getNickName();
     }
 
 }
