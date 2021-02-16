@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @since 2016-02-24
  */
 @Component
-@SuppressWarnings(value = "serial,unused")
+@SuppressWarnings(value = "unused")
 public class ApplicationContextHolder implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;

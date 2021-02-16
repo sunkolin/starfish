@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @version 1.0.0
  * @since 2013-5-7
  */
-@SuppressWarnings(value = "serial,unused")
+@SuppressWarnings(value = "unused")
 public class CustomException extends RuntimeException implements Serializable {
 
     /**

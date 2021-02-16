@@ -21,7 +21,7 @@ import java.util.Map;
  * @version 1.0.0
  * @since 2015-12-02
  */
-@SuppressWarnings(value = "serial,unused")
+@SuppressWarnings(value = "unused")
 @Component
 public class DefaultExceptionResolver implements HandlerExceptionResolver {
 

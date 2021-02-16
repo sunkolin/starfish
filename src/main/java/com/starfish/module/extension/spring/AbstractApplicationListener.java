@@ -24,7 +24,7 @@ import javax.servlet.ServletContext;
  */
 @Component
 @Slf4j
-@SuppressWarnings(value = "serial,unused")
+@SuppressWarnings(value = "unused")
 public abstract class AbstractApplicationListener implements org.springframework.context.ApplicationListener<ApplicationEvent>, ApplicationContextAware, InitializingBean {
 
     private ApplicationContext applicationContext;
