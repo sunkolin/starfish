@@ -1,4 +1,4 @@
-package com.starfish.module.mobile;
+package com.starfish.ttt;
 
 import com.google.common.base.Strings;
 

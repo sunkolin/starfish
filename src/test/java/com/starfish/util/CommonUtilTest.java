@@ -1,6 +1,6 @@
 package com.starfish.util;
 
-import com.starfish.module.weather.Weather;
+import com.starfish.ttt.Weather;
 import org.junit.Test;
 
 import java.util.ArrayList;
