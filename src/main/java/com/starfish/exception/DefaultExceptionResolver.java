@@ -1,12 +1,12 @@
 package com.starfish.exception;
 
-import com.alibaba.fastjson.support.spring.FastJsonJsonView;
 import com.google.common.base.Joiner;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.starfish.model.Result;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.HandlerExceptionResolver;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,15 +21,20 @@ import java.util.Map;
  * @version 1.0.0
  * @since 2015-12-02
  */
-@SuppressWarnings(value = "unused")
+@Slf4j
+@ControllerAdvice
 @Component
-public class DefaultExceptionResolver implements HandlerExceptionResolver {
+public class DefaultExceptionResolver {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultExceptionResolver.class);
+    public static final int SYSTEM_EXCEPTION_CODE = 500;
 
-    @Override
-    public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-        Map<String, String> map = new HashMap<>();
+    public static final String SYSTEM_EXCEPTION_MESSAGE = "系统异常";
+
+    @ExceptionHandler
+    @ResponseBody
+    public Result<Object> resolveException(HttpServletRequest request, HttpServletResponse response, Exception ex) {
+        // 拼接链接和参数
+        Map<String, String> map = new HashMap<>(20);
         Enumeration<String> parameterNames = request.getParameterNames();
         while (parameterNames.hasMoreElements()) {
             String key = parameterNames.nextElement();
@@ -37,36 +42,20 @@ public class DefaultExceptionResolver implements HandlerExceptionResolver {
             map.put(key, value);
         }
         String parameters = Joiner.on("&").withKeyValueSeparator("=").join(map);
-
         String url = request.getRequestURL() + "?" + parameters;
 
-
-        if (ex instanceof CheckedException) {
-            CheckedException checkedException = (CheckedException) ex;
-            LOGGER.error("exception occur.url is {},description is {},code is {},message is {}", url, checkedException.getDescription(), checkedException.getCode(), checkedException.getMessage(), ex);
-            return newInstance(checkedException.getCode(), checkedException.getMessage(), checkedException.getDescription());
-        }
-
+        // 处理异常成错误码返回
+        Result<Object> result;
         if (ex instanceof CustomException) {
-            CustomException customException = (CustomException) ex;
-            LOGGER.error("exception occur.url is {},description is {},code is {},message is {}", url, customException.getDescription(), customException.getCode(), customException.getMessage(), ex);
-            return newInstance(customException.getCode(), customException.getMessage(), customException.getDescription());
+            CustomException ce = (CustomException) ex;
+            result = new Result<>(ce);
+            log.error("exception occur.status={},message={},url={}", result.getStatus(), result.getMessage(), url, ex);
+        } else {
+            result = new Result<>(SYSTEM_EXCEPTION_CODE, SYSTEM_EXCEPTION_MESSAGE);
+            log.error("system exception occur.status={},message={},url={}", result.getStatus(), result.getMessage(), url, ex);
         }
-        LOGGER.error("system exception occur.url is {}", url, ex);
 
-        return newInstance(-1, "system exception", ex.getMessage());
-    }
-
-    private ModelAndView newInstance(Integer status, String message, String description) {
-        ModelAndView mv = new ModelAndView();
-        FastJsonJsonView view = new FastJsonJsonView();
-        Map<String, Object> attributes = new HashMap<>();
-        attributes.put("status", status);
-        attributes.put("message", message);
-        attributes.put("description", description);
-        view.setAttributesMap(attributes);
-        mv.setView(view);
-        return mv;
+        return result;
     }
 
 }
