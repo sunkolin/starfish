@@ -19,7 +19,7 @@ import java.util.Properties;
  * @since 2012-9-11
  */
 @Slf4j
-public class Mail {
+public class EmailUtil {
 
     /**
      * 发送邮件

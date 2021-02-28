@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
  * @since 2020-10-30
  */
 @Slf4j
-public final class ShortUrl {
+public final class ShortUrlUtil {
 
     /**
      * 获取短网址，使用百度短网址服务

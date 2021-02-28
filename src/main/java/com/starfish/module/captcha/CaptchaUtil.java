@@ -9,6 +9,6 @@ import cn.hutool.captcha.CaptchaUtil;
  * @version 1.0.0
  * @since 2020-10-30
  */
-public class Captcha extends CaptchaUtil {
+public class CaptchaUtil extends cn.hutool.captcha.CaptchaUtil {
 
 }

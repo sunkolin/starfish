@@ -10,7 +10,7 @@ import java.util.List;
  * @version 1.0.0
  * @since 2020-10-30
  */
-public final class TrafficRestriction {
+public final class TrafficRestrictionUtil {
 
     /**
      * 尾号限行 TODO

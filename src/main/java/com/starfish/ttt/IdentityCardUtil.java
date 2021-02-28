@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
  * @version 1.0.0
  * @since 2019-08-07
  */
-public class IdentityCard {
+public class IdentityCardUtil {
 
     /**
      * 根据身份证获取生日
