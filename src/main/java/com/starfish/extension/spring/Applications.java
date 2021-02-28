@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  */
 @Data
 @Component
-public class SuperApplication {
+public class Applications {
 
     @Value("${spring.application.name}")
     private String name;
