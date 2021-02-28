@@ -1,6 +1,6 @@
 package com.starfish.util;
 
-import com.starfish.module.cache.EhcacheUtil;
+import com.starfish.extension.cache.EhcacheUtil;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

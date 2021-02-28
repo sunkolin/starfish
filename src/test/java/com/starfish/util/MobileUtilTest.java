@@ -1,6 +1,6 @@
 package com.starfish.util;
 
-import com.starfish.ttt.MobileUtil;
+import com.starfish.extension.util.MobileUtil;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

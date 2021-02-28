@@ -5,7 +5,7 @@ import com.google.common.collect.Lists;
 import com.starfish.enums.ResultEnum;
 import com.starfish.enums.SortEnum;
 import com.starfish.exception.CustomException;
-import com.starfish.extension.validator.Validator;
+import com.starfish.trial.validator.Validator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 
