@@ -1,6 +1,6 @@
 package com.starfish.trial.spring;
 
-import com.starfish.enums.ResultEnum;
+import com.starfish.enumeration.ResultEnum;
 import com.starfish.exception.CustomException;
 import com.starfish.util.FileUtil;
 import com.starfish.util.StringUtil;

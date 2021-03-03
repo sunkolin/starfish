@@ -1,20 +1,11 @@
 package com.starfish.util;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Joiner;
-import com.starfish.constant.Constant;
-import com.starfish.enums.ResultEnum;
+import com.starfish.enumeration.ResultEnum;
 import com.starfish.exception.CustomException;
-import com.starfish.model.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.Strings;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;

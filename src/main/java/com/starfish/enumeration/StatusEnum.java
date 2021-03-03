@@ -1,24 +1,24 @@
-package com.starfish.enums;
+package com.starfish.enumeration;
 
 /**
- * 排序枚举
+ * 状态枚举
  *
  * @author sunny
  * @version 1.0.0
  * @since 2014-07-07
  */
 @SuppressWarnings(value = "unused")
-public enum SortEnum {
+public enum StatusEnum {
 
     /**
-     * 升序
+     * 是
      */
-    ASC(1, "asc", "升序", "升序"),
+    YES(1, "yes", "是", "是"),
 
     /**
-     * 降序
+     * 否
      */
-    DESC(2, "desc", "降序", "降序"),
+    NO(2, "no", "是", "否"),
 
     ;
 
@@ -43,14 +43,14 @@ public enum SortEnum {
     private final String message;
 
     /**
-     * SortEnum
+     * StatusEnum
      *
      * @param code        code
      * @param englishCode englishCode
      * @param name        name
      * @param message     message
      */
-    SortEnum(Integer code, String englishCode, String name, String message) {
+    StatusEnum(Integer code, String englishCode, String name, String message) {
         this.code = code;
         this.englishCode = englishCode;
         this.name = name;
@@ -99,10 +99,10 @@ public enum SortEnum {
      * @param code code
      * @return the enum
      */
-    public static SortEnum get(Integer code) {
-        SortEnum[] values = SortEnum.values();
-        SortEnum v = null;
-        for (SortEnum value : values) {
+    public static StatusEnum get(Integer code) {
+        StatusEnum[] values = StatusEnum.values();
+        StatusEnum v = null;
+        for (StatusEnum value : values) {
             if (value.getCode().equals(code)) {
                 v = value;
                 break;
@@ -117,10 +117,10 @@ public enum SortEnum {
      * @param englishCode englishCode
      * @return the enum
      */
-    public static SortEnum get(String englishCode) {
-        SortEnum[] values = SortEnum.values();
-        SortEnum v = null;
-        for (SortEnum value : values) {
+    public static StatusEnum get(String englishCode) {
+        StatusEnum[] values = StatusEnum.values();
+        StatusEnum v = null;
+        for (StatusEnum value : values) {
             if (value.getEnglishCode().equalsIgnoreCase(englishCode)) {
                 v = value;
                 break;

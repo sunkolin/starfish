@@ -3,7 +3,7 @@ package com.starfish.util;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Strings;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import com.starfish.enums.ResultEnum;
+import com.starfish.enumeration.ResultEnum;
 import com.starfish.constant.Constant;
 import com.starfish.exception.CustomException;
 import lombok.extern.slf4j.Slf4j;

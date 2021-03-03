@@ -1,34 +1,24 @@
-package com.starfish.enums;
+package com.starfish.enumeration;
 
 /**
- * 角色枚举
+ * DeleteStatusEnum
  *
  * @author sunny
  * @version 1.0.0
  * @since 2014-07-07
  */
 @SuppressWarnings(value = "unused")
-public enum RoleEnum {
+public enum DeleteStatusEnum {
 
     /**
-     * 游客
+     * 已删除
      */
-    GUEST(1, "guest", "游客", "游客"),
+    DELETE(1, "delete", "已删除", "已删除"),
 
     /**
-     * 普通
+     * 未删除
      */
-    USER(2, "user", "普通用户", "普通用户"),
-
-    /**
-     * 管理
-     */
-    ADMIN(3, "admin", "管理员", "管理员"),
-
-    /**
-     * 超级
-     */
-    SUPER(4, "super", "超级管理员", "超级管理员"),
+    NOT_DELETE(2, "not_delete", "未删除", "未删除"),
 
     ;
 
@@ -53,14 +43,14 @@ public enum RoleEnum {
     private final String message;
 
     /**
-     * RoleEnum
+     * DeleteStatusEnum
      *
      * @param code        code
      * @param englishCode englishCode
      * @param name        name
      * @param message     message
      */
-    RoleEnum(Integer code, String englishCode, String name, String message) {
+    DeleteStatusEnum(Integer code, String englishCode, String name, String message) {
         this.code = code;
         this.englishCode = englishCode;
         this.name = name;
@@ -109,10 +99,10 @@ public enum RoleEnum {
      * @param code code
      * @return the enum
      */
-    public static RoleEnum get(Integer code) {
-        RoleEnum[] values = RoleEnum.values();
-        RoleEnum v = null;
-        for (RoleEnum value : values) {
+    public static DeleteStatusEnum get(Integer code) {
+        DeleteStatusEnum[] values = DeleteStatusEnum.values();
+        DeleteStatusEnum v = null;
+        for (DeleteStatusEnum value : values) {
             if (value.getCode().equals(code)) {
                 v = value;
                 break;
@@ -127,10 +117,10 @@ public enum RoleEnum {
      * @param englishCode englishCode
      * @return the enum
      */
-    public static RoleEnum get(String englishCode) {
-        RoleEnum[] values = RoleEnum.values();
-        RoleEnum v = null;
-        for (RoleEnum value : values) {
+    public static DeleteStatusEnum get(String englishCode) {
+        DeleteStatusEnum[] values = DeleteStatusEnum.values();
+        DeleteStatusEnum v = null;
+        for (DeleteStatusEnum value : values) {
             if (value.getEnglishCode().equalsIgnoreCase(englishCode)) {
                 v = value;
                 break;

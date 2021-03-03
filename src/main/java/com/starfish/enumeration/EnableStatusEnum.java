@@ -1,4 +1,4 @@
-package com.starfish.enums;
+package com.starfish.enumeration;
 
 /**
  * 启用禁用状态枚举

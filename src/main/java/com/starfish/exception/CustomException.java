@@ -1,6 +1,6 @@
 package com.starfish.exception;
 
-import com.starfish.enums.ResultEnum;
+import com.starfish.enumeration.ResultEnum;
 
 import java.io.Serializable;
 

@@ -1,31 +1,31 @@
-package com.starfish.enums;
+package com.starfish.enumeration;
 
 /**
- * 星期枚举
+ * 性别枚举
+ * （1）枚举类不能有public修饰的构造函数，构造函数都是隐含private，编译器自动处理。
+ * （2）每个枚举值隐含都是由public、static、final修饰的，不需要添加这些修饰符。
  *
  * @author sunny
  * @version 1.0.0
  * @since 2014-07-07
  */
 @SuppressWarnings(value = "unused")
-public enum WeekEnum {
+public enum SexEnum {
 
     /**
-     * 周一
+     * 男
      */
-    MONDAY(1, "monday", "周一", "周一"),
+    MAN(1, "man", "男", "男"),
 
-    TUESDAY(2, "tuesday", "周二", "周二"),
+    /**
+     * 女
+     */
+    WOMAN(2, "woman", "女", "女"),
 
-    WEDNESDAY(3, "wednesday", "周三", "周三"),
-
-    THURSDAY(4, "thursday", "周四", "周四"),
-
-    FRIDAY(5, "friday", "周五", "周五"),
-
-    SATURDAY(6, "saturday", "周六", "周六"),
-
-    SUNDAY(7, "sunday", "周日", "周日"),
+    /**
+     * 保密
+     */
+    SECRET(3, "secret", "保密", "保密"),
 
     ;
 
@@ -50,14 +50,14 @@ public enum WeekEnum {
     private final String message;
 
     /**
-     * WeekEnum
+     * SexEnum
      *
      * @param code        code
      * @param englishCode englishCode
      * @param name        name
      * @param message     message
      */
-    WeekEnum(Integer code, String englishCode, String name, String message) {
+    SexEnum(Integer code, String englishCode, String name, String message) {
         this.code = code;
         this.englishCode = englishCode;
         this.name = name;
@@ -106,10 +106,10 @@ public enum WeekEnum {
      * @param code code
      * @return the enum
      */
-    public static WeekEnum get(Integer code) {
-        WeekEnum[] values = WeekEnum.values();
-        WeekEnum v = null;
-        for (WeekEnum value : values) {
+    public static SexEnum get(Integer code) {
+        SexEnum[] values = SexEnum.values();
+        SexEnum v = null;
+        for (SexEnum value : values) {
             if (value.getCode().equals(code)) {
                 v = value;
                 break;
@@ -124,10 +124,10 @@ public enum WeekEnum {
      * @param englishCode englishCode
      * @return the enum
      */
-    public static WeekEnum get(String englishCode) {
-        WeekEnum[] values = WeekEnum.values();
-        WeekEnum v = null;
-        for (WeekEnum value : values) {
+    public static SexEnum get(String englishCode) {
+        SexEnum[] values = SexEnum.values();
+        SexEnum v = null;
+        for (SexEnum value : values) {
             if (value.getEnglishCode().equalsIgnoreCase(englishCode)) {
                 v = value;
                 break;
@@ -155,5 +155,6 @@ public enum WeekEnum {
     public static boolean exist(String englishCode) {
         return get(englishCode) != null;
     }
+
 
 }

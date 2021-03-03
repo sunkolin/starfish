@@ -2,8 +2,8 @@ package com.starfish.util;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
-import com.starfish.enums.ResultEnum;
-import com.starfish.enums.SortEnum;
+import com.starfish.enumeration.ResultEnum;
+import com.starfish.enumeration.SortEnum;
 import com.starfish.exception.CustomException;
 import com.starfish.trial.validator.Validator;
 import lombok.extern.slf4j.Slf4j;
