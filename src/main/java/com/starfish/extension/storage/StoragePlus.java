@@ -9,7 +9,7 @@ import java.io.File;
  * @version 1.0.0
  * @since 2020-10-28
  */
-public class StorageUtil {
+public class StoragePlus {
 
     /**
      * 存储文件并返回一个链接地址

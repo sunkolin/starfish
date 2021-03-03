@@ -15,7 +15,7 @@ import org.ehcache.config.builders.ResourcePoolsBuilder;
  * @since 2018-06-06
  */
 @SuppressWarnings("unused")
-public class EhcacheUtil {
+public class EhcachePlus {
 
     private static final CacheManager CACHE_MANAGER = CacheManagerBuilder.newCacheManagerBuilder()
             .withCache("customCache", CacheConfigurationBuilder.newCacheConfigurationBuilder(String.class, String.class,

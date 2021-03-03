@@ -19,7 +19,7 @@
 // */
 //@Slf4j
 //@Service
-//public class Applications {
+//public class DiscoveryPlus {
 //
 //    @Autowired
 //    private DiscoveryClient discoveryClient;

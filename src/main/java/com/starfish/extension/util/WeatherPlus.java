@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
  * @version 1.0.0
  * @since 2020-10-30
  */
-public final class WeatherUtil {
+public final class WeatherPlus {
 
     /**
      * 查询天气

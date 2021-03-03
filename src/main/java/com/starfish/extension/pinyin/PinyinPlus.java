@@ -11,7 +11,7 @@ import java.util.List;
  * @since 2020-10-28
  */
 @SuppressWarnings("unused")
-public class PinyinUtil {
+public class PinyinPlus {
 
     /**
      * 汉字转拼音

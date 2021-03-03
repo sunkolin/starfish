@@ -19,7 +19,7 @@ import java.util.UUID;
  * @since 2021-02-12
  */
 @SuppressWarnings(value = "unused")
-public class JsonWebTokenUtil {
+public class JsonWebTokenPlus {
 
     private static final String SECRET = "1234567890";
 

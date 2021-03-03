@@ -27,7 +27,7 @@ public class CustomJsonWebToken {
         Map<String, Object> claims = new HashMap<>();
         claims.put(USER_ID_KEY, userId);
 //        Map<String, Object> claims =ImmutableMap.of(USER_ID_KEY,userId);
-        return JsonWebTokenUtil.createToken(claims);
+        return JsonWebTokenPlus.createToken(claims);
     }
 
     public static String createToken(User user) {
@@ -35,11 +35,11 @@ public class CustomJsonWebToken {
         claims.put(USER_ID_KEY, user.getUserId());
         claims.put(USER_NAME_KEY, user.getUserName());
         claims.put(NICK_NAME_KEY, user.getNickName());
-        return JsonWebTokenUtil.createToken(claims);
+        return JsonWebTokenPlus.createToken(claims);
     }
 
     public static User verifyToken(String token) {
-        DecodedJWT decodedJwt = JsonWebTokenUtil.verifyToken(token);
+        DecodedJWT decodedJwt = JsonWebTokenPlus.verifyToken(token);
         Map<String, Claim> claims = decodedJwt.getClaims();
 
         // 解析claims

@@ -23,17 +23,17 @@ import java.util.Map;
  * @version 1.0.0
  * @since 2020-10-16
  */
-public class SuperRestTemplate extends RestTemplate {
+public class RestTemplatePlus extends RestTemplate {
 
-    private SuperRestTemplate() {
+    private RestTemplatePlus() {
         super();
         List<HttpMessageConverter<?>> messageConverters = super.getMessageConverters();
         supportUtf8(messageConverters);
         supportJavascript(messageConverters);
     }
 
-    public static SuperRestTemplate buildSuperRestTemplate() {
-        return new SuperRestTemplate();
+    public static RestTemplatePlus buildSuperRestTemplate() {
+        return new RestTemplatePlus();
     }
 
     public static RestTemplate buildRestTemplate() {

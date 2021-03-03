@@ -19,11 +19,11 @@ import java.util.Map;
  */
 @SuppressWarnings(value = "unused")
 @Slf4j
-public class Redis {
+public class RedisPlus {
 
     private final ShardedJedisPool pool;
 
-    public Redis(ShardedJedisPool pool) {
+    public RedisPlus(ShardedJedisPool pool) {
         this.pool = pool;
     }
 

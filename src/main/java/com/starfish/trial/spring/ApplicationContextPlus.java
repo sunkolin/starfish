@@ -14,13 +14,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @SuppressWarnings(value = "unused")
-public class ApplicationContextHolder implements ApplicationContextAware {
+public class ApplicationContextPlus implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        ApplicationContextHolder.applicationContext = applicationContext;
+        ApplicationContextPlus.applicationContext = applicationContext;
     }
 
     public static ApplicationContext getApplicationContext() {

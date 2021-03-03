@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * @version 1.0.0
  * @since 2019-08-14
  */
-public class MobileUtil {
+public class MobilePlus {
 
     /**
      * 参考：https://www.cnblogs.com/zjk1/p/8623965.html
