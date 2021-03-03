@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Redis
+ * RedisPlus
  *
  * @author sunny
  * @version 1.0.0

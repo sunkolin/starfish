@@ -13,9 +13,10 @@ import java.util.Date;
 import java.util.Properties;
 
 /**
- * Mails
+ * EmailPlus
  *
  * @author sunny
+ * @version 1.0.0
  * @since 2012-9-11
  */
 @Slf4j

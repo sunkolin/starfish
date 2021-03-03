@@ -8,7 +8,7 @@ import org.ehcache.config.builders.CacheManagerBuilder;
 import org.ehcache.config.builders.ResourcePoolsBuilder;
 
 /**
- * EhcacheUtil
+ * EhcachePlus
  *
  * @author sunny
  * @version 1.0.0

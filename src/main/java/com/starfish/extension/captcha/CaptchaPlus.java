@@ -1,7 +1,7 @@
 package com.starfish.extension.captcha;
 
 /**
- * Captcha
+ * CaptchaPlus
  *
  * @author sunny
  * @version 1.0.0

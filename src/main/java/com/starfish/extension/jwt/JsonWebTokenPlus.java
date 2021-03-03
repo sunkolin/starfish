@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * JsonWebToken
+ * JsonWebTokenPlus
  *
  * @author sunny
  * @version 1.0.0
