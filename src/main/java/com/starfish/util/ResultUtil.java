@@ -12,7 +12,7 @@ import com.starfish.model.Result;
  * @since 2019-07-11
  */
 @SuppressWarnings(value = "unused")
-public class Results {
+public class ResultUtil {
 
     /**
      * 返回成功结果
