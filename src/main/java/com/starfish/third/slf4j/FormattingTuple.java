@@ -1,4 +1,4 @@
-package com.starfish.trial.slf4j;
+package com.starfish.third.slf4j;
 
 /**
  * Holds the results of formatting done by {@link MessageFormatter}.

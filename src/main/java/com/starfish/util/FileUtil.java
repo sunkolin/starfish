@@ -265,6 +265,11 @@ public final class FileUtil {
      * @return 文件类型
      */
     public static String getFileType(String name) {
+        // 校验文件名称
+        if (Strings.isNullOrEmpty(name)){
+            throw new CustomException(ResultEnum.FILE_TYPE_ERROR);
+        }
+
         int index = name.lastIndexOf(Constant.DOT);
         return name.substring(index).toLowerCase();
     }

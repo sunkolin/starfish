@@ -1,7 +1,7 @@
 package com.starfish.util;
 
-import com.starfish.trial.slf4j.FormattingTuple;
-import com.starfish.trial.slf4j.MessageFormatter;
+import com.starfish.third.slf4j.FormattingTuple;
+import com.starfish.third.slf4j.MessageFormatter;
 import org.apache.commons.lang.text.StrBuilder;
 
 import java.util.Locale;

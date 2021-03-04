@@ -37,6 +37,10 @@ public enum ResultEnum {
 
     FIELD_COUNT_IS_ZERO(1009, "field_count_is_zero", "当前对象中没有任何属性值"),
 
+    FILE_TYPE_ERROR(1010, "file_type_error", "文件类型错误"),
+
+    SAVE_FILE_EXCEPTION(1011, "save_file_exception", "保存文件异常"),
+
     ;
 
     /**
