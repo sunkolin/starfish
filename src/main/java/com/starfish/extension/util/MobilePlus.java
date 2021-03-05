@@ -5,7 +5,7 @@ import com.google.common.base.Strings;
 import java.util.regex.Pattern;
 
 /**
- * MobileUtil
+ * MobilePlus
  *
  * @author sunny
  * @version 1.0.0
@@ -27,10 +27,12 @@ public class MobilePlus {
      * @return 结果
      */
     public static boolean isMobile(String mobile) {
-        if (Strings.isNullOrEmpty(mobile) || mobile.length() != MOBILE_LENGTH) {
+        if (Strings.isNullOrEmpty(mobile)) {
             return false;
         }
-
+        if (mobile.length() != MOBILE_LENGTH) {
+            return false;
+        }
         return Pattern.matches(MOBILE_REGEX, mobile);
     }
 
