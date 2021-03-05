@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * Weather
+ * WeatherPlus
  *
  * @author sunny
  * @version 1.0.0

@@ -3,7 +3,7 @@ package com.starfish.extension.util;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * IdentityCard
+ * IdentityCardPlus
  *
  * @author sunny
  * @version 1.0.0
@@ -24,11 +24,11 @@ public class IdentityCardPlus {
     /**
      * 获取身份证信息
      *
-     * @param idCard id card
-     * @return the info
+     * @param identityCard 身份证好吗
+     * @return 结果
      */
-    public static String getIdCardInfo(String idCard) {
-        return new RestTemplate().getForObject("http://apistore.baidu.com/microservice/icardinfo?id=" + idCard, String.class);
+    public static String getIdCardInfo(String identityCard) {
+        return new RestTemplate().getForObject("http://apistore.baidu.com/microservice/icardinfo?id=" + identityCard, String.class);
     }
 
 }
