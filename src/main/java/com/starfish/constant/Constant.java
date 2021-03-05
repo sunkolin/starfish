@@ -56,7 +56,7 @@ public class Constant {
     public static final String DOT = ".";
 
     /**
-     *
+     * BAIDU_API_KEY
      */
     public static final String BAIDU_API_KEY = "25893504b880292c8472c48cc003a70a";
 
