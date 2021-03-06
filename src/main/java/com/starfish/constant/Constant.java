@@ -31,11 +31,6 @@ public class Constant {
     public static final String TIME_PATTERN = "HH:mm:ss";
 
     /**
-     * 用户键
-     */
-    public static final String USER_HOLDER_KEY = "_User_Holder_Key_";
-
-    /**
      * cookie名称
      */
     public static final String COOKIE_NAME = "secret";
@@ -54,11 +49,6 @@ public class Constant {
      * 点
      */
     public static final String DOT = ".";
-
-    /**
-     * BAIDU_API_KEY
-     */
-    public static final String BAIDU_API_KEY = "25893504b880292c8472c48cc003a70a";
 
     /**
      * 请求开始时间

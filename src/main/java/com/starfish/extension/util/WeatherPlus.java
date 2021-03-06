@@ -17,6 +17,11 @@ import org.springframework.web.client.RestTemplate;
 public final class WeatherPlus {
 
     /**
+     * BAIDU_API_KEY
+     */
+    public static final String BAIDU_API_KEY = "25893504b880292c8472c48cc003a70a";
+
+    /**
      * 查询天气
      *
      * @param cityName 城市名称
@@ -29,7 +34,7 @@ public final class WeatherPlus {
         //设置请求头 apiKey
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("apikey", Constant.BAIDU_API_KEY);
+        httpHeaders.add("apikey", BAIDU_API_KEY);
         HttpEntity<String> httpEntity = new HttpEntity<>(httpHeaders);
 
         ResponseEntity<String> data = restTemplate.exchange(url, HttpMethod.GET, httpEntity, String.class);

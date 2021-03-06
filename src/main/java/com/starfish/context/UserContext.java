@@ -1,6 +1,5 @@
 package com.starfish.context;
 
-import com.starfish.constant.Constant;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -19,6 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 @SuppressWarnings(value = "unused")
 public class UserContext {
 
+    /**
+     * 用户键
+     */
+    public static final String USER_CONTEXT_KEY = "user_context_key";
+
     public static HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     }
@@ -33,18 +37,19 @@ public class UserContext {
     }
 
     public static Long getUserId() {
-        User user = getAttribute(Constant.USER_HOLDER_KEY);
-        return user.getUserId();
+        return getUser().getUserId();
     }
 
     public static String getUsername() {
-        User user = getAttribute(Constant.USER_HOLDER_KEY);
-        return user.getUserName();
+        return getUser().getUserName();
     }
 
     public static String getNickname() {
-        User user = getAttribute(Constant.USER_HOLDER_KEY);
-        return user.getNickName();
+        return getUser().getNickName();
+    }
+
+    private static User getUser() {
+        return getAttribute(USER_CONTEXT_KEY);
     }
 
 }
