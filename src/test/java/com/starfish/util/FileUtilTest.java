@@ -18,13 +18,13 @@ public class FileUtilTest {
 
     @Test
     public void readTest() {
-        String result = FileUtil.read("classpath:log4j.xml");
+        String result = FileUtil.read("classpath:application.properties");
         assertNotNull(result);
     }
 
     @Test
     public void readLinesTest() {
-        List<String> result = FileUtil.readLines("classpath:log4j.xml");
+        List<String> result = FileUtil.readLines("classpath:application.properties");
         assertTrue(result != null && !result.isEmpty());
     }
 

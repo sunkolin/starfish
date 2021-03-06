@@ -42,7 +42,7 @@ public final class CommonUtil {
     private static final List<String> SENSITIVE_WORD_LIST;
 
     static {
-        SENSITIVE_WORD_LIST = FileUtil.readLines("classpath:words.txt");
+        SENSITIVE_WORD_LIST = FileUtil.readLines("words.txt");
     }
 
     /**
