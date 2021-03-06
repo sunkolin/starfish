@@ -15,7 +15,6 @@ import java.net.NetworkInterface;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
@@ -32,18 +31,9 @@ import java.util.concurrent.ThreadLocalRandom;
 public final class CommonUtil {
 
     /**
-     * 问好
+     * 问号
      */
     public static final String QUESTION_MARK = "?";
-
-    /**
-     * sensitive words list
-     */
-    private static final List<String> SENSITIVE_WORD_LIST;
-
-    static {
-        SENSITIVE_WORD_LIST = FileUtil.readLines("words.txt");
-    }
 
     /**
      * 比较两个对象是否相等
@@ -167,25 +157,6 @@ public final class CommonUtil {
     }
 
     /**
-     * check sensitive words
-     * 判断给定的字符串是否包含敏感词
-     *
-     * @param words words
-     * @return return
-     */
-    public static boolean containsSensitiveWords(String... words) {
-        // default flag is false
-        boolean flag = false;
-        for (String word : words) {
-            if (SENSITIVE_WORD_LIST.contains(word)) {
-                flag = true;
-                break;
-            }
-        }
-        return flag;
-    }
-
-    /**
      * 解决poi文件名称中文乱码问题
      *
      * @param request  请求
@@ -205,13 +176,13 @@ public final class CommonUtil {
                 result = new String(filename.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("resolveFilenameCharset", e);
         }
         return result;
     }
 
     /**
-     * 生成知道范围的随机数
+     * 生成指定范围的随机数
      *
      * @param min 最小值
      * @param max 最大值
@@ -222,7 +193,7 @@ public final class CommonUtil {
     }
 
     /**
-     * 生成知道范围的随机数
+     * 生成指定范围的随机数
      *
      * @param min 最小值
      * @param max 最大值
