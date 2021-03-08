@@ -1,5 +1,6 @@
 package com.starfish.util;
 
+import com.starfish.extension.util.SensitiveWordsPlus;
 import com.starfish.extension.util.WeatherPlus;
 import org.junit.Test;
 
@@ -49,14 +50,14 @@ public class CommonUtilTest {
     @Test
     public void checkWordsTrue() {
         String word = "考前答案";
-        boolean result = CommonUtil.containsSensitiveWords(word);
+        boolean result = SensitiveWordsPlus.contains(word);
         assertTrue(result);
     }
 
     @Test
     public void checkWordsFalse() {
         String word2 = "没有";
-        boolean result2 = CommonUtil.containsSensitiveWords(word2);
+        boolean result2 = SensitiveWordsPlus.contains(word2);
         assertFalse(result2);
     }
 

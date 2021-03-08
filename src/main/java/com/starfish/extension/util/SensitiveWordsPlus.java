@@ -29,7 +29,7 @@ public final class SensitiveWordsPlus {
      * @param words words
      * @return return
      */
-    public static boolean containsSensitiveWords(String... words) {
+    public static boolean contains(String... words) {
         // default flag is false
         boolean flag = false;
         for (String word : words) {
