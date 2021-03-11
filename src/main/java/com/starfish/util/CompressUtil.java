@@ -2,6 +2,7 @@ package com.starfish.util;
 
 import com.starfish.enumeration.ResultEnum;
 import com.starfish.exception.CustomException;
+import joptsimple.internal.Strings;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.FileCopyUtils;
@@ -176,7 +177,7 @@ public class CompressUtil {
      * 判断zip文件
      */
     private static boolean isEndsWithZip(String fileName) {
-        return !StringUtils.isEmpty(fileName) && fileName.trim().toLowerCase().endsWith(".zip");
+        return !Strings.isNullOrEmpty(fileName) && fileName.trim().toLowerCase().endsWith(".zip");
     }
 
     @Data
