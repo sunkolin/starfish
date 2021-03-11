@@ -8,26 +8,32 @@ import com.starfish.exception.CustomException;
 import com.starfish.model.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
+import org.springframework.lang.Nullable;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.HtmlUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * HttpUtil
+ * WebUtil
  *
  * @author sunny
  * @version 1.0.0
+ * @see org.springframework.web.util.WebUtils
+ * @see org.springframework.web.util.HtmlUtils
+ * @see org.springframework.web.util.JavaScriptUtils
  * @since 2015-07-24
  */
 @SuppressWarnings(value = "unused")
 @Slf4j
-public class HttpUtil {
+public class WebUtil extends HtmlUtils {
 
     /**
      * 淘宝查询IP地址接口
@@ -47,6 +53,89 @@ public class HttpUtil {
 
     static {
         initStreamType();
+    }
+
+    /**
+     * 获取Scheme
+     *
+     * @param url 链接
+     * @return 结果
+     */
+    public static String getScheme(String url) {
+        String scheme = "";
+        try {
+            URI uri = new URI(url);
+            scheme = uri.getScheme();
+        } catch (Exception e) {
+            log.error("getScheme error.url={}", url, e);
+        }
+        return scheme;
+    }
+
+    /**
+     * 获取Host
+     *
+     * @param url 链接
+     * @return 结果
+     */
+    public static String getHost(String url) {
+        String host = "";
+        try {
+            URI uri = new URI(url);
+            host = uri.getHost();
+        } catch (Exception e) {
+            log.error("getHost error.url={}", url, e);
+        }
+        return host;
+    }
+
+    /**
+     * 获取基础url
+     *
+     * @param url 链接地址，例如https://m.gmw.cn/baijia/2021-03/11/1302158793.html
+     * @return 结果，例如https://m.gmw.cn:80
+     */
+    public static String getBaseUrl(String url) {
+        String scheme = getScheme(url);
+        String host = getHost(url);
+        String port = getPort(url);
+        return scheme + "://" + host + ":" + port;
+    }
+
+    /**
+     * 获取端口
+     *
+     * @param url 链接
+     * @return 结果
+     */
+    public static String getPort(String url) {
+        String port = "";
+        try {
+            URI uri = new URI(url);
+            int intPort = getPort(uri.getScheme(), uri.getPort());
+            port = String.valueOf(intPort);
+        } catch (Exception e) {
+            log.error("getPort error.url={}", url, e);
+        }
+        return port;
+    }
+
+    /**
+     * 获取端口
+     *
+     * @param scheme scheme
+     * @param port   端口
+     * @return 结果
+     */
+    private static int getPort(@Nullable String scheme, int port) {
+        if (port == -1) {
+            if ("http".equals(scheme) || "ws".equals(scheme)) {
+                port = 80;
+            } else if ("https".equals(scheme) || "wss".equals(scheme)) {
+                port = 443;
+            }
+        }
+        return port;
     }
 
     /**
@@ -202,11 +291,11 @@ public class HttpUtil {
         String ip = "";
         String[] names = new String[]{"X-Real-IP", "X-Forwarded-For", "Proxy-Client-IP", "WL-Proxy-Client-IP", "HTTP_CLIENT_IP", "HTTP_X_FORWARDED_FOR"};
         for (String string : names) {
-            if (HttpUtil.isEmptyOrUnknown(ip)) {
+            if (WebUtil.isEmptyOrUnknown(ip)) {
                 ip = request.getHeader(string);
             }
         }
-        if (HttpUtil.isEmptyOrUnknown(ip)) {
+        if (WebUtil.isEmptyOrUnknown(ip)) {
             ip = request.getRemoteAddr();
         }
 
@@ -270,7 +359,7 @@ public class HttpUtil {
      * @return the location
      */
     public static String getLocation(HttpServletRequest request) {
-        return getLocation(HttpUtil.getInternetProtocolAddress(request));
+        return getLocation(WebUtil.getInternetProtocolAddress(request));
     }
 
     /**
@@ -287,6 +376,67 @@ public class HttpUtil {
         response.setHeader("Cache-Control", "no-cache, must-revalidate");
         response.addHeader("Expires", "Thu, 01 Jan 1970 00:00:01 GMT");
         response.addHeader("If-Modified-Since", "0");
+    }
+
+    /**
+     * JavaScriptUtils中方法
+     *
+     * @param input 内容
+     * @return 过滤掉特殊字符后的内容
+     */
+    public static String javaScriptEscape(String input) {
+        if (input == null) {
+            return null;
+        }
+
+        StringBuilder filtered = new StringBuilder(input.length());
+        char prevChar = '\u0000';
+        char c;
+        for (int i = 0; i < input.length(); i++) {
+            c = input.charAt(i);
+            if (c == '"') {
+                filtered.append("\\\"");
+            } else if (c == '\'') {
+                filtered.append("\\'");
+            } else if (c == '\\') {
+                filtered.append("\\\\");
+            } else if (c == '/') {
+                filtered.append("\\/");
+            } else if (c == '\t') {
+                filtered.append("\\t");
+            } else if (c == '\n') {
+                if (prevChar != '\r') {
+                    filtered.append("\\n");
+                }
+            } else if (c == '\r') {
+                filtered.append("\\n");
+            } else if (c == '\f') {
+                filtered.append("\\f");
+            } else if (c == '\b') {
+                filtered.append("\\b");
+            }
+            // No '\v' in Java, use octal value for VT ascii char
+            else if (c == '\013') {
+                filtered.append("\\v");
+            } else if (c == '<') {
+                filtered.append("\\u003C");
+            } else if (c == '>') {
+                filtered.append("\\u003E");
+            }
+            // Unicode for PS (line terminator in ECMA-262)
+            else if (c == '\u2028') {
+                filtered.append("\\u2028");
+            }
+            // Unicode for LS (line terminator in ECMA-262)
+            else if (c == '\u2029') {
+                filtered.append("\\u2029");
+            } else {
+                filtered.append(c);
+            }
+            prevChar = c;
+
+        }
+        return filtered.toString();
     }
 
     /**
