@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * WeatherM
+ * WeatherDetailModel
  *
  * @author sunny
  * @version 1.0.0
