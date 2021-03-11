@@ -61,13 +61,6 @@ public class CommonUtilTest {
         assertFalse(result2);
     }
 
-    @Test
-    public void weather() {
-        String city = "北京";
-        String result = WeatherPlus.getWeather(city);
-        assertNotNull(result);
-    }
-
     /**
      * 用户模型
      */

@@ -1,6 +1,6 @@
 package com.starfish.extension.util;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.Data;
 
 import java.util.List;
 
@@ -11,22 +11,22 @@ import java.util.List;
  * @version 1.0.0
  * @since 2021-03-08
  */
-@Slf4j
+@Data
 public class WeatherModel {
 
     /**
      * 昨日天气
      */
-    private WeatherM yesterday;
+    private WeatherDetailModel yesterday;
 
     /**
      * 今日天气
      */
-    private WeatherM today;
+    private WeatherDetailModel today;
 
     /**
-     * 未来7日天气
+     * 未来5日天气，包括今日
      */
-    private List<WeatherM> forecast;
+    private List<WeatherDetailModel> forecast;
 
 }

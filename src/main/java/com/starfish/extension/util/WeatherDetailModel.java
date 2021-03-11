@@ -1,6 +1,6 @@
 package com.starfish.extension.util;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,23 +12,23 @@ import java.util.Date;
  * @version 1.0.0
  * @since 2021-03-08
  */
-@Slf4j
-public class WeatherM implements Serializable {
+@Data
+public class WeatherDetailModel implements Serializable {
 
     /**
      * 日期
      */
-    private Date date;
+    private String date;
 
     /**
      * 最低温度
      */
-    private int lowTemp;
+    private String low;
 
     /**
      * 最高温度
      */
-    private int highTemp;
+    private String high;
 
     /**
      * 天气
