@@ -3,7 +3,6 @@ package com.starfish.extension.util;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * WeatherM
