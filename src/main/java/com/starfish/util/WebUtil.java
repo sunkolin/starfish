@@ -15,7 +15,6 @@ import org.springframework.web.util.HtmlUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -64,10 +63,10 @@ public class WebUtil extends HtmlUtils {
     public static String getScheme(String url) {
         String scheme = "";
         try {
-            URI uri = new URI(url);
-            scheme = uri.getScheme();
+            URL u = new URL(url);
+            scheme = u.getProtocol();
         } catch (Exception e) {
-            log.error("getScheme error.url={}", url, e);
+            log.error("getProtocol error.url={}", url, e);
         }
         return scheme;
     }
@@ -81,8 +80,8 @@ public class WebUtil extends HtmlUtils {
     public static String getHost(String url) {
         String host = "";
         try {
-            URI uri = new URI(url);
-            host = uri.getHost();
+            URL u = new URL(url);
+            host = u.getHost();
         } catch (Exception e) {
             log.error("getHost error.url={}", url, e);
         }
@@ -92,7 +91,7 @@ public class WebUtil extends HtmlUtils {
     /**
      * 获取基础url
      *
-     * @param url 链接地址，例如https://m.gmw.cn/baijia/2021-03/11/1302158793.html
+     * @param url 链接地址，例如https://m.gmw.cn/baijia/2021-03/11/1302158793.html?a=1&b=2&c=12#34
      * @return 结果，例如https://m.gmw.cn:80
      */
     public static String getBaseUrl(String url) {
@@ -111,8 +110,8 @@ public class WebUtil extends HtmlUtils {
     public static String getPort(String url) {
         String port = "";
         try {
-            URI uri = new URI(url);
-            int intPort = getPort(uri.getScheme(), uri.getPort());
+            URL u = new URL(url);
+            int intPort = getPort(u.getProtocol(), u.getPort());
             port = String.valueOf(intPort);
         } catch (Exception e) {
             log.error("getPort error.url={}", url, e);
