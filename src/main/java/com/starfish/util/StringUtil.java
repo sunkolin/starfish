@@ -1,11 +1,14 @@
 package com.starfish.util;
 
+import com.google.common.base.Splitter;
 import com.starfish.third.slf4j.FormattingTuple;
 import com.starfish.third.slf4j.MessageFormatter;
 import org.apache.commons.lang.text.StrBuilder;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * StringUtil
@@ -337,7 +340,7 @@ public class StringUtil {
      * Ensures that an object reference passed as a parameter to the calling method is not null.
      *
      * @param reference an object reference
-     * @param <T> T
+     * @param <T>       T
      * @return the non-null reference that was validated
      * @throws NullPointerException if {@code reference} is null
      * @see com.google.common.base.Strings
@@ -357,6 +360,41 @@ public class StringUtil {
      */
     public static boolean isNullOrEmpty(String string) {
         return string == null || string.isEmpty();
+    }
+
+    /**
+     * 切分字符串
+     *
+     * @param str       字符串
+     * @param separator 分割字符串
+     * @return 结果
+     */
+    public static List<String> split(String str, String separator) {
+        return Splitter.on(separator).splitToList(str);
+    }
+
+    /**
+     * 切分字符串
+     *
+     * @param str       字符串
+     * @param separator 分割字符串
+     * @return 结果
+     */
+    public static List<Integer> splitToInteger(String str, String separator) {
+        List<String> stringList = Splitter.on(separator).splitToList(str);
+        return stringList.stream().map(Integer::valueOf).collect(Collectors.toList());
+    }
+
+    /**
+     * 切分字符串
+     *
+     * @param str       字符串
+     * @param separator 分割字符串
+     * @return 结果
+     */
+    public static List<Long> splitToLong(String str, String separator) {
+        List<String> stringList = Splitter.on(separator).splitToList(str);
+        return stringList.stream().map(Long::valueOf).collect(Collectors.toList());
     }
 
 }

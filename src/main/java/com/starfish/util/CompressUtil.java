@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StreamUtils;
-import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -184,7 +183,9 @@ public class CompressUtil {
     private static class Entry {
 
         private String basePath;
+
         private String filePath;
+
         private String relativePath;
 
     }
