@@ -1,6 +1,5 @@
 package com.starfish.util;
 
-import com.alibaba.fastjson.JSON;
 import com.google.common.base.Strings;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.starfish.enumeration.ResultEnum;
@@ -32,8 +31,8 @@ import java.util.concurrent.*;
  * @version 1.0.0
  * @since 2015-01-05
  */
-@SuppressWarnings(value = "unused")
 @Slf4j
+@SuppressWarnings(value = "unused")
 public final class FileUtil {
 
     private static final ThreadFactory NAMED_THREAD_FACTORY = new ThreadFactoryBuilder().setNameFormat("file-util-thread-pool-factory").build();
@@ -224,7 +223,6 @@ public final class FileUtil {
 
     /**
      * 读取项目下文件，按行转成字符串，以行为单位放入list中，适合读取小文件
-     * <p>
      * File file = classPathResource.getFile(); 方式无法获取jar包中的文件
      *
      * @param path 文件路径
@@ -266,98 +264,12 @@ public final class FileUtil {
      */
     public static String getFileType(String name) {
         // 校验文件名称
-        if (Strings.isNullOrEmpty(name)){
+        if (Strings.isNullOrEmpty(name)) {
             throw new CustomException(ResultEnum.FILE_TYPE_ERROR);
         }
 
         int index = name.lastIndexOf(Constant.DOT);
         return name.substring(index).toLowerCase();
-    }
-
-    /**
-     * 文件分割
-     *
-     * @param fileName   待拆分的完整文件名，例如/opt/tmp/2017080714245658403aec312.mp4
-     * @param targetPath 目标文件夹，例如/opt/tmp/8b3df7067dcb4d0fb27f90b7598163d4/
-     * @param size       单位MB，按多少字节大小拆分，例如100
-     * @return 拆分成功true，拆分失败false
-     */
-    public static boolean split(String fileName, String targetPath, int size) {
-        List<String> parts = new ArrayList<>();
-        File file = new File(fileName);
-        int byteSize = 1024 * 1024 * size;
-        int count = (int) Math.ceil(file.length() / (double) byteSize);
-        int countLen = (count + "").length();
-
-        // 创建目标文件
-        File targetFile = new File(targetPath);
-        if (!targetFile.exists()) {
-            //noinspection ResultOfMethodCallIgnored
-            targetFile.mkdirs();
-        }
-
-        List<Future<Boolean>> futures = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            String partFileName = Strings.padStart(String.valueOf(i + 1), countLen, '0') + ".part";
-            parts.add(partFileName);
-            Future<Boolean> future = EXECUTOR.submit(new SplitCallable(byteSize, i * byteSize, partFileName, file, targetPath));
-            futures.add(future);
-        }
-
-        // 等待完成
-        for (Future<Boolean> future : futures) {
-            try {
-                Boolean result = future.get();
-                if (!result) {
-                    return false;
-                }
-            } catch (Exception e) {
-                log.error("split file error,file={},targetPath={},parts={}", fileName, targetPath, JSON.toJSONString(parts), e);
-                return false;
-            }
-        }
-        log.info("split file success,file={},targetPath={},parts={}", fileName, targetPath, JSON.toJSONString(parts));
-
-        return true;
-    }
-
-    private static class SplitCallable implements Callable<Boolean> {
-
-        int byteSize;
-        String partFileName;
-        File originFile;
-        int startPos;
-        String targetPath;
-
-        SplitCallable(int byteSize, int startPos, String partFileName, File originFile, String targetPath) {
-            this.startPos = startPos;
-            this.byteSize = byteSize;
-            this.partFileName = partFileName;
-            this.originFile = originFile;
-            this.targetPath = targetPath;
-        }
-
-        @Override
-        public Boolean call() {
-            RandomAccessFile rFile;
-            OutputStream os;
-            try {
-                rFile = new RandomAccessFile(originFile, "r");
-                byte[] b = new byte[byteSize];
-                // 移动指针到每“段”开头
-                rFile.seek(startPos);
-                int s = rFile.read(b);
-                os = new FileOutputStream(targetPath + partFileName);
-                os.write(b, 0, s);
-                os.flush();
-                os.close();
-                log.info("split file complete.tmpFile={}", originFile.getName());
-                return true;
-            } catch (IOException e) {
-                log.info("split file error.", e);
-                return false;
-            }
-        }
     }
 
 }
