@@ -369,6 +369,7 @@ public class StringUtil {
      * @param separator 分割字符串
      * @return 结果
      */
+    @SuppressWarnings("UnstableApiUsage")
     public static List<String> split(String str, String separator) {
         return Splitter.on(separator).splitToList(str);
     }
@@ -380,6 +381,7 @@ public class StringUtil {
      * @param separator 分割字符串
      * @return 结果
      */
+    @SuppressWarnings("UnstableApiUsage")
     public static List<Integer> splitToInteger(String str, String separator) {
         List<String> stringList = Splitter.on(separator).splitToList(str);
         return stringList.stream().map(Integer::valueOf).collect(Collectors.toList());
@@ -392,6 +394,7 @@ public class StringUtil {
      * @param separator 分割字符串
      * @return 结果
      */
+    @SuppressWarnings("UnstableApiUsage")
     public static List<Long> splitToLong(String str, String separator) {
         List<String> stringList = Splitter.on(separator).splitToList(str);
         return stringList.stream().map(Long::valueOf).collect(Collectors.toList());
