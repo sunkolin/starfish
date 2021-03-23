@@ -17,6 +17,11 @@ import java.util.HashMap;
 public class BeanUtil {
 
     /**
+     * OBJECT_CLASS_NAME
+     */
+    private static final String OBJECT_CLASS_NAME = "Object";
+
+    /**
      * 将指定对象属性名称和属性值转化为Map键值对
      * org.apache.commons.beanutils.BeanUtils.describe(Object bean) 返回类型为Map,key类型是String,value类型也是String,
      * 此map传入mybatis如果类型不一致有的地方会报错,例如 limit m,n
@@ -30,13 +35,13 @@ public class BeanUtil {
         }
 
         Class<?> clazz = object.getClass();
-        HashMap<String, Object> map = new HashMap<>();
+        HashMap<String, Object> map = new HashMap<>(20);
         getClass(clazz, map, object);
         return map;
     }
 
     private static void getClass(Class<?> clazz, HashMap<String, Object> map, Object obj) {
-        if ("Object".equals(clazz.getSimpleName())) {
+        if (OBJECT_CLASS_NAME.equals(clazz.getSimpleName())) {
             return;
         }
 

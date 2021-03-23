@@ -10,6 +10,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
@@ -29,20 +30,24 @@ import java.util.Map;
 public final class SecurityUtil {
 
     public static final String ALGORITHM_MD5 = "MD5";
-    public static final String ALGORITHM_SHA1 = "SHA-1";
-    public static final String ALGORITHM_SHA256 = "SHA-256";
-    public static final String ALGORITHM_SHA512 = "SHA-512";
-    public static final String ALGORITHM_DES = "DES";
-    public static final String ALGORITHM_AES = "AES";
-    public static final String ALGORITHM_RSA = "RSA";
 
-    @SuppressWarnings(value = "unused")
-    public static final String DEFAULT_CHARSET = "UTF-8";
+    public static final String ALGORITHM_SHA1 = "SHA-1";
+
+    public static final String ALGORITHM_SHA256 = "SHA-256";
+
+    public static final String ALGORITHM_SHA512 = "SHA-512";
+
+    public static final String ALGORITHM_DES = "DES";
+
+    public static final String ALGORITHM_AES = "AES";
+
+    public static final String ALGORITHM_RSA = "RSA";
 
     /**
      * Used to build output as Hex
      */
     private static final char[] DIGITS_LOWER = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+
     private static final char[] DIGITS_UPPER = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
     private SecurityUtil() {
@@ -58,8 +63,6 @@ public final class SecurityUtil {
     @SuppressWarnings(value = "unused")
     public static String encodeBase64(byte[] data) {
         try {
-//            return Base64.encodeBase64String(data);
-//            return new BASE64Encoder().encode(data);
             return Base64Utils.encodeToString(data);
         } catch (Exception e) {
             throw new CustomException(ResultEnum.SYSTEM_EXCEPTION.getCode(), "encode base64 exception");
@@ -75,8 +78,6 @@ public final class SecurityUtil {
     @SuppressWarnings(value = "unused")
     public static byte[] decodeBase64(String data) {
         try {
-//            return Base64.decodeBase64(data);
-//            return new BASE64Decoder().decodeBuffer(data);
             return Base64Utils.decodeFromString(data);
         } catch (Exception e) {
             throw new CustomException(ResultEnum.SYSTEM_EXCEPTION.getCode(), "decode base64 exception");
@@ -256,7 +257,7 @@ public final class SecurityUtil {
             SecretKeySpec secretKeySpec = new SecretKeySpec(enCodeFormat, ALGORITHM_AES);
             Cipher cipher = Cipher.getInstance(ALGORITHM_AES);
             cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
-            return new String(cipher.doFinal(decodeBase64(data)), "UTF-8");
+            return new String(cipher.doFinal(decodeBase64(data)), StandardCharsets.UTF_8);
         } catch (Exception e) {
             throw new CustomException(ResultEnum.SYSTEM_EXCEPTION.getCode(), "decode aes exception,message is " + e.getMessage());
         }
@@ -275,7 +276,7 @@ public final class SecurityUtil {
             KeyPair keyPair = keyPairGen.generateKeyPair();
             RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
             RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-            HashMap<String, String> result = new HashMap<>();
+            HashMap<String, String> result = new HashMap<>(20);
             result.put("PublicKey", encodeBase64(publicKey.getEncoded()));
             result.put("PrivateKey", encodeBase64(privateKey.getEncoded()));
             return result;
@@ -315,9 +316,9 @@ public final class SecurityUtil {
     @SuppressWarnings(value = "unused")
     public static String decodeRsa(String data, String key) {
         try {
-            PKCS8EncodedKeySpec pKCS8EncodedKeySpec = new PKCS8EncodedKeySpec(decodeBase64(key));
+            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(decodeBase64(key));
             KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM_RSA);
-            Key privateKey = keyFactory.generatePrivate(pKCS8EncodedKeySpec);
+            Key privateKey = keyFactory.generatePrivate(keySpec);
             Cipher cipher = Cipher.getInstance(keyFactory.getAlgorithm());
             cipher.init(Cipher.DECRYPT_MODE, privateKey);
             return new String(cipher.doFinal(decodeBase64(data)));

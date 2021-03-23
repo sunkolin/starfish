@@ -23,7 +23,7 @@ public class JsonWebTokenPlus {
 
     private static final String SECRET = "1234567890";
 
-    private static final Algorithm algorithm = Algorithm.HMAC256(SECRET);
+    private static final Algorithm ALGORITHM = Algorithm.HMAC256(SECRET);
 
     /**
      * 生成token
@@ -66,7 +66,7 @@ public class JsonWebTokenPlus {
             }
         });
 
-        return builder.sign(algorithm);
+        return builder.sign(ALGORITHM);
     }
 
     /**
@@ -76,7 +76,7 @@ public class JsonWebTokenPlus {
      * @return 结果
      */
     public static DecodedJWT verifyToken(String token) {
-        JWTVerifier verifier = JWT.require(algorithm)
+        JWTVerifier verifier = JWT.require(ALGORITHM)
                 .withIssuer(JsonWebTokenConstant.ISS)
                 .build();
         return verifier.verify(token);

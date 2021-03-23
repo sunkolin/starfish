@@ -1,39 +1,35 @@
 package com.starfish.trial;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 
 /**
  * 缓存配置
+ * <p>
+ * //@Configuration
+ * //@EnableCaching(proxyTargetClass = true)
  *
  * @author sunny
  * @version 1.0.0
  * @since 2015-05-22
  */
-//@Configuration
-//@EnableCaching(proxyTargetClass = true)
 public class CacheConfiguration {
 
-    @Autowired
-    @Qualifier("defaultCacheFactoryBean")
+    @Resource(name = "defaultCacheFactoryBean")
     private ConcurrentMapCacheFactoryBean defaultCacheFactoryBean;
 
-    @Autowired
-    @Qualifier("simpleCacheFactoryBean")
+    @Resource(name = "simpleCacheFactoryBean")
     private ConcurrentMapCacheFactoryBean simpleCacheFactoryBean;
 
-    @Autowired
-    @Qualifier("defaultCache")
+    @Resource(name = "defaultCache")
     private ConcurrentMapCache defaultCache;
 
-    @Autowired
-    @Qualifier("simpleCache")
+    @Resource(name = "simpleCache")
     private ConcurrentMapCache simpleCache;
 
     @Bean(name = "defaultCacheFactoryBean", initMethod = "afterPropertiesSet")

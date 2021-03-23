@@ -16,6 +16,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
@@ -32,6 +33,15 @@ import java.util.zip.ZipOutputStream;
 public class CompressUtil {
 
     /**
+     * zip压缩文件拓展名
+     */
+    public static final String ZIP_COMPRESS_FILE_EXTENSION = ".zip";
+
+    private CompressUtil(){
+
+    }
+
+    /**
      * 压缩
      *
      * @param sourcePath 源文件或者目录的路径
@@ -40,7 +50,7 @@ public class CompressUtil {
     public static void compress(String sourcePath, String targetPath) {
         //验证参数
         File file = new File(sourcePath);
-        if ((!targetPath.endsWith(".zip") && !targetPath.endsWith(".ZIP"))) {
+        if ((!targetPath.toLowerCase().endsWith(ZIP_COMPRESS_FILE_EXTENSION))) {
             throw new CustomException(ResultEnum.COMPRESS_FILE_ERROR);
         }
 

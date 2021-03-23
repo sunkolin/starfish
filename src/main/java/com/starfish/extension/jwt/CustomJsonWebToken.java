@@ -24,14 +24,13 @@ public class CustomJsonWebToken {
     public static final String NICK_NAME_KEY = "nickName";
 
     public static String createToken(Long userId) {
-        Map<String, Object> claims = new HashMap<>();
+        Map<String, Object> claims = new HashMap<>(20);
         claims.put(USER_ID_KEY, userId);
-//        Map<String, Object> claims =ImmutableMap.of(USER_ID_KEY,userId);
         return JsonWebTokenPlus.createToken(claims);
     }
 
     public static String createToken(User user) {
-        Map<String, Object> claims = new HashMap<>();
+        Map<String, Object> claims = new HashMap<>(20);
         claims.put(USER_ID_KEY, user.getUserId());
         claims.put(USER_NAME_KEY, user.getUserName());
         claims.put(NICK_NAME_KEY, user.getNickName());

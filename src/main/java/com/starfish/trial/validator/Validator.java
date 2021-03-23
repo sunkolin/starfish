@@ -1,11 +1,13 @@
 package com.starfish.trial.validator;
 
 import com.starfish.exception.CustomException;
+import org.assertj.core.util.Strings;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,12 +16,27 @@ import java.util.regex.Pattern;
  *
  * @author sunny
  * @version 1.0.0
- * @since 2014-11-10
+ * @since 2014-10-10
  */
 @SuppressWarnings(value = "unused")
 public class Validator {
 
     private static final String EMAIL_PATTERN = "\\b(^['_A-Za-z0-9-]+(\\.['_A-Za-z0-9-]+)*@([A-Za-z0-9-])+(\\.[A-Za-z0-9-]+)*((\\.[A-Za-z0-9]{2,})|(\\.[A-Za-z0-9]{2,}\\.[A-Za-z0-9]{2,}))$)\\b";
+
+    /**
+     * 中国手机号长度
+     */
+    private static final int MOBILE_LENGTH = 11;
+
+    /**
+     * http链接前缀
+     */
+    private static final String HTTP_URL_PREFIX = "http://";
+
+    /**
+     * https链接前缀
+     */
+    private static final String HTTPS_URL_PREFIX = "https://";
 
     /**
      * 验证字符串
@@ -31,9 +48,11 @@ public class Validator {
      * @param errorMessage 错误信息
      */
     public static void validateString(String value, int min, int max, int errorCode, String errorMessage) {
-        if (value == null && min > 0) {
-            throw new CustomException(errorCode, errorMessage);
-        } else if (value != null && (value.length() < min || value.length() > max)) {
+        if (value == null) {
+            if (min > 0) {
+                throw new CustomException(errorCode, errorMessage);
+            }
+        } else if (value.length() < min || value.length() > max) {
             throw new CustomException(errorCode, errorMessage);
         }
     }
@@ -163,13 +182,11 @@ public class Validator {
      * @param errorMessage message
      */
     public static void validateUrl(String value, int errorCode, String errorMessage) {
-        try {
-            String tmpValue = value;
-            if (tmpValue.startsWith("https://")) {
-                tmpValue = "http://" + tmpValue.substring(8); // URL doesn't understand the https protocol, hack it
-            }
-            new URL(tmpValue);
-        } catch (MalformedURLException e) {
+        if (Strings.isNullOrEmpty(value)) {
+            throw new CustomException(errorCode, errorMessage);
+        }
+        String lowerCaseValue = value.toLowerCase();
+        if (!lowerCaseValue.startsWith(HTTP_URL_PREFIX) && !lowerCaseValue.startsWith(HTTPS_URL_PREFIX)) {
             throw new CustomException(errorCode, errorMessage);
         }
     }
@@ -200,11 +217,10 @@ public class Validator {
      * @param errorMessage message
      */
     public static void validateQq(String value, int errorCode, String errorMessage) {
-        if (value == null || value.length() > 11) {
+        if (value == null) {
             throw new CustomException(errorCode, errorMessage);
         }
         validateStringNumber(value, errorCode, errorMessage);
-
     }
 
     /**
@@ -215,7 +231,7 @@ public class Validator {
      * @param errorMessage message
      */
     public static void validateMobile(String value, int errorCode, String errorMessage) {
-        if (value == null || value.length() > 11) {
+        if (value == null || value.length() > MOBILE_LENGTH) {
             throw new CustomException(errorCode, errorMessage);
         }
         validateStringNumber(value, errorCode, errorMessage);

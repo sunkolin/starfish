@@ -23,6 +23,11 @@ public class RedisPlus {
 
     private final ShardedJedisPool pool;
 
+    /**
+     * 空格
+     */
+    private static final String BLANK = " ";
+
     public RedisPlus(ShardedJedisPool pool) {
         this.pool = pool;
     }
@@ -56,16 +61,10 @@ public class RedisPlus {
      * @param value 值
      */
     public void setString(String key, String value) {
-        ShardedJedis redis = null;
-        try {
-            redis = pool.getResource();
+        try (ShardedJedis redis = pool.getResource()) {
             redis.set(key, value);
         } catch (Exception e) {
             log.error("redis set value failed", e);
-        } finally {
-            if (redis != null) {
-                redis.close();
-            }
         }
     }
 
@@ -76,16 +75,10 @@ public class RedisPlus {
      * @param appendValue 附加值
      */
     public void appendString(String key, String appendValue) {
-        ShardedJedis redis = null;
-        try {
-            redis = pool.getResource();
+        try (ShardedJedis redis = pool.getResource()) {
             redis.append(key, appendValue);
         } catch (Exception e) {
             log.error("redis append value failed", e);
-        } finally {
-            if (redis != null) {
-                redis.close();
-            }
         }
     }
 
@@ -95,16 +88,10 @@ public class RedisPlus {
      * @param key 键
      */
     public void delete(String key) {
-        ShardedJedis redis = null;
-        try {
-            redis = pool.getResource();
+        try (ShardedJedis redis = pool.getResource()) {
             redis.del(key);
         } catch (Exception e) {
             log.error("redis del failed", e);
-        } finally {
-            if (redis != null) {
-                redis.close();
-            }
         }
     }
 
@@ -140,16 +127,10 @@ public class RedisPlus {
      * @param object 值
      */
     public void setObject(String key, Object object) {
-        ShardedJedis redis = null;
-        try {
-            redis = pool.getResource();
+        try (ShardedJedis redis = pool.getResource()) {
             redis.set(key, JSON.toJSONString(object));
         } catch (Exception e) {
             log.error("redis set object failed", e);
-        } finally {
-            if (redis != null) {
-                redis.close();
-            }
         }
     }
 
@@ -234,16 +215,10 @@ public class RedisPlus {
      * @param index 下标
      */
     public void setListIndex(String key, Object value, long index) {
-        ShardedJedis redis = null;
-        try {
-            redis = pool.getResource();
+        try (ShardedJedis redis = pool.getResource()) {
             redis.lset(key, index, JSON.toJSONString(value));
         } catch (Exception e) {
             log.error("redis set list index failed", e);
-        } finally {
-            if (redis != null) {
-                redis.close();
-            }
         }
     }
 
@@ -254,19 +229,13 @@ public class RedisPlus {
      * @param list 列表
      */
     public void setList(String key, List<Object> list) {
-        ShardedJedis redis = null;
-        try {
-            redis = pool.getResource();
+        try (ShardedJedis redis = pool.getResource()) {
             redis.del(key);
             for (Object value : list) {
                 redis.lpush(key, JSON.toJSONString(value));
             }
         } catch (Exception e) {
             log.error("redis set list failed", e);
-        } finally {
-            if (redis != null) {
-                redis.close();
-            }
         }
     }
 
@@ -277,18 +246,12 @@ public class RedisPlus {
      * @param list 列表
      */
     public void appendList(String key, List<Object> list) {
-        ShardedJedis redis = null;
-        try {
-            redis = pool.getResource();
+        try (ShardedJedis redis = pool.getResource()) {
             for (Object value : list) {
                 redis.lpush(key, JSON.toJSONString(value));
             }
         } catch (Exception e) {
             log.error("redis append list failed", e);
-        } finally {
-            if (redis != null) {
-                redis.close();
-            }
         }
     }
 
@@ -299,10 +262,8 @@ public class RedisPlus {
      * @param index 下标
      */
     public void deleteListIndex(String key, int index) {
-        ShardedJedis redis = null;
         List<String> list = new ArrayList<>();
-        try {
-            redis = pool.getResource();
+        try (ShardedJedis redis = pool.getResource()) {
             long listSize = redis.llen(key);
             List<String> value = redis.lrange(key, 0, listSize);
             list.addAll(value);
@@ -312,10 +273,6 @@ public class RedisPlus {
             }
         } catch (Exception e) {
             log.error("redis del list index failed", e);
-        } finally {
-            if (redis != null) {
-                redis.close();
-            }
         }
     }
 
@@ -326,22 +283,16 @@ public class RedisPlus {
      * @param map map
      */
     public void setMap(String key, Map<Object, Object> map) {
-        ShardedJedis redis = null;
-        try {
-            redis = pool.getResource();
+        try (ShardedJedis redis = pool.getResource()) {
             redis.del(key);
             //object对象转json字符串
-            HashMap<String, String> tmp = new HashMap<>();
+            HashMap<String, String> tmp = new HashMap<>(20);
             for (Map.Entry<Object, Object> entry : map.entrySet()) {
                 tmp.put(JSON.toJSONString(entry.getKey()), JSON.toJSONString(entry.getValue()));
             }
             redis.hmset(key, tmp);
         } catch (Exception e) {
             log.error("redis set map failed", e);
-        } finally {
-            if (redis != null) {
-                redis.close();
-            }
         }
     }
 
@@ -358,7 +309,7 @@ public class RedisPlus {
         try {
             redis = pool.getResource();
             //object对象转json字符串
-            HashMap<String, String> tmp = new HashMap<>();
+            HashMap<String, String> tmp = new HashMap<>(20);
             for (Map.Entry<Object, Object> entry : map.entrySet()) {
                 tmp.put(JSON.toJSONString(entry.getKey()), JSON.toJSONString(entry.getValue()));
             }
@@ -461,7 +412,7 @@ public class RedisPlus {
                 tmp.append(" ");
             }
             String str = tmp.toString();
-            if (str.endsWith(" ")) {
+            if (str.endsWith(BLANK)) {
                 str = str.substring(0, str.length() - 1);
             }
             list = redis.hmget(key, str);
@@ -504,16 +455,10 @@ public class RedisPlus {
      * @param mapKey map键
      */
     public void delMapSpecific(String key, Object mapKey) {
-        ShardedJedis redis = null;
-        try {
-            redis = pool.getResource();
+        try (ShardedJedis redis = pool.getResource()) {
             redis.hdel(key, JSON.toJSONString(mapKey));
         } catch (Exception e) {
             log.error("redis del map specific failed", e);
-        } finally {
-            if (redis != null) {
-                redis.close();
-            }
         }
     }
 

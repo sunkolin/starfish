@@ -34,6 +34,11 @@ public final class WeatherPlus {
     private static final RestTemplate REST_TEMPLATE = new RestTemplate();
 
     /**
+     * 请求天气预报接口成功状态码
+     */
+    private static final int SUCCESS_STATUS = 1000;
+
+    /**
      * 根据城市名称查询天气接口地址
      */
     private static final String GET_WEATHER_BY_CITY_NAME_URL = "http://wthrcdn.etouch.cn/weather_mini";
@@ -41,7 +46,7 @@ public final class WeatherPlus {
     public static WeatherModel getWeather(String cityName) {
         Map<String, Object> uriVariables = ImmutableMap.of("city", cityName);
         String finalUrl = CommonUtil.contact(GET_WEATHER_BY_CITY_NAME_URL, uriVariables);
-        String jsonResult = REST_TEMPLATE.getForObject(finalUrl, String.class, new HashMap<>());
+        String jsonResult = REST_TEMPLATE.getForObject(finalUrl, String.class, new HashMap<>(20));
         String finalJsonResult = conventFromGzip(jsonResult);
         return buildWeatherModel(finalJsonResult);
     }
@@ -99,8 +104,8 @@ public final class WeatherPlus {
 
         // 解析状态与描述
         Integer status = jsonObject.getInteger("status");
-//        String msg = jsonObject.getString("msg");
-        if (status == null || 1000 != status) {
+
+        if (status == null || SUCCESS_STATUS != status) {
             throw new CustomException(ResultEnum.GET_WEATHER_EXCEPTION);
         }
 

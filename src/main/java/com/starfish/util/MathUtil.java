@@ -15,6 +15,16 @@ import java.text.DecimalFormat;
 public class MathUtil {
 
     /**
+     * 百分号
+     */
+    private static final String PERCENT_SIGN = "%";
+
+    /**
+     * 千分号
+     */
+    private static final String PER_THOUSAND_SIGN = "‰";
+
+    /**
      * 判断字符串是数字
      * copy from commons-lang NumberUtils
      *
@@ -27,7 +37,7 @@ public class MathUtil {
         }
         try {
             String value = string;
-            if (value.endsWith("%") || value.endsWith("‰")) {
+            if (value.endsWith(PERCENT_SIGN) || value.endsWith(PER_THOUSAND_SIGN)) {
                 value = value.substring(0, value.length() - 1);
             }
             new BigDecimal(value);
@@ -47,9 +57,9 @@ public class MathUtil {
     public static String toValue(String value) {
         String result = "0.00";
 
-        if (value.endsWith("%")) {
+        if (value.endsWith(PERCENT_SIGN)) {
             result = divide(value.substring(0, value.length() - 1), "100");
-        } else if (value.endsWith("‰")) {
+        } else if (value.endsWith(PER_THOUSAND_SIGN)) {
             result = divide(value.substring(0, value.length() - 1), "1000");
         }
         //数字处理，非数字返回0.00

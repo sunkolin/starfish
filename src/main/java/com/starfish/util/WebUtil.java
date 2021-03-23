@@ -442,9 +442,54 @@ public class WebUtil extends HtmlUtils {
      * 初始化stream type
      */
     private static void initStreamType() {
+        initFirstBatchStreamType();
+        initSecondBatchStreamType();
+    }
+
+    /**
+     * 初始化第一批
+     */
+    private static void initFirstBatchStreamType() {
+        STREAM_TYPE.put("ppt", "application/vnd.ms-powerpoin");
+        STREAM_TYPE.put("movie", "video/x-sgi-movie");
+        STREAM_TYPE.put("js", "application/x-javascript");
+        STREAM_TYPE.put("tar", "application/x-tar");
+        STREAM_TYPE.put("zip", "application/zip");
+        STREAM_TYPE.put("jpg", "image/jpeg");
+        STREAM_TYPE.put("png", "image/png");
+        STREAM_TYPE.put("tif", "image/tiff");
+        STREAM_TYPE.put("rgb", "image/x-rgb");
+        STREAM_TYPE.put("css", "text/css");
+        STREAM_TYPE.put("htm", "text/html");
+        STREAM_TYPE.put("doc", "application/msword");
+        STREAM_TYPE.put("xls", "application/vnd.ms-excel");
+        STREAM_TYPE.put("pdf", "application/pdf");
+        STREAM_TYPE.put("mp3", "audio/mpeg");
+        STREAM_TYPE.put("wav", "audio/x-wav");
+        STREAM_TYPE.put("gif", "image/gif");
+        STREAM_TYPE.put("jpeg", "image/jpeg");
+        STREAM_TYPE.put("mpg", "video/mpeg");
+        STREAM_TYPE.put("mov", "video/quicktimef");
+        STREAM_TYPE.put("avi", "video/x-msvideo");
+        STREAM_TYPE.put("gz", "application/zip");
+        STREAM_TYPE.put("tgz", "application/zip");
+        STREAM_TYPE.put("midi", "audio/midi");
+        STREAM_TYPE.put("rm", "audio/x-pn-realaudio");
+        STREAM_TYPE.put("xml", "text/xml");
+        STREAM_TYPE.put("html", "text/html");
+        STREAM_TYPE.put("docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+        STREAM_TYPE.put("pptx", "application/vnd.openxmlformats-officedocument.presentationml.presentation");
+        STREAM_TYPE.put("xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        STREAM_TYPE.put("xmind", "application/xmind");
+        STREAM_TYPE.put("jar", "application/java-archive");
+    }
+
+    /**
+     * 初始化第二批
+     */
+    private static void initSecondBatchStreamType() {
         STREAM_TYPE.put("rtf", "text/rtf");
         STREAM_TYPE.put("mif", "application/vnd.mif");
-        STREAM_TYPE.put("ppt", "application/vnd.ms-powerpoin");
         STREAM_TYPE.put("gtar", "application/x-gtar");
         STREAM_TYPE.put("latex", "application/x-latex");
         STREAM_TYPE.put("aif", "audio/x-aiff");
@@ -452,38 +497,25 @@ public class WebUtil extends HtmlUtils {
         STREAM_TYPE.put("pgm", "image/x-portable-graymap");
         STREAM_TYPE.put("iges", "model/iges");
         STREAM_TYPE.put("mpe", "text/plain");
-        STREAM_TYPE.put("movie", "video/x-sgi-movie");
         STREAM_TYPE.put("ez", "application/andrew-inset");
         STREAM_TYPE.put("smi", "application/smil");
-        STREAM_TYPE.put("js", "application/x-javascript");
         STREAM_TYPE.put("nc", "application/x-netcdf");
         STREAM_TYPE.put("cdf", "application/x-netcdf");
         STREAM_TYPE.put("sv4crc", "application/x-sv4crc");
-        STREAM_TYPE.put("tar", "application/x-tar");
         STREAM_TYPE.put("tcl", "application/x-tclc");
         STREAM_TYPE.put("roff", "application/x-troff");
         STREAM_TYPE.put("ustar", "application/x-ustar");
-        STREAM_TYPE.put("zip", "application/zip");
         STREAM_TYPE.put("snd", "audio/general");
         STREAM_TYPE.put("xyz", "chemical/x-pdb");
-        STREAM_TYPE.put("jpg", "image/jpeg");
-        STREAM_TYPE.put("png", "image/png");
         STREAM_TYPE.put("tiff", "image/tiff");
-        STREAM_TYPE.put("tif", "image/tiff");
         STREAM_TYPE.put("ppm", "image/x-portable-pixmap");
-        STREAM_TYPE.put("rgb", "image/x-rgb");
         STREAM_TYPE.put("xpm", "model/vrml");
         STREAM_TYPE.put("wrl", "image/x-xpixmap");
-        STREAM_TYPE.put("css", "text/css");
         STREAM_TYPE.put("sgml", "text/sgml");
         STREAM_TYPE.put("etx", "text/x-setext");
         STREAM_TYPE.put("xwd", "image/x-xwindowdump");
         STREAM_TYPE.put("ice", "x-conference/x-cooltalk");
-        STREAM_TYPE.put("htm", "text/html");
-        STREAM_TYPE.put("doc", "application/msword");
-        STREAM_TYPE.put("xls", "application/vnd.ms-excel");
         STREAM_TYPE.put("oda", "application/oda");
-        STREAM_TYPE.put("pdf", "application/pdf");
         STREAM_TYPE.put("ai", "application/postscript");
         STREAM_TYPE.put("eps", "application/postscript");
         STREAM_TYPE.put("csh", "application/x-csh");
@@ -498,17 +530,10 @@ public class WebUtil extends HtmlUtils {
         STREAM_TYPE.put("au", "audio/general");
         STREAM_TYPE.put("mid", "audio/midi");
         STREAM_TYPE.put("kar", "audio/midi");
-        STREAM_TYPE.put("mp3", "audio/mpeg");
         STREAM_TYPE.put("aiff", "audio/x-aiff");
-        STREAM_TYPE.put("wav", "audio/x-wav");
         STREAM_TYPE.put("pdb", "chemical/x-pdb");
-        STREAM_TYPE.put("gif", "image/gif");
-        STREAM_TYPE.put("jpeg", "image/jpeg");
         STREAM_TYPE.put("ras", "image/x-cmu-raster");
         STREAM_TYPE.put("rtx", "text/richtext");
-        STREAM_TYPE.put("mpg", "video/mpeg");
-        STREAM_TYPE.put("mov", "video/quicktimef");
-        STREAM_TYPE.put("avi", "video/x-msvideo");
         STREAM_TYPE.put("hqx", "application/mac-binhex40");
         STREAM_TYPE.put("cpt", "application/mac-compactpro");
         STREAM_TYPE.put("ps", "application/postscript");
@@ -517,27 +542,15 @@ public class WebUtil extends HtmlUtils {
         STREAM_TYPE.put("vcd", "application/x-cdlink");
         STREAM_TYPE.put("dcr", "application/x-director");
         STREAM_TYPE.put("pgn", "application/x-chess-pgn");
-        STREAM_TYPE.put("gz", "application/zip");
-        STREAM_TYPE.put("tgz", "application/zip");
-        STREAM_TYPE.put("midi", "audio/midi");
         STREAM_TYPE.put("mpga", "audio/mpeg");
-        STREAM_TYPE.put("rm", "audio/x-pn-realaudio");
         STREAM_TYPE.put("ra", "audio/x-realaudio");
         STREAM_TYPE.put("jpe", "image/jpeg");
         STREAM_TYPE.put("asc", "text/plain");
-        STREAM_TYPE.put("xml", "text/xml");
-        STREAM_TYPE.put("html", "text/html");
-        STREAM_TYPE.put("docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-        STREAM_TYPE.put("pptx", "application/vnd.openxmlformats-officedocument.presentationml.presentation");
-        STREAM_TYPE.put("xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         STREAM_TYPE.put("mmap", "application/vnd.mindjet.mindmanager");
         STREAM_TYPE.put("mmp", "application/vnd.mindjet.mindmanager");
         STREAM_TYPE.put("mmpt", "application/vnd.mindjet.mindmanager");
         STREAM_TYPE.put("mmat", "application/vnd.mindjet.mindmanager");
         STREAM_TYPE.put("mmmp", "application/vnd.mindjet.mindmanager");
         STREAM_TYPE.put("mmas", "application/vnd.mindjet.mindmanager");
-        STREAM_TYPE.put("xmind", "application/xmind");
-        STREAM_TYPE.put("jar", "application/java-archive");
     }
-
 }

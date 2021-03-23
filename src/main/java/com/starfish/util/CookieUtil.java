@@ -98,7 +98,6 @@ public class CookieUtil {
             cookie.setDomain(getDomain(domain));
         }
         cookie.setPath(PATH);
-//        cookie.setHttpOnly(true);
         cookie.setMaxAge(maxAge);
         response.addCookie(cookie);
     }

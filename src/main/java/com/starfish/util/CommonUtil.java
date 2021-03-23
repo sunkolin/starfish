@@ -167,13 +167,15 @@ public final class CommonUtil {
         String result = filename;
         try {
             String agent = request.getHeader("USER-AGENT");
-            // ie
-            if (null != agent && agent.contains("MSIE") || null != agent && agent.contains("Trident")) {
-                result = java.net.URLEncoder.encode(filename, "UTF8");
-            }
-            // 火狐,chrome等
-            else if (null != agent && agent.contains("Mozilla")) {
-                result = new String(filename.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
+            if (!Strings.isNullOrEmpty(agent)) {
+                // ie
+                if (agent.contains("MSIE") || agent.contains("Trident")) {
+                    result = java.net.URLEncoder.encode(filename, "UTF8");
+                }
+                // 火狐,chrome等
+                if (agent.contains("Mozilla")) {
+                    result = new String(filename.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
+                }
             }
         } catch (Exception e) {
             log.error("resolveFilenameCharset", e);

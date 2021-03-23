@@ -17,6 +17,15 @@ import java.lang.management.OperatingSystemMXBean;
 public class SystemUtil {
 
     /**
+     * windows操作系统关键字
+     */
+    private static final String WINDOWS_SYSTEM_NAME_KEYWORDS = "windows";
+
+    private SystemUtil() {
+
+    }
+
+    /**
      * 获取默认路径
      *
      * @return 路径
@@ -24,7 +33,7 @@ public class SystemUtil {
     public static String getBasePath() {
         String result;
         String systemName = getSystem();
-        if (systemName != null && systemName.toLowerCase().contains("windows")) {
+        if (systemName != null && systemName.toLowerCase().contains(WINDOWS_SYSTEM_NAME_KEYWORDS)) {
             File d = new File("d:/");
             if (d.exists() && d.canWrite()) {
                 result = "d:/";
@@ -43,7 +52,7 @@ public class SystemUtil {
      * @return 临时路径字符串
      */
     public static String getTmpPath() {
-        return getBasePath() + "tmp/";
+        return getBasePath() + "tmp" + File.separator;
     }
 
     /**
