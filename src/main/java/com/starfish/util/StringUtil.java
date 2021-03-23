@@ -1,9 +1,9 @@
 package com.starfish.util;
 
 import com.google.common.base.Splitter;
-import com.starfish.third.slf4j.FormattingTuple;
-import com.starfish.third.slf4j.MessageFormatter;
 import org.apache.commons.lang.text.StrBuilder;
+import org.slf4j.helpers.FormattingTuple;
+import org.slf4j.helpers.MessageFormatter;
 
 import java.util.List;
 import java.util.Locale;
@@ -311,13 +311,13 @@ public class StringUtil {
         return result;
     }
 
-    /**
-     * 格式化文本
-     *
-     * @param string    文本模板，被替换的部分用 {} 表示
-     * @param arguments 参数值
-     * @return 格式化后的文本
-     */
+//    /**
+//     * 格式化文本
+//     *
+//     * @param string    文本模板，被替换的部分用 {} 表示
+//     * @param arguments 参数值
+//     * @return 格式化后的文本
+//     */
     public static String format(String string, Object... arguments) {
         FormattingTuple ft = MessageFormatter.arrayFormat(string, arguments);
         return ft.getMessage();
@@ -369,7 +369,6 @@ public class StringUtil {
      * @param separator 分割字符串
      * @return 结果
      */
-    @SuppressWarnings("UnstableApiUsage")
     public static List<String> split(String str, String separator) {
         return Splitter.on(separator).splitToList(str);
     }
@@ -381,7 +380,6 @@ public class StringUtil {
      * @param separator 分割字符串
      * @return 结果
      */
-    @SuppressWarnings("UnstableApiUsage")
     public static List<Integer> splitToInteger(String str, String separator) {
         List<String> stringList = Splitter.on(separator).splitToList(str);
         return stringList.stream().map(Integer::valueOf).collect(Collectors.toList());
@@ -394,7 +392,6 @@ public class StringUtil {
      * @param separator 分割字符串
      * @return 结果
      */
-    @SuppressWarnings("UnstableApiUsage")
     public static List<Long> splitToLong(String str, String separator) {
         List<String> stringList = Splitter.on(separator).splitToList(str);
         return stringList.stream().map(Long::valueOf).collect(Collectors.toList());
