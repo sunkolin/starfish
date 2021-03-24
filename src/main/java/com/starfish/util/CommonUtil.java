@@ -1,6 +1,7 @@
 package com.starfish.util;
 
 import com.google.common.base.Joiner;
+import com.starfish.Alpha;
 import com.starfish.enumeration.ResultEnum;
 import com.starfish.exception.CustomException;
 import lombok.extern.slf4j.Slf4j;
@@ -90,15 +91,16 @@ public final class CommonUtil {
      * @return 路径
      */
     public static String getResourcePath(Class<?> cls) {
-        String className = cls.getName();
-        String classNamePath = className.replace(".", "/") + ".class";
-        URL url = cls.getClassLoader().getResource(classNamePath);
-        String path = url == null ? "" : url.getFile();
-        path = path.replace("%20", " ");
-        if (path.startsWith("/")) {
-            path = path.substring(1);
-        }
-        return path;
+        String path = getResourceParentPath(cls);
+        String className = cls.getSimpleName() + ".class";
+        String result = path + className;
+        result = result.replace("%20", " ");
+        return result;
+    }
+
+    public static void main(String[] args) {
+        String s = getResourcePath(Alpha.class);
+        System.out.println(s);
     }
 
     /**
@@ -110,9 +112,6 @@ public final class CommonUtil {
     public static String getResourceParentPath(Class<?> cls) {
         String path = cls.getResource("").getPath();
         path = path.replace("%20", " ");
-        if (path.startsWith(File.separator)) {
-            path = path.substring(1);
-        }
         return path;
     }
 

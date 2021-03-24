@@ -15,6 +15,7 @@ import org.springframework.web.util.HtmlUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -44,9 +45,13 @@ public class WebUtil extends HtmlUtils {
      */
     private static final String SINA_INTERFACE_URL = "http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=";
 
-    private static final String APPLICATION_OCTET_STREAM = "application/octet-stream";
+    public static final String HTTP_URL_PREFIX = "http";
 
-    private static final String APPLICATION_X_MPEG_URL = "application/x-mpegURL";
+    public static final String HTTPS_URL_PREFIX = "https";
+
+    public static final String WS_URL_PREFIX = "ws";
+
+    public static final String WSS_URL_PREFIX = "wss";
 
     private static final Map<String, String> STREAM_TYPE = new HashMap<>();
 
@@ -89,6 +94,24 @@ public class WebUtil extends HtmlUtils {
     }
 
     /**
+     * 获取端口，如果没有写明端口号，也会返回
+     *
+     * @param url 链接
+     * @return 结果
+     */
+    public static String getPort(String url) {
+        String result = "";
+        try {
+            URL u = new URL(url);
+            int port = getPort(u.getProtocol(), u.getPort());
+            result = String.valueOf(port);
+        } catch (Exception e) {
+            log.error("getPort error.url={}", url, e);
+        }
+        return result;
+    }
+
+    /**
      * 获取基础url
      *
      * @param url 链接地址，例如https://m.gmw.cn/baijia/2021-03/11/1302158793.html?a=1&b=2&c=12#34
@@ -97,30 +120,30 @@ public class WebUtil extends HtmlUtils {
     public static String getBaseUrl(String url) {
         String scheme = getScheme(url);
         String host = getHost(url);
-        String port = getPort(url);
-        return scheme + "://" + host + ":" + port;
-    }
 
-    /**
-     * 获取端口
-     *
-     * @param url 链接
-     * @return 结果
-     */
-    public static String getPort(String url) {
+        // 获取端口
         String port = "";
         try {
             URL u = new URL(url);
-            int intPort = getPort(u.getProtocol(), u.getPort());
-            port = String.valueOf(intPort);
-        } catch (Exception e) {
-            log.error("getPort error.url={}", url, e);
+            int intPort = u.getPort();
+            if (intPort != -1) {
+                port = String.valueOf(intPort);
+            }
+        } catch (MalformedURLException e) {
+            log.error("getBaseUrl,url={}", url, e);
         }
-        return port;
+
+        // 拼接地址，如果端口不为空，拼上端口号
+        String result = scheme + "://" + host;
+        if (!Strings.isNullOrEmpty(port)) {
+            result = result + ":" + port;
+        }
+
+        return result;
     }
 
     /**
-     * 获取端口
+     * 获取端口，如果没有写明端口号，也会返回
      *
      * @param scheme scheme
      * @param port   端口
@@ -128,9 +151,9 @@ public class WebUtil extends HtmlUtils {
      */
     private static int getPort(@Nullable String scheme, int port) {
         if (port == -1) {
-            if ("http".equals(scheme) || "ws".equals(scheme)) {
+            if (HTTP_URL_PREFIX.equals(scheme) || WS_URL_PREFIX.equals(scheme)) {
                 port = 80;
-            } else if ("https".equals(scheme) || "wss".equals(scheme)) {
+            } else if (HTTPS_URL_PREFIX.equals(scheme) || WSS_URL_PREFIX.equals(scheme)) {
                 port = 443;
             }
         }
@@ -163,13 +186,21 @@ public class WebUtil extends HtmlUtils {
             String contentType = httpHeaders.getFirst("Content-Type");
             log.info("check media url result,response contentType={}", contentType);
 
-            if (!Strings.isNullOrEmpty(contentType)) {
-                if (contentType.startsWith("video")
-                        || contentType.startsWith("audio")
-                        || contentType.equalsIgnoreCase(APPLICATION_OCTET_STREAM)
-                        || contentType.equalsIgnoreCase(APPLICATION_X_MPEG_URL)) {
-                    result = true;
-                }
+            // 如果没有Content-Type，返回false
+            if (Strings.isNullOrEmpty(contentType)) {
+                return false;
+            }
+            if ("application/x-mpegURL".equalsIgnoreCase(contentType)) {
+                return true;
+            }
+            if ("application/octet-stream".equalsIgnoreCase(contentType)) {
+                return true;
+            }
+            if (contentType.contains("video")) {
+                return true;
+            }
+            if (contentType.contains("audio")) {
+                return true;
             }
         } catch (Exception e) {
             log.error("check media url error.url={}", url, e);
