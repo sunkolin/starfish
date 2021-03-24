@@ -19,7 +19,7 @@ public class PageResult<T> implements Serializable {
     /**
      * total count，optional
      */
-    private Long total;
+    private Long totalCount;
 
     /**
      * list

@@ -3,12 +3,10 @@ package com.starfish.trial.spring;
 import com.starfish.util.CommonUtil;
 import org.springframework.http.*;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +31,7 @@ public final class RestTemplatePlus {
     static {
         REST_TEMPLATE = new RestTemplate();
         List<HttpMessageConverter<?>> messageConverters = REST_TEMPLATE.getMessageConverters();
-        supportUtf8(messageConverters);
+//        supportUtf8(messageConverters);
         supportJavascript(messageConverters);
     }
 
@@ -44,30 +42,30 @@ public final class RestTemplatePlus {
     public static RestTemplate buildRestTemplate() {
         RestTemplate restTemplate = new RestTemplate();
         List<HttpMessageConverter<?>> messageConverters = restTemplate.getMessageConverters();
-        supportUtf8(messageConverters);
+//        supportUtf8(messageConverters);
         supportJavascript(messageConverters);
         return restTemplate;
     }
 
-    /**
-     * RestTemplate 解决乱码问题
-     *
-     * @param messageConverters messageConverters
-     */
-    public static void supportUtf8(List<HttpMessageConverter<?>> messageConverters) {
-        HttpMessageConverter<?> converterTarget = null;
-        for (HttpMessageConverter<?> item : messageConverters) {
-            if (item.getClass() == StringHttpMessageConverter.class) {
-                converterTarget = item;
-                break;
-            }
-        }
-        if (converterTarget != null) {
-            messageConverters.remove(converterTarget);
-        }
-        HttpMessageConverter<?> converter = new StringHttpMessageConverter(StandardCharsets.UTF_8);
-        messageConverters.add(converter);
-    }
+//    /**
+//     * RestTemplate 解决乱码问题
+//     *
+//     * @param messageConverters messageConverters
+//     */
+//    public static void supportUtf8(List<HttpMessageConverter<?>> messageConverters) {
+//        HttpMessageConverter<?> converterTarget = null;
+//        for (HttpMessageConverter<?> item : messageConverters) {
+//            if (item.getClass() == StringHttpMessageConverter.class) {
+//                converterTarget = item;
+//                break;
+//            }
+//        }
+//        if (converterTarget != null) {
+//            messageConverters.remove(converterTarget);
+//        }
+//        HttpMessageConverter<?> converter = new StringHttpMessageConverter(StandardCharsets.UTF_8);
+//        messageConverters.add(converter);
+//    }
 
     /**
      * 支持application/x-javascript类型
