@@ -311,13 +311,13 @@ public class StringUtil {
         return result;
     }
 
-//    /**
-//     * 格式化文本
-//     *
-//     * @param string    文本模板，被替换的部分用 {} 表示
-//     * @param arguments 参数值
-//     * @return 格式化后的文本
-//     */
+    /**
+     * 格式化文本
+     *
+     * @param string    文本模板，被替换的部分用 {} 表示
+     * @param arguments 参数值
+     * @return 格式化后的文本
+     */
     public static String format(String string, Object... arguments) {
         FormattingTuple ft = MessageFormatter.arrayFormat(string, arguments);
         return ft.getMessage();
