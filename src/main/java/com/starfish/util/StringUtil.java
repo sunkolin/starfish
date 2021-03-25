@@ -30,6 +30,21 @@ public class StringUtil {
     private static final int INDEX_NOT_FOUND = -1;
 
     /**
+     * 英文字母
+     */
+    public static final String LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    /**
+     * 数字
+     */
+    public static final String NUMBERS = "0123456789";
+
+    /**
+     * 特殊字符，验证字符串是否有特殊字符时使用
+     */
+    public static final String SPECIAL_CHARACTER = "`~!@#$%^&*()_+-=[]{}|;:'?/.<>,";
+
+    /**
      * 判断字符串是null或空
      *
      * @param string 字符串
@@ -250,11 +265,11 @@ public class StringUtil {
      * @param string 字符串
      * @return 结果
      */
-    public static boolean containCharacter(String string) {
+    public static boolean containLetter(String string) {
         boolean result = false;
-        char[] chars = string.toCharArray();
-        for (char c : chars) {
-            if (Character.isLetter(c)) {
+        String[] stringArray = string.split("");
+        for (String item : stringArray) {
+            if (LETTERS.contains(item)) {
                 result = true;
                 break;
             }
@@ -278,6 +293,54 @@ public class StringUtil {
             }
         }
         return result;
+    }
+
+    /**
+     * 判断一个字符串是否只有字母
+     *
+     * @param string 字符串
+     * @return 是返回true，否返回false
+     */
+    public static boolean onlyLetter(String string) {
+        String[] stringArray = string.split("");
+        for (String item : stringArray) {
+            if (!LETTERS.contains(item)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 判断一个字符串是否只有数字
+     *
+     * @param string 字符串
+     * @return 是返回true，否返回false
+     */
+    public static boolean onlyNumber(String string) {
+        char[] chars = string.toCharArray();
+        for (char c : chars) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 判断一个字符串是否是字母，数字和特殊字符
+     *
+     * @param string 字符串
+     * @return 是返回true，否返回false
+     */
+    public static boolean onlyNumberLetterAndSpecialCharacter(String string) {
+        String[] stringArray = string.split("");
+        for (String item : stringArray) {
+            if (!LETTERS.contains(item) && !NUMBERS.contains(item) && !SPECIAL_CHARACTER.contains(item)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

@@ -13,7 +13,6 @@ import java.io.*;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.Map;
@@ -96,11 +95,6 @@ public final class CommonUtil {
         String result = path + className;
         result = result.replace("%20", " ");
         return result;
-    }
-
-    public static void main(String[] args) {
-        String s = getResourcePath(Alpha.class);
-        System.out.println(s);
     }
 
     /**
