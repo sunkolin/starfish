@@ -1,4 +1,4 @@
-package com.starfish.trial.validator;
+package com.starfish.trial;
 
 import com.starfish.exception.CustomException;
 import org.assertj.core.util.Strings;

@@ -31,7 +31,6 @@ public final class RestTemplatePlus {
     static {
         REST_TEMPLATE = new RestTemplate();
         List<HttpMessageConverter<?>> messageConverters = REST_TEMPLATE.getMessageConverters();
-//        supportUtf8(messageConverters);
         supportJavascript(messageConverters);
     }
 
@@ -42,30 +41,9 @@ public final class RestTemplatePlus {
     public static RestTemplate buildRestTemplate() {
         RestTemplate restTemplate = new RestTemplate();
         List<HttpMessageConverter<?>> messageConverters = restTemplate.getMessageConverters();
-//        supportUtf8(messageConverters);
         supportJavascript(messageConverters);
         return restTemplate;
     }
-
-//    /**
-//     * RestTemplate 解决乱码问题
-//     *
-//     * @param messageConverters messageConverters
-//     */
-//    public static void supportUtf8(List<HttpMessageConverter<?>> messageConverters) {
-//        HttpMessageConverter<?> converterTarget = null;
-//        for (HttpMessageConverter<?> item : messageConverters) {
-//            if (item.getClass() == StringHttpMessageConverter.class) {
-//                converterTarget = item;
-//                break;
-//            }
-//        }
-//        if (converterTarget != null) {
-//            messageConverters.remove(converterTarget);
-//        }
-//        HttpMessageConverter<?> converter = new StringHttpMessageConverter(StandardCharsets.UTF_8);
-//        messageConverters.add(converter);
-//    }
 
     /**
      * 支持application/x-javascript类型
@@ -76,10 +54,6 @@ public final class RestTemplatePlus {
         MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
         mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Collections.singletonList(new MediaType("application", "x-javascript")));
         messageConverters.add(mappingJackson2HttpMessageConverter);
-
-//        StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter();
-//        stringHttpMessageConverter.setSupportedMediaTypes(Collections.singletonList(new MediaType("application", "x-javascript")));
-//        template.getMessageConverters().add(stringHttpMessageConverter);
     }
 
     public static <T> ResponseEntity<T> exchange(String url, HttpMethod method, Map<String, Object> params, Map<String, String> headers, String body, Class<T> responseType) {

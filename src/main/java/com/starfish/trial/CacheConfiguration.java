@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 /**
  * 缓存配置
- * <p>
  * //@Configuration
  * //@EnableCaching(proxyTargetClass = true)
  *

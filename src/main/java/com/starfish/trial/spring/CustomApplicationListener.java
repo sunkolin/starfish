@@ -84,7 +84,6 @@ public class CustomApplicationListener implements org.springframework.context.Ap
         log.info("application startup time={}", applicationStartupTime);
     }
 
-
     @Override
     public void afterPropertiesSet() throws Exception {
         // init
@@ -95,15 +94,5 @@ public class CustomApplicationListener implements org.springframework.context.Ap
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
     }
-
-//    private void setStartTime() {
-//        if (applicationContext instanceof WebApplicationContext) {
-//            ServletContext context = ((WebApplicationContext) applicationContext).getServletContext();
-//            String startTime = String.valueOf(System.currentTimeMillis());
-//            context.setAttribute("startTime", startTime);
-//            log.info("ApplicationListener setStartTime={}", startTime);
-//            applicationContext.getStartupDate();
-//        }
-//    }
 
 }

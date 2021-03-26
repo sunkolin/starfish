@@ -1,4 +1,4 @@
-package com.starfish.trial.logback;
+package com.starfish.trial;
 
 import ch.qos.logback.classic.pattern.ClassicConverter;
 import ch.qos.logback.classic.spi.ILoggingEvent;
@@ -15,7 +15,7 @@ import java.net.InetAddress;
  * @since 2020-09-13
  */
 @Slf4j
-public class IpClassicConverter extends ClassicConverter {
+public class LogbackIpClassicConverter extends ClassicConverter {
 
     @Override
     public String convert(ILoggingEvent iLoggingEvent) {
