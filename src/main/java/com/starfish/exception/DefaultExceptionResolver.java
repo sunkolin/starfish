@@ -2,6 +2,7 @@ package com.starfish.exception;
 
 import com.google.common.base.Joiner;
 import com.starfish.model.Result;
+import com.starfish.util.WebUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -33,7 +34,12 @@ public class DefaultExceptionResolver {
     @ExceptionHandler
     @ResponseBody
     public Result<Object> resolveException(HttpServletRequest request, HttpServletResponse response, Exception ex) {
-        // 拼接链接和参数
+        // 请求地址
+        // request.getRequestURL() 返回全路径
+        //request.getRequestURI() 返回除去host（域名或者ip）部分的路径
+        String url = request.getRequestURL().toString();
+
+        // 参数
         Map<String, String> map = new HashMap<>(20);
         Enumeration<String> parameterNames = request.getParameterNames();
         while (parameterNames.hasMoreElements()) {
@@ -41,15 +47,17 @@ public class DefaultExceptionResolver {
             String value = request.getParameter(key);
             map.put(key, value);
         }
-        String parameters = Joiner.on("&").withKeyValueSeparator("=").join(map);
-        String url = request.getRequestURL() + "?" + parameters;
+        String param = Joiner.on("&").withKeyValueSeparator("=").join(map);
+
+        // body
+        String body = WebUtil.getBody(request);
 
         // 处理异常成错误码返回
         Result<Object> result;
         if (ex instanceof CustomException) {
             CustomException ce = (CustomException) ex;
             result = new Result<>(ce);
-            log.error("exception occur.status={},message={},url={}", result.getStatus(), result.getMessage(), url, ex);
+            log.error("exception occur.status={},message={},url={},param={},body={}", result.getStatus(), result.getMessage(), url, param, body, ex);
         } else {
             result = new Result<>(SYSTEM_EXCEPTION_CODE, SYSTEM_EXCEPTION_MESSAGE);
             log.error("system exception occur.status={},message={},url={}", result.getStatus(), result.getMessage(), url, ex);

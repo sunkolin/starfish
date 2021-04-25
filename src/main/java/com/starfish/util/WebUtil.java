@@ -9,6 +9,7 @@ import com.starfish.model.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.lang.Nullable;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.HtmlUtils;
 
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -584,4 +586,22 @@ public class WebUtil extends HtmlUtils {
         STREAM_TYPE.put("mmmp", "application/vnd.mindjet.mindmanager");
         STREAM_TYPE.put("mmas", "application/vnd.mindjet.mindmanager");
     }
+
+    /**
+     * 获取Body
+     *
+     * @param request 请求
+     * @return 结果
+     */
+    public static String getBody(HttpServletRequest request) {
+        String body = "";
+        try {
+            Charset charset = Charset.forName(request.getCharacterEncoding());
+            body = StreamUtils.copyToString(request.getInputStream(), charset);
+        } catch (IOException e) {
+            log.error("getBody exception.");
+        }
+        return body;
+    }
+
 }
