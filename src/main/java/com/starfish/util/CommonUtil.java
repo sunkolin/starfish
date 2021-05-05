@@ -13,6 +13,8 @@ import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.Map;
 import java.util.UUID;
@@ -61,6 +63,27 @@ public final class CommonUtil {
      */
     public static String getUuidWithLine() {
         return UUID.randomUUID().toString();
+    }
+
+    /**
+     * 获取主键，返回18位数字，支持Long类型，在请求量较小系统中可以使用
+     * long long的最大值：9223372036854775807
+     * long long的最小值：-9223372036854775808
+     *
+     * @return 结果
+     */
+    public static String getId() {
+        // 第一段：yyyyMMddHHmmss共14位
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+        String id1 = format.format(new Date());
+
+        //第二段：4位随机数
+        String id2 = StringUtil.randomString("0123456789",4);
+
+        String id = id1 + id2;
+        log.info("getId(),id={}", id);
+
+        return id;
     }
 
     /**

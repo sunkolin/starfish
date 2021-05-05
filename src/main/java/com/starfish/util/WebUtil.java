@@ -2,6 +2,7 @@ package com.starfish.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.starfish.enumeration.ResultEnum;
 import com.starfish.exception.CustomException;
@@ -20,6 +21,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -585,6 +587,33 @@ public class WebUtil extends HtmlUtils {
         STREAM_TYPE.put("mmat", "application/vnd.mindjet.mindmanager");
         STREAM_TYPE.put("mmmp", "application/vnd.mindjet.mindmanager");
         STREAM_TYPE.put("mmas", "application/vnd.mindjet.mindmanager");
+    }
+
+    /**
+     * 获取Body
+     *
+     * @param request 请求
+     * @return 结果
+     */
+    public static String getUrl(HttpServletRequest request) {
+        return request.getRequestURL().toString();
+    }
+
+    /**
+     * 获取param
+     *
+     * @param request 请求
+     * @return 结果
+     */
+    public static String getParam(HttpServletRequest request) {
+        Map<String, String> parameterMap = new HashMap<>(20);
+        Enumeration<String> parameterNames = request.getParameterNames();
+        while (parameterNames.hasMoreElements()) {
+            String key = parameterNames.nextElement();
+            String value = request.getParameter(key);
+            parameterMap.put(key, value);
+        }
+        return Joiner.on("&").withKeyValueSeparator("=").join(parameterMap);
     }
 
     /**

@@ -12,15 +12,21 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.EncodedResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.ResourceUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -146,22 +152,72 @@ public final class FileUtil {
     /**
      * 获取文件名，不带后缀
      *
-     * @param fileName 文件名，例如123.txt
-     * @return 结果 123
+     * @param fileName      文件名，例如123.txt，https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png等
+     * @param extensionSign 是否带拓展名，true带，false不带
+     * @return 结果 123，123.txt
      */
-    public static String getFileName(String fileName) {
+    public static String getFileName(String fileName, boolean extensionSign) {
+        // http 或者https
+        if (fileName.startsWith("http")) {
+            fileName = getUrlFileName(fileName);
+        }
+
+        if (!extensionSign) {
+            fileName = getFileName(fileName);
+        }
+
+        return fileName;
+    }
+
+    /**
+     * 获取文件名，不带后缀
+     *
+     * @param fileName 文件名，例如123.txt
+     * @return 结果
+     */
+    private static String getFileName(String fileName) {
         int index = fileName.lastIndexOf(Constant.DOT);
         return fileName.substring(0, index);
+    }
+
+    /**
+     * 获取文件名
+     *
+     * @param url，链接，例如https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png
+     * @return 结果，PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png
+     */
+    private static String getUrlFileName(String url) {
+        try {
+            HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+            connection.setReadTimeout(3000);
+            connection.setConnectTimeout(3000);
+            //设置应用程序要从网络链接读取数据
+            connection.setDoInput(true);
+            connection.setRequestMethod("GET");
+            InputStream inputStream = connection.getInputStream();
+
+            // 获取文件名
+            String fileName;
+            String attachmentFileName = connection.getHeaderField("attachment; filename=");
+            if (!Strings.isNullOrEmpty(attachmentFileName)) {
+                fileName = attachmentFileName;
+            } else {
+                fileName = url.substring(url.lastIndexOf('/') + 1);
+            }
+            return fileName;
+        } catch (Exception e) {
+            throw new CustomException(ResultEnum.GET_FILE_NAME_EXCEPTION);
+        }
     }
 
     /**
      * 更换文件拓展格式
      *
      * @param sourceName 源文件名
-     * @param extension  拓展名
+     * @param extension  拓展名，必须以点开头
      * @return 结果
      */
-    public static String changeName(String sourceName, String extension) {
+    public static String changeExtension(String sourceName, String extension) {
         String targetName = getFileName(sourceName);
 
         // 如果没有写点，加上点
@@ -172,6 +228,37 @@ public final class FileUtil {
         targetName = targetName + extension;
 
         return targetName;
+    }
+
+    /**
+     * 随机生成一个文件名
+     *
+     * @param sourceNameOrExtension 源文件名称或拓展名，必须包含点
+     * @return 结果
+     */
+    public static String randomName(String sourceNameOrExtension) {
+        String fileName = getRandomNameString();
+        String extension = getFileName(sourceNameOrExtension);
+        return fileName + extension;
+    }
+
+    /**
+     * 获取一个32位字符串名称，由年月日时分秒毫秒加随机字符串组成
+     *
+     * @return 结果
+     */
+    private static String getRandomNameString() {
+        // 第一段：17位，yyyyMMddHHmmssSSS共
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        String id1 = format.format(new Date());
+
+        //第二段：3位随机数字
+        String id2 = StringUtil.randomString(3);
+
+        //第三段：12位随机字符
+        String id3 = StringUtil.randomString("abcdefghijklmnopqrstuvwxyz", 12);
+
+        return id1 + id2 + id3;
     }
 
     /**
@@ -270,6 +357,47 @@ public final class FileUtil {
 
         int index = name.lastIndexOf(Constant.DOT);
         return name.substring(index).toLowerCase();
+    }
+
+    /**
+     * File转MultipartFile
+     *
+     * @param file 文件
+     * @return 结果
+     * @throws IOException 异常
+     */
+    public static MultipartFile toMultipartFile(File file) throws IOException {
+        FileInputStream fileInputStream = new FileInputStream(file);
+        return new MockMultipartFile(file.getName(), file.getName(), "application/octet-stream", fileInputStream);
+    }
+
+    /**
+     * url转MultipartFile
+     *
+     * @param url 链接地址，例如https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png
+     * @return 结果
+     * @throws IOException 异常
+     */
+    public static MultipartFile toMultipartFile(String url) throws IOException {
+        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+        connection.setReadTimeout(3000);
+        connection.setConnectTimeout(3000);
+        //设置应用程序要从网络链接读取数据
+        connection.setDoInput(true);
+        connection.setRequestMethod("GET");
+        InputStream inputStream = connection.getInputStream();
+
+        // 获取文件名
+        String fileName = getFileName(url, true);
+        return new MockMultipartFile(fileName, fileName, "application/octet-stream", inputStream);
+    }
+
+    public static void main(String[] args) throws IOException {
+        MultipartFile f = toMultipartFile("https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png");
+        System.out.println(f.getName());
+
+        File target = new File("/Users/sunlin/tmp/" + f.getName());
+        f.transferTo(target);
     }
 
 }

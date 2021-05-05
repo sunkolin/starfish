@@ -43,6 +43,8 @@ public enum ResultEnum {
 
     GET_WEATHER_EXCEPTION(1012, "get_weather_exception", "查询天气异常"),
 
+    GET_FILE_NAME_EXCEPTION(1013, "get_file_name_exception", "获取文件名异常"),
+
     ;
 
     /**
