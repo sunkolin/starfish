@@ -21,7 +21,7 @@ public class UserContext {
     /**
      * 用户键
      */
-    public static final String USER_CONTEXT_KEY = "user_context_key";
+    public static final String USER_CONTEXT_KEY = "user_context";
 
     public static HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();

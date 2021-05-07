@@ -3,7 +3,6 @@ package com.starfish.util;
 import com.starfish.enumeration.ResultEnum;
 import com.starfish.exception.CustomException;
 import joptsimple.internal.Strings;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StreamUtils;
@@ -34,9 +33,9 @@ public class CompressUtil {
     /**
      * zip压缩文件拓展名
      */
-    public static final String ZIP_COMPRESS_FILE_EXTENSION = ".zip";
+    private static final String ZIP_COMPRESS_FILE_EXTENSION = ".zip";
 
-    private CompressUtil(){
+    private CompressUtil() {
 
     }
 
@@ -48,30 +47,46 @@ public class CompressUtil {
      */
     public static void compress(String sourcePath, String targetPath) {
         //验证参数
-        File file = new File(sourcePath);
         if ((!targetPath.toLowerCase().endsWith(ZIP_COMPRESS_FILE_EXTENSION))) {
             throw new CustomException(ResultEnum.COMPRESS_FILE_ERROR);
         }
 
-        //计算 basePath
-        String basePath = sourcePath;
-        if (file.isFile()) {
+        //计算路径
+        File file = new File(sourcePath);
+        String basePath;
+        if (file.isDirectory()) {
+            basePath = file.getPath();
+        } else {
             basePath = file.getParent();
         }
 
-        // 遍历文件得到文件字符串list
-        List<String> filePaths = traverse(sourcePath);
-        List<Entry> fileEntries = new ArrayList<>();
-        for (String f : filePaths) {
-            Entry entry = new Entry();
-            entry.setBasePath(basePath);
-            entry.setFilePath(f);
-            entry.setRelativePath(calculateRelativePath(basePath, f));
-            fileEntries.add(entry);
-        }
+        // 压缩文件
+        compress(basePath, sourcePath, targetPath);
+    }
 
-        // 遍历list获取相对路径，压缩文件
-        compress(targetPath, fileEntries);
+    /**
+     * 压缩文件列表
+     */
+    private static void compress(String basePath, String sourcePath, String targetPath) {
+        // 遍历文件得到文件字符串list
+        List<String> filePathList = traverse(sourcePath);
+
+        ZipOutputStream outputStream = null;
+        try {
+            outputStream = new ZipOutputStream(new FileOutputStream(targetPath));
+
+            // 遍历添加文件
+            for (String filePath : filePathList) {
+                String relativePath = calculateRelativePath(basePath, filePath);
+                addEntry(outputStream, filePath, relativePath);
+            }
+
+            outputStream.finish();
+        } catch (Exception e) {
+            throw new CustomException(ResultEnum.COMPRESS_FILE_ERROR);
+        } finally {
+            IoUtil.close(outputStream);
+        }
     }
 
     /**
@@ -129,21 +144,6 @@ public class CompressUtil {
     }
 
     /**
-     * 压缩文件列表
-     */
-    private static void compress(String targetPath, List<Entry> fileEntries) {
-        try {
-            ZipOutputStream outputStream = new ZipOutputStream(new FileOutputStream(targetPath));
-            for (Entry entry : fileEntries) {
-                addEntry(outputStream, entry.getFilePath(), entry.getRelativePath());
-            }
-            outputStream.finish();
-        } catch (Exception e) {
-            throw new CustomException(ResultEnum.COMPRESS_FILE_ERROR);
-        }
-    }
-
-    /**
      * 遍历文件或文件夹
      */
     private static List<String> traverse(String sourcePath) {
@@ -183,20 +183,12 @@ public class CompressUtil {
 
     /**
      * 判断zip文件
+     *
+     * @param fileName 文件名
+     * @return 结果
      */
     private static boolean isEndsWithZip(String fileName) {
         return !Strings.isNullOrEmpty(fileName) && fileName.trim().toLowerCase().endsWith(".zip");
-    }
-
-    @Data
-    private static class Entry {
-
-        private String basePath;
-
-        private String filePath;
-
-        private String relativePath;
-
     }
 
 }
