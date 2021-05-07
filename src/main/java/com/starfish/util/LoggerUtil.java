@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * 日志工具类，废弃，使用@Slf4j替代
+ * 日志工具类，废弃，使用lombok@Slf4j替代
  *
  * @author sunny
  * @version 1.0.0
