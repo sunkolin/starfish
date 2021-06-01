@@ -9,7 +9,7 @@
     </parent>
     <groupId>com.github.sunlin901203</groupId>
     <artifactId>starfish</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>starfish</name>
     <description>starfish</description>
@@ -36,6 +36,36 @@
     </scm>
 
     <profiles>
+        <profile>
+            <id>github</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <url>https://repo1.maven.org/maven2</url>
+                </repository>
+                <repository>
+                    <id>github</id>
+                    <url>https://maven.pkg.github.com/sunlin901203/*</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub OWNER Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/sunlin901203/starfish</url>
+        </repository>
+    </distributionManagement>
+
+<!--    <profiles>-->
         <!--        <profile>-->
         <!--            <id>dev</id>-->
         <!--            <activation>-->
@@ -88,7 +118,7 @@
         <!--                </repository>-->
         <!--            </distributionManagement>-->
         <!--        </profile>-->
-    </profiles>
+<!--    </profiles>-->
 
     <properties>
         <project.springboot.version>2.4.1</project.springboot.version>
@@ -511,26 +541,6 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>2.8</version>
             </plugin>
-            <!--javadoc-->
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-javadoc-plugin</artifactId>-->
-            <!--                <version>2.10.3</version>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <phase>package</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>jar</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--                <configuration>-->
-            <!--                    <outputDirectory>target\document</outputDirectory>-->
-            <!--                    <reportOutputDirectory>target\report</reportOutputDirectory>-->
-            <!--                    <charset>UTF-8</charset>-->
-            <!--                    <encoding>UTF-8</encoding>-->
-            <!--                </configuration>-->
-            <!--            </plugin>-->
         </plugins>
     </build>
 
