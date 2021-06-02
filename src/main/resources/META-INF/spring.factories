@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.starfish.controller.AliveController
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.starfish.controller.AliveController,com.starfish.exception.DefaultExceptionResolver

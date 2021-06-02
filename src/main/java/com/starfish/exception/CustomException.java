@@ -1,14 +1,17 @@
 package com.starfish.exception;
 
 import com.starfish.enumeration.ResultEnum;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
+import java.lang.reflect.Method;
 
 /**
  * @author sunny
  * @version 1.0.0
  * @since 2013-5-7
  */
+@Slf4j
 @SuppressWarnings(value = "unused")
 public class CustomException extends RuntimeException implements Serializable {
 
@@ -65,6 +68,27 @@ public class CustomException extends RuntimeException implements Serializable {
         this.code = resultEnum.getCode();
         this.message = resultEnum.getMessage();
         this.description = resultEnum.getMessage();
+    }
+
+    /**
+     * 构造方法，对象需要有getCode和getMessage方法
+     *
+     * @param object object
+     */
+    public CustomException(Object object) {
+        try {
+            Method getCodeMethod = object.getClass().getMethod("getCode");
+            Method getMessageMethod = object.getClass().getMethod("getMessage");
+            Object codeObject = getCodeMethod.invoke(object);
+            Object messageObject = getMessageMethod.invoke(object);
+            int code = (codeObject == null ? -1 : (int) codeObject);
+            String message = (messageObject == null ? "" : messageObject.toString());
+            this.code = code;
+            this.message = message;
+            this.description = message;
+        } catch (Exception e) {
+            log.error("CustomException", e);
+        }
     }
 
     public int getCode() {
