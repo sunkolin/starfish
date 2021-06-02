@@ -2,4 +2,5 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.starfish.controller.AliveController,\
   com.starfish.exception.DefaultExceptionResolver,\
   com.starfish.config.ExecutorAutoConfiguration,\
+  com.starfish.config.SwaggerConfig,\
   com.starfish.trial.spring.SpringPlus

@@ -37,8 +37,8 @@ public class SwaggerConfig {
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .produces(Sets.newHashSet("application/json"))
-                .consumes(Sets.newHashSet("application/json"))
+//                .produces(Sets.newHashSet("application/json"))
+//                .consumes(Sets.newHashSet("application/json"))
                 .protocols(Sets.newHashSet("http", "https"))
                 .apiInfo(apiInfo())
                 .forCodeGeneration(true)
