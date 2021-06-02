@@ -22,6 +22,7 @@ import java.util.Map;
  * @version 1.0.0
  * @since 2015-12-02
  */
+@SuppressWarnings("unused")
 @Slf4j
 @ControllerAdvice
 @Component
@@ -57,10 +58,10 @@ public class DefaultExceptionResolver {
         if (ex instanceof CustomException) {
             CustomException ce = (CustomException) ex;
             result = new Result<>(ce);
-            log.error("exception occur.status={},message={},url={},param={},body={}", result.getStatus(), result.getMessage(), url, param, body, ex);
+            log.error("DefaultExceptionResolver exception.status={},message={},url={},param={},body={}", result.getStatus(), result.getMessage(), url, param, body, ex);
         } else {
             result = new Result<>(SYSTEM_EXCEPTION_CODE, SYSTEM_EXCEPTION_MESSAGE);
-            log.error("system exception occur.status={},message={},url={}", result.getStatus(), result.getMessage(), url, ex);
+            log.error("DefaultExceptionResolver system exception.status={},message={},url={}", result.getStatus(), result.getMessage(), url, ex);
         }
 
         return result;
