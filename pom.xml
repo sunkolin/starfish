@@ -9,7 +9,7 @@
     </parent>
     <groupId>com.github.sunlin901203</groupId>
     <artifactId>starfish</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.4-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>starfish</name>
     <description>starfish</description>
