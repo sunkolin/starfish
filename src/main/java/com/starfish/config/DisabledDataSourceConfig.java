@@ -13,8 +13,8 @@ import org.springframework.context.annotation.FilterType;
  * @since 2021-06-02
  */
 //@ConditionalOnExpression("${spring.datasource.enabled:true} || ${application.datasource.enabled:true}")
-@ConditionalOnExpression("!${application.datasource.enabled:true}")
+@ConditionalOnExpression("${application.datasource.disabled:false}")
 @ComponentScan(excludeFilters = {@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = DataSourceAutoConfiguration.class)})
-public class EnableDataSource {
+public class DisabledDataSourceConfig {
 
 }

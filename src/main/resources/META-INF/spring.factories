@@ -8,4 +8,4 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.starfish.interceptor.TimeInterceptor,\
   com.starfish.config.DefaultWebMvcConfig,\
   com.starfish.trial.spring.SpringPlus,\
-  com.starfish.config.EnableDataSource
+  com.starfish.config.DisabledDataSourceConfig
