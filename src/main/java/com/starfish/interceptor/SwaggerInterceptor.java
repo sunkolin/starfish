@@ -22,11 +22,11 @@ import javax.servlet.http.HttpServletResponse;
 public class SwaggerInterceptor implements HandlerInterceptor {
 
     @Value("${application.swagger.enabled}")
-    private boolean swaggerEnabled;
+    private Boolean swaggerEnabled;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (!swaggerEnabled) {
+        if (swaggerEnabled == null || !swaggerEnabled) {
             throw new CustomException(ResultEnum.SYSTEM_EXCEPTION);
         }
 
