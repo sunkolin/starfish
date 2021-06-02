@@ -1,8 +1,8 @@
 package com.starfish.util;
 
+import com.google.common.base.Strings;
 import com.starfish.enumeration.ResultEnum;
 import com.starfish.exception.CustomException;
-import joptsimple.internal.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StreamUtils;
