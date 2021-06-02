@@ -29,6 +29,11 @@
       "name": "application.executor.rejectedExecutionHandler",
       "type": "java.lang.String",
       "description": "Description for application.executor.rejectedExecutionHandler."
+    },
+    {
+      "name": "spring.datasource.enabled",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.enabled."
     }
   ]
 }
