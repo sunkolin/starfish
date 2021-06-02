@@ -1,4 +1,4 @@
-package com.starfish.trial.spring.interceptor;
+package com.starfish.interceptor;
 
 import com.google.common.base.Joiner;
 import lombok.extern.slf4j.Slf4j;

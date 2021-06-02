@@ -1,4 +1,4 @@
-package com.starfish.trial.spring.interceptor;
+package com.starfish.interceptor;
 
 import com.starfish.constant.Constant;
 import lombok.extern.slf4j.Slf4j;

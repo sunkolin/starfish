@@ -3,4 +3,8 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.starfish.exception.DefaultExceptionResolver,\
   com.starfish.config.ExecutorAutoConfiguration,\
   com.starfish.config.SwaggerConfig,\
+  com.starfish.interceptor.TraceIdInterceptor,\
+  com.starfish.interceptor.TimeInterceptor,\
+  com.starfish.interceptor.SwaggerInterceptor,\
+  com.starfish.config.DefaultWebMvcConfig,\
   com.starfish.trial.spring.SpringPlus
