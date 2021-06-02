@@ -52,17 +52,18 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                // 文档标题
-                .title("XXX系统接口服务")
-                // 文档描述
-                .description("XXX系统API接口文档简要描述")
-                // .termsOfServiceUrl("https://github.com/xxx")
-                .version("v1")
-                .license("Apache License2.0")
-                .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0")
-                .contact(new Contact("小志", "https://github.com/xxx", "xxx@gmail.com"))
-                .build();
+        ApiInfoBuilder apiInfoBuilder = new ApiInfoBuilder();
+        apiInfoBuilder.title(swaggerProperties.getTitle());
+        apiInfoBuilder.description(swaggerProperties.getDescription());
+        //apiInfoBuilder .termsOfServiceUrl("https://github.com/xxx");
+        apiInfoBuilder.version(swaggerProperties.getVersion());
+        apiInfoBuilder.license(swaggerProperties.getLicense());
+        apiInfoBuilder.licenseUrl(swaggerProperties.getLicenseUrl());
+
+        Contact contact =  new Contact(swaggerProperties.getName(), swaggerProperties.getUrl(), swaggerProperties.getEmail());
+        apiInfoBuilder.contact(contact);
+        return apiInfoBuilder.build();
+
     }
 
 }

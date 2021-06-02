@@ -2,7 +2,6 @@ package com.starfish.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import springfox.documentation.service.Contact;
 
 /**
  * SwaggerProperties
@@ -19,28 +18,44 @@ public class SwaggerProperties {
 
     private String basePackage;
 
+    /**
+     * 文档标题
+     */
     private String title;
 
+    /**
+     * 文档描述
+     */
     private String description;
 
+    /**
+     * 版本
+     */
     private String version = "1.0.0";
 
+    /**
+     * 许可证
+     */
     private String license = "Apache License2.0";
 
+    /**
+     * 许可证地址
+     */
     private String licenseUrl = "http://www.apache.org/licenses/LICENSE-2.0";
 
-    private  String name;
+    /**
+     * 姓名
+     */
+    private String name;
 
-    private  String url;
+    /**
+     * 网站
+     */
+    private String url;
 
-    private  String email;
+    /**
+     * 邮箱
+     */
+    private String email;
 
-    .title("XXX系统接口服务")
-    // 文档描述
-                .description("XXX系统API接口文档简要描述")
-    // .termsOfServiceUrl("https://github.com/xxx")
-                .version("v1")
-                .license("Apache License2.0")
-                .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0")
-                .contact(new Contact("小志", "https://github.com/xxx", "xxx@gmail.com"))
 }
