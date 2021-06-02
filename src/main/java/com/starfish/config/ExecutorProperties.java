@@ -1,4 +1,4 @@
-package com.starfish.extension.executor;
+package com.starfish.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
