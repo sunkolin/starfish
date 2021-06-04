@@ -29,16 +29,6 @@
       "name": "application.executor.rejectedExecutionHandler",
       "type": "java.lang.String",
       "description": "Description for application.executor.rejectedExecutionHandler."
-    },
-    {
-      "name": "application.datasource.enabled",
-      "type": "java.lang.String",
-      "description": "Description for application.datasource.enabled."
-    },
-    {
-      "name": "application.datasource.disabled",
-      "type": "java.lang.String",
-      "description": "Description for application.datasource.disabled."
     }
   ]
 }
