@@ -19,6 +19,7 @@ import java.util.Map;
  * DefaultExceptionResolver
  * 需要使用ExceptionResolverAutoConfiguration扫描包，异常处理器才能对controller和拦截器同时生效
  * 直接在spring.factories中配置DefaultExceptionResolver时对拦截器不生效
+ * 当前配置对于使用本jar的项目中的controller和interceptor有效，对于starfish中的interceptor无效
  *
  * @author sunny
  * @version 1.0.0
@@ -26,7 +27,7 @@ import java.util.Map;
  */
 @SuppressWarnings("unused")
 @Slf4j
-@ControllerAdvice
+@ControllerAdvice("com.starfish")
 @Component
 public class DefaultExceptionResolver {
 

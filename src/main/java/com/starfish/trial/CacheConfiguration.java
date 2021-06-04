@@ -60,7 +60,7 @@ public class CacheConfiguration {
         SimpleCacheManager simpleCacheManager = new SimpleCacheManager();
 
         //set caches
-        ArrayList<ConcurrentMapCache> caches = new ArrayList<ConcurrentMapCache>();
+        ArrayList<ConcurrentMapCache> caches = new ArrayList<>();
         caches.add(defaultCache);
         caches.add(simpleCache);
         simpleCacheManager.setCaches(caches);

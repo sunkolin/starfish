@@ -1,4 +1,4 @@
-package com.starfish.trial.spring;
+package com.starfish.plus;
 
 import lombok.Data;
 import org.springframework.beans.BeansException;
@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -20,7 +19,6 @@ import java.util.Map;
  * @since 2019-07-04
  */
 @Data
-@Component
 public class SpringPlus implements ApplicationContextAware {
 
     @Value("${spring.application.name}")

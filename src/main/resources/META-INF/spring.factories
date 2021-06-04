@@ -6,7 +6,7 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.starfish.interceptor.TraceIdInterceptor,\
   com.starfish.interceptor.TimeInterceptor,\
   com.starfish.config.DefaultWebMvcConfig,\
-  com.starfish.trial.spring.SpringPlus,\
+  com.starfish.plus.SpringPlus,\
   com.starfish.exception.ExceptionResolverAutoConfiguration
 org.springframework.boot.autoconfigure.AutoConfigurationImportFilter=\
   com.starfish.filter.DataSourceAutoConfigurationImportFilter
