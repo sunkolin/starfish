@@ -2,6 +2,7 @@ package com.starfish.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.starfish.enumeration.ResultEnum;
@@ -303,7 +304,7 @@ public class WebUtil extends HtmlUtils {
             result.setStatus(code);
             result.setMessage(message);
             result.setBody(data);
-            String value = JSON.toJSONString(result);
+            String value = JSON.toJSONString(result, SerializerFeature.WriteMapNullValue);
             pw.println(value);
             pw.flush();
         } catch (IOException e) {
