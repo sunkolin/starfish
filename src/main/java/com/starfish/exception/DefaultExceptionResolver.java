@@ -17,6 +17,8 @@ import java.util.Map;
 
 /**
  * DefaultExceptionResolver
+ * 需要使用ExceptionResolverAutoConfiguration扫描包，异常处理器才能对controller和拦截器同时生效
+ * 直接在spring.factories中配置DefaultExceptionResolver时对拦截器不生效
  *
  * @author sunny
  * @version 1.0.0
