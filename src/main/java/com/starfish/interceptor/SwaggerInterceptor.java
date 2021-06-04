@@ -2,6 +2,7 @@ package com.starfish.interceptor;
 
 import com.starfish.enumeration.ResultEnum;
 import com.starfish.exception.CustomException;
+import com.starfish.util.WebUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -27,7 +28,10 @@ public class SwaggerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (swaggerEnabled == null || !swaggerEnabled) {
-            throw new CustomException(ResultEnum.SYSTEM_EXCEPTION);
+            log.error("swagger未开启.swaggerEnabled={}", swaggerEnabled);
+            // 此处抛异常在DefaultExceptionResolver中无法捕获，改为write方式
+//            throw new CustomException(ResultEnum.SYSTEM_EXCEPTION);
+            WebUtil.write(request, response, ResultEnum.SYSTEM_EXCEPTION.getCode(), ResultEnum.SYSTEM_EXCEPTION.getMessage(), null);
         }
 
         return true;
