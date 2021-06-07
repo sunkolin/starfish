@@ -9,6 +9,7 @@ import com.starfish.enumeration.ResultEnum;
 import com.starfish.exception.CustomException;
 import com.starfish.model.Result;
 import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.util.Lists;
 import org.springframework.http.HttpHeaders;
 import org.springframework.lang.Nullable;
 import org.springframework.util.StreamUtils;
@@ -24,6 +25,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -59,6 +61,11 @@ public class WebUtil extends HtmlUtils {
     public static final String WSS_URL_PREFIX = "wss";
 
     private static final Map<String, String> STREAM_TYPE = new HashMap<>();
+
+    /**
+     * 多媒体内容的ContentType
+     */
+    private static final List<String> MEDIA_CONTENT_TYPE_LIST = Lists.newArrayList("application/x-mpegURL", "application/octet-stream", "video", "audio");
 
     static {
         initStreamType();
@@ -195,23 +202,12 @@ public class WebUtil extends HtmlUtils {
             if (Strings.isNullOrEmpty(contentType)) {
                 return false;
             }
-            if ("application/x-mpegURL".equalsIgnoreCase(contentType)) {
-                return true;
-            }
-            if ("application/octet-stream".equalsIgnoreCase(contentType)) {
-                return true;
-            }
-            if (contentType.contains("video")) {
-                return true;
-            }
-            if (contentType.contains("audio")) {
-                return true;
-            }
+            return MEDIA_CONTENT_TYPE_LIST.contains(contentType);
         } catch (Exception e) {
             log.error("check media url error.url={}", url, e);
-            result = false;
         }
-        return result;
+
+        return false;
     }
 
     public static String getStreamType(String ext) {

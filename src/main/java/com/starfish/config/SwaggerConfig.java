@@ -55,7 +55,6 @@ public class SwaggerConfig {
         ApiInfoBuilder apiInfoBuilder = new ApiInfoBuilder();
         apiInfoBuilder.title(swaggerProperties.getTitle());
         apiInfoBuilder.description(swaggerProperties.getDescription());
-        //apiInfoBuilder .termsOfServiceUrl("https://github.com/xxx");
         apiInfoBuilder.version(swaggerProperties.getVersion());
         apiInfoBuilder.license(swaggerProperties.getLicense());
         apiInfoBuilder.licenseUrl(swaggerProperties.getLicenseUrl());

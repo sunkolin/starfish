@@ -172,33 +172,6 @@ public final class CommonUtil {
     }
 
     /**
-     * 解决poi文件名称中文乱码问题
-     *
-     * @param request  请求
-     * @param filename 文件名称
-     * @return 结果
-     */
-    public static String resolveFilenameCharset(HttpServletRequest request, String filename) {
-        String result = filename;
-        try {
-            String agent = request.getHeader("USER-AGENT");
-            if (!Strings.isNullOrEmpty(agent)) {
-                // ie
-                if (agent.contains("MSIE") || agent.contains("Trident")) {
-                    result = java.net.URLEncoder.encode(filename, "UTF8");
-                }
-                // 火狐,chrome等
-                if (agent.contains("Mozilla")) {
-                    result = new String(filename.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
-                }
-            }
-        } catch (Exception e) {
-            log.error("resolveFilenameCharset", e);
-        }
-        return result;
-    }
-
-    /**
      * 生成指定范围的随机数
      *
      * @param min 最小值
