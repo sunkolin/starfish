@@ -16,14 +16,14 @@ public class PropertiesContext {
 
     }
 
-    public static final Map<String,String> properties = new HashMap<>();
+    public static final Map<String,String> PROPERTIES = new HashMap<>();
 
     public static String get(String key){
-        return properties.get(key);
+        return PROPERTIES.get(key);
     }
 
     public static String set(String key,String value){
-        return properties.put(key,value);
+        return PROPERTIES.put(key,value);
     }
 
 }

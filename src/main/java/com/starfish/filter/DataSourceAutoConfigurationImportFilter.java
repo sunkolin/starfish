@@ -36,7 +36,7 @@ public class DataSourceAutoConfigurationImportFilter implements AutoConfiguratio
             // 默认移除数据源相关的类
             String dataSourceAutoConfigurationProperty = PropertiesContext.get("DataSourceAutoConfiguration");
             // 未配置EnableDataSource注解或value设置未true都通过
-            if (dataSourceAutoConfigurationProperty == null || dataSourceAutoConfigurationProperty.equalsIgnoreCase("true")) {
+            if (dataSourceAutoConfigurationProperty == null || "true".equalsIgnoreCase(dataSourceAutoConfigurationProperty)) {
                 matches[i] = true;
             } else {
                 matches[i] = !EXCLUDE_CLASSES.contains(className);
