@@ -41,6 +41,11 @@ import java.util.concurrent.*;
 @SuppressWarnings(value = "unused")
 public final class FileUtil {
 
+    /**
+     * http前缀
+     */
+    public static final String HTTP_PREFIX= "http";
+
     private static final ThreadFactory NAMED_THREAD_FACTORY = new ThreadFactoryBuilder().setNameFormat("file-util-thread-pool-factory").build();
 
     private static final ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(10, 100, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), NAMED_THREAD_FACTORY);
@@ -158,7 +163,7 @@ public final class FileUtil {
      */
     public static String getFileName(String fileName, boolean extensionSign) {
         // http 或者https
-        if (fileName.startsWith("http")) {
+        if (fileName.startsWith(HTTP_PREFIX)) {
             fileName = getUrlFileName(fileName);
         }
 
