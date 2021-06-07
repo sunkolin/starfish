@@ -37,6 +37,14 @@ public class CustomException extends RuntimeException implements Serializable {
         this.description = ResultEnum.SYSTEM_EXCEPTION.getMessage();
     }
 
+    public CustomException(int code) {
+        this(code, ResultEnum.SYSTEM_EXCEPTION.getMessage(), ResultEnum.SYSTEM_EXCEPTION.getMessage());
+    }
+
+    public CustomException(String message) {
+        this(ResultEnum.SYSTEM_EXCEPTION.getCode(), message, message);
+    }
+
     /**
      * construct method
      *
@@ -44,7 +52,7 @@ public class CustomException extends RuntimeException implements Serializable {
      * @param message message
      */
     public CustomException(int code, String message) {
-        this(code, message, "");
+        this(code, message, message);
     }
 
     /**
