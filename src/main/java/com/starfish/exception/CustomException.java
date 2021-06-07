@@ -45,23 +45,10 @@ public class CustomException extends RuntimeException implements Serializable {
         this(ResultEnum.SYSTEM_EXCEPTION.getCode(), message, message);
     }
 
-    /**
-     * construct method
-     *
-     * @param code    code
-     * @param message message
-     */
     public CustomException(int code, String message) {
         this(code, message, message);
     }
 
-    /**
-     * 构造方法
-     *
-     * @param code        code
-     * @param message     message
-     * @param description description
-     */
     public CustomException(int code, String message, String description) {
         super(message);
         this.code = code;
@@ -69,11 +56,6 @@ public class CustomException extends RuntimeException implements Serializable {
         this.description = description;
     }
 
-    /**
-     * 构造方法
-     *
-     * @param resultEnum resultEnum
-     */
     public CustomException(ResultEnum resultEnum) {
         super(resultEnum.getMessage());
         this.code = resultEnum.getCode();
@@ -81,22 +63,17 @@ public class CustomException extends RuntimeException implements Serializable {
         this.description = resultEnum.getMessage();
     }
 
-    /**
-     * 构造方法，对象需要有getCode和getMessage方法
-     *
-     * @param object object
-     */
     public CustomException(Object object) {
         try {
             Method getCodeMethod = object.getClass().getMethod("getCode");
             Method getMessageMethod = object.getClass().getMethod("getMessage");
             Object codeObject = getCodeMethod.invoke(object);
             Object messageObject = getMessageMethod.invoke(object);
-            int code = (codeObject == null ? -1 : (int) codeObject);
-            String message = (messageObject == null ? "" : messageObject.toString());
-            this.code = code;
-            this.message = message;
-            this.description = message;
+            int codeInt = (codeObject == null ? -1 : (int) codeObject);
+            String messageString = (messageObject == null ? "" : messageObject.toString());
+            this.code = codeInt;
+            this.message = messageString;
+            this.description = messageString;
         } catch (Exception e) {
             log.error("CustomException", e);
         }
