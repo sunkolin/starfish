@@ -4,7 +4,6 @@ import com.google.common.base.Joiner;
 import com.starfish.model.Result;
 import com.starfish.util.WebUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,9 +26,8 @@ import java.util.Map;
  */
 @SuppressWarnings("unused")
 @Slf4j
-@ControllerAdvice("com.starfish")
-@Component
-public class DefaultExceptionResolver {
+@ControllerAdvice(basePackages = {"com.starfish"})
+public class ExceptionResolver {
 
     public static final int SYSTEM_EXCEPTION_CODE = 500;
 

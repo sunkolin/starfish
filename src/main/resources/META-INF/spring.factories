@@ -7,6 +7,6 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.starfish.interceptor.TimeInterceptor,\
   com.starfish.config.DefaultWebMvcConfig,\
   com.starfish.plus.SpringPlus,\
-  com.starfish.exception.ExceptionResolverAutoConfiguration
+  com.starfish.exception.ExceptionAutoConfiguration
 org.springframework.boot.autoconfigure.AutoConfigurationImportFilter=\
   com.starfish.filter.DataSourceAutoConfigurationImportFilter

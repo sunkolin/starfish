@@ -33,9 +33,15 @@ public class DefaultWebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(traceIdInterceptor).addPathPatterns("/**");
-        registry.addInterceptor(timeInterceptor).addPathPatterns("/**").excludePathPatterns("/excludeUrl");
-        registry.addInterceptor(swaggerInterceptor).addPathPatterns("/swagger-ui.html");
+        if (traceIdInterceptor != null) {
+            registry.addInterceptor(traceIdInterceptor).addPathPatterns("/**");
+        }
+        if (timeInterceptor != null) {
+            registry.addInterceptor(timeInterceptor).addPathPatterns("/**").excludePathPatterns("/excludeUrl");
+        }
+        if (swaggerInterceptor != null) {
+            registry.addInterceptor(swaggerInterceptor).addPathPatterns("/swagger-ui.html");
+        }
     }
 
 }
