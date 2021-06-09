@@ -1,4 +1,4 @@
-package com.starfish.plus1;
+package com.starfish.extension;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -6,8 +6,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.ImmutableMap;
 import com.starfish.enumeration.ResultEnum;
 import com.starfish.exception.CustomException;
-import com.starfish.plus1.weather.WeatherDetailModel;
-import com.starfish.plus1.weather.WeatherModel;
+import com.starfish.extension.weather.WeatherDetailModel;
+import com.starfish.extension.weather.WeatherModel;
 import com.starfish.util.CommonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.Strings;
@@ -31,7 +31,7 @@ import java.util.zip.GZIPInputStream;
  * @since 2020-10-30
  */
 @Slf4j
-public final class WeatherPlus {
+public final class WeatherUtil {
 
     private static final RestTemplate REST_TEMPLATE = new RestTemplate();
 

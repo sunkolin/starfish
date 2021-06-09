@@ -1,4 +1,4 @@
-package com.starfish.plus1;
+package com.starfish.extension;
 
 import com.google.common.base.Strings;
 
@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * @version 1.0.0
  * @since 2019-08-14
  */
-public final class MobilePlus {
+public final class MobileUtil {
 
     /**
      * 参考：https://www.cnblogs.com/zjk1/p/8623965.html

@@ -1,6 +1,6 @@
 package com.starfish.util;
 
-import com.starfish.plus1.SensitiveWordsPlus;
+import com.starfish.extension.SensitiveWordsUtil;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -49,14 +49,14 @@ public class CommonUtilTest {
     @Test
     public void checkWordsTrue() {
         String word = "考前答案";
-        boolean result = SensitiveWordsPlus.contains(word);
+        boolean result = SensitiveWordsUtil.contains(word);
         assertTrue(result);
     }
 
     @Test
     public void checkWordsFalse() {
         String word2 = "没有";
-        boolean result2 = SensitiveWordsPlus.contains(word2);
+        boolean result2 = SensitiveWordsUtil.contains(word2);
         assertFalse(result2);
     }
 

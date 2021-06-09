@@ -1,4 +1,4 @@
-package com.starfish.plus1;
+package com.starfish.extension;
 
 import com.starfish.util.FileUtil;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @version 1.0.0
  * @since 2021-03-06
  */
-public final class SensitiveWordsPlus {
+public final class SensitiveWordsUtil {
 
     /**
      * sensitive words list

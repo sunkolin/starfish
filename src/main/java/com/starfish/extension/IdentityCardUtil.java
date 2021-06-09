@@ -1,4 +1,4 @@
-package com.starfish.plus1;
+package com.starfish.extension;
 
 import org.springframework.web.client.RestTemplate;
 
@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
  * @version 1.0.0
  * @since 2019-08-07
  */
-public final class IdentityCardPlus {
+public final class IdentityCardUtil {
 
     /**
      * 根据身份证获取生日

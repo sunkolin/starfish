@@ -1,4 +1,4 @@
-package com.starfish.plus1;
+package com.starfish.extension;
 
 import com.google.common.base.Strings;
 import com.starfish.enumeration.ResultEnum;
@@ -22,7 +22,7 @@ import java.util.Date;
  */
 @Slf4j
 @SuppressWarnings("unused")
-public class StoragePlus {
+public class StorageUtil {
 
     /**
      * 存储文件并返回一个链接地址

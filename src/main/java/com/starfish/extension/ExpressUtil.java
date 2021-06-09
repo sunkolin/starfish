@@ -1,4 +1,4 @@
-package com.starfish.plus1;
+package com.starfish.extension;
 
 /**
  * Express
@@ -7,6 +7,6 @@ package com.starfish.plus1;
  * @version 1.0.0
  * @since 2020-10-30
  */
-public final class ExpressPlus {
+public final class ExpressUtil {
 
 }
