@@ -12,6 +12,9 @@ import java.util.Map;
 
 /**
  * SpringPlus
+ * 使用时无需注入ApplicationContext对象
+ * 可以直接调用静态方法SpringPlus.getApplicationContext();这样可以实现在工具类中使用
+ * <p>
  * 参考：cn.hutool.extra.spring.SpringUtil
  *
  * @author sunny
