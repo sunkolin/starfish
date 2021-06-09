@@ -1,4 +1,4 @@
-package com.starfish.plus;
+package com.starfish.plus1;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -6,6 +6,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.ImmutableMap;
 import com.starfish.enumeration.ResultEnum;
 import com.starfish.exception.CustomException;
+import com.starfish.plus1.weather.WeatherDetailModel;
+import com.starfish.plus1.weather.WeatherModel;
 import com.starfish.util.CommonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.Strings;

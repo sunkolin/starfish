@@ -1,4 +1,4 @@
-package com.starfish.plus.storage;
+package com.starfish.plus1;
 
 import com.google.common.base.Strings;
 import com.starfish.enumeration.ResultEnum;

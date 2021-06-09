@@ -1,4 +1,4 @@
-package com.starfish.extension.email;
+package com.starfish.plus;
 
 import com.alibaba.fastjson.JSON;
 import com.starfish.constant.MailConstant;

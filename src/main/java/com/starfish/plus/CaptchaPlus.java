@@ -1,4 +1,4 @@
-package com.starfish.extension.captcha;
+package com.starfish.plus;
 
 /**
  * CaptchaPlus

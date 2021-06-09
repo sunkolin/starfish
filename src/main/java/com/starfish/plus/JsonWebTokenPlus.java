@@ -1,10 +1,13 @@
-package com.starfish.extension.jwt;
+package com.starfish.plus;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.starfish.plus.jwt.JsonWebPayload;
+import com.starfish.plus.jwt.JsonWebTokenConstant;
+import com.starfish.plus.jwt.JsonWebTokenHeader;
 import org.apache.commons.lang.time.DateUtils;
 
 import java.util.Date;

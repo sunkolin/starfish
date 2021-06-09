@@ -1,4 +1,4 @@
-package com.starfish.plus;
+package com.starfish.plus1;
 
 import lombok.extern.slf4j.Slf4j;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;

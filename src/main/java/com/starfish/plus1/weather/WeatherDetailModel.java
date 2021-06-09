@@ -1,4 +1,4 @@
-package com.starfish.plus;
+package com.starfish.plus1.weather;
 
 import lombok.Data;
 

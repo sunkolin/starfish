@@ -1,6 +1,6 @@
 package com.starfish.util;
 
-import com.starfish.extension.email.EmailPlus;
+import com.starfish.plus.EmailPlus;
 import org.junit.Test;
 
 import javax.mail.MessagingException;

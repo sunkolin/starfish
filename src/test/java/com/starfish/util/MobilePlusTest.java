@@ -1,6 +1,6 @@
 package com.starfish.util;
 
-import com.starfish.plus.MobilePlus;
+import com.starfish.plus1.MobilePlus;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

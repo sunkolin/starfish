@@ -1,6 +1,6 @@
 package com.starfish.util;
 
-import com.starfish.plus.SensitiveWordsPlus;
+import com.starfish.plus1.SensitiveWordsPlus;
 import org.junit.Test;
 
 import java.util.ArrayList;
