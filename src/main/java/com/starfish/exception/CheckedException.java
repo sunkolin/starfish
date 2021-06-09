@@ -13,7 +13,7 @@ public class CheckedException extends Exception implements Serializable {
     /**
      * code
      */
-    public int code = 0;
+    public int code;
 
     /**
      * message

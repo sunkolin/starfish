@@ -18,7 +18,7 @@ public class CustomException extends RuntimeException implements Serializable {
     /**
      * code
      */
-    public int code = 0;
+    public int code;
 
     /**
      * message
