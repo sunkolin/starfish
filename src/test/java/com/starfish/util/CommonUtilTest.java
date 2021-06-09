@@ -1,7 +1,6 @@
 package com.starfish.util;
 
-import com.starfish.extension.util.SensitiveWordsPlus;
-import com.starfish.extension.util.WeatherPlus;
+import com.starfish.plus.SensitiveWordsPlus;
 import org.junit.Test;
 
 import java.util.ArrayList;

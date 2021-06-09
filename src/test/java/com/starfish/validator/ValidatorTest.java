@@ -1,6 +1,6 @@
 package com.starfish.validator;
 
-import com.starfish.trial.Validator;
+import com.starfish.util.Validator;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;

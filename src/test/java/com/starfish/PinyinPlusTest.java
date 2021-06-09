@@ -1,7 +1,7 @@
 package com.starfish;
 
 import com.starfish.context.User;
-import com.starfish.extension.pinyin.PinyinPlus;
+import com.starfish.plus.PinyinPlus;
 import org.junit.Test;
 
 import java.util.ArrayList;
