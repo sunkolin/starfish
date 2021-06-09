@@ -1,16 +1,13 @@
-# starfish
+## starfish
 
-## 研究
+### 研究
 
-- 数据库
-- 设计模式
+- 限流，支持单机与集群
+- 多数据源支持
+- 消息系统支持
 - 主从集群调优 分布式 集群 大数据 高并发 海量分布式事务的处理策略
 
-## 问题
-- 打印日志工具类，支持打印异常堆栈
-- 使用java config方式加载的bean如何解决初始化等问题
-
-## 知识
+### 知识
 - Future V get(long timeout, TimeUnit unit)方法是从get的时候开始算超时时间的，而不是从submit的时候开始计算的。
 - Integer.compare(o1, o2) 排序是从小到大
 - Spring BeanUtils.copyProperties();拷贝属性的时候，model类型不一致时可以拷贝，但是model中的类型不一致时无法拷贝，会设置为null
