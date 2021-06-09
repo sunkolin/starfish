@@ -63,6 +63,10 @@ public class CustomException extends RuntimeException implements Serializable {
         this.description = resultEnum.getMessage();
     }
 
+    public CustomException(Exception exception) {
+        super(exception);
+    }
+
     public CustomException(Object object) {
         try {
             Method getCodeMethod = object.getClass().getMethod("getCode");
