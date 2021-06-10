@@ -29,7 +29,7 @@ import javax.annotation.Resource;
 @ConditionalOnProperty(value = {"application.swagger.enabled"}, matchIfMissing = true)
 @EnableConfigurationProperties({SwaggerProperties.class})
 @EnableSwagger2
-public class SwaggerConfig {
+public class SwaggerAutoConfiguration {
 
     @Resource
     private SwaggerProperties swaggerProperties;

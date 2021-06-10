@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "application.web.response-wrapper.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Description for application.web.response-wrapper.enabled."
+    }
+  ]
+}

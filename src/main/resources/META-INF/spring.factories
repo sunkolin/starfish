@@ -1,7 +1,7 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.starfish.controller.AliveController,\
   com.starfish.autoconfigure.executor.ExecutorAutoConfiguration,\
-  com.starfish.autoconfigure.swagger.SwaggerConfig,\
+  com.starfish.autoconfigure.swagger.SwaggerAutoConfiguration,\
   com.starfish.interceptor.SwaggerInterceptor,\
   com.starfish.interceptor.TraceIdInterceptor,\
   com.starfish.interceptor.TimeInterceptor,\

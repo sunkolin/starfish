@@ -1,39 +1,41 @@
 {
+  "groups": [
+    {
+      "name": "application.web",
+      "type": "com.starfish.autoconfigure.web.ResponseWrapperProperties",
+      "sourceType": "com.starfish.autoconfigure.web.ResponseWrapperProperties"
+    },
+    {
+      "name": "application.swagger",
+      "type": "com.starfish.autoconfigure.swagger.SwaggerProperties",
+      "sourceType": "com.starfish.autoconfigure.swagger.SwaggerProperties"
+    },
+    {
+      "name": "application.executor",
+      "type": "com.starfish.autoconfigure.executor.ExecutorProperties",
+      "sourceType": "com.starfish.autoconfigure.swagger.ExecutorProperties"
+    }
+  ],
   "properties": [
     {
-      "name": "application.executor.enabled",
-      "type": "java.lang.String",
-      "description": "Description for application.executor.enabled."
-    },
+      "name": "application.exception",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.starfish.autoconfigure.exception.ExceptionProperties"
+    }
+  ],
+  "hints": [
     {
-      "name": "application.executor.corePoolSize",
-      "type": "java.lang.String",
-      "description": "Description for application.executor.corePoolSize."
-    },
-    {
-      "name": "application.executor.maxPoolSize",
-      "type": "java.lang.String",
-      "description": "Description for application.executor.maxPoolSize."
-    },
-    {
-      "name": "application.executor.queueCapacity",
-      "type": "java.lang.String",
-      "description": "Description for application.executor.queueCapacity."
-    },
-    {
-      "name": "application.executor.keepAliveSeconds",
-      "type": "java.lang.String",
-      "description": "Description for application.executor.keepAliveSeconds."
-    },
-    {
-      "name": "application.executor.rejectedExecutionHandler",
-      "type": "java.lang.String",
-      "description": "Description for application.executor.rejectedExecutionHandler."
-    },
-    {
-      "name": "application.web.response-wrapper.enabled",
-      "type": "java.lang.String",
-      "description": "Description for application.web.response-wrapper.enabled."
+      "name": "application.exception",
+      "values": [
+        {
+          "value": "true",
+          "description": "开启统一异常处理."
+        },
+        {
+          "value": "false",
+          "description": "关闭统一异常处理."
+        }
+      ]
     }
   ]
 }
