@@ -29,6 +29,11 @@
       "name": "application.executor.rejectedExecutionHandler",
       "type": "java.lang.String",
       "description": "Description for application.executor.rejectedExecutionHandler."
+    },
+    {
+      "name": "application.web.response-wrapper.enabled",
+      "type": "java.lang.String",
+      "description": "Description for application.web.response-wrapper.enabled."
     }
   ]
 }

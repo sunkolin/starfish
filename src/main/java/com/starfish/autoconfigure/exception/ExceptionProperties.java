@@ -1,4 +1,4 @@
-package com.starfish.exception;
+package com.starfish.autoconfigure.exception;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -14,6 +14,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "application.exception")
 public class ExceptionProperties {
 
-    private Boolean enabled = true;
+    private Boolean enabled;
 
 }

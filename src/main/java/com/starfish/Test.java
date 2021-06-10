@@ -1,5 +1,8 @@
 package com.starfish;
 
+import com.google.protobuf.Api;
+import com.starfish.model.ApiResult;
+
 /**
  * Test
  *
@@ -10,8 +13,15 @@ package com.starfish;
 public class Test {
 
     public static void main(String[] args) {
-        String s = System.getProperty("os.name");
-        System.out.println(s);
+        ApiResult apiResult = new ApiResult();
+        Object o = apiResult;
+
+        if (o instanceof ApiResult){
+            System.out.println(true);
+        }else{
+            System.out.println(false);
+        }
+
     }
 
 }
