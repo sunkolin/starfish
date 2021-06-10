@@ -14,6 +14,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "application.exception")
 public class ExceptionProperties {
 
+    /**
+     * 是否启用,true启用，false禁用
+     */
     private Boolean enabled;
 
 }

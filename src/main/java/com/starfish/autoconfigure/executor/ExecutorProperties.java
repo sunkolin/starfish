@@ -14,16 +14,34 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "application.executor")
 public class ExecutorProperties {
 
-    private Boolean enabled = true;
+    /**
+     * 是否启用,true启用，false禁用
+     */
+    private Boolean enabled;
 
+    /**
+     * 核心线程数
+     */
     private Integer corePoolSize;
 
+    /**
+     * 最大线程数
+     */
     private Integer maxPoolSize;
 
+    /**
+     * 队列长度
+     */
     private Integer queueCapacity;
 
+    /**
+     * 超时回收时间
+     */
     private Integer keepAliveSeconds;
 
+    /**
+     * 拒绝策略
+     */
     private String rejectedExecutionHandler;
 
 }

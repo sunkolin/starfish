@@ -14,8 +14,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "application.swagger")
 public class SwaggerProperties {
 
-    private Boolean enabled = true;
+    /**
+     * 是否启用,true启用，false禁用
+     */
+    private Boolean enabled;
 
+    /**
+     * 包路径，多个逗号分割
+     */
     private String basePackage;
 
     /**
