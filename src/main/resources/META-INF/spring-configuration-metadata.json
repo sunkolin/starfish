@@ -1,9 +1,14 @@
 {
   "groups": [
     {
-      "name": "application.web",
-      "type": "com.starfish.autoconfigure.web.ResponseWrapperProperties",
-      "sourceType": "com.starfish.autoconfigure.web.ResponseWrapperProperties"
+      "name": "application.exception",
+      "type": "com.starfish.autoconfigure.exception.ExceptionProperties",
+      "sourceType": "com.starfish.autoconfigure.exception.ExceptionProperties"
+    },
+    {
+      "name": "application.executor",
+      "type": "com.starfish.autoconfigure.executor.ExecutorProperties",
+      "sourceType": "com.starfish.autoconfigure.executor.ExecutorProperties"
     },
     {
       "name": "application.swagger",
@@ -11,31 +16,123 @@
       "sourceType": "com.starfish.autoconfigure.swagger.SwaggerProperties"
     },
     {
-      "name": "application.executor",
-      "type": "com.starfish.autoconfigure.executor.ExecutorProperties",
-      "sourceType": "com.starfish.autoconfigure.swagger.ExecutorProperties"
+      "name": "application.web.response-wrapper",
+      "type": "com.starfish.autoconfigure.web.ResponseWrapperProperties",
+      "sourceType": "com.starfish.autoconfigure.web.ResponseWrapperProperties"
     }
   ],
   "properties": [
     {
-      "name": "application.exception",
+      "name": "application.exception.enabled",
       "type": "java.lang.Boolean",
+      "description": "是否启用,true启用，false禁用",
       "sourceType": "com.starfish.autoconfigure.exception.ExceptionProperties"
+    },
+    {
+      "name": "application.executor.core-pool-size",
+      "type": "java.lang.Integer",
+      "description": "核心线程数",
+      "sourceType": "com.starfish.autoconfigure.executor.ExecutorProperties"
+    },
+    {
+      "name": "application.executor.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否启用,true启用，false禁用",
+      "sourceType": "com.starfish.autoconfigure.executor.ExecutorProperties"
+    },
+    {
+      "name": "application.executor.keep-alive-seconds",
+      "type": "java.lang.Integer",
+      "description": "超时回收时间",
+      "sourceType": "com.starfish.autoconfigure.executor.ExecutorProperties"
+    },
+    {
+      "name": "application.executor.max-pool-size",
+      "type": "java.lang.Integer",
+      "description": "最大线程数",
+      "sourceType": "com.starfish.autoconfigure.executor.ExecutorProperties"
+    },
+    {
+      "name": "application.executor.queue-capacity",
+      "type": "java.lang.Integer",
+      "description": "队列长度",
+      "sourceType": "com.starfish.autoconfigure.executor.ExecutorProperties"
+    },
+    {
+      "name": "application.executor.rejected-execution-handler",
+      "type": "java.lang.String",
+      "description": "拒绝策略",
+      "sourceType": "com.starfish.autoconfigure.executor.ExecutorProperties"
+    },
+    {
+      "name": "application.swagger.base-package",
+      "type": "java.lang.String",
+      "description": "包路径，多个逗号分割",
+      "sourceType": "com.starfish.autoconfigure.swagger.SwaggerProperties"
+    },
+    {
+      "name": "application.swagger.description",
+      "type": "java.lang.String",
+      "description": "文档描述",
+      "sourceType": "com.starfish.autoconfigure.swagger.SwaggerProperties"
+    },
+    {
+      "name": "application.swagger.email",
+      "type": "java.lang.String",
+      "description": "邮箱",
+      "sourceType": "com.starfish.autoconfigure.swagger.SwaggerProperties"
+    },
+    {
+      "name": "application.swagger.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否启用,true启用，false禁用",
+      "sourceType": "com.starfish.autoconfigure.swagger.SwaggerProperties"
+    },
+    {
+      "name": "application.swagger.license",
+      "type": "java.lang.String",
+      "description": "许可证",
+      "sourceType": "com.starfish.autoconfigure.swagger.SwaggerProperties",
+      "defaultValue": "Apache License2.0"
+    },
+    {
+      "name": "application.swagger.license-url",
+      "type": "java.lang.String",
+      "description": "许可证地址",
+      "sourceType": "com.starfish.autoconfigure.swagger.SwaggerProperties",
+      "defaultValue": "http:\/\/www.apache.org\/licenses\/LICENSE-2.0"
+    },
+    {
+      "name": "application.swagger.name",
+      "type": "java.lang.String",
+      "description": "姓名",
+      "sourceType": "com.starfish.autoconfigure.swagger.SwaggerProperties"
+    },
+    {
+      "name": "application.swagger.title",
+      "type": "java.lang.String",
+      "description": "文档标题",
+      "sourceType": "com.starfish.autoconfigure.swagger.SwaggerProperties"
+    },
+    {
+      "name": "application.swagger.url",
+      "type": "java.lang.String",
+      "description": "网站",
+      "sourceType": "com.starfish.autoconfigure.swagger.SwaggerProperties"
+    },
+    {
+      "name": "application.swagger.version",
+      "type": "java.lang.String",
+      "description": "版本",
+      "sourceType": "com.starfish.autoconfigure.swagger.SwaggerProperties",
+      "defaultValue": "1.0.0"
+    },
+    {
+      "name": "application.web.response-wrapper.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Description for application.web.response-wrapper.enabled.",
+      "sourceType": "com.starfish.autoconfigure.web.ResponseWrapperProperties"
     }
   ],
-  "hints": [
-    {
-      "name": "application.exception",
-      "values": [
-        {
-          "value": "true",
-          "description": "开启统一异常处理."
-        },
-        {
-          "value": "false",
-          "description": "关闭统一异常处理."
-        }
-      ]
-    }
-  ]
+  "hints": []
 }
