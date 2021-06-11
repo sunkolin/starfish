@@ -8,6 +8,7 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.starfish.autoconfigure.web.WebAutoConfiguration,\
   com.starfish.autoconfigure.web.ResponseWrapperAutoConfiguration,\
   com.starfish.plus.SpringPlus,\
-  com.starfish.autoconfigure.exception.ExceptionAutoConfiguration
+  com.starfish.autoconfigure.exception.ExceptionAutoConfiguration,\
+  com.starfish.autoconfigure.caffeine.CaffeineCacheAutoConfiguration
 org.springframework.boot.autoconfigure.AutoConfigurationImportFilter=\
   com.starfish.autoconfigure.datasource.DataSourceAutoConfigurationImportFilter

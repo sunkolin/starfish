@@ -17,7 +17,7 @@ public class SwaggerProperties {
     /**
      * 是否启用,true启用，false禁用
      */
-    private Boolean enabled;
+    private Boolean enabled = true;
 
     /**
      * 包路径，多个逗号分割
