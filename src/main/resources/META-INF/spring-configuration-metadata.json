@@ -1,6 +1,11 @@
 {
   "groups": [
     {
+      "name": "application.cache.caffeine",
+      "type": "com.starfish.autoconfigure.caffeine.CaffeineCacheProperties",
+      "sourceType": "com.starfish.autoconfigure.caffeine.CaffeineCacheProperties"
+    },
+    {
       "name": "application.exception",
       "type": "com.starfish.autoconfigure.exception.ExceptionProperties",
       "sourceType": "com.starfish.autoconfigure.exception.ExceptionProperties"
@@ -23,10 +28,45 @@
   ],
   "properties": [
     {
+      "name": "application.cache.caffeine.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否启用,true启用，false禁用，默认false",
+      "sourceType": "com.starfish.autoconfigure.caffeine.CaffeineCacheProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "application.cache.caffeine.expire",
+      "type": "java.lang.Long",
+      "description": "缓存过期时间，单位秒，默认一小时，expireAfterWrite",
+      "sourceType": "com.starfish.autoconfigure.caffeine.CaffeineCacheProperties"
+    },
+    {
+      "name": "application.cache.caffeine.soft-values",
+      "type": "java.lang.Boolean",
+      "description": "将value设置为软引用，在内存溢出前可以直接淘汰，默认false",
+      "sourceType": "com.starfish.autoconfigure.caffeine.CaffeineCacheProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "application.cache.caffeine.weak-keys",
+      "type": "java.lang.Boolean",
+      "description": "将key设置为弱引用，在GC时可以直接淘汰，默认false",
+      "sourceType": "com.starfish.autoconfigure.caffeine.CaffeineCacheProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "application.cache.caffeine.weak-values",
+      "type": "java.lang.Boolean",
+      "description": "将value设置为弱引用，在GC时可以直接淘汰，默认false",
+      "sourceType": "com.starfish.autoconfigure.caffeine.CaffeineCacheProperties",
+      "defaultValue": false
+    },
+    {
       "name": "application.exception.enabled",
       "type": "java.lang.Boolean",
       "description": "是否启用,true启用，false禁用",
-      "sourceType": "com.starfish.autoconfigure.exception.ExceptionProperties"
+      "sourceType": "com.starfish.autoconfigure.exception.ExceptionProperties",
+      "defaultValue": true
     },
     {
       "name": "application.executor.core-pool-size",
@@ -38,7 +78,8 @@
       "name": "application.executor.enabled",
       "type": "java.lang.Boolean",
       "description": "是否启用,true启用，false禁用",
-      "sourceType": "com.starfish.autoconfigure.executor.ExecutorProperties"
+      "sourceType": "com.starfish.autoconfigure.executor.ExecutorProperties",
+      "defaultValue": true
     },
     {
       "name": "application.executor.keep-alive-seconds",
@@ -86,7 +127,8 @@
       "name": "application.swagger.enabled",
       "type": "java.lang.Boolean",
       "description": "是否启用,true启用，false禁用",
-      "sourceType": "com.starfish.autoconfigure.swagger.SwaggerProperties"
+      "sourceType": "com.starfish.autoconfigure.swagger.SwaggerProperties",
+      "defaultValue": true
     },
     {
       "name": "application.swagger.license",
@@ -131,7 +173,8 @@
       "name": "application.web.response-wrapper.enabled",
       "type": "java.lang.Boolean",
       "description": "Description for application.web.response-wrapper.enabled.",
-      "sourceType": "com.starfish.autoconfigure.web.ResponseWrapperProperties"
+      "sourceType": "com.starfish.autoconfigure.web.ResponseWrapperProperties",
+      "defaultValue": true
     }
   ],
   "hints": []
