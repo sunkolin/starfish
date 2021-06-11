@@ -22,17 +22,17 @@ public class SwaggerProperties {
     /**
      * 包路径，多个逗号分割
      */
-    private String basePackage;
+    private String basePackage = "com.starfish.controller";
 
     /**
      * 文档标题
      */
-    private String title;
+    private String title = "xxx服务接口文档";
 
     /**
      * 文档描述
      */
-    private String description;
+    private String description = "xxx服务接口文档";
 
     /**
      * 版本
@@ -52,16 +52,16 @@ public class SwaggerProperties {
     /**
      * 姓名
      */
-    private String name;
+    private String name = "xxx";
 
     /**
      * 网站
      */
-    private String url;
+    private String url = "http://www.xxx.com/";
 
     /**
      * 邮箱
      */
-    private String email;
+    private String email = "xxx@qq.com";
 
 }

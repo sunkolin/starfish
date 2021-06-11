@@ -22,7 +22,7 @@ public class CaffeineCacheProperties {
     /**
      * 缓存过期时间，单位秒，默认一小时，expireAfterWrite
      */
-    private Long expire;
+    private Long expire = 3600L;
 
     /**
      * 将key设置为弱引用，在GC时可以直接淘汰，默认false

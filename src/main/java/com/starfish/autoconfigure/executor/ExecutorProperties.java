@@ -22,26 +22,26 @@ public class ExecutorProperties {
     /**
      * 核心线程数
      */
-    private Integer corePoolSize;
+    private Integer corePoolSize = 10;
 
     /**
      * 最大线程数
      */
-    private Integer maxPoolSize;
+    private Integer maxPoolSize = 10;
 
     /**
      * 队列长度
      */
-    private Integer queueCapacity;
+    private Integer queueCapacity = Integer.MAX_VALUE;
 
     /**
      * 超时回收时间
      */
-    private Integer keepAliveSeconds;
+    private Integer keepAliveSeconds = 60;
 
     /**
      * 拒绝策略
      */
-    private String rejectedExecutionHandler;
+    private String rejectedExecutionHandler = "java.util.concurrent.ThreadPoolExecutor$AbortPolicy";
 
 }
