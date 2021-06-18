@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.core.env.Environment;
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -22,7 +24,7 @@ import java.util.Map;
  * @since 2019-07-04
  */
 @Data
-public class SpringPlus implements ApplicationContextAware {
+public class SpringPlus implements ApplicationContextAware , EnvironmentAware {
 
     @Value("${spring.application.name}")
     private String name;
@@ -36,10 +38,12 @@ public class SpringPlus implements ApplicationContextAware {
     /**
      * 自动注入的ApplicationContext，无法定义为static的
      */
-    @Resource
-    private ApplicationContext injectApplicationContext;
+//    @Resource
+//    private ApplicationContext injectApplicationContext;
 
     private static ApplicationContext applicationContext;
+
+    private static Environment environment;
 
     /**
      * 通过name获取Bean
@@ -143,6 +147,11 @@ public class SpringPlus implements ApplicationContextAware {
 
     public static ApplicationContext getApplicationContext() {
         return applicationContext;
+    }
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        SpringPlus.environment = environment;
     }
 
 }
