@@ -9,14 +9,12 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
 
-import javax.annotation.Resource;
 import java.util.Map;
 
 /**
  * SpringPlus
  * 使用时无需注入ApplicationContext对象
  * 可以直接调用静态方法SpringPlus.getApplicationContext();这样可以实现在工具类中使用
- * <p>
  * 参考：cn.hutool.extra.spring.SpringUtil
  *
  * @author sunny
@@ -24,7 +22,7 @@ import java.util.Map;
  * @since 2019-07-04
  */
 @Data
-public class SpringPlus implements ApplicationContextAware , EnvironmentAware {
+public class SpringPlus implements ApplicationContextAware, EnvironmentAware {
 
     @Value("${spring.application.name}")
     private String name;
@@ -36,11 +34,13 @@ public class SpringPlus implements ApplicationContextAware , EnvironmentAware {
     private String profile;
 
     /**
+     * 另外一种方式可以使用注解自动注入ApplicationContext
      * 自动注入的ApplicationContext，无法定义为static的
+     * <code>
+     *
+     * @Resource private ApplicationContext applicationContext;
+     * </code>
      */
-//    @Resource
-//    private ApplicationContext injectApplicationContext;
-
     private static ApplicationContext applicationContext;
 
     private static Environment environment;
