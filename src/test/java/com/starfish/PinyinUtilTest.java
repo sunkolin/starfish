@@ -1,7 +1,7 @@
 package com.starfish;
 
 import com.starfish.context.User;
-import com.starfish.plus.PinyinPlus;
+import com.starfish.util.PinyinUtil;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import java.util.function.Function;
  * @version 1.0.0
  * @since 2021-03-03
  */
-public class PinyinPlusTest {
+public class PinyinUtilTest {
 
     @Test
     public void sortTest() {
@@ -31,7 +31,7 @@ public class PinyinPlusTest {
         u2.setUserName("马");
         users.add(u2);
 
-        PinyinPlus.sort(users, new Function<User, String>() {
+        PinyinUtil.sort(users, new Function<User, String>() {
             @Override
             public String apply(User user) {
                 return user.getUserName();

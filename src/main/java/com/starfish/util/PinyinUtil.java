@@ -1,4 +1,4 @@
-package com.starfish.plus;
+package com.starfish.util;
 
 import lombok.extern.slf4j.Slf4j;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
@@ -19,7 +19,7 @@ import java.util.function.Function;
  */
 @Slf4j
 @SuppressWarnings("unused")
-public class PinyinPlus {
+public class PinyinUtil {
 
     private static final HanyuPinyinOutputFormat FORMAT = new HanyuPinyinOutputFormat();
 
@@ -80,7 +80,7 @@ public class PinyinPlus {
             @Override
             public String apply(T t) {
                 String key = keyExtractor.apply(t);
-                return PinyinPlus.getPinyin(key);
+                return PinyinUtil.getPinyin(key);
             }
         };
         list.sort(Comparator.comparing(newKeyExtractor));
