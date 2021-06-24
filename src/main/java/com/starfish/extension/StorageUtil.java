@@ -38,7 +38,7 @@ public class StorageUtil {
 
         // 获取文件类型
         String fineName = file.getOriginalFilename();
-        String fileType = FileUtil.getFileType(fineName);
+        String fileType = FileUtil.getExtension(fineName);
 
         // 获取最终路径
         String targetPath = getTargetPath(targetFileDirectory, fileType);
@@ -74,10 +74,10 @@ public class StorageUtil {
         }
 
         // file type
-        String fileType = FileUtil.getFileType(filename);
+        String extension = FileUtil.getExtension(filename);
 
         //check the type
-        if (Strings.isNullOrEmpty(fileType)) {
+        if (Strings.isNullOrEmpty(extension)) {
             throw new CustomException(ResultEnum.FILE_TYPE_ERROR);
         }
     }
