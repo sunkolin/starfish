@@ -44,7 +44,7 @@ public final class FileUtil {
     /**
      * http前缀
      */
-    public static final String HTTP_PREFIX= "http";
+    public static final String HTTP_PREFIX = "http";
 
     private static final ThreadFactory NAMED_THREAD_FACTORY = new ThreadFactoryBuilder().setNameFormat("file-util-thread-pool-factory").build();
 
@@ -349,12 +349,12 @@ public final class FileUtil {
     }
 
     /**
-     * 获取文件类型
+     * 获取文件拓展名
      *
      * @param name 文件名称
      * @return 文件类型
      */
-    public static String getFileType(String name) {
+    public static String getExtension(String name) {
         // 校验文件名称
         if (Strings.isNullOrEmpty(name)) {
             throw new CustomException(ResultEnum.FILE_TYPE_ERROR);
