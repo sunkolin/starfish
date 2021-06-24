@@ -8,7 +8,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.starfish.plus.jwt.JsonWebPayload;
 import com.starfish.plus.jwt.JsonWebTokenConstant;
 import com.starfish.plus.jwt.JsonWebTokenHeader;
-import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.Date;
 import java.util.Map;

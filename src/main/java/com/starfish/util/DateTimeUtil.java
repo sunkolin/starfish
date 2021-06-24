@@ -3,7 +3,7 @@ package com.starfish.util;
 import com.starfish.enumeration.ResultEnum;
 import com.starfish.exception.CustomException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang3.time.DateUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

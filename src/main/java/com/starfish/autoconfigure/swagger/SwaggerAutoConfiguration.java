@@ -16,7 +16,8 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebFlux;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -33,7 +34,8 @@ import java.util.function.Predicate;
 @Configuration
 @ConditionalOnProperty(value = {"application.swagger.enabled"}, matchIfMissing = true)
 @EnableConfigurationProperties({SwaggerProperties.class})
-@EnableSwagger2
+@EnableSwagger2WebMvc
+@EnableSwagger2WebFlux
 public class SwaggerAutoConfiguration {
 
     @Resource

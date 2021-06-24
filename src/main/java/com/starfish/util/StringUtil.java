@@ -1,7 +1,7 @@
 package com.starfish.util;
 
 import com.google.common.base.Splitter;
-import org.apache.commons.lang.text.StrBuilder;
+import org.apache.commons.lang3.text.StrBuilder;
 import org.slf4j.helpers.FormattingTuple;
 import org.slf4j.helpers.MessageFormatter;
 
@@ -115,7 +115,7 @@ public class StringUtil {
      * @param start  开始
      * @param end    结束
      * @return 结果
-     * @see org.apache.commons.lang.StringUtils
+     * @see org.apache.commons.lang3.StringUtils
      */
     public static String substring(String string, int start, int end) {
         if (string == null) {
@@ -159,7 +159,7 @@ public class StringUtil {
      * @param searchString 需要替换的字符串
      * @param replacement  新字符串
      * @return 结果
-     * @see org.apache.commons.lang.StringUtils
+     * @see org.apache.commons.lang3.StringUtils
      */
     public static String replace(String text, String searchString, String replacement) {
         return replace(text, searchString, replacement, -1);
@@ -173,7 +173,7 @@ public class StringUtil {
      * @param replacement  新字符串
      * @param max          最大替换次数
      * @return 结果
-     * @see org.apache.commons.lang.StringUtils
+     * @see org.apache.commons.lang3.StringUtils
      */
     public static String replace(String text, String searchString, String replacement, int max) {
         if (isEmpty(text) || isEmpty(searchString) || replacement == null || max == 0) {
