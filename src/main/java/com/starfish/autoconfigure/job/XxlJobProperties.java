@@ -31,7 +31,7 @@ public class XxlJobProperties {
     @Data
     public static class Admin {
 
-        private String address = "http://127.0.0.1:8080/xxl-job-admin";
+        private String addresses = "http://127.0.0.1:8080/xxl-job-admin";
 
     }
 
