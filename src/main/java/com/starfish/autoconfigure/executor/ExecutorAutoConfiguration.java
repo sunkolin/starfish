@@ -20,7 +20,7 @@ import java.util.concurrent.RejectedExecutionHandler;
  */
 @Slf4j
 @Configuration
-@ConditionalOnProperty(value = {"application.executor.enabled"})
+@ConditionalOnProperty(prefix = "application.executor", name = "enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties({ExecutorProperties.class})
 public class ExecutorAutoConfiguration {
 
