@@ -1,4 +1,4 @@
-package com.starfish.web.wrapper;
+package com.starfish.web;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;

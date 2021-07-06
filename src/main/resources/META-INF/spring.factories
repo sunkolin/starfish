@@ -7,7 +7,7 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.starfish.plus.SpringPlus,\
   com.starfish.interceptor.TraceIdInterceptor,\
   com.starfish.interceptor.TimeInterceptor,\
-  com.starfish.controller.AliveController,\
+  com.starfish.web.AliveController,\
   com.starfish.autoconfigure.web.WebAutoConfiguration,\
   com.starfish.autoconfigure.web.ResponseWrapperAutoConfiguration,\
   com.starfish.autoconfigure.exception.ExceptionAutoConfiguration,\
