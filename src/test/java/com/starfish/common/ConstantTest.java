@@ -1,6 +1,6 @@
 package com.starfish.common;
 
-import com.starfish.constant.Constant;
+import com.starfish.core.constant.Constant;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

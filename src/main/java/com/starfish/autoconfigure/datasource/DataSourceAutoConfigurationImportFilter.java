@@ -1,7 +1,7 @@
 package com.starfish.autoconfigure.datasource;
 
 import com.google.common.collect.Sets;
-import com.starfish.context.PropertiesContext;
+import com.starfish.core.context.PropertiesContext;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.BeanFactory;

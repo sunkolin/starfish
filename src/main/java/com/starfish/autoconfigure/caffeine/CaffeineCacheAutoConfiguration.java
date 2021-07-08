@@ -2,8 +2,7 @@ package com.starfish.autoconfigure.caffeine;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.starfish.condition.CaffeineCacheCondition;
-import com.starfish.plus.CachePlus;
+import com.starfish.cache.CachePlus;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.CacheManager;

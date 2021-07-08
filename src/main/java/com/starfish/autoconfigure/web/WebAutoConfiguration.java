@@ -1,8 +1,8 @@
 package com.starfish.autoconfigure.web;
 
-import com.starfish.interceptor.SwaggerInterceptor;
-import com.starfish.interceptor.TimeInterceptor;
-import com.starfish.interceptor.TraceIdInterceptor;
+import com.starfish.swagger.SwaggerInterceptor;
+import com.starfish.web.interceptor.TimeInterceptor;
+import com.starfish.web.interceptor.TraceIdInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

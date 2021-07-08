@@ -1,6 +1,6 @@
 package com.starfish.plus;
 
-import com.starfish.util.CommonUtil;
+import com.starfish.core.util.CommonUtil;
 import org.springframework.http.*;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;

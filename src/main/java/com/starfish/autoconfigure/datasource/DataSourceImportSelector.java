@@ -1,7 +1,6 @@
 package com.starfish.autoconfigure.datasource;
 
-import com.starfish.annotation.EnableDataSource;
-import com.starfish.context.PropertiesContext;
+import com.starfish.core.context.PropertiesContext;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 

@@ -1,6 +1,6 @@
 package com.starfish;
 
-import com.starfish.util.WebUtil;
+import com.starfish.core.util.WebUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
