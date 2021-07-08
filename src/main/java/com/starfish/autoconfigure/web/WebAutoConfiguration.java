@@ -1,6 +1,6 @@
 package com.starfish.autoconfigure.web;
 
-import com.starfish.swagger.SwaggerInterceptor;
+import com.starfish.autoconfigure.swagger.SwaggerInterceptor;
 import com.starfish.web.interceptor.TimeInterceptor;
 import com.starfish.web.interceptor.TraceIdInterceptor;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.starfish.autoconfigure.job;
+package com.starfish.autoconfigure.task;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

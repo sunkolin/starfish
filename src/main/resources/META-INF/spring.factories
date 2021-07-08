@@ -1,10 +1,10 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.starfish.autoconfigure.caffeine.CaffeineCacheAutoConfiguration,\
-  com.starfish.autoconfigure.job.XxlJobAutoConfiguration,\
+  com.starfish.autoconfigure.task.XxlJobAutoConfiguration,\
   com.starfish.autoconfigure.executor.ExecutorAutoConfiguration,\
   com.starfish.autoconfigure.swagger.SwaggerAutoConfiguration,\
-  com.starfish.swagger.SwaggerInterceptor,\
-  com.starfish.plus.SpringPlus,\
+  com.starfish.autoconfigure.swagger.SwaggerInterceptor,\
+  com.starfish.extension.SpringPlus,\
   com.starfish.web.interceptor.TraceIdInterceptor,\
   com.starfish.web.interceptor.TimeInterceptor,\
   com.starfish.web.controller.AliveController,\

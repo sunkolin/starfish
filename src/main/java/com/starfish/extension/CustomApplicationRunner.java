@@ -1,4 +1,4 @@
-package com.starfish.plus;
+package com.starfish.extension;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;

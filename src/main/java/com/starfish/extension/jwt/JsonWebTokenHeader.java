@@ -1,4 +1,4 @@
-package com.starfish.plus.jwt;
+package com.starfish.extension.jwt;
 
 import lombok.Data;
 

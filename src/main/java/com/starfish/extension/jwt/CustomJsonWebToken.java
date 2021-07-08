@@ -1,9 +1,9 @@
-package com.starfish.plus.jwt;
+package com.starfish.extension.jwt;
 
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.starfish.core.context.User;
-import com.starfish.plus.JsonWebTokenPlus;
+import com.starfish.extension.JsonWebTokenPlus;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.starfish.plus;
+package com.starfish.extension;
 
 import lombok.Data;
 import org.springframework.beans.BeansException;

@@ -1,4 +1,4 @@
-package com.starfish.plus;
+package com.starfish.extension;
 
 /**
  * StopWatch

@@ -1,6 +1,5 @@
-package com.starfish.autoconfigure.job;
+package com.starfish.autoconfigure.task;
 
-import com.google.common.base.Strings;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

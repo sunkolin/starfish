@@ -1,4 +1,4 @@
-package com.starfish.swagger;
+package com.starfish.autoconfigure.swagger;
 
 import com.starfish.core.enumeration.ResultEnum;
 import com.starfish.core.util.WebUtil;
