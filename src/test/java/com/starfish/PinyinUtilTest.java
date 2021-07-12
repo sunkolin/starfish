@@ -1,7 +1,7 @@
 package com.starfish;
 
-import com.starfish.core.context.User;
-import com.starfish.core.util.PinyinUtil;
+import com.starfish.context.User;
+import com.starfish.util.PinyinUtil;
 import org.junit.Test;
 
 import java.util.ArrayList;

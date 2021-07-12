@@ -1,7 +1,7 @@
 package com.starfish.autoconfigure.swagger;
 
-import com.starfish.core.enumeration.ResultEnum;
-import com.starfish.core.util.WebUtil;
+import com.starfish.enumeration.ResultEnum;
+import com.starfish.util.WebUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

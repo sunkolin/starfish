@@ -1,7 +1,7 @@
 package com.starfish;
 
-import com.starfish.core.model.weather.WeatherModel;
-import com.starfish.core.util.CommonBusinessUtil;
+import com.starfish.model.weather.WeatherModel;
+import com.starfish.util.CommonBusinessUtil;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;

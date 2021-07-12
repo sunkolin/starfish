@@ -1,6 +1,6 @@
 package com.starfish.autoconfigure.exception;
 
-import com.starfish.core.exception.ExceptionResolver;
+import com.starfish.exception.ExceptionResolver;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
