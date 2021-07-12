@@ -1,4 +1,4 @@
-package com.starfish.processor;
+package com.starfish.extension.processor;
 
 import lombok.SneakyThrows;
 import org.springframework.boot.SpringApplication;
@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * CustomEnvironmentPostProcessor
+ * 属性加载，加载在jar中的属性文件
  *
  * @author sunny
  * @version 1.0.0
