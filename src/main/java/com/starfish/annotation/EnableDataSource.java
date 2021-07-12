@@ -1,4 +1,4 @@
-package com.starfish.autoconfigure.datasource;
+package com.starfish.annotation;
 
 import com.starfish.autoconfigure.datasource.DataSourceImportSelector;
 import org.springframework.context.annotation.Import;
