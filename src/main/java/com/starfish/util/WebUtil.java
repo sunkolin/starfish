@@ -210,7 +210,7 @@ public class WebUtil extends HtmlUtils {
         return false;
     }
 
-    public static String getStreamType(String ext) {
+    public static String getContentType(String ext) {
         return STREAM_TYPE.getOrDefault(ext.toLowerCase(), "application/octet-stream");
     }
 
