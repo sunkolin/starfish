@@ -243,7 +243,7 @@ public final class FileUtil {
      */
     public static String randomName(String sourceNameOrExtension) {
         String fileName = getRandomNameString();
-        String extension = getFileName(sourceNameOrExtension);
+        String extension = getExtension(sourceNameOrExtension);
         return fileName + extension;
     }
 
