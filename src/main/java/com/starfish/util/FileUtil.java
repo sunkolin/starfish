@@ -248,22 +248,22 @@ public final class FileUtil {
     }
 
     /**
-     * 获取一个32位字符串名称，由年月日时分秒毫秒加随机字符串组成
+     * 获取一个24位字符串名称，由年月日时分秒加随机字符串组成
      *
      * @return 结果
      */
     private static String getRandomNameString() {
-        // 第一段：17位，yyyyMMddHHmmssSSS共
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        // 第一段：14位，yyyyMMddHHmmss
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
         String id1 = format.format(new Date());
 
-        //第二段：3位随机数字
-        String id2 = StringUtil.randomString(3);
+//        //第二段：3位随机数字
+//        String id2 = StringUtil.randomString(3);
 
         //第三段：12位随机字符
-        String id3 = StringUtil.randomString("abcdefghijklmnopqrstuvwxyz", 12);
+        String id2 = StringUtil.randomString("abcdefghijklmnopqrstuvwxyz", 10);
 
-        return id1 + id2 + id3;
+        return id1 + id2;
     }
 
     /**

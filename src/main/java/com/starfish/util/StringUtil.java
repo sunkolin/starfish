@@ -232,7 +232,7 @@ public class StringUtil {
         char[] chars = new char[size];
         for (int i = 0; i < size; i++) {
             Random random = new Random();
-            chars[i] = string.charAt(random.nextInt(size));
+            chars[i] = string.charAt(random.nextInt(string.length()));
         }
         return new String(chars);
     }
