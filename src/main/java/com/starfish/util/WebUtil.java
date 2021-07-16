@@ -482,38 +482,38 @@ public class WebUtil extends HtmlUtils {
      * 初始化第一批
      */
     private static void initFirstBatchStreamType() {
-        STREAM_TYPE.put("ppt", "application/vnd.ms-powerpoin");
-        STREAM_TYPE.put("movie", "video/x-sgi-movie");
-        STREAM_TYPE.put("js", "application/x-javascript");
-        STREAM_TYPE.put("tar", "application/x-tar");
-        STREAM_TYPE.put("zip", "application/zip");
-        STREAM_TYPE.put("jpg", "image/jpeg");
-        STREAM_TYPE.put("png", "image/png");
-        STREAM_TYPE.put("tif", "image/tiff");
-        STREAM_TYPE.put("rgb", "image/x-rgb");
-        STREAM_TYPE.put("css", "text/css");
-        STREAM_TYPE.put("htm", "text/html");
-        STREAM_TYPE.put("doc", "application/msword");
-        STREAM_TYPE.put("xls", "application/vnd.ms-excel");
-        STREAM_TYPE.put("pdf", "application/pdf");
-        STREAM_TYPE.put("mp3", "audio/mpeg");
-        STREAM_TYPE.put("wav", "audio/x-wav");
-        STREAM_TYPE.put("gif", "image/gif");
-        STREAM_TYPE.put("jpeg", "image/jpeg");
-        STREAM_TYPE.put("mpg", "video/mpeg");
-        STREAM_TYPE.put("mov", "video/quicktimef");
-        STREAM_TYPE.put("avi", "video/x-msvideo");
-        STREAM_TYPE.put("gz", "application/zip");
-        STREAM_TYPE.put("tgz", "application/zip");
-        STREAM_TYPE.put("midi", "audio/midi");
-        STREAM_TYPE.put("rm", "audio/x-pn-realaudio");
-        STREAM_TYPE.put("xml", "text/xml");
-        STREAM_TYPE.put("html", "text/html");
-        STREAM_TYPE.put("docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-        STREAM_TYPE.put("pptx", "application/vnd.openxmlformats-officedocument.presentationml.presentation");
-        STREAM_TYPE.put("xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        STREAM_TYPE.put("xmind", "application/xmind");
-        STREAM_TYPE.put("jar", "application/java-archive");
+        STREAM_TYPE.put(".ppt", "application/vnd.ms-powerpoin");
+        STREAM_TYPE.put(".movie", "video/x-sgi-movie");
+        STREAM_TYPE.put(".js", "application/x-javascript");
+        STREAM_TYPE.put(".tar", "application/x-tar");
+        STREAM_TYPE.put(".zip", "application/zip");
+        STREAM_TYPE.put(".jpg", "image/jpeg");
+        STREAM_TYPE.put(".png", "image/png");
+        STREAM_TYPE.put(".tif", "image/tiff");
+        STREAM_TYPE.put(".rgb", "image/x-rgb");
+        STREAM_TYPE.put(".css", "text/css");
+        STREAM_TYPE.put(".htm", "text/html");
+        STREAM_TYPE.put(".doc", "application/msword");
+        STREAM_TYPE.put(".xls", "application/vnd.ms-excel");
+        STREAM_TYPE.put(".pdf", "application/pdf");
+        STREAM_TYPE.put(".mp3", "audio/mpeg");
+        STREAM_TYPE.put(".wav", "audio/x-wav");
+        STREAM_TYPE.put(".gif", "image/gif");
+        STREAM_TYPE.put(".jpeg", "image/jpeg");
+        STREAM_TYPE.put(".mpg", "video/mpeg");
+        STREAM_TYPE.put(".mov", "video/quicktimef");
+        STREAM_TYPE.put(".avi", "video/x-msvideo");
+        STREAM_TYPE.put(".gz", "application/zip");
+        STREAM_TYPE.put(".tgz", "application/zip");
+        STREAM_TYPE.put(".midi", "audio/midi");
+        STREAM_TYPE.put(".rm", "audio/x-pn-realaudio");
+        STREAM_TYPE.put(".xml", "text/xml");
+        STREAM_TYPE.put(".html", "text/html");
+        STREAM_TYPE.put(".docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+        STREAM_TYPE.put(".pptx", "application/vnd.openxmlformats-officedocument.presentationml.presentation");
+        STREAM_TYPE.put(".xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        STREAM_TYPE.put(".xmind", "application/xmind");
+        STREAM_TYPE.put(".jar", "application/java-archive");
     }
 
     /**
