@@ -486,8 +486,8 @@ public class WebUtil extends HtmlUtils {
         STREAM_TYPE.put(".movie", "video/x-sgi-movie");
         STREAM_TYPE.put(".js", "application/x-javascript");
         STREAM_TYPE.put(".tar", "application/x-tar");
-        STREAM_TYPE.put(".zip", "application/zip");
-        STREAM_TYPE.put(".jpg", "image/jpeg");
+        STREAM_TYPE.put(".zip", "APPLICATION/zip");
+        STREAM_TYPE.put(".jpg", "image/jpg");
         STREAM_TYPE.put(".png", "image/png");
         STREAM_TYPE.put(".tif", "image/tiff");
         STREAM_TYPE.put(".rgb", "image/x-rgb");
