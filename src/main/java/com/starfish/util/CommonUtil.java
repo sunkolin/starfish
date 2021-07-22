@@ -76,7 +76,7 @@ public final class CommonUtil {
         String id1 = format.format(new Date());
 
         //第二段：4位随机数
-        String id2 = StringUtil.randomString("0123456789",4);
+        String id2 = StringUtil.randomString("0123456789", 4);
 
         String id = id1 + id2;
         log.info("getId(),id={}", id);
@@ -248,7 +248,7 @@ public final class CommonUtil {
     }
 
     public static String contact(Map<String, Object> params) {
-        return contact("", params);
+        return Joiner.on("&").useForNull("").withKeyValueSeparator("=").join(params);
     }
 
     /**
