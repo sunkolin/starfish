@@ -223,7 +223,7 @@ public final class CommonUtil {
      * @param params 参数
      * @return 结果
      */
-    public static String contact(String url, Map<String, Object> params) {
+    public static String contact(String url, Map<?, ?> params) {
         // 参数为空，则直接返回url
         if (CollectionUtils.isEmpty(params)) {
             return url == null ? "" : url;
@@ -247,7 +247,7 @@ public final class CommonUtil {
         return url;
     }
 
-    public static String contact(Map<String, Object> params) {
+    public static String contact(Map<?, ?> params) {
         return Joiner.on("&").useForNull("").withKeyValueSeparator("=").join(params);
     }
 
