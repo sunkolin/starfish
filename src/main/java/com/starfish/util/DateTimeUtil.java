@@ -1,7 +1,5 @@
 package com.starfish.util;
 
-import com.starfish.enumeration.ResultEnum;
-import com.starfish.exception.CustomException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateUtils;
 
@@ -27,23 +25,13 @@ public class DateTimeUtil {
      * @return 日期时间
      */
     public static Date parse(String datetime) {
-        Date result;
-        if (datetime == null) {
-            throw new CustomException(ResultEnum.DATE_TIME_FORMAT_ERROR);
-        }
-
-        result = parse(datetime, "yyyy-MM-dd HH:mm:ss");
+        Date result = parse(datetime, "yyyy-MM-dd HH:mm:ss");
 
         if (result == null) {
             result = parse(datetime, "yyyy-MM-dd");
         }
-
         if (result == null) {
             result = parse(datetime, "yyyyMMdd");
-        }
-
-        if (result == null) {
-            throw new CustomException(ResultEnum.PARSE_DATE_TIME_ERROR);
         }
 
         return result;
