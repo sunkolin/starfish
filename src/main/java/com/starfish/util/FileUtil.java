@@ -261,7 +261,7 @@ public final class FileUtil {
 //        String id2 = StringUtil.randomString(3);
 
         //第三段：12位随机字符
-        String id2 = StringUtil.randomString("abcdefghijklmnopqrstuvwxyz", 10);
+        String id2 = StringUtil.random("abcdefghijklmnopqrstuvwxyz", 10);
 
         return id1 + id2;
     }

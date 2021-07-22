@@ -84,7 +84,7 @@ public class StorageUtil {
         // 日期17位，随机数字3位，uuid16位，一共36位
         String date = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
         String uuid = CommonUtil.getUuid();
-        String number = StringUtil.randomString("0123456789", 3);
+        String number = StringUtil.random("0123456789", 3);
         String filename = date + uuid + number;
 
         // 判断文件路径是否以反斜杠结尾，如果不是，自动加上一个反斜杠

@@ -76,7 +76,7 @@ public final class CommonUtil {
         String id1 = format.format(new Date());
 
         //第二段：4位随机数
-        String id2 = StringUtil.randomString("0123456789", 4);
+        String id2 = StringUtil.random("0123456789", 4);
 
         String id = id1 + id2;
         log.info("getId(),id={}", id);
@@ -176,7 +176,7 @@ public final class CommonUtil {
      * @param max 最大值
      * @return 结果
      */
-    public static int nextInt(int min, int max) {
+    public static int random(int min, int max) {
         return ThreadLocalRandom.current().nextInt(min, max);
     }
 
@@ -187,7 +187,7 @@ public final class CommonUtil {
      * @param max 最大值
      * @return 结果
      */
-    public static long nextLong(long min, long max) {
+    public static long random(long min, long max) {
         return ThreadLocalRandom.current().nextLong(min, max);
     }
 

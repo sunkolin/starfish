@@ -217,8 +217,8 @@ public class StringUtil {
      * @param size 字符串长度
      * @return 结果
      */
-    public static String randomString(int size) {
-        return randomString("0123456789abcdefghijklmnopqrstuvwxyz", size);
+    public static String random(int size) {
+        return random("0123456789abcdefghijklmnopqrstuvwxyz", size);
     }
 
     /**
@@ -228,7 +228,7 @@ public class StringUtil {
      * @param size   长度
      * @return 结果
      */
-    public static String randomString(String string, int size) {
+    public static String random(String string, int size) {
         char[] chars = new char[size];
         for (int i = 0; i < size; i++) {
             Random random = new Random();
