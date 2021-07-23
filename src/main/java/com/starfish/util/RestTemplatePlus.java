@@ -3,6 +3,7 @@ package com.starfish.util;
 import org.springframework.http.*;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
@@ -10,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.net.ssl.*;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 import java.util.Collections;
@@ -40,6 +42,7 @@ public final class RestTemplatePlus {
         REST_TEMPLATE = new RestTemplate();
         List<HttpMessageConverter<?>> messageConverters = REST_TEMPLATE.getMessageConverters();
         supportJavascript(messageConverters);
+        useUtf8(REST_TEMPLATE);
 
         Ssl factory = new Ssl();
         factory.setReadTimeout(5000);
@@ -51,6 +54,42 @@ public final class RestTemplatePlus {
 
     private RestTemplatePlus() {
 
+    }
+
+    /**
+     * 支持UTF-8
+     *
+     * @param restTemplate restTemplate
+     */
+    public static void useUtf8(RestTemplate restTemplate) {
+        List<HttpMessageConverter<?>> messageConverters = restTemplate.getMessageConverters();
+        for (HttpMessageConverter<?> item : messageConverters) {
+            if (item.getClass() == StringHttpMessageConverter.class) {
+                StringHttpMessageConverter messageConverter = (StringHttpMessageConverter) item;
+                messageConverter.setDefaultCharset(StandardCharsets.UTF_8);
+                break;
+            }
+        }
+    }
+
+    /**
+     * RestTemplate 解决乱码问题
+     *
+     * @param messageConverters messageConverters
+     */
+    public static void supportUtf8(List<HttpMessageConverter<?>> messageConverters) {
+        HttpMessageConverter<?> converterTarget = null;
+        for (HttpMessageConverter<?> item : messageConverters) {
+            if (item.getClass() == StringHttpMessageConverter.class) {
+                converterTarget = item;
+                break;
+            }
+        }
+        if (converterTarget != null) {
+            messageConverters.remove(converterTarget);
+        }
+        HttpMessageConverter<?> converter = new StringHttpMessageConverter(StandardCharsets.UTF_8);
+        messageConverters.add(converter);
     }
 
     public static RestTemplate buildRestTemplate() {
