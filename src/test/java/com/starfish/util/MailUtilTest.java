@@ -13,8 +13,8 @@ public class MailUtilTest {
         boolean result = true;
         try {
             String receiver = "xiaozhi8859@qq.com";
-            String subject = "你的快递已揽收，运单号814674262810";
-            String content = "你好，你有一个来自【江苏省南京市江宁区汤山】的快递于 2018-06-05 07:28 发出，运单号814674262810。";
+            String subject = "海星发送邮件测试";
+            String content = "你好，海星发送邮件测试。";
             MailUtil.send(new String[]{receiver}, null, null, subject, content);
         } catch (Exception e) {
             result = false;
