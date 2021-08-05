@@ -1,4 +1,4 @@
-package com.starfish.validator;
+package com.starfish.util;
 
 import com.starfish.util.Validator;
 import org.junit.Test;
