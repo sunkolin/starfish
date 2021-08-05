@@ -9,7 +9,7 @@ package com.starfish.constant;
  */
 public class MailConstant {
 
-    public static final String HOST = "smtp.126.com";
+    public static final String HOST = "smtp.qq.com";
 
     public static final String PORT = "465";
 
@@ -17,12 +17,12 @@ public class MailConstant {
 
     public static final boolean SSL = true;
 
-    public static final String FROM = "maxiaoshuai2588@126.com";
+    public static final String FROM = "jinkela008@foxmail.com";
 
-    public static final String USERNAME = "maxiaoshuai2588";
+    public static final String USERNAME = "jinkela008@foxmail.com";
 
-    public static final String PASSWORD = "xiaozhi888+";
+    public static final String PASSWORD = "ctxeegbnktdpbdfb";
 
-    public static final String TIMEOUT = "20000";
+    public static final String TIMEOUT = "10000";
 
 }

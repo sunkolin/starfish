@@ -1,15 +1,12 @@
 package com.starfish.util;
 
+import org.junit.Assert;
 import org.junit.Test;
-
-import javax.mail.MessagingException;
-
-import static org.junit.Assert.assertTrue;
 
 public class MailUtilTest {
 
     @Test
-    public void testSend() throws MessagingException {
+    public void testSend() {
         boolean result = true;
         try {
             String receiver = "xiaozhi8859@qq.com";
@@ -19,7 +16,7 @@ public class MailUtilTest {
         } catch (Exception e) {
             result = false;
         }
-        assertTrue(result);
+        Assert.assertTrue(result);
     }
 
 }
