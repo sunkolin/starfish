@@ -313,7 +313,7 @@ public class WebUtil extends HtmlUtils {
     }
 
     /**
-     * get the true ip address
+     * 获取请求的真实IP地址
      *
      * @param request request
      * @return the ip
