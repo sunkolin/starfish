@@ -40,6 +40,13 @@ public class ResponseWrapper implements ResponseBodyAdvice<Object> {
         // 参考：https://www.cnblogs.com/caozx/p/13329468.html
         // 参考：https://blog.csdn.net/chuwengliang4642/article/details/101055473
         // 参考：https://github.com/mingyang66/spring-parent/tree/master/emily-spring-boot-autoconfigure/src/main/java/com/emily/infrastructure/autoconfigure/response/handler
+
+        // 判断内容为null的情况
+        if (body == null){
+            Result<Object> result = new Result<>();
+            result.setMessage("notice:body is null");
+            return result;
+        }
         if (body instanceof String) {
             response.getHeaders().set("Content-Type", "application/json;charset=utf-8");
             return JSON.toJSONString(new Result<>(body), SerializerFeature.WriteMapNullValue);
