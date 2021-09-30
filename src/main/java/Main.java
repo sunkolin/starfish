@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * Main
  *
@@ -8,7 +10,12 @@
 public class Main {
 
     public static void main(String[] args) {
-
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            int count =  scanner.nextInt();
+            System.out.println(count);
+        }
+        scanner.close();
     }
 
 }
