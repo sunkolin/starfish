@@ -73,6 +73,7 @@ public class CompressUtil {
 
         ZipOutputStream outputStream = null;
         try {
+            FileUtil.create(targetPath);
             outputStream = new ZipOutputStream(new FileOutputStream(targetPath));
 
             // 遍历添加文件

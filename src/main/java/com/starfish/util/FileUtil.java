@@ -51,6 +51,21 @@ public final class FileUtil {
     private static final ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(10, 100, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), NAMED_THREAD_FACTORY);
 
     /**
+     * 创建文件及父目录
+     *
+     * @param path 路径
+     */
+    public static void create(String path) throws IOException {
+        File file = new File(path);
+        if (file.isDirectory()) {
+            file.mkdirs();
+        } else {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+        }
+    }
+
+    /**
      * 获取文件大小
      *
      * @param path 路径

@@ -31,17 +31,21 @@ public class SystemUtil {
      * @return 路径
      */
     public static String getBasePath() {
+        return getBasePathPrefix() + File.separator;
+    }
+
+    public static String getBasePathPrefix() {
         String result;
         String systemName = getSystem();
         if (systemName != null && systemName.toLowerCase().contains(WINDOWS_SYSTEM_NAME_KEYWORDS)) {
-            File d = new File("d:/");
+            File d = new File("d:");
             if (d.exists() && d.canWrite()) {
-                result = "d:/";
+                result = "d:";
             } else {
-                result = "c:/";
+                result = "c:";
             }
         } else {
-            result = "/";
+            result = "";
         }
         return result;
     }
@@ -52,7 +56,7 @@ public class SystemUtil {
      * @return 临时路径字符串
      */
     public static String getTmpPath() {
-        return getBasePath() + "tmp" + File.separator;
+        return getBasePathPrefix() + File.separator + "tmp" + File.separator;
     }
 
     /**
