@@ -24,18 +24,12 @@ public class TraceIdInterceptor implements HandlerInterceptor {
     @Resource
     private Tracer sleuthTracer;
 
-    @Resource
-    private brave.Tracer tracer;
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         try {
-            // brave方式获取traceId
-//           String traceId = tracer.currentSpan().context().traceIdString();
-
             // 新的方式获取traceId
             String traceId = sleuthTracer.currentSpan().context().traceId();
-            String spanId = sleuthTracer.currentSpan().context().spanId();
+
             // 设置Header
             response.setHeader("traceId", traceId);
         } catch (Exception e) {
