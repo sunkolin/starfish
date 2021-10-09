@@ -1,5 +1,6 @@
 package com.starfish.util;
 
+import cn.hutool.core.util.HexUtil;
 import com.starfish.enumeration.ResultEnum;
 import com.starfish.exception.CustomException;
 import org.springframework.util.Base64Utils;
@@ -43,13 +44,6 @@ public final class SecurityUtil {
 
     public static final String ALGORITHM_RSA = "RSA";
 
-    /**
-     * Used to build output as Hex
-     */
-    private static final char[] DIGITS_LOWER = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
-
-    private static final char[] DIGITS_UPPER = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-
     private SecurityUtil() {
 
     }
@@ -92,12 +86,7 @@ public final class SecurityUtil {
      */
     @SuppressWarnings(value = "unused")
     public static String encodeHex(byte[] data) {
-        return new String(encodeHex(data, DIGITS_LOWER));
-    }
-
-    @SuppressWarnings(value = "unused")
-    public static String encodeHex(byte[] data, boolean lowerCase) {
-        return new String(encodeHex(data, lowerCase ? DIGITS_LOWER : DIGITS_UPPER));
+        return HexUtil.encodeHexStr(data);
     }
 
     /**
@@ -109,7 +98,7 @@ public final class SecurityUtil {
     @SuppressWarnings(value = "unused")
     public static byte[] decodeHex(String data) {
         try {
-            return decodeHex(data.toCharArray());
+            return HexUtil.decodeHex(data);
         } catch (Exception e) {
             throw new CustomException(ResultEnum.SYSTEM_EXCEPTION.getCode(), "decode hex exception");
         }
@@ -325,35 +314,6 @@ public final class SecurityUtil {
         } catch (Exception e) {
             throw new CustomException(ResultEnum.SYSTEM_EXCEPTION.getCode(), "decode rsa exception");
         }
-    }
-
-    protected static char[] encodeHex(final byte[] data, final char[] toDigits) {
-        final int l = data.length;
-        final char[] out = new char[l << 1];
-        int j = 0;
-        for (byte aData : data) {
-            out[j++] = toDigits[(0xF0 & aData) >>> 4];
-            out[j++] = toDigits[0x0F & aData];
-        }
-        return out;
-    }
-
-    protected static byte[] decodeHex(final char[] data) {
-        final int len = data.length;
-        if ((len & 0x01) != 0) {
-            throw new CustomException(ResultEnum.SYSTEM_EXCEPTION.getCode(), "Odd number of characters.");
-        }
-        final byte[] out = new byte[len >> 1];
-        // two characters form the hex value.
-        int j = 0;
-        for (int i = 0; j < len; i++) {
-            int f = toDigit(data[j], j) << 4;
-            j++;
-            f = f | toDigit(data[j], j);
-            j++;
-            out[i] = (byte) (f & 0xFF);
-        }
-        return out;
     }
 
     protected static int toDigit(final char ch, final int index) {
