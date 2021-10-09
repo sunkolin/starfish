@@ -265,6 +265,7 @@ public final class FileUtil {
 
     /**
      * 读取项目下文件的全部内容转成字符串
+     * 支持格式：classpath:application.properties，file:/etc/profile
      *
      * @param path 文件路径
      * @return 文件内容
@@ -288,7 +289,8 @@ public final class FileUtil {
     }
 
     /**
-     * 读取项目下文件的全部内容转成字符串
+     * 读取项目下文件的全部内容转成字符串，备用方法，默认使用read方法
+     * 支持格式：classpath:application.properties，file:/etc/profile
      *
      * @param path 文件路径
      * @return 文件内容
@@ -301,8 +303,9 @@ public final class FileUtil {
 
         String result = "";
         try {
-            ClassPathResource classPathResource = new ClassPathResource(path);
-            InputStream inputStream = classPathResource.getInputStream();
+            File file = ResourceUtils.getFile(path);
+            FileSystemResource fileSystemResource = new FileSystemResource(file);
+            InputStream inputStream = fileSystemResource.getInputStream();
             String content = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
         } catch (IOException e) {
             log.error("read file error", e);
@@ -313,6 +316,7 @@ public final class FileUtil {
     /**
      * 读取项目下文件，按行转成字符串，以行为单位放入list中，适合读取小文件
      * File file = classPathResource.getFile(); 方式无法获取jar包中的文件
+     * 支持格式：classpath:application.properties，file:/etc/profile
      *
      * @param path 文件路径
      * @return 文件内容
@@ -324,10 +328,10 @@ public final class FileUtil {
         }
 
         List<String> result = new ArrayList<>();
-
         try {
-            ClassPathResource classPathResource = new ClassPathResource(path);
-            InputStream inputStream = classPathResource.getInputStream();
+            File file = ResourceUtils.getFile(path);
+            FileSystemResource fileSystemResource = new FileSystemResource(file);
+            InputStream inputStream = fileSystemResource.getInputStream();
             result = IOUtils.readLines(inputStream, StandardCharsets.UTF_8);
         } catch (IOException e) {
             log.error("read file error", e);
@@ -338,9 +342,14 @@ public final class FileUtil {
     /**
      * 写文件
      *
-     * @param file 文件路径，例如/tmp/data.csv
+     * @param file 文件路径，例如file:/etc/profile,/etc/profile
      */
     private static void write(String file, List<String> list) throws IOException {
+        // 如果有file:前缀需要去掉
+        if (file.startsWith("file:")){
+            file = file.replaceFirst("file:","");
+        }
+
         Path filePath = Paths.get(file);
         Files.write(filePath, list);
     }
