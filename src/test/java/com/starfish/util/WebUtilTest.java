@@ -32,9 +32,9 @@ public class WebUtilTest {
     }
 
     @Test
-    public void getIpLocation() {
-        String result = WebUtil.getAddress("61.135.169.121");
-        assertEquals("中国##北京##北京",result);
+    public void getAddress() {
+        String result = WebUtil.getAddress("203.119.241.126");
+        assertEquals("中国 广东 深圳",result);
     }
 
     @Test

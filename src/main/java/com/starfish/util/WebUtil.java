@@ -45,7 +45,7 @@ public class WebUtil extends HtmlUtils {
     /**
      * 淘宝查询IP地址接口
      */
-    private static final String TAOBAO_INTERFACE_URL = "http://ip.taobao.com/service/getIpInfo.php?ip=";
+    private static final String TAOBAO_INTERFACE_URL = "https://ip.taobao.com/outGetIpInfo?accessKey=alibaba-inc&ip=";
 
     /**
      * 新浪查询IP地址接口
@@ -371,7 +371,7 @@ public class WebUtil extends HtmlUtils {
             //process the result,the result format is { code: 0, data: { } }
             JSONObject data = JSON.parseObject(result).getJSONObject("data");
 
-            result = data.getString("country") + "##" + data.getString("region") + "##" + data.getString("city");
+            result = data.getString("country") + " " + data.getString("region") + " " + data.getString("city");
 
             //return
             return result;
@@ -381,7 +381,7 @@ public class WebUtil extends HtmlUtils {
 
             //process the result,the result format is { ret: 1,  start: -1,  end: -1,  country: "中国",  province: "北京", city: "北京",district: "",  isp: "",  type: "",  desc: ""  }
             JSONObject jsonObject = JSON.parseObject(result);
-            result = jsonObject.getString("country") + "##" + jsonObject.getString("province") + "##" + jsonObject.getString("city");
+            result = jsonObject.getString("country") + " " + jsonObject.getString("province") + " " + jsonObject.getString("city");
 
             //return
             return result;
