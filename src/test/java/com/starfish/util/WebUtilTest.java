@@ -33,13 +33,13 @@ public class WebUtilTest {
 
     @Test
     public void getIpLocation() {
-        String result = WebUtil.getLocation("61.135.169.121");
+        String result = WebUtil.getAddress("61.135.169.121");
         assertEquals("中国##北京##北京",result);
     }
 
     @Test
     public void existMedia() {
-        String url = "http://baidudown-al.wasu.cn/pcsan12/mams/vod/201708/07/18/20170807183604432b759dbfe.mp4";
+        String url = "https://vd3.bdstatic.com/mda-mj84pad7qad8hhur/sc/cae_h264_clips/1633750377008601665/mda-mj84pad7qad8hhur.mp4";
         assertTrue(WebUtil.existMedia(url));
     }
 

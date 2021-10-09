@@ -15,11 +15,11 @@ public class MobileUtilTest {
 
     @Test
     public void isMobileTest() {
-        assertTrue(CommonBusinessUtil.isMobile("18610815188"));
+        assertTrue(BusinessUtil.isMobile("18610815188"));
 
-        assertTrue(CommonBusinessUtil.isMobile("13496215263"));
+        assertTrue(BusinessUtil.isMobile("13496215263"));
 
-        assertTrue(CommonBusinessUtil.isMobile("13912345678"));
+        assertTrue(BusinessUtil.isMobile("13912345678"));
     }
 
 }

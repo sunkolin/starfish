@@ -30,7 +30,7 @@ import java.util.zip.GZIPInputStream;
  * @since 2021-07-08
  */
 @Slf4j
-public class CommonBusinessUtil {
+public class BusinessUtil {
 
     /**
      * 参考：https://www.cnblogs.com/zjk1/p/8623965.html
@@ -45,7 +45,7 @@ public class CommonBusinessUtil {
     private static final List<String> SENSITIVE_WORD_LIST;
 
     static {
-        SENSITIVE_WORD_LIST = FileUtil.readLines("words.txt");
+        SENSITIVE_WORD_LIST = FileUtil.readLines("classpath:words.txt");
     }
 
     private static final RestTemplate REST_TEMPLATE = new RestTemplate();

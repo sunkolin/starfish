@@ -48,14 +48,14 @@ public class CommonUtilTest {
     @Test
     public void checkWordsTrue() {
         String word = "考前答案";
-        boolean result = CommonBusinessUtil.contains(word);
+        boolean result = BusinessUtil.contains(word);
         assertTrue(result);
     }
 
     @Test
     public void checkWordsFalse() {
         String word2 = "没有";
-        boolean result2 = CommonBusinessUtil.contains(word2);
+        boolean result2 = BusinessUtil.contains(word2);
         assertFalse(result2);
     }
 

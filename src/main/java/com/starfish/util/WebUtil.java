@@ -190,8 +190,9 @@ public class WebUtil extends HtmlUtils {
      * @return 结果
      */
     public static boolean existMedia(String url) {
-        // 判断是否可以访问
         boolean result = false;
+
+        // 判断是否可以访问
         try {
             RestTemplate restTemplate = new RestTemplate();
             HttpHeaders httpHeaders = restTemplate.headForHeaders(url);
@@ -199,15 +200,19 @@ public class WebUtil extends HtmlUtils {
             log.info("check media url result,response contentType={}", contentType);
 
             // 如果没有Content-Type，返回false
-            if (Strings.isNullOrEmpty(contentType)) {
-                return false;
+            if (!Strings.isNullOrEmpty(contentType)) {
+                for (String mediaContentType : MEDIA_CONTENT_TYPE_LIST) {
+                    if (contentType.startsWith(mediaContentType) || contentType.equalsIgnoreCase(mediaContentType)) {
+                        result = true;
+                        break;
+                    }
+                }
             }
-            return MEDIA_CONTENT_TYPE_LIST.contains(contentType);
         } catch (Exception e) {
             log.error("check media url error.url={}", url, e);
         }
 
-        return false;
+        return result;
     }
 
     public static String getContentType(String ext) {
@@ -357,7 +362,7 @@ public class WebUtil extends HtmlUtils {
      * @param ip ip
      * @return the location
      */
-    public static String getLocation(String ip) {
+    public static String getAddress(String ip) {
         RestTemplate template = new RestTemplate();
         try {
             //call remote interface of sina
@@ -389,8 +394,8 @@ public class WebUtil extends HtmlUtils {
      * @param request request
      * @return the location
      */
-    public static String getLocation(HttpServletRequest request) {
-        return getLocation(WebUtil.getInternetProtocolAddress(request));
+    public static String getAddress(HttpServletRequest request) {
+        return getAddress(WebUtil.getInternetProtocolAddress(request));
     }
 
     /**
