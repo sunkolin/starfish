@@ -22,16 +22,16 @@ import java.util.List;
  */
 public class CustomEnvironmentPostProcessor implements EnvironmentPostProcessor {
 
-    private static final YamlPropertySourceLoader yamlLoader = new YamlPropertySourceLoader();
+    private static final YamlPropertySourceLoader YAML_LOADER = new YamlPropertySourceLoader();
 
-    private static final PropertiesPropertySourceLoader propertiesLoader = new PropertiesPropertySourceLoader();
+    private static final PropertiesPropertySourceLoader PROPERTIES_LOADER = new PropertiesPropertySourceLoader();
 
     @SneakyThrows
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
         // 加载配置文件
         Resource resource = new ClassPathResource("/application.properties");
-        List<PropertySource<?>> propertySourceList = propertiesLoader.load("starfish", resource);
+        List<PropertySource<?>> propertySourceList = PROPERTIES_LOADER.load("starfish", resource);
         PropertySource<?> propertySource = propertySourceList.get(0);
         environment.getPropertySources().addLast(propertySource);
     }

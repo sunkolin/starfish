@@ -1,9 +1,9 @@
 package com.starfish.util;
 
 import com.google.common.base.Splitter;
-import org.apache.commons.lang3.text.StrBuilder;
 import org.slf4j.helpers.FormattingTuple;
 import org.slf4j.helpers.MessageFormatter;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Locale;
@@ -155,50 +155,14 @@ public class StringUtil {
     /**
      * 替换字符串
      *
-     * @param text         字符串
-     * @param searchString 需要替换的字符串
-     * @param replacement  新字符串
+     * @param string    字符串
+     * @param oldString 需要替换的字符串
+     * @param newString 新字符串
      * @return 结果
      * @see org.apache.commons.lang3.StringUtils
      */
-    public static String replace(String text, String searchString, String replacement) {
-        return replace(text, searchString, replacement, -1);
-    }
-
-    /**
-     * 替换字符串
-     *
-     * @param text         字符串
-     * @param searchString 需要替换的字符串
-     * @param replacement  新字符串
-     * @param max          最大替换次数
-     * @return 结果
-     * @see org.apache.commons.lang3.StringUtils
-     */
-    public static String replace(String text, String searchString, String replacement, int max) {
-        if (isEmpty(text) || isEmpty(searchString) || replacement == null || max == 0) {
-            return text;
-        }
-        int start = 0;
-        int end = text.indexOf(searchString, start);
-        if (end == INDEX_NOT_FOUND) {
-            return text;
-        }
-        int replLength = searchString.length();
-        int increase = replacement.length() - replLength;
-        increase = (increase < 0 ? 0 : increase);
-        increase *= (max < 0 ? 16 : (max > 64 ? 64 : max));
-        StrBuilder buf = new StrBuilder(text.length() + increase);
-        while (end != INDEX_NOT_FOUND) {
-            buf.append(text.substring(start, end)).append(replacement);
-            start = end + replLength;
-            if (--max == 0) {
-                break;
-            }
-            end = text.indexOf(searchString, start);
-        }
-        buf.append(text.substring(start));
-        return buf.toString();
+    public static String replace(String string, String oldString, String newString) {
+        return StringUtils.replace(string, oldString, newString);
     }
 
     /**
@@ -428,35 +392,35 @@ public class StringUtil {
     /**
      * 切分字符串
      *
-     * @param str       字符串
+     * @param string       字符串
      * @param separator 分割字符串
      * @return 结果
      */
-    public static List<String> split(String str, String separator) {
-        return Splitter.on(separator).splitToList(str);
+    public static List<String> split(String string, String separator) {
+        return Splitter.on(separator).splitToList(string);
     }
 
     /**
      * 切分字符串
      *
-     * @param str       字符串
+     * @param string       字符串
      * @param separator 分割字符串
      * @return 结果
      */
-    public static List<Integer> splitToInteger(String str, String separator) {
-        List<String> stringList = Splitter.on(separator).splitToList(str);
+    public static List<Integer> splitToInteger(String string, String separator) {
+        List<String> stringList = Splitter.on(separator).splitToList(string);
         return stringList.stream().map(Integer::valueOf).collect(Collectors.toList());
     }
 
     /**
      * 切分字符串
      *
-     * @param str       字符串
+     * @param string       字符串
      * @param separator 分割字符串
      * @return 结果
      */
-    public static List<Long> splitToLong(String str, String separator) {
-        List<String> stringList = Splitter.on(separator).splitToList(str);
+    public static List<Long> splitToLong(String string, String separator) {
+        List<String> stringList = Splitter.on(separator).splitToList(string);
         return stringList.stream().map(Long::valueOf).collect(Collectors.toList());
     }
 
