@@ -9,7 +9,6 @@ import org.assertj.core.util.Strings;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.*;
 import java.net.Inet4Address;
@@ -18,8 +17,6 @@ import java.net.NetworkInterface;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * CommonUtil
@@ -33,9 +30,24 @@ import java.util.regex.Pattern;
 public final class CommonUtil {
 
     /**
+     * &号
+     */
+    public static final String AMPERSAND_SYMBOL = "&";
+
+    /**
+     * 冒号
+     */
+    public static final String COLON_SYMBOL = ":";
+
+    /**
      * 问号
      */
-    public static final String QUESTION_MARK = "?";
+    public static final String QUESTION_MARK_SYMBOL = "?";
+
+    /**
+     * 等于号
+     */
+    public static final String EQUAL_SYMBOL = "=";
 
     /**
      * 比较两个对象是否相等
@@ -241,10 +253,10 @@ public final class CommonUtil {
         }
 
         // 链接不为空，拼接字符串
-        if (url.contains("?")) {
-            url = url.concat("&").concat(paramsString);
+        if (url.contains(QUESTION_MARK_SYMBOL)) {
+            url = url.concat(AMPERSAND_SYMBOL).concat(paramsString);
         } else {
-            url = url.concat("?").concat(paramsString);
+            url = url.concat(QUESTION_MARK_SYMBOL).concat(paramsString);
         }
 
         return url;
@@ -289,7 +301,7 @@ public final class CommonUtil {
      * @return 结果
      */
     public static String getPublicAddress() {
-        HashMap<String, String> header = new HashMap<>();
+        HashMap<String, String> header = new HashMap<>(20);
         header.put("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
         header.put("user-agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36");
         header.put("cookie", "UM_distinctid=17b80664e762cd-0806aa579995fa-35667c03-13c680-17b80664e777ed; CNZZDATA1278852728=1391488375-1629944092-https%253A%252F%252Fwww.baidu.com%252F%7C1629944092; __51cke__=; __51uvsct__1vGn5KEyNxI88WjH=1; __51vcke__1vGn5KEyNxI88WjH=311712a8-8217-5248-93ec-70cc18e109ba; __51vuft__1vGn5KEyNxI88WjH=1629946793633; INIT_IP_INFO=%E4%B8%AD%E5%9B%BD++%E5%8C%97%E4%BA%AC+%E5%8C%97%E4%BA%AC%E5%B8%82+%E7%94%B5%E4%BF%A1; __tins__20765349=%7B%22sid%22%3A%201629946793615%2C%20%22vd%22%3A%202%2C%20%22expires%22%3A%201629948607357%7D; __51laig__=2; __vtins__1vGn5KEyNxI88WjH=%7B%22sid%22%3A%20%22216c9f22-0d2a-5843-ae6d-37a6f08167c2%22%2C%20%22vd%22%3A%202%2C%20%22stt%22%3A%2013744%2C%20%22dr%22%3A%2013744%2C%20%22expires%22%3A%201629948607372%2C%20%22ct%22%3A%201629946807372%7D");

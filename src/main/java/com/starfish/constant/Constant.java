@@ -48,7 +48,27 @@ public class Constant {
     /**
      * 点
      */
-    public static final String DOT = ".";
+    public static final String DOT_SYMBOL = ".";
+
+    /**
+     * &号
+     */
+    public static final String AMPERSAND_SYMBOL = "&";
+
+    /**
+     * 冒号
+     */
+    public static final String COLON_SYMBOL = ":";
+
+    /**
+     * 问号
+     */
+    public static final String QUESTION_MARK_SYMBOL = "?";
+
+    /**
+     * 等于号
+     */
+    public static final String EQUAL_SYMBOL = "=";
 
     /**
      * 请求开始时间

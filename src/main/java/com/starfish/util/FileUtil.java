@@ -181,7 +181,7 @@ public final class FileUtil {
      * @return 结果
      */
     private static String getFileName(String fileName) {
-        int index = fileName.lastIndexOf(Constant.DOT);
+        int index = fileName.lastIndexOf(Constant.DOT_SYMBOL);
         return fileName.substring(0, index);
     }
 
@@ -226,8 +226,8 @@ public final class FileUtil {
         String targetName = getFileName(sourceName);
 
         // 如果没有写点，加上点
-        if (!extension.startsWith(Constant.DOT)) {
-            extension = Constant.DOT + extension;
+        if (!extension.startsWith(Constant.DOT_SYMBOL)) {
+            extension = Constant.DOT_SYMBOL + extension;
         }
 
         targetName = targetName + extension;
@@ -257,10 +257,7 @@ public final class FileUtil {
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
         String id1 = format.format(new Date());
 
-//        //第二段：3位随机数字
-//        String id2 = StringUtil.randomString(3);
-
-        //第三段：12位随机字符
+        //第二段：12位随机字符
         String id2 = StringUtil.random("abcdefghijklmnopqrstuvwxyz", 10);
 
         return id1 + id2;
@@ -360,7 +357,7 @@ public final class FileUtil {
             throw new CustomException(ResultEnum.FILE_TYPE_ERROR);
         }
 
-        int index = name.lastIndexOf(Constant.DOT);
+        int index = name.lastIndexOf(Constant.DOT_SYMBOL);
         return name.substring(index).toLowerCase();
     }
 

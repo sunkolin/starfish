@@ -36,10 +36,6 @@ public class SpringPlus implements ApplicationContextAware, EnvironmentAware {
     /**
      * 另外一种方式可以使用注解自动注入ApplicationContext
      * 自动注入的ApplicationContext，无法定义为static的
-     * <code>
-     *
-     * @Resource private ApplicationContext applicationContext;
-     * </code>
      */
     private static ApplicationContext applicationContext;
 
