@@ -277,40 +277,55 @@ public final class FileUtil {
         }
 
         String result = "";
-        try {
-            File file = ResourceUtils.getFile(path);
-            FileSystemResource fileSystemResource = new FileSystemResource(file);
-            EncodedResource encodedResource = new EncodedResource(fileSystemResource, "UTF-8");
-            result = FileCopyUtils.copyToString(encodedResource.getReader());
-        } catch (IOException e) {
-            log.error("read file error", e);
+        if (path.startsWith("file:")) {
+            try {
+                result = readFromSystem(path);
+            } catch (IOException e) {
+                log.error("read error", e);
+            }
+        }
+
+        if (path.startsWith("classpath:")) {
+            try {
+                result = readFromClassPath(path);
+            } catch (IOException e) {
+                log.error("read error", e);
+            }
         }
         return result;
     }
 
     /**
-     * 读取项目下文件的全部内容转成字符串，备用方法，默认使用read方法
-     * 支持格式：classpath:application.properties，file:/etc/profile
+     * 从系统路径下读取文件
+     * 实际本方法也支持从classpath路径下读取文件，但是不支持从jar中读取文件
      *
-     * @param path 文件路径
-     * @return 文件内容
+     * @param path 路径
+     * @return 结果
+     * @throws IOException 异常
      */
-    public static String readString(String path) {
-        //验证参数
-        if (path == null) {
-            throw new CustomException(ResultEnum.FILE_PATH_IS_EMPTY);
+    protected static String readFromSystem(String path) throws IOException {
+        File file = ResourceUtils.getFile(path);
+        FileSystemResource fileSystemResource = new FileSystemResource(file);
+        InputStream inputStream = fileSystemResource.getInputStream();
+        return IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+    }
+
+    /**
+     * 从classpath路径下读取文件
+     *
+     * @param path 路径
+     * @return 结果
+     * @throws IOException 异常
+     */
+    protected static String readFromClassPath(String path) throws IOException {
+        // ClassPathResource创建参数不需要classpath:，如果有自动去掉
+        if (path.startsWith("classpath:")) {
+            path = path.replaceFirst("classpath:", "");
         }
 
-        String result = "";
-        try {
-            File file = ResourceUtils.getFile(path);
-            FileSystemResource fileSystemResource = new FileSystemResource(file);
-            InputStream inputStream = fileSystemResource.getInputStream();
-            String content = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            log.error("read file error", e);
-        }
-        return result;
+        ClassPathResource classPathResource = new ClassPathResource(path);
+        InputStream inputStream = classPathResource.getInputStream();
+        return IOUtils.toString(inputStream, StandardCharsets.UTF_8);
     }
 
     /**
@@ -328,15 +343,56 @@ public final class FileUtil {
         }
 
         List<String> result = new ArrayList<>();
-        try {
-            File file = ResourceUtils.getFile(path);
-            FileSystemResource fileSystemResource = new FileSystemResource(file);
-            InputStream inputStream = fileSystemResource.getInputStream();
-            result = IOUtils.readLines(inputStream, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            log.error("read file error", e);
+        if (path.startsWith("file:")) {
+            try {
+                result = readLinesFromSystem(path);
+            } catch (IOException e) {
+                log.error("read error", e);
+            }
         }
+
+        if (path.startsWith("classpath:")) {
+            try {
+                result = readLinesFromClassPath(path);
+            } catch (IOException e) {
+                log.error("read error", e);
+            }
+        }
+
         return result;
+    }
+
+    /**
+     * 从系统路径下读取文件
+     * 实际本方法也支持从classpath路径下读取文件，但是不支持从jar中读取文件
+     *
+     * @param path 路径
+     * @return 结果
+     * @throws IOException 异常
+     */
+    protected static List<String> readLinesFromSystem(String path) throws IOException {
+        File file = ResourceUtils.getFile(path);
+        FileSystemResource fileSystemResource = new FileSystemResource(file);
+        InputStream inputStream = fileSystemResource.getInputStream();
+        return IOUtils.readLines(inputStream, StandardCharsets.UTF_8);
+    }
+
+    /**
+     * 从classpath路径下读取文件
+     *
+     * @param path 路径
+     * @return 结果
+     * @throws IOException 异常
+     */
+    protected static List<String> readLinesFromClassPath(String path) throws IOException {
+        // ClassPathResource创建参数不需要classpath:，如果有自动去掉
+        if (path.startsWith("classpath:")) {
+            path = path.replaceFirst("classpath:", "");
+        }
+
+        ClassPathResource classPathResource = new ClassPathResource(path);
+        InputStream inputStream = classPathResource.getInputStream();
+        return IOUtils.readLines(inputStream, StandardCharsets.UTF_8);
     }
 
     /**
@@ -346,8 +402,8 @@ public final class FileUtil {
      */
     private static void write(String file, List<String> list) throws IOException {
         // 如果有file:前缀需要去掉
-        if (file.startsWith("file:")){
-            file = file.replaceFirst("file:","");
+        if (file.startsWith("file:")) {
+            file = file.replaceFirst("file:", "");
         }
 
         Path filePath = Paths.get(file);

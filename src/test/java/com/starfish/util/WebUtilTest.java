@@ -26,7 +26,7 @@ public class WebUtilTest {
 
     @Test
     public void downloadTest() {
-        String filePath = workspace + System.currentTimeMillis() + "baidu.ico";
+        String filePath = workspace + System.currentTimeMillis() + ".ico";
         WebUtil.download("http://www.baidu.com/favicon.ico", filePath);
         assertTrue(new File(filePath).exists());
     }

@@ -1,7 +1,12 @@
 package com.starfish.util;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
+import org.springframework.core.io.ClassPathResource;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
@@ -22,16 +27,6 @@ public class FileUtilTest {
         assertNotNull(result);
 
         String result2 = FileUtil.read("file:/etc/profile");
-        System.out.println(result2);
-        assertNotNull(result2);
-    }
-
-    @Test
-    public void readStringTest() {
-        String result = FileUtil.readString("classpath:application.properties");
-        assertNotNull(result);
-
-        String result2 = FileUtil.readString("file:/etc/profile");
         System.out.println(result2);
         assertNotNull(result2);
     }
