@@ -45,19 +45,7 @@ public class CommonUtilTest {
         assertFalse(CommonUtil.existClass("com.starfish.util.CommonUtil2"));
     }
 
-    @Test
-    public void checkWordsTrue() {
-        String word = "考前答案";
-        boolean result = BusinessUtil.contains(word);
-        assertTrue(result);
-    }
 
-    @Test
-    public void checkWordsFalse() {
-        String word2 = "没有";
-        boolean result2 = BusinessUtil.contains(word2);
-        assertFalse(result2);
-    }
 
     /**
      * 用户模型

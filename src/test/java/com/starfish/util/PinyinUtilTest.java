@@ -1,4 +1,4 @@
-package com.starfish;
+package com.starfish.util;
 
 import com.starfish.context.User;
 import com.starfish.util.PinyinUtil;

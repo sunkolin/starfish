@@ -1,4 +1,4 @@
-package com.starfish;
+package com.starfish.util;
 
 import com.starfish.model.weather.WeatherModel;
 import com.starfish.util.BusinessUtil;

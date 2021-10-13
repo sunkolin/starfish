@@ -88,8 +88,9 @@ public class BusinessUtil {
 
     /**
      * 获取身份证信息
+     * TODO 已无法使用，需要寻找新的接口
      *
-     * @param identityCard 身份证好吗
+     * @param identityCard 身份证号码
      * @return 结果
      */
     public static String getIdCardInfo(String identityCard) {
@@ -100,21 +101,19 @@ public class BusinessUtil {
      * check sensitive words
      * 判断给定的字符串是否包含敏感词
      *
-     * @param words words
+     * @param word word
      * @return return
      */
-    public static boolean contains(String... words) {
-        // default flag is false
-        boolean flag = false;
-        for (String word : words) {
-            if (SENSITIVE_WORD_LIST.contains(word)) {
-                flag = true;
-                break;
-            }
-        }
-        return flag;
+    public static boolean containsSensitiveWords(String word) {
+        return SENSITIVE_WORD_LIST.contains(word);
     }
 
+    /**
+     * 根据城市名称查询天气
+     *
+     * @param cityName 城市名称
+     * @return 结果
+     */
     public static WeatherModel getWeather(String cityName) {
         Map<String, Object> uriVariables = ImmutableMap.of("city", cityName);
         String finalUrl = CommonUtil.contact(GET_WEATHER_BY_CITY_NAME_URL, uriVariables);
@@ -129,7 +128,7 @@ public class BusinessUtil {
      * @param string 字符串
      * @return 结果
      */
-    public static String conventFromGzip(String string) {
+    private static String conventFromGzip(String string) {
         String result = "";
 
         if (org.assertj.core.util.Strings.isNullOrEmpty(string)) {
