@@ -145,7 +145,7 @@ public final class RestTemplatePlus {
      * @param <T>          T
      * @return 结果
      */
-    public static <T> ResponseEntity<T> exchangeSkipSsl(String url, HttpMethod method, Map<String, String> params, Map<String, String> headers, String body, Class<T> responseType) {
+    public static <T> ResponseEntity<T> exchangeSkipSsl(String url, HttpMethod method, Map<String, String> headers, Map<String, String> params, String body, Class<T> responseType) {
         url = CommonUtil.contact(url, params);
         HttpHeaders httpHeaders = new HttpHeaders();
         if (!CollectionUtils.isEmpty(headers)) {
