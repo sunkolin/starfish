@@ -1,6 +1,9 @@
 package com.starfish.util;
 
 import com.alibaba.fastjson.JSON;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -44,51 +47,17 @@ public class CollectionUtilTest {
         Assert.assertFalse(CommonUtil.existClass("com.starfish.util.CommonUtil2"));
     }
 
-    /**
-     * 用户模型
-     */
-    static class UserModel {
-
-        private String username;
-        private String password;
-        private Integer age;
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public Integer getAge() {
-            return age;
-        }
-
-        public void setAge(Integer age) {
-            this.age = age;
-        }
-    }
-
     @Test
     public void sortStringTest() {
         String[] array = new String[]{"1", "3", "2", "a", "4"};
-        array = CollectionUtil.sort(array, "desc");
+        CollectionUtil.sort(array, "desc");
         System.out.println(JSON.toJSONString(array));
         Assert.assertArrayEquals(new String[]{"a", "4", "3", "2", "1"}, array);
     }
 
     @Test
     public void sortLongTest() {
-        List<Long> list = new ArrayList<Long>();
+        List<Long> list = new ArrayList<>();
         list.add(99L);
         list.add(48L);
         list.add(75L);
@@ -96,14 +65,14 @@ public class CollectionUtilTest {
         list.add(63L);
         list.add(36L);
         list.add(40L);
-        list = CollectionUtil.sort(list, "desc", null);
+        CollectionUtil.sort(list, "desc", null);
         System.out.println(JSON.toJSONString(list));
         Assert.assertEquals(12L, list.get(list.size() - 1).longValue());
     }
 
     @Test
     public void sortMapTest() {
-        HashMap<Date, String> map = new HashMap<Date, String>();
+        HashMap<Date, String> map = new HashMap<>();
         map.put(new Date(), "123");
         map.put(new Date(), "456");
         map.put(new Date(), "789");
@@ -119,23 +88,20 @@ public class CollectionUtilTest {
 
     @Test
     public void sortMapValueTest() {
-        HashMap<String, TempModel> map = new HashMap<String, TempModel>();
-        map.put("Beethoven", new TempModel(1L, "Beethoven"));
-        map.put("Bush", new TempModel(3L, "Bush"));
-        map.put("Clinton", new TempModel(83L, "Clinton"));
-        map.put("Washington", new TempModel(35L, "Washington"));
-        map.put("Lincoln", new TempModel(58L, "Lincoln"));
-        LinkedHashMap<String, TempModel> result = CollectionUtil.sort(map, "desc", new Comparator<Map.Entry<String, TempModel>>() {
-            @Override
-            public int compare(Map.Entry<String, TempModel> o1, Map.Entry<String, TempModel> o2) {
-                Long comp = o1.getValue().getId() - o2.getValue().getId();
-                if (comp > 0) {
-                    return 1;
-                } else if (comp == 0) {
-                    return 0;
-                } else {
-                    return -1;
-                }
+        HashMap<String, UserModel> map = new HashMap<>();
+        map.put("Beethoven", new UserModel(1L, "Beethoven", "", 100));
+        map.put("Bush", new UserModel(3L, "Bush", "", 100));
+        map.put("Clinton", new UserModel(83L, "Clinton", "", 100));
+        map.put("Washington", new UserModel(35L, "Washington", "", 100));
+        map.put("Lincoln", new UserModel(58L, "Lincoln", "", 100));
+        LinkedHashMap<String, UserModel> result = CollectionUtil.sort(map, "desc", (o1, o2) -> {
+            long comp = o1.getValue().getId() - o2.getValue().getId();
+            if (comp > 0) {
+                return 1;
+            } else if (comp == 0) {
+                return 0;
+            } else {
+                return -1;
             }
         });
         Set<String> keySet = result.keySet();
@@ -146,23 +112,21 @@ public class CollectionUtilTest {
         Assert.assertEquals("Beethoven", result.get(last).getUsername());
     }
 
-    class TempModel {
+    /**
+     * 用户模型
+     */
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    static class UserModel {
+
         private Long id;
 
         private String username;
 
-        public TempModel(Long id, String username) {
-            this.id = id;
-            this.username = username;
-        }
+        private String password;
 
-        public Long getId() {
-            return id;
-        }
-
-        public String getUsername() {
-            return username;
-        }
+        private Integer age;
 
     }
 
