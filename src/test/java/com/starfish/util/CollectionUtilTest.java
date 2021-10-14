@@ -1,12 +1,10 @@
 package com.starfish.util;
 
 import com.alibaba.fastjson.JSON;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.*;
-
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
 
 /**
  * SortUtilTest
@@ -22,7 +20,7 @@ public class CollectionUtilTest {
         String[] array = new String[]{"1", "3", "2", "a", "4"};
         array = CollectionUtil.sort(array, "desc");
         System.out.println(JSON.toJSONString(array));
-        assertArrayEquals(new String[]{"a", "4", "3", "2", "1"}, array);
+        Assert.assertArrayEquals(new String[]{"a", "4", "3", "2", "1"}, array);
     }
 
     @Test
@@ -37,7 +35,7 @@ public class CollectionUtilTest {
         list.add(40L);
         list = CollectionUtil.sort(list, "desc", null);
         System.out.println(JSON.toJSONString(list));
-        assertEquals(12L, list.get(list.size() - 1).longValue());
+        Assert.assertEquals(12L, list.get(list.size() - 1).longValue());
     }
 
     @Test
@@ -53,7 +51,7 @@ public class CollectionUtilTest {
         for (Date key : keySet) {
             last = key;
         }
-        assertEquals("873", result.get(last));
+        Assert.assertEquals("873", result.get(last));
     }
 
     @Test
@@ -82,7 +80,7 @@ public class CollectionUtilTest {
         for (String key : keySet) {
             last = key;
         }
-        assertEquals("Beethoven", result.get(last).getUsername());
+        Assert.assertEquals("Beethoven", result.get(last).getUsername());
     }
 
     class TempModel {

@@ -4,8 +4,6 @@ import com.starfish.trial.EhcacheUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * EhcacheUtilTest
  *
@@ -24,7 +22,7 @@ public class EhcacheUtilTest {
         EhcacheUtil.put("commonCache", String.class, String.class, "userCount", "100");
 
         userCount = EhcacheUtil.get("commonCache", String.class, String.class, "userCount");
-        assertEquals("100", userCount);
+        Assert.assertEquals("100", userCount);
 
         // 清除
         EhcacheUtil.clear("commonCache", String.class, String.class);

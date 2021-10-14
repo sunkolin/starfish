@@ -5,8 +5,6 @@ import com.starfish.model.weather.WeatherModel;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * BusinessUtilTEST
  *
@@ -23,18 +21,22 @@ public class BusinessUtilTest {
 
         boolean result2 = BusinessUtil.isMobile("18610815188");
         Assert.assertTrue(result2);
+
+        Assert.assertTrue(BusinessUtil.isMobile("18610815188"));
+        Assert.assertTrue(BusinessUtil.isMobile("13496215263"));
+        Assert.assertTrue(BusinessUtil.isMobile("13912345678"));
     }
 
     @Test
     public void getBirthdayTest() {
         String result = BusinessUtil.getBirthday("513436200010136655");
-        Assert.assertEquals("20001013",result);
+        Assert.assertEquals("20001013", result);
     }
 
     @Test
     public void getIdCardInfoTest() {
         String result = BusinessUtil.getIdCardInfo("513436200010136655");
-        Assert.assertEquals("xxx",result);
+        Assert.assertEquals("xxx", result);
     }
 
     @Test

@@ -1,11 +1,10 @@
 package com.starfish.util;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * CommonUtilTest
@@ -26,25 +25,24 @@ public class CommonUtilTest {
         list.add(model);
 
         List<UserModel> r1 = CollectionUtil.select(list, "username", "tom");
-        assertEquals(r1.get(0).getUsername(), "tom");
+        Assert.assertEquals(r1.get(0).getUsername(), "tom");
 
         List<UserModel> r2 = CollectionUtil.select(list, "username", "tomson");
-        assertEquals(r2.size(), 0);
+        Assert.assertEquals(r2.size(), 0);
 
         List<UserModel> r3 = CollectionUtil.remove(list, "username", "tom");
-        assertEquals(r3.size(), 0);
+        Assert.assertEquals(r3.size(), 0);
 
         List<UserModel> r4 = CollectionUtil.select(list, "age", 20);
-        assertEquals(r4.get(0).getUsername(), "tom");
+        Assert.assertEquals(r4.get(0).getUsername(), "tom");
     }
 
     @Test
     public void testExistClass() {
-        assertTrue( CommonUtil.existClass("com.starfish.util.CommonUtil"));
+        Assert.assertTrue(CommonUtil.existClass("com.starfish.util.CommonUtil"));
 
-        assertFalse(CommonUtil.existClass("com.starfish.util.CommonUtil2"));
+        Assert.assertFalse(CommonUtil.existClass("com.starfish.util.CommonUtil2"));
     }
-
 
 
     /**

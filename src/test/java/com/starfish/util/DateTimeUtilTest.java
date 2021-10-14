@@ -1,8 +1,7 @@
 package com.starfish.util;
 
+import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +19,7 @@ public class DateTimeUtilTest {
     public void dateBetween() {
         List<String> dates = DateTimeUtil.dateBetween("2014-01-01", "2014-01-03");
         System.out.println(dates);
-        assertEquals(dates, Arrays.asList("2014-01-01","2014-01-02","2014-01-03"));
+        Assert.assertEquals(dates, Arrays.asList("2014-01-01", "2014-01-02", "2014-01-03"));
     }
 
 }

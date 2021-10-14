@@ -1,16 +1,12 @@
 package com.starfish.util;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.util.FileCopyUtils;
 
 import java.io.File;
 import java.io.IOException;
-
-import static org.junit.Assert.assertTrue;
 
 /**
  * CompressUtilTest
@@ -32,7 +28,7 @@ public class CompressUtilTest {
     @Test
     public void test() throws IOException {
         String filePath = basePathPrefix + "/tmp/images/favicon.ico";
-        if (!new File(filePath).exists()){
+        if (!new File(filePath).exists()) {
             WebUtil.download("http://www.baidu.com/favicon.ico", filePath);
         }
 
@@ -41,20 +37,20 @@ public class CompressUtilTest {
         String targetPath1 = basePathPrefix + "/tmp/compress/favicon1.zip";
         String compressPath = basePathPrefix + "/tmp/compress/";
         CompressUtil.compress(sourcePath1, targetPath1);
-        assertTrue(new File(targetPath1).exists());
+        Assert.assertTrue(new File(targetPath1).exists());
 
         // 文件压缩
         String sourcePath2 = basePathPrefix + "/tmp/images/favicon.ico";
         String targetPath2 = basePathPrefix + "/tmp/compress/favicon2.zip";
         CompressUtil.compress(sourcePath2, targetPath2);
-        assertTrue(new File(targetPath2).exists());
+        Assert.assertTrue(new File(targetPath2).exists());
 
         // 文件解压
         String sourcePath3 = basePathPrefix + "/tmp/compress/favicon2.zip";
         String targetPath3 = basePathPrefix + "/tmp/decompress/";
         String decompressPath = basePathPrefix + "/tmp/decompress/";
         CompressUtil.decompress(sourcePath3, targetPath3);
-        assertTrue(new File(targetPath3).exists());
+        Assert.assertTrue(new File(targetPath3).exists());
 
         // 删除文件
         FileUtil.delete(compressPath);
