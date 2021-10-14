@@ -1,10 +1,8 @@
 package com.starfish.util;
 
 import com.starfish.model.weather.WeatherModel;
-import com.starfish.util.BusinessUtil;
+import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.assertNotNull;
 
 /**
  * WeatherPlusTest
@@ -19,7 +17,7 @@ public class WeatherUtilTest {
     public void weatherPlusTest() {
         String city = "北京";
         WeatherModel result = BusinessUtil.getWeather(city);
-        assertNotNull(result);
+        Assert.assertNotNull(result);
     }
 
 }
