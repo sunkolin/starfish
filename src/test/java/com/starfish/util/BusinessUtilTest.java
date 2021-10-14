@@ -52,7 +52,8 @@ public class BusinessUtilTest {
 
     @Test
     public void getWeatherTest() {
-        WeatherModel result = BusinessUtil.getWeather("北京市");
+        String cityName = "北京市";
+        WeatherModel result = BusinessUtil.getWeather(cityName);
         System.out.println(JSON.toJSONString(result));
         Assert.assertNotNull(result);
     }
