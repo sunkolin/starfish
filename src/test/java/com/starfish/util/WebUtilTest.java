@@ -1,13 +1,12 @@
 package com.starfish.util;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * HttpUtilTest
@@ -30,19 +29,19 @@ public class WebUtilTest {
     public void downloadTest() {
         String filePath = workspace + System.currentTimeMillis() + ".ico";
         WebUtil.download("http://www.baidu.com/favicon.ico", filePath);
-        assertTrue(new File(filePath).exists());
+        Assert.assertTrue(new File(filePath).exists());
     }
 
     @Test
     public void getAddress() {
         String result = WebUtil.getAddress("203.119.241.126");
-        assertEquals("中国 广东 深圳",result);
+        Assert.assertEquals("中国 广东 深圳", result);
     }
 
     @Test
     public void existMedia() {
         String url = "https://vd3.bdstatic.com/mda-mj84pad7qad8hhur/sc/cae_h264_clips/1633750377008601665/mda-mj84pad7qad8hhur.mp4";
-        assertTrue(WebUtil.existMedia(url));
+        Assert.assertTrue(WebUtil.existMedia(url));
     }
 
     @Test
