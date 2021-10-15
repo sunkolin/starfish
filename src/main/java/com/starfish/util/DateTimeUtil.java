@@ -44,13 +44,13 @@ public class DateTimeUtil {
      * @param format   格式
      * @return 日期时间
      */
-    private static Date parse(String datetime, String format) {
+    public static Date parse(String datetime, String format) {
         Date result = null;
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
             result = simpleDateFormat.parse(datetime);
         } catch (ParseException e) {
-            log.error("日期格式不是{}", format);
+            log.warn("日期格式不是{}", format);
         }
         return result;
     }
