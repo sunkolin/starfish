@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
- * SortUtilTest
+ * CollectionUtilTest
  *
  * @author sunny
  * @version 1.0.0
@@ -118,7 +119,7 @@ public class CollectionUtilTest {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    static class UserModel {
+    class UserModel implements Serializable {
 
         private Long id;
 

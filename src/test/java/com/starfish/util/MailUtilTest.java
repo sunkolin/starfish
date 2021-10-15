@@ -1,6 +1,5 @@
 package com.starfish.util;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import javax.mail.MessagingException;

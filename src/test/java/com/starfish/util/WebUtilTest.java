@@ -7,9 +7,8 @@ import org.junit.Test;
 
 import java.io.File;
 
-
 /**
- * HttpUtilTest
+ * WebUtilTest
  *
  * @author sunny
  * @version 1.0.0

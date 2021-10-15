@@ -1,12 +1,10 @@
 package com.starfish.util;
 
 import com.starfish.context.User;
-import com.starfish.util.PinyinUtil;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 /**
  * PinyinPlusTest
@@ -31,12 +29,7 @@ public class PinyinUtilTest {
         u2.setUserName("马");
         users.add(u2);
 
-        PinyinUtil.sort(users, new Function<User, String>() {
-            @Override
-            public String apply(User user) {
-                return user.getUserName();
-            }
-        });
+        PinyinUtil.sort(users, User::getUserName);
 
         System.out.println(users);
     }
