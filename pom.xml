@@ -210,6 +210,11 @@
             <version>5.7.14</version>
         </dependency>
         <dependency>
+            <groupId>com.dtflys.forest</groupId>
+            <artifactId>forest-spring-boot-starter</artifactId>
+            <version>1.5.9</version>
+        </dependency>
+        <dependency>
             <groupId>com.jfinal</groupId>
             <artifactId>jfinal</artifactId>
             <version>4.9.13</version>
