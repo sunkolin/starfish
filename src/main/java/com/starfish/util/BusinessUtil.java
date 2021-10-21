@@ -3,6 +3,7 @@ package com.starfish.util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.dtflys.forest.Forest;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.starfish.enumeration.ResultEnum;
@@ -12,15 +13,10 @@ import com.starfish.model.weather.WeatherModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
-import java.util.zip.GZIPInputStream;
 
 /**
  * CommonBusinessUtil
@@ -47,8 +43,6 @@ public class BusinessUtil {
     static {
         SENSITIVE_WORD_LIST = FileUtil.readLines("classpath:words.txt");
     }
-
-    private static final RestTemplate REST_TEMPLATE = new RestTemplate();
 
     /**
      * 请求天气预报接口成功状态码
@@ -94,7 +88,8 @@ public class BusinessUtil {
      * @return 结果
      */
     public static String getIdCardInfo(String identityCard) {
-        return new RestTemplate().getForObject("http://apistore.baidu.com/microservice/icardinfo?id=" + identityCard, String.class);
+        Map<String, Object> params = ImmutableMap.of("id", identityCard);
+        return Forest.get("https://apistore.baidu.com/microservice/icardinfo").addQuery(params).executeAsString();
     }
 
     /**
@@ -115,59 +110,9 @@ public class BusinessUtil {
      * @return 结果
      */
     public static WeatherModel getWeather(String cityName) {
-        Map<String, Object> uriVariables = ImmutableMap.of("city", cityName);
-        String finalUrl = CommonUtil.contact(GET_WEATHER_BY_CITY_NAME_URL, uriVariables);
-        String jsonResult = REST_TEMPLATE.getForObject(finalUrl, String.class, new HashMap<>(20));
-        String finalJsonResult = conventFromGzip(jsonResult);
-        return buildWeatherModel(finalJsonResult);
-    }
-
-    /**
-     * 处理gizp压缩的数据
-     *
-     * @param string 字符串
-     * @return 结果
-     */
-    private static String conventFromGzip(String string) {
-        String result = "";
-
-        if (org.assertj.core.util.Strings.isNullOrEmpty(string)) {
-            return result;
-        }
-
-        ByteArrayInputStream in = null;
-        ByteArrayOutputStream out = null;
-        GZIPInputStream gunzip = null;
-        try {
-            in = new ByteArrayInputStream(string.getBytes(StandardCharsets.ISO_8859_1));
-            out = new ByteArrayOutputStream();
-            gunzip = new GZIPInputStream(in);
-            byte[] buffer = new byte[1024];
-            int n;
-            while ((n = gunzip.read(buffer)) >= 0) {
-                out.write(buffer, 0, n);
-            }
-
-            result = out.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (in != null) {
-                    in.close();
-                }
-                if (out != null) {
-                    out.close();
-                }
-                if (gunzip != null) {
-                    gunzip.close();
-                }
-            } catch (Exception e) {
-                log.error("close stream error.", e);
-            }
-        }
-
-        return result;
+        Map<String, Object> params = ImmutableMap.of("city", cityName);
+        String json = Forest.get(GET_WEATHER_BY_CITY_NAME_URL).addQuery(params).executeAsString();
+        return buildWeatherModel(json);
     }
 
     private static WeatherModel buildWeatherModel(String jsonResult) {
