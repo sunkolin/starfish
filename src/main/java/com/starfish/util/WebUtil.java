@@ -197,7 +197,7 @@ public class WebUtil extends HtmlUtils {
 
         // 判断是否可以访问
         try {
-            ForestHeaderMap forestHeaderMap = Forest.head(url).getHeaders();
+            ForestHeaderMap forestHeaderMap = ForestUtil.head(url);
             String contentType = forestHeaderMap.getValue("Content-Type");
             log.info("get media contentType,url={},contentType={}", url, contentType);
 
