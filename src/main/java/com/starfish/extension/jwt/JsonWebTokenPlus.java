@@ -5,10 +5,7 @@ import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.starfish.extension.jwt.JsonWebPayload;
-import com.starfish.extension.jwt.JsonWebTokenConstant;
-import com.starfish.extension.jwt.JsonWebTokenHeader;
-import org.apache.commons.lang3.time.DateUtils;
+import cn.hutool.core.date.DateUtil;
 
 import java.util.Date;
 import java.util.Map;
@@ -43,8 +40,8 @@ public class JsonWebTokenPlus {
         payload.setIss(JsonWebTokenConstant.ISS);
         Date now = new Date();
         payload.setIat(now);
-        // 设置有效期一个月
-        payload.setExp(DateUtils.addDays(now, 30));
+        // 设置有效期30天
+        payload.setExp(DateUtil.offsetDay(now, 30));
         payload.setJti(UUID.randomUUID().toString().replaceAll("-", ""));
 
         JWTCreator.Builder builder = JWT.create();

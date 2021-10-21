@@ -1,5 +1,9 @@
 package com.starfish;
 
+import cn.hutool.core.date.DateUtil;
+
+import java.util.Date;
+
 /**
  * Test
  *
@@ -10,7 +14,8 @@ package com.starfish;
 public class Test {
 
     public static void main(String[] args) {
-
+        Date d = DateUtil.endOfDay(DateUtil.yesterday());
+        System.out.println(d);
     }
 
 }
