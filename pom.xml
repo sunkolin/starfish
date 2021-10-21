@@ -286,6 +286,11 @@
 <!--            <artifactId>commons-collections</artifactId>-->
 <!--            <version>3.2.2</version>-->
 <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>commons-codec</groupId>-->
+        <!--            <artifactId>commons-codec</artifactId>-->
+        <!--        </dependency>-->
+
         <!--jackson2-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -399,6 +404,7 @@
             <version>3.18.1</version>
         </dependency>
 
+        <!-- Java implementation of JSON Web Token (JWT) -->
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
@@ -406,12 +412,6 @@
         </dependency>
 
         <!--以下是sample包使用到的依赖-->
-        <!--apache commons ,the latest stable release of commons-lang is 3.1-->
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-        </dependency>
-
         <!--test scope-->
         <dependency>
             <groupId>junit</groupId>
@@ -486,6 +486,7 @@
         <!--<artifactId>httpasyncclient</artifactId>-->
         <!--<version>4.0</version>-->
         <!--</dependency>-->
+
         <dependency>
             <groupId>com.github.ben-manes.caffeine</groupId>
             <artifactId>caffeine</artifactId>
