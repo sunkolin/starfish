@@ -11,7 +11,6 @@ import com.starfish.exception.CustomException;
 import com.starfish.model.weather.WeatherDetailModel;
 import com.starfish.model.weather.WeatherModel;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
