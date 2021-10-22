@@ -30,7 +30,7 @@ public class BusinessUtilTest {
     @Test
     public void getBirthdayTest() {
         String result = BusinessUtil.getBirthday("513436200010136655");
-        Assert.assertEquals("20001013", result);
+        Assert.assertEquals("2000-10-13", result);
     }
 
     @Test

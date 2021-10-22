@@ -1,11 +1,14 @@
 package com.starfish.util;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.IdcardUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.Forest;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
+import com.starfish.constant.Constant;
 import com.starfish.enumeration.ResultEnum;
 import com.starfish.exception.CustomException;
 import com.starfish.model.weather.WeatherDetailModel;
@@ -13,6 +16,7 @@ import com.starfish.model.weather.WeatherModel;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -72,23 +76,22 @@ public class BusinessUtil {
     /**
      * 根据身份证获取生日
      *
-     * @param identityCard 身份证
+     * @param idCard 身份证
      * @return 结果
      */
-    public static String getBirthday(String identityCard) {
-        return identityCard.substring(6, 14);
+    public static String getBirthday(String idCard) {
+        Date date = IdcardUtil.getBirthDate(idCard);
+        return DateUtil.format(date, Constant.DATE_PATTERN);
     }
 
     /**
-     * 获取身份证信息
-     * TODO 已无法使用，需要寻找新的接口
+     * 判断身份证是否有效
      *
-     * @param identityCard 身份证号码
-     * @return 结果
+     * @param idCard 身份证号码
+     * @return 结果，true有效，false无效
      */
-    public static String getIdCardInfo(String identityCard) {
-        Map<String, Object> params = ImmutableMap.of("id", identityCard);
-        return Forest.get("https://apistore.baidu.com/microservice/icardinfo").addQuery(params).executeAsString();
+    public static boolean validIdCard(String idCard) {
+        return IdcardUtil.isValidCard(idCard);
     }
 
     /**
