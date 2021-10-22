@@ -3,6 +3,7 @@ package com.starfish.util;
 import com.dtflys.forest.Forest;
 import com.dtflys.forest.callback.OnSuccess;
 import com.dtflys.forest.http.ForestHeaderMap;
+import org.springframework.util.CollectionUtils;
 
 /**
  * ForestUtil
@@ -20,12 +21,15 @@ public class ForestUtil {
      * @return 结果
      */
     public static ForestHeaderMap head(String url) {
-        final ForestHeaderMap[] result = {null};
+        ForestHeaderMap forestHeaderMap = new ForestHeaderMap();
         OnSuccess<String> onSuccess = (data, req, res) -> {
-            result[0] = res.getHeaders();
+            ForestHeaderMap headers = res.getHeaders();
+            if (!CollectionUtils.isEmpty(headers)) {
+                forestHeaderMap.putAll(headers);
+            }
         };
         Forest.head(url).onSuccess(onSuccess).execute();
-        return result[0];
+        return forestHeaderMap;
     }
 
 }
