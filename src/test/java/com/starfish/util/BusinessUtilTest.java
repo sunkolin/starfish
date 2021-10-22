@@ -29,7 +29,7 @@ public class BusinessUtilTest {
 
     @Test
     public void getBirthdayTest() {
-        String result = BusinessUtil.getBirthday("513436200010136655");
+        String result = BusinessUtil.getBirthByIdCard("513436200010136655");
         Assert.assertEquals("2000-10-13", result);
     }
 
