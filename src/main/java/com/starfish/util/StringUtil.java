@@ -1,8 +1,8 @@
 package com.starfish.util;
 
+import cn.hutool.core.util.StrUtil;
 import com.google.common.base.Splitter;
-import org.slf4j.helpers.FormattingTuple;
-import org.slf4j.helpers.MessageFormatter;
+import com.google.common.base.Strings;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -115,7 +115,6 @@ public class StringUtil {
      * @param start  开始
      * @param end    结束
      * @return 结果
-     * @see org.apache.commons.lang3.StringUtils
      */
     public static String substring(String string, int start, int end) {
         if (string == null) {
@@ -159,7 +158,6 @@ public class StringUtil {
      * @param oldString 需要替换的字符串
      * @param newString 新字符串
      * @return 结果
-     * @see org.apache.commons.lang3.StringUtils
      */
     public static String replace(String string, String oldString, String newString) {
         return StringUtils.replace(string, oldString, newString);
@@ -339,15 +337,27 @@ public class StringUtil {
     }
 
     /**
-     * 格式化文本
+     * 格式化文本，有slf4j中的方法替换为hutool中方法
      *
-     * @param string    文本模板，被替换的部分用 {} 表示
-     * @param arguments 参数值
+     * @param string 文本模板，被替换的部分用 {} 表示
+     * @param params 参数值
      * @return 格式化后的文本
      */
-    public static String format(String string, Object... arguments) {
-        FormattingTuple ft = MessageFormatter.arrayFormat(string, arguments);
-        return ft.getMessage();
+    public static String format(String string, Object... params) {
+        if (Strings.isNullOrEmpty(string)) {
+            string = Strings.repeat("{}", params.length);
+        }
+        return StrUtil.format(string, params);
+    }
+
+    /**
+     * 格式化文本，相当于多个字符串连接
+     *
+     * @param params 参数值
+     * @return 格式化后的文本
+     */
+    public static String format(Object... params) {
+        return format("", params);
     }
 
     public static String simpleFormat(String string, Object... arguments) {
@@ -392,7 +402,7 @@ public class StringUtil {
     /**
      * 切分字符串
      *
-     * @param string       字符串
+     * @param string    字符串
      * @param separator 分割字符串
      * @return 结果
      */
@@ -403,7 +413,7 @@ public class StringUtil {
     /**
      * 切分字符串
      *
-     * @param string       字符串
+     * @param string    字符串
      * @param separator 分割字符串
      * @return 结果
      */
@@ -415,7 +425,7 @@ public class StringUtil {
     /**
      * 切分字符串
      *
-     * @param string       字符串
+     * @param string    字符串
      * @param separator 分割字符串
      * @return 结果
      */
