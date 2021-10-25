@@ -79,7 +79,7 @@ public class BusinessUtil {
      * @param idCard 身份证号码
      * @return 结果，true有效，false无效
      */
-    public static boolean validIdCard(String idCard) {
+    public static boolean validateIdCard(String idCard) {
         return IdcardUtil.isValidCard(idCard);
     }
 

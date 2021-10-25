@@ -34,9 +34,9 @@ public class BusinessUtilTest {
     }
 
     @Test
-    public void getIdCardInfoTest() {
-//        String result = BusinessUtil.getIdCardInfo("513436200010136655");
-//        Assert.assertEquals("xxx", result);
+    public void validateIdCardTest() {
+        boolean result = BusinessUtil.validateIdCard("513436200010136655");
+        Assert.assertTrue(result);
     }
 
     @Test
