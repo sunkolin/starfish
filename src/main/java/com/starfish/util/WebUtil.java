@@ -3,8 +3,12 @@ package com.starfish.util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.dtflys.forest.Forest;
+import com.dtflys.forest.http.ForestHeader;
+import com.dtflys.forest.http.ForestHeaderMap;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableMap;
 import com.starfish.enumeration.ResultEnum;
 import com.starfish.exception.CustomException;
 import com.starfish.model.Result;
@@ -13,7 +17,6 @@ import org.assertj.core.util.Lists;
 import org.springframework.http.HttpHeaders;
 import org.springframework.lang.Nullable;
 import org.springframework.util.StreamUtils;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.HtmlUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,12 +48,12 @@ public class WebUtil extends HtmlUtils {
     /**
      * 淘宝查询IP地址接口
      */
-    private static final String TAOBAO_INTERFACE_URL = "https://ip.taobao.com/outGetIpInfo?accessKey=alibaba-inc&ip=";
+    private static final String TAOBAO_INTERFACE_URL = "https://ip.taobao.com/outGetIpInfo?accessKey=alibaba-inc";
 
     /**
      * 新浪查询IP地址接口
      */
-    private static final String SINA_INTERFACE_URL = "http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=";
+    private static final String SINA_INTERFACE_URL = "https://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json";
 
     public static final String HTTP_URL_PREFIX = "http";
 
@@ -194,10 +197,9 @@ public class WebUtil extends HtmlUtils {
 
         // 判断是否可以访问
         try {
-            RestTemplate restTemplate = new RestTemplate();
-            HttpHeaders httpHeaders = restTemplate.headForHeaders(url);
-            String contentType = httpHeaders.getFirst("Content-Type");
-            log.info("check media url result,response contentType={}", contentType);
+            ForestHeaderMap forestHeaderMap = ForestUtil.head(url);
+            String contentType = forestHeaderMap.getValue("Content-Type");
+            log.info("get media contentType,url={},contentType={}", url, contentType);
 
             // 如果没有Content-Type，返回false
             if (!Strings.isNullOrEmpty(contentType)) {
@@ -363,10 +365,10 @@ public class WebUtil extends HtmlUtils {
      * @return the location
      */
     public static String getAddress(String ip) {
-        RestTemplate template = new RestTemplate();
         try {
-            //call remote interface of sina
-            String result = template.getForObject(TAOBAO_INTERFACE_URL + ip, String.class);
+            //call remote interface of taobao
+            Map<String, Object> params = ImmutableMap.of("ip", ip);
+            String result = Forest.get(TAOBAO_INTERFACE_URL).addQuery(params).executeAsString();
 
             //process the result,the result format is { code: 0, data: { } }
             JSONObject data = JSON.parseObject(result).getJSONObject("data");
@@ -377,7 +379,8 @@ public class WebUtil extends HtmlUtils {
             return result;
         } catch (Exception e) {
             //if catch exception,call remote interface of sina
-            String result = template.getForObject(SINA_INTERFACE_URL + ip, String.class);
+            Map<String, Object> params = ImmutableMap.of("ip", ip);
+            String result = Forest.get(TAOBAO_INTERFACE_URL).addQuery(params).executeAsString();
 
             //process the result,the result format is { ret: 1,  start: -1,  end: -1,  country: "中国",  province: "北京", city: "北京",district: "",  isp: "",  type: "",  desc: ""  }
             JSONObject jsonObject = JSON.parseObject(result);

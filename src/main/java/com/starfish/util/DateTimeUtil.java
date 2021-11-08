@@ -1,7 +1,7 @@
 package com.starfish.util;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.time.DateUtils;
+import cn.hutool.core.date.DateUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,13 +44,13 @@ public class DateTimeUtil {
      * @param format   格式
      * @return 日期时间
      */
-    private static Date parse(String datetime, String format) {
+    public static Date parse(String datetime, String format) {
         Date result = null;
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
             result = simpleDateFormat.parse(datetime);
         } catch (ParseException e) {
-            log.error("日期格式不是{}", format);
+            log.warn("日期格式不是{}", format);
         }
         return result;
     }
@@ -127,10 +127,7 @@ public class DateTimeUtil {
      * @return 结果
      */
     public static Date getMonthStart(Date date) {
-        Calendar calendar = getCalendar(date);
-        int index = calendar.get(Calendar.DAY_OF_MONTH);
-        calendar.add(Calendar.DATE, (1 - index));
-        return DateUtils.truncate(calendar.getTime(), Calendar.DATE);
+        return DateUtil.beginOfMonth(date);
     }
 
     /**
@@ -140,11 +137,7 @@ public class DateTimeUtil {
      * @return 结果
      */
     public static Date getMonthEnd(Date date) {
-        Calendar calendar = getCalendar(date);
-        calendar.add(Calendar.MONTH, 1);
-        int index = calendar.get(Calendar.DAY_OF_MONTH);
-        calendar.add(Calendar.DATE, (-index));
-        return DateUtils.addSeconds(DateUtils.addDays(DateUtils.truncate(calendar.getTime(), Calendar.DATE), 1), -1);
+        return DateUtil.endOfMonth(date);
     }
 
     /**
@@ -218,7 +211,7 @@ public class DateTimeUtil {
      * @return 结果
      */
     public static Date min(Date date) {
-        return DateUtils.truncate(date, Calendar.DATE);
+        return DateUtil.beginOfDay(date);
     }
 
     /**
@@ -228,7 +221,7 @@ public class DateTimeUtil {
      * @return 结果
      */
     public static Date max(Date date) {
-        return DateUtils.addMilliseconds(DateUtils.addDays(DateUtils.truncate(date, Calendar.DATE), 1), -1);
+        return DateUtil.endOfDay(date);
     }
 
     /**
@@ -237,8 +230,7 @@ public class DateTimeUtil {
      * @return 结果
      */
     public static Date yesterdayMin() {
-        Date yesterday = DateUtils.addDays(new Date(), -1);
-        return min(yesterday);
+        return DateUtil.beginOfDay(DateUtil.yesterday());
     }
 
     /**
@@ -247,8 +239,7 @@ public class DateTimeUtil {
      * @return 结果
      */
     public static Date yesterdayMax() {
-        Date yesterday = DateUtils.addDays(new Date(), -1);
-        return max(yesterday);
+        return DateUtil.endOfDay(DateUtil.yesterday());
     }
 
     /**

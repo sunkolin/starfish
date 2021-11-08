@@ -1,9 +1,7 @@
-package com.starfish.common;
+package com.starfish.constant;
 
-import com.starfish.constant.Constant;
+import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * SunnyConstantTest
@@ -17,7 +15,7 @@ public class ConstantTest {
     @Test
     public void getVersionTest() {
         String version = Constant.FRAMEWORK_VERSION;
-        assertEquals(version, "1.0.0-SNAPSHOT");
+        Assert.assertEquals(version, "1.0.0-SNAPSHOT");
     }
 
 }

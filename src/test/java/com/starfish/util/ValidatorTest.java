@@ -2,10 +2,8 @@ package com.starfish.util;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
-
 /**
- * ValidatorToolTest
+ * ValidatorTest
  *
  * @author sunny
  * @version 1.0.0
@@ -15,13 +13,7 @@ public class ValidatorTest {
 
     @Test
     public void emailTest() {
-        boolean result = true;
-        try {
-            Validator.validateEmail("starfish@qq.com", -1, "邮箱格式不正确");
-        } catch (Exception e) {
-            result = false;
-        }
-        assertTrue(result);
+        Validator.validateEmail("starfish@qq.com", -1, "邮箱格式不正确");
     }
 
 }

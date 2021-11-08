@@ -1,26 +1,25 @@
 package com.starfish.util;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.IdcardUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.dtflys.forest.Forest;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
+import com.starfish.constant.Constant;
 import com.starfish.enumeration.ResultEnum;
 import com.starfish.exception.CustomException;
 import com.starfish.model.weather.WeatherDetailModel;
 import com.starfish.model.weather.WeatherModel;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.client.RestTemplate;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
-import java.util.zip.GZIPInputStream;
 
 /**
  * CommonBusinessUtil
@@ -47,8 +46,6 @@ public class BusinessUtil {
     static {
         SENSITIVE_WORD_LIST = FileUtil.readLines("classpath:words.txt");
     }
-
-    private static final RestTemplate REST_TEMPLATE = new RestTemplate();
 
     /**
      * 请求天气预报接口成功状态码
@@ -77,98 +74,47 @@ public class BusinessUtil {
     }
 
     /**
-     * 根据身份证获取生日
+     * 判断身份证是否有效
      *
-     * @param identityCard 身份证
-     * @return 结果
+     * @param idCard 身份证号码
+     * @return 结果，true有效，false无效
      */
-    public static String getBirthday(String identityCard) {
-        return identityCard.substring(6, 14);
+    public static boolean validateIdCard(String idCard) {
+        return IdcardUtil.isValidCard(idCard);
     }
 
     /**
-     * 获取身份证信息
+     * 根据身份证获取生日
      *
-     * @param identityCard 身份证好吗
+     * @param idCard 身份证
      * @return 结果
      */
-    public static String getIdCardInfo(String identityCard) {
-        return new RestTemplate().getForObject("http://apistore.baidu.com/microservice/icardinfo?id=" + identityCard, String.class);
+    public static String getBirthByIdCard(String idCard) {
+        Date date = IdcardUtil.getBirthDate(idCard);
+        return DateUtil.format(date, Constant.DATE_PATTERN);
     }
 
     /**
      * check sensitive words
      * 判断给定的字符串是否包含敏感词
      *
-     * @param words words
+     * @param word word
      * @return return
      */
-    public static boolean contains(String... words) {
-        // default flag is false
-        boolean flag = false;
-        for (String word : words) {
-            if (SENSITIVE_WORD_LIST.contains(word)) {
-                flag = true;
-                break;
-            }
-        }
-        return flag;
-    }
-
-    public static WeatherModel getWeather(String cityName) {
-        Map<String, Object> uriVariables = ImmutableMap.of("city", cityName);
-        String finalUrl = CommonUtil.contact(GET_WEATHER_BY_CITY_NAME_URL, uriVariables);
-        String jsonResult = REST_TEMPLATE.getForObject(finalUrl, String.class, new HashMap<>(20));
-        String finalJsonResult = conventFromGzip(jsonResult);
-        return buildWeatherModel(finalJsonResult);
+    public static boolean containsSensitiveWords(String word) {
+        return SENSITIVE_WORD_LIST.contains(word);
     }
 
     /**
-     * 处理gizp压缩的数据
+     * 根据城市名称查询天气
      *
-     * @param string 字符串
+     * @param cityName 城市名称
      * @return 结果
      */
-    public static String conventFromGzip(String string) {
-        String result = "";
-
-        if (org.assertj.core.util.Strings.isNullOrEmpty(string)) {
-            return result;
-        }
-
-        ByteArrayInputStream in = null;
-        ByteArrayOutputStream out = null;
-        GZIPInputStream gunzip = null;
-        try {
-            in = new ByteArrayInputStream(string.getBytes(StandardCharsets.ISO_8859_1));
-            out = new ByteArrayOutputStream();
-            gunzip = new GZIPInputStream(in);
-            byte[] buffer = new byte[1024];
-            int n;
-            while ((n = gunzip.read(buffer)) >= 0) {
-                out.write(buffer, 0, n);
-            }
-
-            result = out.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (in != null) {
-                    in.close();
-                }
-                if (out != null) {
-                    out.close();
-                }
-                if (gunzip != null) {
-                    gunzip.close();
-                }
-            } catch (Exception e) {
-                log.error("close stream error.", e);
-            }
-        }
-
-        return result;
+    public static WeatherModel getWeather(String cityName) {
+        Map<String, Object> params = ImmutableMap.of("city", cityName);
+        String json = Forest.get(GET_WEATHER_BY_CITY_NAME_URL).addQuery(params).executeAsString();
+        return buildWeatherModel(json);
     }
 
     private static WeatherModel buildWeatherModel(String jsonResult) {

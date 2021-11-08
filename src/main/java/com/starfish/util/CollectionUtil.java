@@ -71,6 +71,13 @@ public class CollectionUtil {
         return array;
     }
 
+    /**
+     * 判断List是否为空
+     *
+     * @param list 列表
+     * @param <T>  T
+     * @return 结果
+     */
     public static <T> boolean isEmpty(List<T> list) {
         return list == null || list.isEmpty();
     }
@@ -320,4 +327,5 @@ public class CollectionUtil {
         log.info("continuousList,param={},num={},result={}", JSON.toJSONString(list), num, JSON.toJSONString(result));
         return result;
     }
+
 }
