@@ -321,27 +321,31 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <!--grpc-->
-        <dependency>
-            <groupId>io.grpc</groupId>
-            <artifactId>grpc-netty-shaded</artifactId>
-            <version>1.41.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.grpc</groupId>
-            <artifactId>grpc-protobuf</artifactId>
-            <version>1.42.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.grpc</groupId>
-            <artifactId>grpc-stub</artifactId>
-            <version>1.42.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.grpc</groupId>-->
+<!--            <artifactId>grpc-netty-shaded</artifactId>-->
+<!--            <version>1.41.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.grpc</groupId>-->
+<!--            <artifactId>grpc-protobuf</artifactId>-->
+<!--            <version>1.42.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.grpc</groupId>-->
+<!--            <artifactId>grpc-stub</artifactId>-->
+<!--            <version>1.42.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.google.protobuf</groupId>-->
+<!--            <artifactId>protobuf-java-util</artifactId>-->
+<!--            <version>3.19.1</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java-util</artifactId>
+            <artifactId>protobuf-java</artifactId>
             <version>3.19.1</version>
         </dependency>
-
         <!-- Java implementation of JSON Web Token (JWT) -->
         <dependency>
             <groupId>com.auth0</groupId>
