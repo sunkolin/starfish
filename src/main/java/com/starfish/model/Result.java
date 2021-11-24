@@ -102,6 +102,18 @@ public class Result<T> implements Serializable {
     }
 
     /**
+     * 判断结果是否是成功
+     *
+     * @param result 参数
+     * @return true成功，false失败
+     */
+    public static boolean success(Result<?> result) {
+        return result != null
+                && result.getStatus() != null
+                && result.getStatus().equals(ResultEnum.SUCCESS.getCode());
+    }
+
+    /**
      * 返回失败结果
      *
      * @param resultEnum 枚举
@@ -145,18 +157,6 @@ public class Result<T> implements Serializable {
     }
 
     /**
-     * 判断结果是否是成功
-     *
-     * @param result 参数
-     * @return true成功，false失败
-     */
-    public static boolean success(Result<?> result) {
-        return result != null
-                && result.getStatus() != null
-                && result.getStatus().equals(ResultEnum.SUCCESS.getCode());
-    }
-
-    /**
      * 判断结果是否是失败
      *
      * @param result 参数
@@ -166,6 +166,21 @@ public class Result<T> implements Serializable {
         return result == null
                 || result.getStatus() == null
                 || !result.getStatus().equals(ResultEnum.SUCCESS.getCode());
+    }
+
+    /**
+     * 返回相应，不知结果是成功还是失败时使用
+     *
+     * @param status  状态
+     * @param message 信息
+     * @param <T>     T
+     * @return 结果
+     */
+    public static <T> Result<T> response(Integer status, String message) {
+        Result<T> result = new Result<>();
+        result.setStatus(status);
+        result.setMessage(message);
+        return result;
     }
 
 }
