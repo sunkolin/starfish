@@ -1,7 +1,9 @@
+package com.starfish;
+
 import java.util.Scanner;
 
 /**
- * Main
+ * com.starfish.Main
  *
  * @author sunny
  * @version 1.0.0
