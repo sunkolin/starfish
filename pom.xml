@@ -68,9 +68,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <project.springboot.version>2.4.1</project.springboot.version>
-        <project.springcloud.version>2020.0.0</project.springcloud.version>
-        <project.springfox.version>2.9.2</project.springfox.version>
+        <project.spring.cloud>2020.0.0</project.spring.cloud>
         <project.mybatis>3.5.5</project.mybatis>
         <project.mybatis-spring-boot-starter>2.1.3</project.mybatis-spring-boot-starter>
     </properties>
@@ -80,7 +78,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>2020.0.4</version>
+                <version>${project.spring.cloud}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
