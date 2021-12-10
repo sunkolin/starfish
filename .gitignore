@@ -2,7 +2,6 @@
 *.log
 *.logs
 *.ctxt
-*.jar
 *.war
 *.nar
 *.ear
