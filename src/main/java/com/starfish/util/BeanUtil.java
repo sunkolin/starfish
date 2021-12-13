@@ -13,7 +13,7 @@ import java.util.HashMap;
  * @version 1.0.0
  * @since 2015-01-29
  */
-@SuppressWarnings(value = "unused")
+@SuppressWarnings("unused")
 public class BeanUtil {
 
     /**

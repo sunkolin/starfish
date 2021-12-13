@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  * @version 1.0.0
  * @since 2015-06-02
  */
-@SuppressWarnings(value = "unused")
+@SuppressWarnings("unused")
 public class UserContext {
 
     /**
@@ -36,7 +36,7 @@ public class UserContext {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
     }
 
-    @SuppressWarnings(value = "unchecked")
+    @SuppressWarnings("unchecked")
     public static <T> T getAttribute(String name) {
         return (T) (RequestContextHolder.getRequestAttributes()).getAttribute(name, RequestAttributes.SCOPE_REQUEST);
     }
