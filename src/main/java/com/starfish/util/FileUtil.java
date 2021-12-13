@@ -38,7 +38,7 @@ import java.util.concurrent.*;
  * @since 2015-01-05
  */
 @Slf4j
-@SuppressWarnings(value = "unused")
+@SuppressWarnings("unused")
 public final class FileUtil {
 
     /**

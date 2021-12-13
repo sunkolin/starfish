@@ -19,7 +19,7 @@ import java.util.Date;
  * @since 2013-3-11
  */
 @Data
-@SuppressWarnings(value = "unused")
+@SuppressWarnings("unused")
 public class BasicModel implements Serializable {
 
     /**

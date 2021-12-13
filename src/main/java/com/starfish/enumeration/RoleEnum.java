@@ -7,7 +7,7 @@ package com.starfish.enumeration;
  * @version 1.0.0
  * @since 2014-07-07
  */
-@SuppressWarnings(value = "unused")
+@SuppressWarnings("unused")
 public enum RoleEnum {
 
     /**

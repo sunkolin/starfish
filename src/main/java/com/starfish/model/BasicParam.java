@@ -14,7 +14,7 @@ import java.util.Date;
  * @version 1.0.0
  * @since 2015-06-09
  */
-@SuppressWarnings(value = "unused")
+@SuppressWarnings("unused")
 public class BasicParam extends BasicModel implements Serializable {
 
     /**

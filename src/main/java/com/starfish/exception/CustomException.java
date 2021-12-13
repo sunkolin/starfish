@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
  * @since 2013-5-7
  */
 @Slf4j
-@SuppressWarnings(value = "unused")
+@SuppressWarnings("unused")
 public class CustomException extends RuntimeException implements Serializable {
 
     /**

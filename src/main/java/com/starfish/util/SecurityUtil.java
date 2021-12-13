@@ -28,6 +28,7 @@ import java.util.Map;
  * @version 1.0.0
  * @since 2015-01-06
  */
+@SuppressWarnings("unused")
 public final class SecurityUtil {
 
     public static final String ALGORITHM_MD5 = "MD5";
@@ -54,7 +55,6 @@ public final class SecurityUtil {
      * @param data data data
      * @return return
      */
-    @SuppressWarnings(value = "unused")
     public static String encodeBase64(byte[] data) {
         try {
             return Base64Utils.encodeToString(data);
@@ -69,7 +69,6 @@ public final class SecurityUtil {
      * @param data data data
      * @return return
      */
-    @SuppressWarnings(value = "unused")
     public static byte[] decodeBase64(String data) {
         try {
             return Base64Utils.decodeFromString(data);
@@ -84,7 +83,6 @@ public final class SecurityUtil {
      * @param data data
      * @return return
      */
-    @SuppressWarnings(value = "unused")
     public static String encodeHex(byte[] data) {
         return HexUtil.encodeHexStr(data);
     }
@@ -95,7 +93,6 @@ public final class SecurityUtil {
      * @param data data
      * @return return
      */
-    @SuppressWarnings(value = "unused")
     public static byte[] decodeHex(String data) {
         try {
             return HexUtil.decodeHex(data);
@@ -110,7 +107,6 @@ public final class SecurityUtil {
      * @param data data
      * @return return
      */
-    @SuppressWarnings(value = "unused")
     public static String encodeMd5(String data) {
         try {
             MessageDigest digest = MessageDigest.getInstance(ALGORITHM_MD5);
@@ -129,7 +125,6 @@ public final class SecurityUtil {
      * @param data data
      * @return return
      */
-    @SuppressWarnings(value = "unused")
     public static String encodeSha1(String data) {
         try {
             MessageDigest digest = MessageDigest.getInstance(ALGORITHM_SHA1);
@@ -139,7 +134,6 @@ public final class SecurityUtil {
         }
     }
 
-    @SuppressWarnings(value = "unused")
     public static String encodeSha256(String data) {
         try {
             MessageDigest digest = MessageDigest.getInstance(ALGORITHM_SHA256);
@@ -149,7 +143,6 @@ public final class SecurityUtil {
         }
     }
 
-    @SuppressWarnings(value = "unused")
     public static String encodeSha512(String data) {
         try {
             MessageDigest digest = MessageDigest.getInstance(ALGORITHM_SHA512);
@@ -166,7 +159,6 @@ public final class SecurityUtil {
      * @param key  key length must greater than 8
      * @return return
      */
-    @SuppressWarnings(value = "unused")
     public static String encodeDes(String data, String key) {
         try {
             SecureRandom sr = new SecureRandom();
@@ -188,7 +180,6 @@ public final class SecurityUtil {
      * @param key  key
      * @return return
      */
-    @SuppressWarnings(value = "unused")
     public static String decodeDes(String data, String key) {
         try {
             SecureRandom sr = new SecureRandom();
@@ -234,7 +225,6 @@ public final class SecurityUtil {
      * @param key  key
      * @return return
      */
-    @SuppressWarnings(value = "unused")
     public static String decodeAes(String data, String key) {
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance(ALGORITHM_AES);
@@ -257,7 +247,6 @@ public final class SecurityUtil {
      *
      * @return 公钥和私钥
      */
-    @SuppressWarnings(value = "unused")
     public static Map<String, String> createRsaKeyPair() {
         try {
             KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(ALGORITHM_RSA);
@@ -281,7 +270,6 @@ public final class SecurityUtil {
      * @param key  key
      * @return return
      */
-    @SuppressWarnings(value = "unused")
     public static String encodeRsa(String data, String key) {
         try {
             X509EncodedKeySpec x509KeySpec = new X509EncodedKeySpec(decodeBase64(key));
@@ -302,7 +290,6 @@ public final class SecurityUtil {
      * @param key  key
      * @return return
      */
-    @SuppressWarnings(value = "unused")
     public static String decodeRsa(String data, String key) {
         try {
             PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(decodeBase64(key));

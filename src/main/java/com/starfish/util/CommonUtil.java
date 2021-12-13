@@ -26,7 +26,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @version 1.0.0
  * @since 2015-01-11
  */
-@SuppressWarnings(value = "unused")
+@SuppressWarnings("unused")
 @Slf4j
 public final class CommonUtil {
 

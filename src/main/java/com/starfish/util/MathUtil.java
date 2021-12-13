@@ -11,7 +11,7 @@ import java.text.DecimalFormat;
  * @version 1.0.0
  * @since 2015-03-20
  */
-@SuppressWarnings(value = "unused")
+@SuppressWarnings("unused")
 public class MathUtil {
 
     /**

@@ -74,7 +74,7 @@ public class PinyinUtil {
      * @param <T>          T
      * @return 结果
      */
-    @SuppressWarnings(value = {"all"})
+    @SuppressWarnings({"all"})
     public static <T> List<T> sort(List<T> list, Function<T, String> keyExtractor) {
         Function<T, String> newKeyExtractor = new Function<T, String>() {
             @Override

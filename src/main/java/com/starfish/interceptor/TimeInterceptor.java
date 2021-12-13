@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  * @version 1.0.0
  * @since 2015-05-06
  */
-@SuppressWarnings(value = "unused")
+@SuppressWarnings("unused")
 @Slf4j
 public class TimeInterceptor implements HandlerInterceptor, Ordered {
 
