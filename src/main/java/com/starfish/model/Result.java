@@ -10,7 +10,7 @@ import java.io.Serializable;
  *
  * @author sunny
  * @version 1.0.0
- * @since 2012-7-23
+ * @since 2012-8-15
  */
 @SuppressWarnings("unused")
 public class Result<T> implements Serializable {
