@@ -1,7 +1,6 @@
 package com.starfish.model;
 
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -11,7 +10,7 @@ import java.lang.reflect.Method;
  * @version 1.0.0
  * @since 2012-8-15
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "unchecked"})
 public class Result<T> implements Serializable {
 
     public transient static final Integer SUCCESS_STATUS = 200;
@@ -42,17 +41,22 @@ public class Result<T> implements Serializable {
         this.message = SUCCESS_MESSAGE;
     }
 
-    public Result(T body) {
-        // 如果同时有code和message字段，则只设置只两个字段并返回；否则状态码和信息设置为成功，并设置消息体
-        if (hasCodeAndMessage(body)) {
-            try {
-                Method getCode = body.getClass().getMethod("getCode");
-                getCode.setAccessible(true);
-                int code = (int) getCode.invoke(body);
+    public Result(Object object) {
+        // 验证参数不能为空
+        if (object == null) {
+            throw new NullPointerException("object can not be null.");
+        }
 
-                Method getMessage = body.getClass().getMethod("getMessage");
+        // 如果同时有code和message字段，则只设置只两个字段并返回；否则状态码和信息设置为成功，并设置消息体
+        if (hasCodeAndMessage(object)) {
+            try {
+                Method getCode = object.getClass().getMethod("getCode");
+                getCode.setAccessible(true);
+                this.status = (int) getCode.invoke(object);
+
+                Method getMessage = object.getClass().getMethod("getMessage");
                 getMessage.setAccessible(true);
-                String message = (String) getMessage.invoke(body);
+                this.message = (String) getMessage.invoke(object);
             } catch (Exception e) {
                 e.printStackTrace();
                 this.status = SYSTEM_EXCEPTION_STATUS;
@@ -61,7 +65,7 @@ public class Result<T> implements Serializable {
         } else {
             this.status = SUCCESS_STATUS;
             this.message = SUCCESS_MESSAGE;
-            this.body = body;
+            this.body = (T) object;
         }
     }
 
@@ -187,22 +191,12 @@ public class Result<T> implements Serializable {
      */
     public boolean hasCodeAndMessage(Object object) {
         try {
-            Method getCode = body.getClass().getMethod("getCode");
-            Method getMessage = body.getClass().getMethod("getMessage");
+            Method getCode = object.getClass().getMethod("getCode");
+            Method getMessage = object.getClass().getMethod("getMessage");
         } catch (NoSuchMethodException e) {
             return false;
         }
         return true;
-    }
-
-    public void s(Object o) {
-        try {
-            Method method = body.getClass().getMethod("getCode");
-            method.setAccessible(true);
-            int s = (int) method.invoke(o);
-        } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
     }
 
 }
