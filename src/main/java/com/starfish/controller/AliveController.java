@@ -18,8 +18,8 @@ public class AliveController {
      * 健康检查
      */
     @GetMapping("/api/alive")
-    public ApiResult<Object> alive() {
-        return new ApiResult<>();
+    public ApiResult<String> alive() {
+        return new ApiResult<>("alive");
     }
 
 }
