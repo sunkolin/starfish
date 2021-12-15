@@ -1,9 +1,8 @@
 package com.starfish.model;
 
-import com.starfish.enumeration.ResultEnum;
-import com.starfish.exception.CustomException;
-
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Result
@@ -14,6 +13,14 @@ import java.io.Serializable;
  */
 @SuppressWarnings("unused")
 public class Result<T> implements Serializable {
+
+    public transient static final Integer SUCCESS_STATUS = 200;
+
+    public transient static final String SUCCESS_MESSAGE = "success";
+
+    public transient static final Integer SYSTEM_EXCEPTION_STATUS = 500;
+
+    public transient static final String SYSTEM_EXCEPTION_MESSAGE = "system error";
 
     /**
      * status
@@ -31,24 +38,31 @@ public class Result<T> implements Serializable {
     private T body;
 
     public Result() {
-        this.status = 0;
-        this.message = "success";
+        this.status = SUCCESS_STATUS;
+        this.message = SUCCESS_MESSAGE;
     }
 
     public Result(T body) {
-        this.status = 0;
-        this.message = "success";
-        this.body = body;
-    }
+        // 如果同时有code和message字段，则只设置只两个字段并返回；否则状态码和信息设置为成功，并设置消息体
+        if (hasCodeAndMessage(body)) {
+            try {
+                Method getCode = body.getClass().getMethod("getCode");
+                getCode.setAccessible(true);
+                int code = (int) getCode.invoke(body);
 
-    public Result(ResultEnum resultEnum) {
-        this.status = resultEnum.getCode();
-        this.message = resultEnum.getMessage();
-    }
-
-    public Result(CustomException exception) {
-        this.status = exception.getCode();
-        this.message = exception.getMessage();
+                Method getMessage = body.getClass().getMethod("getMessage");
+                getMessage.setAccessible(true);
+                String message = (String) getMessage.invoke(body);
+            } catch (Exception e) {
+                e.printStackTrace();
+                this.status = SYSTEM_EXCEPTION_STATUS;
+                this.message = SYSTEM_EXCEPTION_MESSAGE;
+            }
+        } else {
+            this.status = SUCCESS_STATUS;
+            this.message = SUCCESS_MESSAGE;
+            this.body = body;
+        }
     }
 
     public Result(Integer status, String message) {
@@ -110,35 +124,18 @@ public class Result<T> implements Serializable {
     public static boolean success(Result<?> result) {
         return result != null
                 && result.getStatus() != null
-                && result.getStatus().equals(ResultEnum.SUCCESS.getCode());
+                && result.getStatus().equals(SUCCESS_STATUS);
     }
 
     /**
      * 返回失败结果
      *
-     * @param resultEnum 枚举
-     * @param <T>        类型
+     * @param t   对象
+     * @param <T> 类型
      * @return 结果
      */
-    public static <T> Result<T> fail(ResultEnum resultEnum) {
-        Result<T> result = new Result<>();
-        result.setStatus(resultEnum.getCode());
-        result.setMessage(resultEnum.getMessage());
-        return result;
-    }
-
-    /**
-     * 返回失败结果
-     *
-     * @param exception 异常
-     * @param <T>       T
-     * @return 结果
-     */
-    public static <T> Result<T> fail(CustomException exception) {
-        Result<T> result = new Result<>();
-        result.setStatus(exception.getCode());
-        result.setMessage(exception.getMessage());
-        return result;
+    public static <T> Result<T> fail(T t) {
+        return new Result<>(t);
     }
 
     /**
@@ -165,7 +162,7 @@ public class Result<T> implements Serializable {
     public static boolean fail(Result<?> result) {
         return result == null
                 || result.getStatus() == null
-                || !result.getStatus().equals(ResultEnum.SUCCESS.getCode());
+                || !result.getStatus().equals(SUCCESS_STATUS);
     }
 
     /**
@@ -181,6 +178,31 @@ public class Result<T> implements Serializable {
         result.setStatus(status);
         result.setMessage(message);
         return result;
+    }
+
+    /**
+     * 判断是否有code和message字段
+     *
+     * @param object 对象
+     */
+    public boolean hasCodeAndMessage(Object object) {
+        try {
+            Method getCode = body.getClass().getMethod("getCode");
+            Method getMessage = body.getClass().getMethod("getMessage");
+        } catch (NoSuchMethodException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public void s(Object o) {
+        try {
+            Method method = body.getClass().getMethod("getCode");
+            method.setAccessible(true);
+            int s = (int) method.invoke(o);
+        } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
 }
