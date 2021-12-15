@@ -7,8 +7,6 @@ import com.starfish.enumeration.ResultEnum;
 import com.starfish.exception.CustomException;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.Strings;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 
 import java.io.*;
