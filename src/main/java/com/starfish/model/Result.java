@@ -13,13 +13,13 @@ import java.lang.reflect.Method;
 @SuppressWarnings({"unused", "unchecked"})
 public class Result<T> implements Serializable {
 
-    public transient static final Integer SUCCESS_STATUS = 200;
+    private transient static final Integer SUCCESS_STATUS = 200;
 
-    public transient static final String SUCCESS_MESSAGE = "success";
+    private transient static final String SUCCESS_MESSAGE = "success";
 
-    public transient static final Integer SYSTEM_EXCEPTION_STATUS = 500;
+    private transient static final Integer SYSTEM_EXCEPTION_STATUS = 500;
 
-    public transient static final String SYSTEM_EXCEPTION_MESSAGE = "system error";
+    private transient static final String SYSTEM_EXCEPTION_MESSAGE = "system error";
 
     /**
      * status

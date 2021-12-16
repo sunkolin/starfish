@@ -29,11 +29,11 @@ public class ResultTest {
 
         result = new Result<>(new ArrayList<>());
         System.out.println(JSON.toJSONString(result));
-        Assert.assertEquals(result.getStatus(), Result.SUCCESS_STATUS);
+        Assert.assertEquals(result.getStatus(), Integer.valueOf(200));
 
         result = new Result<>("你好");
         System.out.println(JSON.toJSONString(result));
-        Assert.assertEquals(result.getStatus(), Result.SUCCESS_STATUS);
+        Assert.assertEquals(result.getStatus(), Integer.valueOf(200));
     }
 
     @Test(expected = NullPointerException.class)
