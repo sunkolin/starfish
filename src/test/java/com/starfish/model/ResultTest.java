@@ -38,7 +38,7 @@ public class ResultTest {
 
     @Test(expected = NullPointerException.class)
     public void nullTest() {
-        Result<Object> result = new Result<>(null);
+        new Result<>(null);
     }
 
 }
