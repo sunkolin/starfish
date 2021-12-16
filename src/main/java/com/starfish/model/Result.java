@@ -133,6 +133,7 @@ public class Result<T> implements Serializable {
 
     /**
      * 返回失败结果
+     * 注意时传递的t需要有getCode和getMessage方法
      *
      * @param t   对象
      * @param <T> 类型
@@ -189,7 +190,7 @@ public class Result<T> implements Serializable {
      *
      * @param object 对象
      */
-    public boolean hasCodeAndMessage(Object object) {
+    private boolean hasCodeAndMessage(Object object) {
         try {
             Method getCode = object.getClass().getMethod("getCode");
             Method getMessage = object.getClass().getMethod("getMessage");
