@@ -14,7 +14,7 @@ import java.util.Map;
  * @version 1.0.0
  * @since 2021-02-12
  */
-@SuppressWarnings(value = "unused")
+@SuppressWarnings("unused")
 public class CustomJsonWebToken {
 
     public static final String USER_ID_KEY = "userId";

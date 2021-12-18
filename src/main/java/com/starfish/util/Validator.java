@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  * @version 1.0.0
  * @since 2014-10-10
  */
-@SuppressWarnings(value = "unused")
+@SuppressWarnings("unused")
 public class Validator {
 
     private static final String EMAIL_PATTERN = "\\b(^['_A-Za-z0-9-]+(\\.['_A-Za-z0-9-]+)*@([A-Za-z0-9-])+(\\.[A-Za-z0-9-]+)*((\\.[A-Za-z0-9]{2,})|(\\.[A-Za-z0-9]{2,}\\.[A-Za-z0-9]{2,}))$)\\b";

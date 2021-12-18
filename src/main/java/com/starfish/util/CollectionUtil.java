@@ -20,7 +20,7 @@ import java.util.*;
  * @version 1.0.0
  * @since 2016-05-17
  */
-@SuppressWarnings(value = "unused")
+@SuppressWarnings("unused")
 @Slf4j
 public class CollectionUtil {
 

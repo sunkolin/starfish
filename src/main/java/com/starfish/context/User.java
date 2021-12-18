@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @since 2015-05-08
  */
 @Data
-@SuppressWarnings(value = "unused")
+@SuppressWarnings("unused")
 public class User implements Serializable {
 
     /**

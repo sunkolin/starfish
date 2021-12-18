@@ -5,9 +5,9 @@ import java.io.Serializable;
 /**
  * @author sunny
  * @version 1.0.0
- * @since 2012-9-10
+ * @since 2012-09-10
  */
-@SuppressWarnings(value = "unused")
+@SuppressWarnings("unused")
 public class CheckedException extends Exception implements Serializable {
 
     /**

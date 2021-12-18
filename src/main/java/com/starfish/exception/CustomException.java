@@ -9,10 +9,10 @@ import java.lang.reflect.Method;
 /**
  * @author sunny
  * @version 1.0.0
- * @since 2013-5-7
+ * @since 2013-06-01
  */
 @Slf4j
-@SuppressWarnings(value = "unused")
+@SuppressWarnings("unused")
 public class CustomException extends RuntimeException implements Serializable {
 
     /**

@@ -41,7 +41,7 @@ import java.util.Map;
  * @see org.springframework.web.util.JavaScriptUtils
  * @since 2015-07-24
  */
-@SuppressWarnings(value = "unused")
+@SuppressWarnings("unused")
 @Slf4j
 public class WebUtil extends HtmlUtils {
 

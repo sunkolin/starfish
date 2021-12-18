@@ -7,7 +7,7 @@ package com.starfish.constant;
  * @version 1.0.0
  * @since 2015-06-04
  */
-@SuppressWarnings(value = "unused")
+@SuppressWarnings("unused")
 public class Constant {
 
     /**

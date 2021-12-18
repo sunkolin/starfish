@@ -17,7 +17,7 @@ import java.util.Properties;
  *
  * @author sunny
  * @version 1.0.0
- * @since 2012-9-11
+ * @since 2012-09-11
  */
 @Slf4j
 public class MailUtil {

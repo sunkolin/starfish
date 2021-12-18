@@ -23,7 +23,7 @@ import java.util.Date;
  * @since 2014-12-08
  */
 @Slf4j
-@SuppressWarnings(value = "unused")
+@SuppressWarnings("unused")
 @Component
 public class CustomApplicationListener implements org.springframework.context.ApplicationListener<ApplicationEvent>, ApplicationContextAware, InitializingBean {
 
