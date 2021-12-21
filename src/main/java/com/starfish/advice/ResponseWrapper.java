@@ -26,7 +26,9 @@ public class ResponseWrapper implements ResponseBodyAdvice<Object> {
 
     @Override
     public boolean supports(MethodParameter returnType, Class converterType) {
-        return true;
+        // ResponseEntity对象不处理
+        Class c = returnType.getMethod().getReturnType();
+        return c != ResponseEntity.class;
     }
 
     @Override
