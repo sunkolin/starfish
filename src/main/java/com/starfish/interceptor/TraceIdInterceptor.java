@@ -24,6 +24,11 @@ public class TraceIdInterceptor implements HandlerInterceptor {
     @Resource
     private Tracer sleuthTracer;
 
+    /**
+     * trace id header name
+     */
+    public static final String TRACE_ID_HEADER_NAME = "traceId";
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         try {
@@ -31,7 +36,7 @@ public class TraceIdInterceptor implements HandlerInterceptor {
             String traceId = sleuthTracer.currentSpan().context().traceId();
 
             // 设置Header
-            response.setHeader("traceId", traceId);
+            response.setHeader(TRACE_ID_HEADER_NAME, traceId);
         } catch (Exception e) {
             log.error("TraceIdInterceptor get trace id error.", e);
         }

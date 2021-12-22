@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 /**
@@ -28,7 +29,7 @@ public class ResponseWrapper implements ResponseBodyAdvice<Object> {
     public boolean supports(MethodParameter returnType, Class converterType) {
         // ResponseEntity对象不处理
         Class c = returnType.getMethod().getReturnType();
-        return c != ResponseEntity.class;
+        return c != ResponseEntity.class && c != ModelAndView.class;
     }
 
     @Override
@@ -45,7 +46,7 @@ public class ResponseWrapper implements ResponseBodyAdvice<Object> {
         // 参考：https://github.com/mingyang66/spring-parent/tree/master/emily-spring-boot-autoconfigure/src/main/java/com/emily/infrastructure/autoconfigure/response/handler
 
         // 判断内容为null的情况
-        if (body == null){
+        if (body == null) {
             Result<Object> result = new Result<>();
             result.setMessage("notice:body is null");
             return result;
@@ -54,7 +55,7 @@ public class ResponseWrapper implements ResponseBodyAdvice<Object> {
             response.getHeaders().set("Content-Type", "application/json;charset=utf-8");
             return JSON.toJSONString(new Result<>(body), SerializerFeature.WriteMapNullValue);
         }
-        if (body instanceof ResponseEntity){
+        if (body instanceof ResponseEntity) {
             return body;
         }
         return new Result<>(body);

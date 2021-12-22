@@ -17,6 +17,6 @@ public class ResponseWrapperProperties {
     /**
      * 是否启用,true启用，false禁用
      */
-    private Boolean enabled = true;
+    private Boolean enabled = false;
 
 }

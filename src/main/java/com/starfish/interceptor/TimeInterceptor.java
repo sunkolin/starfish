@@ -20,6 +20,11 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class TimeInterceptor implements HandlerInterceptor, Ordered {
 
+    /**
+     * spend time header name
+     */
+    public static final String SPEND_TIME_HEADER_NAME = "spendTime";
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         long startTime = System.currentTimeMillis();
@@ -32,11 +37,12 @@ public class TimeInterceptor implements HandlerInterceptor, Ordered {
         long endTime = System.currentTimeMillis();
         long spendTime = endTime - ((Long) request.getAttribute(Constant.REQUEST_START_TIME));
         log.info("request url is {},spend time is {}", request.getRequestURL(), spendTime);
+        response.setHeader(SPEND_TIME_HEADER_NAME, String.valueOf(spendTime));
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object o, Exception e) throws Exception {
-        //解决代码风格问题，不可有空方法体
+        // 解决代码风格问题，不可有空方法体
     }
 
     @Override
