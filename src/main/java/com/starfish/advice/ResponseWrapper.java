@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import java.lang.reflect.Method;
+
 /**
  * ResponseWrapper
  *
@@ -27,9 +29,9 @@ public class ResponseWrapper implements ResponseBodyAdvice<Object> {
 
     @Override
     public boolean supports(MethodParameter returnType, Class converterType) {
-        // ResponseEntity对象不处理
-        Class c = returnType.getMethod().getReturnType();
-        return c != ResponseEntity.class && c != ModelAndView.class;
+        // 返回值是ModelAndView或ResponseEntity时不处理
+        Method method = returnType.getMethod();
+        return method != null && method.getReturnType() != ResponseEntity.class && method.getReturnType() != ModelAndView.class;
     }
 
     @Override
