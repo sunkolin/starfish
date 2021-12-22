@@ -3,7 +3,6 @@ package com.starfish.autoconfigure.caffeine;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.starfish.extension.cache.CachePlus;
-import org.assertj.core.util.Lists;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.CacheManager;
