@@ -3,6 +3,7 @@ package com.starfish.autoconfigure.caffeine;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.starfish.extension.cache.CachePlus;
+import org.assertj.core.util.Lists;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.CacheManager;
@@ -58,16 +59,17 @@ public class CaffeineCacheAutoConfiguration {
         return caffeine.build();
     }
 
-    @Bean(name = "cachePlus")
-    public CachePlus newCaffeineCachePlus(Cache<Object, Object> caffeineCache) {
-        return new CachePlus(caffeineCache);
-    }
-
     @Bean(name = "caffeineCacheManager")
     public CacheManager cacheManager(Caffeine<Object, Object> caffeine) {
         CaffeineCacheManager cacheManager = new CaffeineCacheManager();
         cacheManager.setCaffeine(caffeine);
+//        cacheManager.setCacheNames(Lists.newArrayList("caffeineCache"));
         return cacheManager;
+    }
+
+    @Bean(name = "cachePlus")
+    public CachePlus newCaffeineCachePlus(Cache<Object, Object> caffeineCache) {
+        return new CachePlus(caffeineCache);
     }
 
 }
