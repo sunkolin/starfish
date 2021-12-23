@@ -41,33 +41,34 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <repositories>
-                <repository>
-                    <id>aliyun</id>
-                    <name>aliyun</name>
-                    <layout>default</layout>
-                    <url>https://maven.aliyun.com/repository/public</url>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                </repository>
-                <repository>
-                    <id>central</id>
-                    <url>https://repo1.maven.org/maven2</url>
-                </repository>
-                <repository>
-                    <id>github</id>
-                    <url>https://maven.pkg.github.com/sunlin901203/*</url>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                </repository>
-            </repositories>
         </profile>
     </profiles>
+
+    <repositories>
+        <repository>
+            <id>aliyun</id>
+            <name>aliyun</name>
+            <layout>default</layout>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/sunlin901203/*</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <distributionManagement>
         <repository>
