@@ -58,6 +58,7 @@
         </repository>
     </repositories>
 
+    <!-- 部署构件至远程仓库 -->
     <distributionManagement>
         <repository>
             <id>github</id>
