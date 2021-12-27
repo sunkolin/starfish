@@ -35,14 +35,14 @@
         <url>https://github.com/sunlin901203/starfish.git</url>
     </scm>
 
-    <profiles>
-        <profile>
-            <id>github</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-    </profiles>
+<!--    <profiles>-->
+<!--        <profile>-->
+<!--            <id>github</id>-->
+<!--            <activation>-->
+<!--                <activeByDefault>true</activeByDefault>-->
+<!--            </activation>-->
+<!--        </profile>-->
+<!--    </profiles>-->
 
     <repositories>
         <repository>
