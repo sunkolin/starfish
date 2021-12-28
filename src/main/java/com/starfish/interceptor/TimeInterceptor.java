@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 时间拦截器
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2015-05-06
  */

@@ -478,7 +478,7 @@ public final class FileUtil {
         MultipartFile f = toMultipartFile("https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png");
         System.out.println(f.getName());
 
-        File target = new File("/Users/sunlin/tmp/" + f.getName());
+        File target = new File("~/tmp/" + f.getName());
         f.transferTo(target);
     }
 
