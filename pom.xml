@@ -7,13 +7,13 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.6.2</version>
     </parent>
-    <groupId>com.github.sunlin901203</groupId>
+    <groupId>com.github.neacle</groupId>
     <artifactId>starfish</artifactId>
     <version>2021.12.22-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>starfish</name>
     <description>starfish</description>
-    <url>https://github.com/sunlin901203/starfish</url>
+    <url>https://github.com/neacle/starfish</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -49,7 +49,7 @@
         </repository>
         <repository>
             <id>github</id>
-            <url>https://maven.pkg.github.com/sunlin901203/*</url>
+            <url>https://maven.pkg.github.com/neacle/*</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -61,7 +61,7 @@
         <repository>
             <id>github</id>
             <name>GitHub OWNER Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/sunlin901203/starfish</url>
+            <url>https://maven.pkg.github.com/neacle/starfish</url>
         </repository>
     </distributionManagement>
 
@@ -320,9 +320,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:https://github.com/sunlin901203/starfish.git</connection>
-        <developerConnection>scm:git:https://github.com/sunlin901203/starfish.git</developerConnection>
-        <url>https://github.com/sunlin901203/starfish.git</url>
+        <connection>scm:git:https://github.com/neacle/starfish.git</connection>
+        <developerConnection>scm:git:https://github.com/neacle/starfish.git</developerConnection>
+        <url>https://github.com/neacle/starfish.git</url>
     </scm>
 
 </project>
