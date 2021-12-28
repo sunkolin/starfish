@@ -12,13 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 时间拦截器
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2015-05-06
  */
 @SuppressWarnings("unused")
 @Slf4j
 public class TimeInterceptor implements HandlerInterceptor, Ordered {
+
+    /**
+     * spend time header name
+     */
+    public static final String SPEND_TIME_HEADER_NAME = "spendTime";
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
@@ -32,11 +37,12 @@ public class TimeInterceptor implements HandlerInterceptor, Ordered {
         long endTime = System.currentTimeMillis();
         long spendTime = endTime - ((Long) request.getAttribute(Constant.REQUEST_START_TIME));
         log.info("request url is {},spend time is {}", request.getRequestURL(), spendTime);
+        response.setHeader(SPEND_TIME_HEADER_NAME, String.valueOf(spendTime));
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object o, Exception e) throws Exception {
-        //解决代码风格问题，不可有空方法体
+        // 解决代码风格问题，不可有空方法体
     }
 
     @Override

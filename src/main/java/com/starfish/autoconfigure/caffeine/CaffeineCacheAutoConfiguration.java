@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * CaffeineCacheAutoConfiguration
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2021-06-10
  */
@@ -58,16 +58,17 @@ public class CaffeineCacheAutoConfiguration {
         return caffeine.build();
     }
 
-    @Bean(name = "cachePlus")
-    public CachePlus newCaffeineCachePlus(Cache<Object, Object> caffeineCache) {
-        return new CachePlus(caffeineCache);
-    }
-
     @Bean(name = "caffeineCacheManager")
     public CacheManager cacheManager(Caffeine<Object, Object> caffeine) {
         CaffeineCacheManager cacheManager = new CaffeineCacheManager();
         cacheManager.setCaffeine(caffeine);
+//        cacheManager.setCacheNames(Lists.newArrayList("caffeineCache"));
         return cacheManager;
+    }
+
+    @Bean(name = "cachePlus")
+    public CachePlus newCaffeineCachePlus(Cache<Object, Object> caffeineCache) {
+        return new CachePlus(caffeineCache);
     }
 
 }

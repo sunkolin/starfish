@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * MultiResultTest
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2021-12-13
  */

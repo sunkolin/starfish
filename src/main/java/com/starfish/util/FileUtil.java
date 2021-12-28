@@ -33,7 +33,7 @@ import java.util.concurrent.*;
 /**
  * FileUtil
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2015-01-05
  */
@@ -478,7 +478,7 @@ public final class FileUtil {
         MultipartFile f = toMultipartFile("https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png");
         System.out.println(f.getName());
 
-        File target = new File("/Users/sunlin/tmp/" + f.getName());
+        File target = new File("~/tmp/" + f.getName());
         f.transferTo(target);
     }
 

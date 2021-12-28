@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * TimeBasedResult
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2019-07-04
  */

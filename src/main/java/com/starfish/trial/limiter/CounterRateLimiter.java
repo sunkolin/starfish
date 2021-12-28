@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
  * 计数器算法，网上有说是令牌桶算法，需要具体测试 TODO
  * 简单介绍4种限流算法：计数器算法、滑动窗口计数器算法、漏桶算法、令牌桶算法
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2021-01-19
  */

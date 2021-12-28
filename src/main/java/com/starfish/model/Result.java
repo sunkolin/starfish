@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 /**
  * Result
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2012-8-15
  */

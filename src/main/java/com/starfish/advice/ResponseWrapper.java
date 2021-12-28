@@ -7,15 +7,19 @@ import com.starfish.model.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
+
+import java.lang.reflect.Method;
 
 /**
  * ResponseWrapper
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2021-06-10
  */
@@ -25,7 +29,9 @@ public class ResponseWrapper implements ResponseBodyAdvice<Object> {
 
     @Override
     public boolean supports(MethodParameter returnType, Class converterType) {
-        return true;
+        // 返回值是ModelAndView或ResponseEntity时不处理
+        Method method = returnType.getMethod();
+        return method != null && method.getReturnType() != ResponseEntity.class && method.getReturnType() != ModelAndView.class;
     }
 
     @Override
@@ -42,7 +48,7 @@ public class ResponseWrapper implements ResponseBodyAdvice<Object> {
         // 参考：https://github.com/mingyang66/spring-parent/tree/master/emily-spring-boot-autoconfigure/src/main/java/com/emily/infrastructure/autoconfigure/response/handler
 
         // 判断内容为null的情况
-        if (body == null){
+        if (body == null) {
             Result<Object> result = new Result<>();
             result.setMessage("notice:body is null");
             return result;
@@ -51,7 +57,9 @@ public class ResponseWrapper implements ResponseBodyAdvice<Object> {
             response.getHeaders().set("Content-Type", "application/json;charset=utf-8");
             return JSON.toJSONString(new Result<>(body), SerializerFeature.WriteMapNullValue);
         }
-
+        if (body instanceof ResponseEntity) {
+            return body;
+        }
         return new Result<>(body);
     }
 

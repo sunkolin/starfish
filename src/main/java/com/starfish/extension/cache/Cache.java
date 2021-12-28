@@ -3,7 +3,7 @@ package com.starfish.extension.cache;
 /**
  * Cache
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2021-06-11
  */
@@ -20,20 +20,20 @@ public interface Cache {
     <T> T get(Object key);
 
     /**
-     * 判断一个key是否已经缓存
-     *
-     * @param key 键
-     * @return 结果
-     */
-    boolean exist(Object key);
-
-    /**
      * 设置
      *
      * @param key   键
      * @param value 值
      */
     void set(Object key, Object value);
+
+    /**
+     * 判断一个key是否已经缓存
+     *
+     * @param key 键
+     * @return 结果
+     */
+    boolean exist(Object key);
 
     /**
      * 移除

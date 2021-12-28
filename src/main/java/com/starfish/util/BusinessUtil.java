@@ -22,9 +22,9 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
- * CommonBusinessUtil
+ * BusinessUtil
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2021-07-08
  */

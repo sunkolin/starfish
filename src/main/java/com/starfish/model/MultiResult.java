@@ -8,7 +8,7 @@ import java.io.Serializable;
  * 如果存入数据格式与取出数据格式不一致，会报类型转换异常
  * 例如Exception in thread "main" java.lang.ClassCastException: java.util.ArrayList cannot be cast to java.lang.Long
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2021-12-12
  */

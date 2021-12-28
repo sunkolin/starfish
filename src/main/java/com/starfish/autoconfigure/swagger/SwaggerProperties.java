@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * SwaggerProperties
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2018-11-05
  */

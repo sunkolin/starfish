@@ -7,7 +7,7 @@ import org.junit.Test;
 /**
  * EhcacheUtilTest
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2016-05-19
  */
