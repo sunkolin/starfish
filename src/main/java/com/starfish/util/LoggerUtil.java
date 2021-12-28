@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 /**
  * 日志工具类，废弃，使用lombok@Slf4j替代
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2016-12-23
  */

@@ -24,7 +24,7 @@ import java.util.Map;
  * 1 RestTemplate restTemplate = RestTemplatePlus.buildRestTemplate();
  * 2 RestTemplatePlus superRestTemplate = RestTemplatePlus.buildRestTemplatePlus();
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2020-10-16
  */
