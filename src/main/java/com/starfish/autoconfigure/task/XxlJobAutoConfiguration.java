@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 /**
  * XxlJobAutoConfiguration
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2015-08-03
  */

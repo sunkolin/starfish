@@ -5,7 +5,7 @@ import java.lang.annotation.*;
 /**
  * RateLimiter
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2021-06-09
  */

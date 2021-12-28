@@ -25,7 +25,7 @@ import java.util.function.Predicate;
 /**
  * SwaggerConfig
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2018-03-05
  */

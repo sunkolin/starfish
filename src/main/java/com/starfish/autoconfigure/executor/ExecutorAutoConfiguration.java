@@ -14,7 +14,7 @@ import java.util.concurrent.RejectedExecutionHandler;
 /**
  * 线程池配置
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2015-08-03
  */
