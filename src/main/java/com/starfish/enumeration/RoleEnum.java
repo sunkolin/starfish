@@ -3,7 +3,7 @@ package com.starfish.enumeration;
 /**
  * 角色枚举
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2014-07-07
  */

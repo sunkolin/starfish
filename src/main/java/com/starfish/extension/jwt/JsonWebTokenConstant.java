@@ -3,7 +3,7 @@ package com.starfish.extension.jwt;
 /**
  * JsonWebTokenConstant
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2021-02-12
  */

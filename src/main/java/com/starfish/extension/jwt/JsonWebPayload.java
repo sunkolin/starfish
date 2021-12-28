@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * JsonWebPayload
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2021-02-12
  */
