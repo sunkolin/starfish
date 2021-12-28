@@ -3,7 +3,7 @@ package com.starfish.constant;
 /**
  * Constant
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2015-06-04
  */

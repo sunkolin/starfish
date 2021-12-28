@@ -10,7 +10,7 @@ import java.net.InetAddress;
  * IpClassicConverter
  * reference https://www.freesion.com/article/9551563594/
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2020-09-13
  */

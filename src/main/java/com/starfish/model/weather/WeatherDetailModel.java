@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * WeatherDetailModel
  *
- * @author sunny
+ * @author neacle
  * @version 1.0.0
  * @since 2021-03-08
  */
