@@ -36,7 +36,7 @@ jobs:
       - name: Install and Publish to GitHub Packages
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        run: mvn clean deploy -Dmaven.test.skip=true
+        run: mvn --batch-mode --update-snapshots clean deploy -Dmaven.test.skip=true
 
 #  - name: Build With Maven
 #      run: mvn --batch-mode --update-snapshots clean package -Dmaven.test.skip=true
