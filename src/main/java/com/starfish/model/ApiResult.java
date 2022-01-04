@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * ApiResult
  *
- * @author neacle
+ * @author suncolin
  * @version 1.0.0
  * @since 2020-10-30
  */

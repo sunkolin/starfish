@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * CaffeineCacheAutoConfiguration
  *
- * @author neacle
+ * @author suncolin
  * @version 1.0.0
  * @since 2021-06-10
  */

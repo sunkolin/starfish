@@ -10,7 +10,7 @@ import org.springframework.boot.ApplicationRunner;
  * 一种是实现ApplicationRunner
  * 另外一种是实现CommandLineRunner
  *
- * @author neacle
+ * @author suncolin
  * @version 1.0.0
  * @since 2021-06-09
  */

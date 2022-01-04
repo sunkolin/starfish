@@ -5,7 +5,7 @@ package com.starfish.enumeration;
  * （1）枚举类不能有public修饰的构造函数，构造函数都是隐含private，编译器自动处理。
  * （2）每个枚举值隐含都是由public、static、final修饰的，不需要添加这些修饰符。
  *
- * @author neacle
+ * @author suncolin
  * @version 1.0.0
  * @since 2014-07-07
  */

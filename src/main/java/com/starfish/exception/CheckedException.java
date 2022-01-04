@@ -3,7 +3,7 @@ package com.starfish.exception;
 import java.io.Serializable;
 
 /**
- * @author neacle
+ * @author suncolin
  * @version 1.0.0
  * @since 2012-09-10
  */

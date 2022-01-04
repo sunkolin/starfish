@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * ExecutorProperties
  *
- * @author neacle
+ * @author suncolin
  * @version 1.0.0
  * @since 2018-11-05
  */
