@@ -1,0 +1,50 @@
+name: Run with Java
+
+on:
+  push:
+    branches:
+      - "main"
+      - "2022.**"
+      - "2023.**"
+      - "2024.**"
+      - "2025.**"
+  schedule:
+    - cron: '10 * * * *'
+
+env:
+  APPLICATION_NAME: "starfish"
+#  APPLICATION_VERSION: "1.0.0"
+#  APPLICATION_ENV: "dev"
+
+jobs:
+  MavenDeploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: "8"
+          distribution: "adopt"
+
+      # 由于github packages容量限制，暂时不push到仓库
+      - name: Install and Publish to GitHub Packages
+        env:
+          GITHUB_TOKEN: "${{ secrets.PACKAGES_TOKEN }}"
+        run: mvn clean deploy -Dmaven.test.skip=true
+
+      - name: Deploy
+        uses: easingthemes/ssh-deploy@v2.2.11
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.TENCENT_SERVER_PRIVATE_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "target/starfish-example-1.0.0-SNAPSHOT.jar"
+          REMOTE_HOST: "101.34.149.151"
+          REMOTE_USER: "root"
+          TARGET: "/opt/starfish-example"
