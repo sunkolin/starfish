@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
  * UserRequestContext,在controller service dao中获取request response对象
  * 需要在web.xml中添加listener org.springframework.web.context.request.RequestContextListener
  *
- * @author neacle
+ * @author suncolin
  * @version 1.0.0
  * @since 2015-06-02
  */

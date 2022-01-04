@@ -18,7 +18,7 @@ import java.util.Date;
 /**
  * application start listener
  *
- * @author neacle
+ * @author suncolin
  * @version 1.0.0
  * @since 2014-12-08
  */

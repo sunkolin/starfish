@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 分页结果
  *
- * @author neacle
+ * @author suncolin
  * @version 1.0.0
  * @since 2015-04-13
  */

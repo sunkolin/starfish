@@ -13,7 +13,7 @@ import java.util.function.Function;
 /**
  * Pinyin
  *
- * @author neacle
+ * @author suncolin
  * @version 1.0.0
  * @since 2020-10-28
  */

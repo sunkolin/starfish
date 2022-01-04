@@ -7,13 +7,13 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.6.2</version>
     </parent>
-    <groupId>com.github.neacle</groupId>
+    <groupId>com.github.suncolin</groupId>
     <artifactId>starfish</artifactId>
-    <version>2021.12.28</version>
+    <version>2022.01.03-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>starfish</name>
     <description>starfish</description>
-    <url>https://github.com/neacle/starfish</url>
+    <url>https://github.com/suncolin/starfish</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -49,7 +49,7 @@
         </repository>
         <repository>
             <id>github</id>
-            <url>https://maven.pkg.github.com/neacle/*</url>
+            <url>https://maven.pkg.github.com/suncolin/*</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -61,7 +61,7 @@
         <repository>
             <id>github</id>
             <name>GitHub OWNER Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/neacle/starfish</url>
+            <url>https://maven.pkg.github.com/suncolin/starfish</url>
         </repository>
     </distributionManagement>
 
@@ -314,15 +314,15 @@
 
     <developers>
         <developer>
-            <name>neacle</name>
-            <email>neacle@qq.com</email>
+            <name>suncolin</name>
+            <email>suncolin@qq.com</email>
         </developer>
     </developers>
 
     <scm>
-        <connection>scm:git:https://github.com/neacle/starfish.git</connection>
-        <developerConnection>scm:git:https://github.com/neacle/starfish.git</developerConnection>
-        <url>https://github.com/neacle/starfish.git</url>
+        <connection>scm:git:https://github.com/suncolin/starfish.git</connection>
+        <developerConnection>scm:git:https://github.com/suncolin/starfish.git</developerConnection>
+        <url>https://github.com/suncolin/starfish.git</url>
     </scm>
 
 </project>

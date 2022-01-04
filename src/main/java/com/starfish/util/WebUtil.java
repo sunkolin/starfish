@@ -34,7 +34,7 @@ import java.util.Map;
 /**
  * WebUtil
  *
- * @author neacle
+ * @author suncolin
  * @version 1.0.0
  * @see org.springframework.web.util.WebUtils
  * @see org.springframework.web.util.HtmlUtils

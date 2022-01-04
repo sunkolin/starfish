@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * AliveController
  *
- * @author neacle
+ * @author suncolin
  * @version 1.0.0
  * @since 2021-06-02
  */

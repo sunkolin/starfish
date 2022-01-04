@@ -13,7 +13,7 @@ import java.util.*;
 /**
  * CollectionUtilTest
  *
- * @author neacle
+ * @author suncolin
  * @version 1.0.0
  * @since 2014-11-27
  */
