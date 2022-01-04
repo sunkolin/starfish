@@ -1,4 +1,4 @@
-package com.starfish;
+package com.starfish.trial;
 
 import com.google.common.collect.*;
 
