@@ -34,10 +34,20 @@ jobs:
           distribution: "adopt"
 
       # 由于github packages容量限制，暂时不push到仓库
+#      - name: Install and Publish to GitHub Packages
+#        env:
+#          GITHUB_TOKEN: "${{ secrets.PACKAGES_TOKEN }}"
+#        run: mvn clean deploy -Dmaven.test.skip=true
+
       - name: Install and Publish to GitHub Packages
-        env:
-          GITHUB_TOKEN: "${{ secrets.PACKAGES_TOKEN }}"
         run: mvn clean deploy -Dmaven.test.skip=true
+        env:
+          MAVEN_PASSWORD: ${{ secrets.PACKAGES_TOKEN }}
+
+#  - name: Build With Maven
+#      run: mvn --batch-mode --update-snapshots clean package -Dmaven.test.skip=true
+#      env:
+#        MAVEN_PASSWORD: ${{ secrets.PACKAGES_TOKEN }}
 
 #      - name: Deploy
 #        uses: easingthemes/ssh-deploy@v2.2.11
