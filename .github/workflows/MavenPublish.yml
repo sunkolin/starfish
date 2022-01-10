@@ -7,7 +7,7 @@ on:
       - "2022.**"
   schedule:
     # UTC时间2点即北京时间10点
-    - cron: '11 3 * * *'
+    - cron: '15 3 * * *'
 
 env:
   APPLICATION_NAME: "starfish"
