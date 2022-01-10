@@ -6,7 +6,7 @@ on:
       - "main"
       - "2022.**"
   schedule:
-    - cron: '00 10 * * *'
+    - cron: '13 10 * * *'
 
 env:
   APPLICATION_NAME: "starfish"
