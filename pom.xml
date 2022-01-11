@@ -7,13 +7,13 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.6.2</version>
     </parent>
-    <groupId>com.github.suncolin</groupId>
+    <groupId>com.github.sunkolin</groupId>
     <artifactId>starfish</artifactId>
     <version>2022.01.03-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>starfish</name>
     <description>starfish</description>
-    <url>https://github.com/suncolin/starfish</url>
+    <url>https://github.com/sunkolin/starfish</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -49,7 +49,7 @@
         </repository>
         <repository>
             <id>github</id>
-            <url>https://maven.pkg.github.com/suncolin/*</url>
+            <url>https://maven.pkg.github.com/sunkolin/*</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -61,7 +61,7 @@
         <repository>
             <id>github</id>
             <name>GitHub OWNER Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/suncolin/starfish</url>
+            <url>https://maven.pkg.github.com/sunkolin/starfish</url>
         </repository>
     </distributionManagement>
 
@@ -314,15 +314,15 @@
 
     <developers>
         <developer>
-            <name>suncolin</name>
-            <email>suncolin@qq.com</email>
+            <name>sunkolin</name>
+            <email>sunkolin@qq.com</email>
         </developer>
     </developers>
 
     <scm>
-        <connection>scm:git:https://github.com/suncolin/starfish.git</connection>
-        <developerConnection>scm:git:https://github.com/suncolin/starfish.git</developerConnection>
-        <url>https://github.com/suncolin/starfish.git</url>
+        <connection>scm:git:https://github.com/sunkolin/starfish.git</connection>
+        <developerConnection>scm:git:https://github.com/sunkolin/starfish.git</developerConnection>
+        <url>https://github.com/sunkolin/starfish.git</url>
     </scm>
 
 </project>
