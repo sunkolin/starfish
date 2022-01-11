@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 /**
  * Validator
  *
- * @author suncolin
+ * @author sunkolin
  * @version 1.0.0
  * @since 2014-10-10
  */

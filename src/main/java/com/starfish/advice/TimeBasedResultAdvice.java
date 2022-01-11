@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * ResponseAdvice，修改controller返回的结果
  *
- * @author suncolin
+ * @author sunkolin
  * @version 1.0.0
  * @since 2019-07-03
  */

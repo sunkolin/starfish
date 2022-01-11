@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 缓存配置,当前spring5还不支持ehcache3
  *
- * @author suncolin
+ * @author sunkolin
  * @version 1.0.0
  * @since 2015-08-04
  */

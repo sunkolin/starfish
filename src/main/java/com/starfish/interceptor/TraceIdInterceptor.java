@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * TraceInterceptor
  *
- * @author suncolin
+ * @author sunkolin
  * @version 1.0.0
  * @since 2018-12-05
  */

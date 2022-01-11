@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * RedisRateLimiterService
  *
- * @author suncolin
+ * @author sunkolin
  * @version 1.0.0
  * @since 2019-07-11
  */

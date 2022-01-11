@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * CaffeineCacheProperties
  *
- * @author suncolin
+ * @author sunkolin
  * @version 1.0.0
  * @since 2018-11-05
  */
