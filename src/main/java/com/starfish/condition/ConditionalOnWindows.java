@@ -7,7 +7,7 @@ import java.lang.annotation.*;
 /**
  * ConditionalOnWindows
  *
- * @author suncolin
+ * @author sunkolin
  * @version 1.0.0
  * @since 2021-06-08
  */

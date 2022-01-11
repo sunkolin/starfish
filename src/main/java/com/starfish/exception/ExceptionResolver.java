@@ -20,7 +20,7 @@ import java.util.Map;
  * 直接在spring.factories中配置DefaultExceptionResolver时对拦截器不生效
  * 当前配置对于使用本jar的项目中的controller和interceptor有效，对于starfish中的interceptor无效
  *
- * @author suncolin
+ * @author sunkolin
  * @version 1.0.0
  * @since 2015-12-02
  */

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * ResultTest
  *
- * @author suncolin
+ * @author sunkolin
  * @version 1.0.0
  * @since 2021-12-15
  */

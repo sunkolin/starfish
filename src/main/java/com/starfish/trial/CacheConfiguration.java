@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * //@Configuration
  * //@EnableCaching(proxyTargetClass = true)
  *
- * @author suncolin
+ * @author sunkolin
  * @version 1.0.0
  * @since 2015-05-22
  */

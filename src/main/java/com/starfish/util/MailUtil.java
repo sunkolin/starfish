@@ -15,7 +15,7 @@ import java.util.Properties;
 /**
  * MailUtil
  *
- * @author suncolin
+ * @author sunkolin
  * @version 1.0.0
  * @since 2012-09-11
  */

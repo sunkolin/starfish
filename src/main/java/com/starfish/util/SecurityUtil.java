@@ -24,7 +24,7 @@ import java.util.Map;
  * SecurityUtil
  * 编码和加解密工具类
  *
- * @author suncolin
+ * @author sunkolin
  * @version 1.0.0
  * @since 2015-01-06
  */

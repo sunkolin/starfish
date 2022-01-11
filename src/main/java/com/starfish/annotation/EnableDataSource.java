@@ -15,7 +15,7 @@ import java.lang.annotation.*;
  * 在此过滤器中获取到设置的上下文属性，根据上线文属性判断是否导入数据源配置类DataSourceAutoConfiguration和
  * HibernateJpaAutoConfiguration
  *
- * @author suncolin
+ * @author sunkolin
  * @version 1.0.0
  * @since 2021-06-02
  */

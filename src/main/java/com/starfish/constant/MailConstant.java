@@ -3,7 +3,7 @@ package com.starfish.constant;
 /**
  * MailConstant
  *
- * @author suncolin
+ * @author sunkolin
  * @version 1.0.0
  * @since 2015-05-11
  */

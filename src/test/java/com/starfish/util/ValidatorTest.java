@@ -5,7 +5,7 @@ import org.junit.Test;
 /**
  * ValidatorTest
  *
- * @author suncolin
+ * @author sunkolin
  * @version 1.0.0
  * @since 2015-03-25
  */

@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Alpha
  *
- * @author suncolin
+ * @author sunkolin
  * @version 1.0.0
  * @since 2020-12-12
  */

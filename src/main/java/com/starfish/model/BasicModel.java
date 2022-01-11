@@ -14,7 +14,7 @@ import java.util.Date;
 /**
  * BasicModel
  *
- * @author suncolin
+ * @author sunkolin
  * @version 1.0.0
  * @since 2013-3-11
  */

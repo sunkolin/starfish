@@ -8,7 +8,7 @@
 ///**
 // * ProtobufUtil
 // *
-// * @author suncolin
+// * @author sunkolin
 // * @version 1.0.0
 // * @since 2019-07-05
 // */

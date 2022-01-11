@@ -10,7 +10,7 @@ import org.ehcache.config.builders.ResourcePoolsBuilder;
 /**
  * EhcachePlus
  *
- * @author suncolin
+ * @author sunkolin
  * @version 1.0.0
  * @since 2018-06-06
  */
