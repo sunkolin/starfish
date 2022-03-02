@@ -10,6 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @version 1.0.0
  * @since 2018-11-05
  */
+@Deprecated
 @Data
 @ConfigurationProperties(prefix = "application.executor")
 public class ExecutorProperties {

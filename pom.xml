@@ -5,11 +5,11 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.2</version>
+        <version>2.6.4</version>
     </parent>
     <groupId>com.github.sunkolin</groupId>
     <artifactId>starfish</artifactId>
-    <version>2022.01.28-SNAPSHOT</version>
+    <version>2022.03.02</version>
     <packaging>jar</packaging>
     <name>starfish</name>
     <description>starfish</description>
@@ -18,7 +18,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>8</java.version>
-        <project.spring.cloud>2021.0.0</project.spring.cloud>
+        <project.spring.cloud>2021.0.1</project.spring.cloud>
     </properties>
 
 <!--    <profiles>-->
