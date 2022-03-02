@@ -18,7 +18,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>8</java.version>
-        <project.spring.cloud>2021.0.0</project.spring.cloud>
+        <project.spring.cloud>2021.0.1</project.spring.cloud>
     </properties>
 
 <!--    <profiles>-->
