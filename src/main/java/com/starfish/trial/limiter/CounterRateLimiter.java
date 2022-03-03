@@ -1,10 +1,15 @@
 package com.starfish.trial.limiter;
 
+import cn.hutool.core.date.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.atomic.AtomicLong;
+
 /**
- * 计数器算法，网上有说是令牌桶算法，需要具体测试 TODO
+ * 计数器，单机限流
  * 简单介绍4种限流算法：计数器算法、滑动窗口计数器算法、漏桶算法、令牌桶算法
  *
  * @author sunkolin
@@ -13,17 +18,35 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class CounterRateLimiter implements RateLimiter {
+public class CounterRateLimiter implements CustomRateLimiter {
 
-    private static com.google.common.util.concurrent.RateLimiter GUAVA_RATE_LIMITER;
+    private final long permitsPerSecond;
 
-    CounterRateLimiter(long permitsPerSecond) {
-        GUAVA_RATE_LIMITER = com.google.common.util.concurrent.RateLimiter.create(permitsPerSecond);
+    private final AtomicLong counter = new AtomicLong(0);
+
+    private static Date timestamp = DateUtil.dateSecond();
+
+    public CounterRateLimiter(long permitsPerSecond) {
+        this.permitsPerSecond = permitsPerSecond;
     }
 
     @Override
-    public boolean tryAcquire() {
-        return GUAVA_RATE_LIMITER.tryAcquire();
+    public boolean acquire(int count) {
+        synchronized (this) {
+            Date now = DateUtil.dateSecond();
+            if (now.getTime() - timestamp.getTime() < 1000) {
+                if (counter.get() < permitsPerSecond) {
+                    counter.incrementAndGet();
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                counter.set(0);
+                timestamp = now;
+                return false;
+            }
+        }
     }
 
 }
