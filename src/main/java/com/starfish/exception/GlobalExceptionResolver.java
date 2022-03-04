@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * DefaultExceptionResolver
+ * GlobalExceptionResolver
  * 需要使用ExceptionResolverAutoConfiguration扫描包，异常处理器才能对controller和拦截器同时生效
  * 直接在spring.factories中配置DefaultExceptionResolver时对拦截器不生效
  * 当前配置对于使用本jar的项目中的controller和interceptor有效，对于starfish中的interceptor无效
@@ -27,7 +27,7 @@ import java.util.Map;
 @SuppressWarnings("unused")
 @Slf4j
 @ControllerAdvice(basePackages = {"com.starfish"})
-public class ExceptionResolver {
+public class GlobalExceptionResolver {
 
     public static final int SYSTEM_EXCEPTION_CODE = 500;
 
@@ -59,10 +59,10 @@ public class ExceptionResolver {
         if (ex instanceof CustomException) {
             CustomException ce = (CustomException) ex;
             result = new Result<>(ce);
-            log.error("DefaultExceptionResolver exception.status={},message={},url={},param={},body={}", result.getStatus(), result.getMessage(), url, param, body, ex);
+            log.error("GlobalExceptionResolver exception.status={},message={},url={},param={},body={}", result.getStatus(), result.getMessage(), url, param, body, ex);
         } else {
             result = new Result<>(SYSTEM_EXCEPTION_CODE, SYSTEM_EXCEPTION_MESSAGE);
-            log.error("DefaultExceptionResolver system exception.status={},message={},url={}", result.getStatus(), result.getMessage(), url, ex);
+            log.error("GlobalExceptionResolver system exception.status={},message={},url={}", result.getStatus(), result.getMessage(), url, ex);
         }
 
         return result;

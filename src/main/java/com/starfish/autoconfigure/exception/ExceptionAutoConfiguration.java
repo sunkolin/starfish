@@ -1,6 +1,6 @@
 package com.starfish.autoconfigure.exception;
 
-import com.starfish.exception.ExceptionResolver;
+import com.starfish.exception.GlobalExceptionResolver;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -25,8 +25,8 @@ public class ExceptionAutoConfiguration {
      * @return 结果
      */
     @Bean
-    public ExceptionResolver newExceptionResolver() {
-        return new ExceptionResolver();
+    public GlobalExceptionResolver newExceptionResolver() {
+        return new GlobalExceptionResolver();
     }
 
 }
