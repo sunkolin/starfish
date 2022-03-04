@@ -1,4 +1,4 @@
-package com.starfish.trial.limiter;
+package com.starfish.extension.limiter;
 
 import com.google.common.util.concurrent.RateLimiter;
 
