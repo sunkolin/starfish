@@ -1,4 +1,4 @@
-package com.starfish.trial.limiter;
+package com.starfish.extension.limiter;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -11,6 +11,7 @@ import java.util.UUID;
 /**
  * 滑动窗口算法
  * 简单介绍4种限流算法：计数器算法、滑动窗口计数器算法、漏桶算法、令牌桶算法
+ * 参考：https://www.cnblogs.com/linjiqin/p/9707713.html
  *
  * @author sunkolin
  * @version 1.0.0
@@ -18,7 +19,7 @@ import java.util.UUID;
  */
 @Slf4j
 @Service
-public class SlidingWindowRateLimiter implements RateLimiter {
+public class RollingWindowRateLimiter implements CustomRateLimiter {
 
     /**
      * 一秒允许的数量
@@ -30,18 +31,18 @@ public class SlidingWindowRateLimiter implements RateLimiter {
      */
     public long intervalMillisecond = 10;
 
-    public String name;
+    public String redisKey;
 
     @Resource
     private RedisTemplate<String, String> redisTemplate;
 
-    SlidingWindowRateLimiter(String name, long permits) {
-        this.name = name;
+    public RollingWindowRateLimiter(String redisKey, long permits) {
+        this.redisKey = redisKey;
         this.permits = permits;
     }
 
     @Override
-    public boolean tryAcquire() {
+    public boolean acquire(int count) {
         long score = System.currentTimeMillis();
 
         // 如果不存在此key，返回ture
@@ -50,13 +51,13 @@ public class SlidingWindowRateLimiter implements RateLimiter {
         } else {
             ZSetOperations<String, String> zSetOperations = redisTemplate.opsForZSet();
             String value = UUID.randomUUID().toString();
-            zSetOperations.add(name, value, score);
+            zSetOperations.add(redisKey, value, score);
             return true;
         }
     }
 
     public boolean exist() {
-        return redisTemplate.hasKey(name);
+        return redisTemplate.hasKey(redisKey);
     }
 
     /**
@@ -68,7 +69,7 @@ public class SlidingWindowRateLimiter implements RateLimiter {
     public boolean greaterThanOrEqualToPermits(long max) {
         ZSetOperations<String, String> zSetOperations = redisTemplate.opsForZSet();
         double min = max - intervalMillisecond;
-        Long count = zSetOperations.count(name, min, max);
+        Long count = zSetOperations.count(redisKey, min, max);
         long intervalPermits = (long) (permits / (1000D / intervalMillisecond));
         return (count != null && count > intervalPermits);
     }

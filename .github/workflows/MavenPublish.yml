@@ -3,7 +3,8 @@ name: MavenPublish
 on:
   push:
     branches:
-      - "main"
+      - "2020.**"
+      - "2021.**"
       - "2022.**"
   schedule:
     # UTC时间2点即北京时间10点
