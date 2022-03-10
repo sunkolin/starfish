@@ -17,10 +17,6 @@ public class Result<T> implements Serializable {
 
     private transient static final String SUCCESS_MESSAGE = "success";
 
-    private transient static final Integer SYSTEM_EXCEPTION_CODE = 500;
-
-    private transient static final String SYSTEM_EXCEPTION_MESSAGE = "system error";
-
     /**
      * code
      */
@@ -32,9 +28,9 @@ public class Result<T> implements Serializable {
     private String message;
 
     /**
-     * body
+     * data
      */
-    private T body;
+    private T data;
 
     public Result() {
         this.code = SUCCESS_CODE;
@@ -43,30 +39,31 @@ public class Result<T> implements Serializable {
 
     public Result(Object object) {
         // 验证参数不能为空
-        if (object == null) {
-            throw new NullPointerException("object can not be null.");
-        }
-
-        // 如果同时有code和message字段，则只设置只两个字段并返回；否则编码码和信息设置为成功，并设置消息体
-        if (hasCodeAndMessage(object)) {
-            try {
-                Method getCode = object.getClass().getMethod("getCode");
-                getCode.setAccessible(true);
-                this.code = (int) getCode.invoke(object);
-
-                Method getMessage = object.getClass().getMethod("getMessage");
-                getMessage.setAccessible(true);
-                this.message = (String) getMessage.invoke(object);
-            } catch (Exception e) {
-                e.printStackTrace();
-                this.code = SYSTEM_EXCEPTION_CODE;
-                this.message = SYSTEM_EXCEPTION_MESSAGE;
-            }
+        if (object instanceof Result) {
+            this.code = SUCCESS_CODE;
+            this.message = SUCCESS_MESSAGE;
+            this.data = (T) ((Result<?>) object).getData();
         } else {
             this.code = SUCCESS_CODE;
             this.message = SUCCESS_MESSAGE;
-            this.body = (T) object;
+            this.data = (T) object;
         }
+        // 如果同时有code和message字段，则只设置只两个字段并返回；否则编码码和信息设置为成功，并设置消息体
+//        if (hasCodeAndMessage(data)) {
+//            try {
+//                Method getCode = data.getClass().getMethod("getCode");
+//                getCode.setAccessible(true);
+//                this.code = (int) getCode.invoke(data);
+//
+//                Method getMessage = data.getClass().getMethod("getMessage");
+//                getMessage.setAccessible(true);
+//                this.message = (String) getMessage.invoke(data);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                this.code = SYSTEM_EXCEPTION_CODE;
+//                this.message = SYSTEM_EXCEPTION_MESSAGE;
+//            }
+//        }
     }
 
     public Result(Integer code, String message) {
@@ -90,12 +87,12 @@ public class Result<T> implements Serializable {
         this.message = message;
     }
 
-    public T getBody() {
-        return body;
+    public T getData() {
+        return data;
     }
 
-    public void setBody(T body) {
-        this.body = body;
+    public void setData(T data) {
+        this.data = data;
     }
 
     /**
@@ -146,7 +143,7 @@ public class Result<T> implements Serializable {
     /**
      * 返回失败结果
      *
-     * @param code  编码
+     * @param code    编码
      * @param message 信息
      * @param <T>     T
      * @return 结果
@@ -173,7 +170,7 @@ public class Result<T> implements Serializable {
     /**
      * 返回相应，不知结果是成功还是失败时使用
      *
-     * @param code  编码
+     * @param code    编码
      * @param message 信息
      * @param <T>     T
      * @return 结果

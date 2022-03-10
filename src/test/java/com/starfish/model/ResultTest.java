@@ -21,19 +21,19 @@ public class ResultTest {
     public void test() {
         Result<Object> result = new Result<>(ResultEnum.CAN_NOT_FIND_METHOD);
         System.out.println(JSON.toJSONString(result));
-        Assert.assertEquals(result.getStatus(), ResultEnum.CAN_NOT_FIND_METHOD.getCode());
+        Assert.assertEquals(result.getCode(), ResultEnum.CAN_NOT_FIND_METHOD.getCode());
 
         result = new Result<>(new CustomException(800, "参数错误"));
         System.out.println(JSON.toJSONString(result));
-        Assert.assertEquals(result.getStatus(), Integer.valueOf(800));
+        Assert.assertEquals(result.getCode(), Integer.valueOf(800));
 
         result = new Result<>(new ArrayList<>());
         System.out.println(JSON.toJSONString(result));
-        Assert.assertEquals(result.getStatus(), Integer.valueOf(200));
+        Assert.assertEquals(result.getCode(), Integer.valueOf(200));
 
         result = new Result<>("你好");
         System.out.println(JSON.toJSONString(result));
-        Assert.assertEquals(result.getStatus(), Integer.valueOf(200));
+        Assert.assertEquals(result.getCode(), Integer.valueOf(200));
     }
 
     @Test(expected = NullPointerException.class)

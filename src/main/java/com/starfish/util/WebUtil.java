@@ -304,7 +304,7 @@ public class WebUtil extends HtmlUtils {
             Result<Object> result = new Result<>();
             result.setCode(code);
             result.setMessage(message);
-            result.setBody(data);
+            result.setData(data);
             String value = JSON.toJSONString(result, SerializerFeature.WriteMapNullValue);
             pw.println(value);
             pw.flush();
