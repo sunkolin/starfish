@@ -59,10 +59,10 @@ public class GlobalExceptionResolver {
         if (ex instanceof CustomException) {
             CustomException ce = (CustomException) ex;
             result = new Result<>(ce);
-            log.error("GlobalExceptionResolver exception.status={},message={},url={},param={},body={}", result.getStatus(), result.getMessage(), url, param, body, ex);
+            log.error("GlobalExceptionResolver exception.code={},message={},url={},param={},body={}", result.getCode(), result.getMessage(), url, param, body, ex);
         } else {
             result = new Result<>(SYSTEM_EXCEPTION_CODE, SYSTEM_EXCEPTION_MESSAGE);
-            log.error("GlobalExceptionResolver system exception.status={},message={},url={}", result.getStatus(), result.getMessage(), url, ex);
+            log.error("GlobalExceptionResolver system exception.code={},message={},url={}", result.getCode(), result.getMessage(), url, ex);
         }
 
         return result;
