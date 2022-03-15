@@ -31,7 +31,7 @@ public class ExecutorAutoConfiguration {
     @Resource
     private ExecutorProperties executorProperties;
 
-    @Bean(name = {"executor", "threadPoolTaskExecutor"}, initMethod = "afterPropertiesSet", destroyMethod = "destroy")
+    @Bean(name = {"executor"}, initMethod = "afterPropertiesSet", destroyMethod = "destroy")
     public ThreadPoolTaskExecutor threadPoolTaskExecutor() {
         try {
             ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
