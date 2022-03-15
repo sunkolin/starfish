@@ -2,7 +2,9 @@ package com.starfish.autoconfigure.executor;
 
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +26,7 @@ import java.util.concurrent.RejectedExecutionHandler;
 @Deprecated
 @Slf4j
 @Configuration
+@AutoConfigureAfter(TaskExecutionAutoConfiguration.class)
 @ConditionalOnProperty(prefix = "application.executor", name = "enabled", havingValue = "true")
 @EnableConfigurationProperties({ExecutorProperties.class})
 public class ExecutorAutoConfiguration {
