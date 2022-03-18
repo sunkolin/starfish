@@ -9,7 +9,7 @@
     </parent>
     <groupId>com.github.sunkolin</groupId>
     <artifactId>starfish</artifactId>
-    <version>2022.03.06</version>
+    <version>2022.03.18</version>
     <packaging>jar</packaging>
     <name>starfish</name>
     <description>starfish</description>
@@ -91,10 +91,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-websocket</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-websocket</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-json</artifactId>

@@ -18,7 +18,7 @@ public class CustomException extends RuntimeException implements Serializable {
     /**
      * code
      */
-    public int code;
+    public Integer code;
 
     /**
      * message
@@ -37,7 +37,7 @@ public class CustomException extends RuntimeException implements Serializable {
         this.description = ResultEnum.SYSTEM_EXCEPTION.getMessage();
     }
 
-    public CustomException(int code) {
+    public CustomException(Integer code) {
         this(code, ResultEnum.SYSTEM_EXCEPTION.getMessage(), ResultEnum.SYSTEM_EXCEPTION.getMessage());
     }
 
@@ -45,11 +45,11 @@ public class CustomException extends RuntimeException implements Serializable {
         this(ResultEnum.SYSTEM_EXCEPTION.getCode(), message, message);
     }
 
-    public CustomException(int code, String message) {
+    public CustomException(Integer code, String message) {
         this(code, message, message);
     }
 
-    public CustomException(int code, String message, String description) {
+    public CustomException(Integer code, String message, String description) {
         super(message);
         this.code = code;
         this.message = message;
@@ -73,21 +73,21 @@ public class CustomException extends RuntimeException implements Serializable {
             Method getMessageMethod = object.getClass().getMethod("getMessage");
             Object codeObject = getCodeMethod.invoke(object);
             Object messageObject = getMessageMethod.invoke(object);
-            int codeInt = (codeObject == null ? -1 : (int) codeObject);
-            String messageString = (messageObject == null ? "" : messageObject.toString());
-            this.code = codeInt;
-            this.message = messageString;
-            this.description = messageString;
+            int code = (codeObject == null ? -1 : (Integer) codeObject);
+            String message = (messageObject == null ? "" : messageObject.toString());
+            this.code = code;
+            this.message = message;
+            this.description = message;
         } catch (Exception e) {
             log.error("CustomException", e);
         }
     }
 
-    public int getCode() {
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
 

@@ -2,7 +2,9 @@ package com.starfish.autoconfigure.executor;
 
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +15,9 @@ import java.util.concurrent.RejectedExecutionHandler;
 
 /**
  * 线程池配置
- * 在springboot2.1.0版本之后已加提供类似功能
+ * 在springboot2.1.0版本之后已加提供类似功能，故此功能废弃
+ * 如果需要加载此组件，需要在spring.factories文件中增加如下内容
+ * org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.starfish.autoconfigure.executor.ExecutorAutoConfiguration,\
  *
  * @author sunkolin
  * @version 1.0.0
@@ -22,14 +26,15 @@ import java.util.concurrent.RejectedExecutionHandler;
 @Deprecated
 @Slf4j
 @Configuration
-@ConditionalOnProperty(prefix = "application.executor", name = "enabled", havingValue = "true", matchIfMissing = true)
+@AutoConfigureAfter(TaskExecutionAutoConfiguration.class)
+@ConditionalOnProperty(prefix = "application.executor", name = "enabled", havingValue = "true")
 @EnableConfigurationProperties({ExecutorProperties.class})
 public class ExecutorAutoConfiguration {
 
     @Resource
     private ExecutorProperties executorProperties;
 
-    @Bean(name = {"executor", "threadPoolTaskExecutor"}, initMethod = "afterPropertiesSet", destroyMethod = "destroy")
+    @Bean(name = {"executor"}, initMethod = "afterPropertiesSet", destroyMethod = "destroy")
     public ThreadPoolTaskExecutor threadPoolTaskExecutor() {
         try {
             ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
