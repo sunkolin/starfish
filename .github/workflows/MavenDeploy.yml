@@ -30,8 +30,14 @@ jobs:
         with:
           java-version: "11"
           distribution: "adopt"
+          cache: maven
 
-      - name: Install and Publish to GitHub Packages
+      - name: Install
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        run: mvn --batch-mode --update-snapshots clean install -Dmaven.test.skip=true
+
+      - name: Deploy
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         run: mvn --batch-mode --update-snapshots clean deploy -Dmaven.test.skip=true
