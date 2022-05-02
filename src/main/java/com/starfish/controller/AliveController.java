@@ -17,7 +17,7 @@ public class AliveController {
     /**
      * 健康检查
      */
-    @GetMapping("/api/alive")
+    @GetMapping({"/api/alive", "/${spring.application.name}/api/alive"})
     public ApiResult<String> alive() {
         return new ApiResult<>("alive");
     }
