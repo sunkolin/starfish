@@ -9,8 +9,11 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 /**
  * MailUtil
@@ -22,17 +25,7 @@ import java.util.Properties;
 @Slf4j
 public class MailUtil {
 
-    /**
-     * 发送邮件
-     *
-     * @param to              收件人
-     * @param carbonCopy      抄送人
-     * @param blindCarbonCopy 密送人
-     * @param subject         主题
-     * @param text            内容
-     * @throws MessagingException 发送失败抛出异常
-     */
-    public static void send(String[] to, String[] carbonCopy, String[] blindCarbonCopy, String subject, String text) throws MessagingException {
+    public static void send(List<String> to, List<String> carbonCopy, List<String> blindCarbonCopy, String subject, String text) throws MessagingException {
         Properties properties = new Properties();
         properties.put("mail.smtp.host", MailConstant.HOST);
         properties.put("mail.smtp.port", MailConstant.PORT);
@@ -61,24 +54,24 @@ public class MailUtil {
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress(MailConstant.FROM));
         //to
-        InternetAddress[] tos = new InternetAddress[to.length];
-        for (int i = 0; i < to.length; i++) {
-            tos[i] = new InternetAddress(to[i]);
+        InternetAddress[] tos = new InternetAddress[to.size()];
+        for (int i = 0; i < to.size(); i++) {
+            tos[i] = new InternetAddress(to.get(i));
         }
         message.setRecipients(Message.RecipientType.TO, tos);
         //carbonCopy
-        if (carbonCopy != null && carbonCopy.length > 0) {
-            InternetAddress[] cc = new InternetAddress[carbonCopy.length];
-            for (int i = 0; i < carbonCopy.length; i++) {
-                cc[i] = new InternetAddress(carbonCopy[i]);
+        if (carbonCopy != null && carbonCopy.size() > 0) {
+            InternetAddress[] cc = new InternetAddress[carbonCopy.size()];
+            for (int i = 0; i < carbonCopy.size(); i++) {
+                cc[i] = new InternetAddress(carbonCopy.get(i));
             }
             message.setRecipients(Message.RecipientType.CC, cc);
         }
         //blindCarbonCopy
-        if (blindCarbonCopy != null && blindCarbonCopy.length > 0) {
-            InternetAddress[] bcc = new InternetAddress[blindCarbonCopy.length];
-            for (int i = 0; i < blindCarbonCopy.length; i++) {
-                bcc[i] = new InternetAddress(blindCarbonCopy[i]);
+        if (blindCarbonCopy != null && blindCarbonCopy.size() > 0) {
+            InternetAddress[] bcc = new InternetAddress[blindCarbonCopy.size()];
+            for (int i = 0; i < blindCarbonCopy.size(); i++) {
+                bcc[i] = new InternetAddress(blindCarbonCopy.get(i));
             }
             message.setRecipients(Message.RecipientType.BCC, bcc);
         }
@@ -91,6 +84,23 @@ public class MailUtil {
         message.setContent(multipart);
         Transport.send(message);
         log.info("send mail to {} success.", JSON.toJSONString(to));
+    }
+
+    /**
+     * 发送邮件
+     *
+     * @param to              收件人
+     * @param carbonCopy      抄送人
+     * @param blindCarbonCopy 密送人
+     * @param subject         主题
+     * @param text            内容
+     * @throws MessagingException 发送失败抛出异常
+     */
+    public static void send(String[] to, String[] carbonCopy, String[] blindCarbonCopy, String subject, String text) throws MessagingException {
+        List<String> toList = Arrays.stream(to).collect(Collectors.toList());
+        List<String> carbonCopyList = Arrays.stream(carbonCopy).collect(Collectors.toList());
+        List<String> blindCarbonCopyList = Arrays.stream(blindCarbonCopy).collect(Collectors.toList());
+        send(toList, carbonCopyList, blindCarbonCopyList, subject, text);
     }
 
 }

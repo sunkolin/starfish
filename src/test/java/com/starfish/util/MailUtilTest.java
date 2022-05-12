@@ -1,5 +1,6 @@
 package com.starfish.util;
 
+import com.google.common.collect.Lists;
 import org.junit.Test;
 
 import javax.mail.MessagingException;
@@ -8,10 +9,10 @@ public class MailUtilTest {
 
     @Test
     public void testSend() throws MessagingException {
-        String receiver = "xiaozhi8859@qq.com";
-        String subject = "海星发送邮件测试";
-        String content = "你好，海星发送邮件测试。";
-        MailUtil.send(new String[]{receiver}, null, null, subject, content);
+        String receiver = "jinkela008@foxmail.com";
+        String subject = "邮件系统";
+        String content = "你好，此邮件由邮件系统发送。";
+        MailUtil.send(Lists.newArrayList(receiver), null, null, subject, content);
     }
 
 }
