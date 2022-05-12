@@ -9,7 +9,7 @@
     </parent>
     <groupId>com.github.sunkolin</groupId>
     <artifactId>starfish</artifactId>
-    <version>2022.05.12</version>
+    <version>2022.06.30-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>starfish</name>
     <description>starfish</description>
