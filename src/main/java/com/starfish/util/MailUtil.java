@@ -1,6 +1,5 @@
 package com.starfish.util;
 
-import com.alibaba.fastjson.JSON;
 import com.starfish.constant.MailConstant;
 import lombok.extern.slf4j.Slf4j;
 
@@ -83,7 +82,7 @@ public class MailUtil {
         multipart.addBodyPart(bodyPart);
         message.setContent(multipart);
         Transport.send(message);
-        log.info("send mail to {} success.", JSON.toJSONString(to));
+        log.info("send mail to {} success.", JsonUtil.toJson(to));
     }
 
     /**

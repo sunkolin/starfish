@@ -1,6 +1,5 @@
 package com.starfish.util;
 
-import com.alibaba.fastjson.JSON;
 import com.starfish.model.weather.WeatherModel;
 import org.junit.Assert;
 import org.junit.Test;
@@ -54,7 +53,7 @@ public class BusinessUtilTest {
     public void getWeatherTest() {
         String cityName = "北京市";
         WeatherModel result = BusinessUtil.getWeather(cityName);
-        System.out.println(JSON.toJSONString(result));
+        System.out.println(JsonUtil.toJson(result));
         Assert.assertNotNull(result);
     }
 

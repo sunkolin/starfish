@@ -1,7 +1,5 @@
 package com.starfish.util;
 
-import com.alibaba.fastjson.JSON;
-import com.starfish.model.weather.WeatherModel;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,7 +14,7 @@ public class CommonUtilTest {
 
     @Test
     public void getPublicAddressTest() {
-        String result = CommonUtil.getPublicAddress();
+        String result = CommonUtil.getPublicIp();
         System.out.println(result);
         Assert.assertNotNull(result);
     }

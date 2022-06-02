@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @since 2021-03-08
  */
 @Data
-public class WeatherDetailModel implements Serializable {
+public class WeatherDetail implements Serializable {
 
     /**
      * 日期
@@ -33,5 +33,15 @@ public class WeatherDetailModel implements Serializable {
      * 天气
      */
     private String type;
+
+    /**
+     * 风向
+     */
+    private String fengxiang;
+
+    /**
+     * 风力
+     */
+    private String fengli;
 
 }

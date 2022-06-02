@@ -1,16 +1,15 @@
 package com.starfish.util;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.dtflys.forest.Forest;
 import com.dtflys.forest.http.ForestHeaderMap;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.starfish.enumeration.ResultEnum;
 import com.starfish.exception.CustomException;
 import com.starfish.model.Result;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.Lists;
 import org.springframework.lang.Nullable;
@@ -305,7 +304,7 @@ public class WebUtil extends HtmlUtils {
             result.setCode(code);
             result.setMessage(message);
             result.setData(data);
-            String value = JSON.toJSONString(result, SerializerFeature.WriteMapNullValue);
+            String value = JsonUtil.toJson(result);
             pw.println(value);
             pw.flush();
         } catch (IOException e) {
@@ -363,30 +362,71 @@ public class WebUtil extends HtmlUtils {
      * @return the location
      */
     public static String getAddress(String ip) {
+        String result;
         try {
-            //call remote interface of taobao
+            //call remote interface
             Map<String, Object> params = ImmutableMap.of("ip", ip);
-            String result = Forest.get(TAOBAO_INTERFACE_URL).addQuery(params).executeAsString();
+            String json = Forest.get(TAOBAO_INTERFACE_URL).addQuery(params).executeAsString();
 
-            //process the result,the result format is { code: 0, data: { } }
-            JSONObject data = JSON.parseObject(result).getJSONObject("data");
-
-            result = data.getString("country") + " " + data.getString("region") + " " + data.getString("city");
+            GetIpAddressResult getIpAddressResult = JsonUtil.toObject(json, GetIpAddressResult.class);
+            GetIpAddressData data = getIpAddressResult.getData();
 
             //return
-            return result;
+            return data.getCountry() + " " + data.getRegion() + " " + data.getCity();
         } catch (Exception e) {
-            //if catch exception,call remote interface of sina
-            Map<String, Object> params = ImmutableMap.of("ip", ip);
-            String result = Forest.get(TAOBAO_INTERFACE_URL).addQuery(params).executeAsString();
-
-            //process the result,the result format is { ret: 1,  start: -1,  end: -1,  country: "中国",  province: "北京", city: "北京",district: "",  isp: "",  type: "",  desc: ""  }
-            JSONObject jsonObject = JSON.parseObject(result);
-            result = jsonObject.getString("country") + " " + jsonObject.getString("province") + " " + jsonObject.getString("city");
-
-            //return
+            result = "未知";
             return result;
         }
+    }
+
+    @Data
+    static class GetIpAddressResult implements Serializable {
+
+        private Integer code;
+
+        private String msg;
+
+        private GetIpAddressData data;
+
+    }
+
+    @Data
+    static class GetIpAddressData implements Serializable {
+
+        private String area;
+
+        private String country;
+
+        @JsonProperty("isp_id")
+        private String ispId;
+
+        private String queryIp;
+
+        private String city;
+
+        private String ip;
+
+        private String isp;
+
+        private String county;
+
+        @JsonProperty("region_id")
+        private String regionId;
+
+        @JsonProperty("area_id")
+        private String areaId;
+
+        @JsonProperty("county_id")
+        private String countyId;
+
+        private String region;
+
+        @JsonProperty("country_id")
+        private String countryId;
+
+        @JsonProperty("city_id")
+        private String cityId;
+
     }
 
     /**
