@@ -1,8 +1,14 @@
 package com.starfish;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Multiset;
+import com.google.common.collect.Multisets;
+import com.starfish.util.FileUtil;
 import com.starfish.util.JsonUtil;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * Test
@@ -14,63 +20,15 @@ import lombok.Data;
 public class Test {
 
     public static void main(String[] args) throws JsonProcessingException {
-
-        User u = new User();
-        u.setUsername("tom");
-        u.setMessageType(MessageType.message);
-        u.setSex(null);
-//        String json = JSON.toJSONString(u);
-//        String json = JSON.toJSONString(u, JSON.DEFAULT_GENERATE_FEATURE, SerializerFeature.WriteEnumUsingToString);
-
-//        System.out.println(MessageType.message.ordinal());
-
-        System.out.println(JsonUtil.toJson(u));
-
-
-//        JSON.toJsonString
-
-    }
-
-    @Data
-    static
-    class User {
-
-        private String username;
-
-        private MessageType messageType;
-
-        private String sex;
-
-    }
-
-    enum MessageType {
-        notify(0, "notify"),
-        message(1, "message");
-
-
-        private int type;
-
-        private String name;
-
-        MessageType(int type, String name) {
-            this.type = type;
-            this.name = name;
-        }
-
-        public int getType() {
-            return type;
-        }
-
-        public void setType(int type) {
-            this.type = type;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
+        List<String> list = FileUtil.readLines("classpath:music.txt");
+        Multiset<String> multiset = HashMultiset.create();
+        multiset.addAll(list);
+        multiset.remove("", Integer.MAX_VALUE);
+        for (String item : multiset) {
+            int count = multiset.count(item);
+            if (count > 1) {
+                System.out.println(item);
+            }
         }
     }
 
