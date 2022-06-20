@@ -6,6 +6,8 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.net.ssl.*;
@@ -108,6 +110,37 @@ public final class RestTemplatePlus {
         MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
         mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Collections.singletonList(new MediaType("application", "x-javascript")));
         messageConverters.add(mappingJackson2HttpMessageConverter);
+    }
+
+    /**
+     * 发起http请求
+     *
+     * @param url          请求地址
+     * @param method       方法
+     * @param params       参数
+     * @param headers      headers
+     * @param form         请求体
+     * @param responseType 返回类型
+     * @param <T>          T
+     * @return 结果
+     */
+    public static <T> ResponseEntity<T> form(String url, HttpMethod method, Map<String, String> headers, Map<String, String> params, Map<String, String> form, Class<T> responseType) {
+        url = CommonUtil.contact(url, params);
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        if (!CollectionUtils.isEmpty(headers)) {
+            httpHeaders.setAll(headers);
+        }
+        httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        MultiValueMap<String, String> innerForm = new LinkedMultiValueMap<>();
+        if (!CollectionUtils.isEmpty(form)) {
+            for (Map.Entry<String, String> item : form.entrySet()) {
+                innerForm.add(item.getKey(), item.getValue());
+            }
+        }
+        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(innerForm, httpHeaders);
+        return REST_TEMPLATE.exchange(url, HttpMethod.POST, requestEntity, responseType);
     }
 
     /**
