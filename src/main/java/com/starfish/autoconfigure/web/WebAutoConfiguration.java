@@ -3,7 +3,7 @@ package com.starfish.autoconfigure.web;
 import com.starfish.autoconfigure.swagger.SwaggerInterceptor;
 import com.starfish.interceptor.TimeInterceptor;
 import com.starfish.interceptor.TraceIdInterceptor;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  * @version 1.0.0
  * @since 2019-07-04
  */
-@Configuration
+@AutoConfiguration
 public class WebAutoConfiguration implements WebMvcConfigurer {
 
     @Resource

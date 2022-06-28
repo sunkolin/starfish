@@ -3,10 +3,10 @@ package com.starfish.autoconfigure.swagger;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Sets;
 import org.assertj.core.util.Strings;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -30,7 +30,7 @@ import java.util.function.Predicate;
  * @since 2018-03-05
  */
 @Profile({"dev", "test"})
-@Configuration
+@AutoConfiguration
 @ConditionalOnProperty(value = {"application.swagger.enabled"}, matchIfMissing = true)
 @EnableConfigurationProperties({SwaggerProperties.class})
 @EnableSwagger2

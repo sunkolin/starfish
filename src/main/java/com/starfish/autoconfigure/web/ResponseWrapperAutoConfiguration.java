@@ -1,6 +1,7 @@
 package com.starfish.autoconfigure.web;
 
 import com.starfish.advice.ResponseWrapper;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 1.0.0
  * @since 2021-06-04
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 @EnableConfigurationProperties(ResponseWrapperProperties.class)
 @ConditionalOnProperty(prefix = "application.web.response-wrapper", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class ResponseWrapperAutoConfiguration {
