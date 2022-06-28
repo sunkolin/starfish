@@ -29,8 +29,8 @@ import java.util.function.Predicate;
  * @version 1.0.0
  * @since 2018-03-05
  */
-@Profile({"dev", "test"})
 @AutoConfiguration
+@Profile({"dev", "test"})
 @ConditionalOnProperty(value = {"application.swagger.enabled"}, matchIfMissing = true)
 @EnableConfigurationProperties({SwaggerProperties.class})
 @EnableSwagger2
@@ -76,7 +76,6 @@ public class SwaggerAutoConfiguration {
         Contact contact = new Contact(swaggerProperties.getName(), swaggerProperties.getUrl(), swaggerProperties.getEmail());
         apiInfoBuilder.contact(contact);
         return apiInfoBuilder.build();
-
     }
 
 }
