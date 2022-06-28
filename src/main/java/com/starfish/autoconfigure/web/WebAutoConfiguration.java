@@ -1,5 +1,6 @@
 package com.starfish.autoconfigure.web;
 
+import com.starfish.autoconfigure.swagger.SwaggerAutoConfiguration;
 import com.starfish.autoconfigure.swagger.SwaggerInterceptor;
 import com.starfish.interceptor.TimeInterceptor;
 import com.starfish.interceptor.TraceIdInterceptor;
@@ -16,20 +17,20 @@ import javax.annotation.Resource;
  * @version 1.0.0
  * @since 2019-07-04
  */
-@AutoConfiguration
+@AutoConfiguration(after = {SwaggerAutoConfiguration.class, TimeInterceptor.class, TraceIdInterceptor.class, SwaggerInterceptor.class})
 public class WebAutoConfiguration implements WebMvcConfigurer {
-
-    @Resource
-    private TimeInterceptor timeInterceptor;
-
-    @Resource
-    private SwaggerInterceptor swaggerInterceptor;
 
     /**
      * 此处对象不要new，否则会导致拦截器中依赖的对象为null
      */
     @Resource
     private TraceIdInterceptor traceIdInterceptor;
+
+    @Resource
+    private TimeInterceptor timeInterceptor;
+
+    @Resource
+    private SwaggerInterceptor swaggerInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

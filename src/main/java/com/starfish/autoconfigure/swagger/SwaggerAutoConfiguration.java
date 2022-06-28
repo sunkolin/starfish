@@ -78,4 +78,11 @@ public class SwaggerAutoConfiguration {
         return apiInfoBuilder.build();
     }
 
+    @Bean
+    public SwaggerInterceptor newSwaggerInterceptor() {
+        SwaggerInterceptor swaggerInterceptor = new SwaggerInterceptor();
+        swaggerInterceptor.setEnabled(swaggerProperties.getEnabled());
+        return swaggerInterceptor;
+    }
+
 }

@@ -7,6 +7,5 @@ com.starfish.autoconfigure.web.ResponseWrapperAutoConfiguration
 com.starfish.interceptor.TraceIdInterceptor
 com.starfish.interceptor.TimeInterceptor
 com.starfish.autoconfigure.swagger.SwaggerAutoConfiguration
-com.starfish.autoconfigure.swagger.SwaggerInterceptor
 com.starfish.autoconfigure.caffeine.CaffeineCacheAutoConfiguration
 com.starfish.autoconfigure.task.XxlJobAutoConfiguration
