@@ -46,6 +46,10 @@ public final class RestTemplatePlus {
         supportJavascript(messageConverters);
         useUtf8(REST_TEMPLATE);
 
+        // fix javax.net.ssl.SSLProtocolException: handshake alert:unrecognized_name
+        // reference:https://blog.csdn.net/leisurelen/article/details/74407817
+        System.setProperty ("jsse.enableSNIExtension", "false");
+
         Ssl factory = new Ssl();
         factory.setReadTimeout(5000);
         factory.setConnectTimeout(15000);
