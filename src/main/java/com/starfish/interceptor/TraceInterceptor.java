@@ -1,12 +1,12 @@
 package com.starfish.interceptor;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,10 +19,15 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Slf4j
 @Component
-public class TraceIdInterceptor implements HandlerInterceptor {
+public class TraceInterceptor implements HandlerInterceptor {
 
-    @Resource
-    private Tracer sleuthTracer;
+    private final Tracer sleuthTracer;
+
+    @Autowired(required = false)
+    public TraceInterceptor(Tracer sleuthTracer) {
+        this.sleuthTracer = sleuthTracer;
+    }
+
 
     /**
      * trace id header name
@@ -31,16 +36,17 @@ public class TraceIdInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        try {
-            // 新的方式获取traceId
-            String traceId = sleuthTracer.currentSpan().context().traceId();
-
-            // 设置Header
-            response.setHeader(TRACE_ID_HEADER_NAME, traceId);
-        } catch (Exception e) {
-            log.error("TraceIdInterceptor get trace id error.", e);
+        String traceId = "";
+        if (sleuthTracer != null) {
+            try {
+                // 新的方式获取traceId
+                sleuthTracer.currentSpan().context().traceId();
+                // 设置Header
+                response.setHeader(TRACE_ID_HEADER_NAME, traceId);
+            } catch (Exception e) {
+                log.error("TraceIdInterceptor get trace id error.", e);
+            }
         }
-
         return true;
     }
 
