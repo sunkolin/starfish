@@ -28,7 +28,6 @@ public class TraceInterceptor implements HandlerInterceptor {
         this.sleuthTracer = sleuthTracer;
     }
 
-
     /**
      * trace id header name
      */
