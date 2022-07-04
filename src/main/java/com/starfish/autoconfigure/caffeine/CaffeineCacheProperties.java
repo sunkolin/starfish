@@ -15,7 +15,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class CaffeineCacheProperties {
 
     /**
-     * 是否启用,true启用，false禁用，默认false
+     * 是否启用,true启用，false禁用，默认启用
      */
     private Boolean enabled = true;
 
