@@ -1,5 +1,6 @@
 package com.starfish.autoconfigure.trace;
 
+import com.starfish.extension.trace.TraceConfigurer;
 import com.starfish.extension.trace.TraceInterceptor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -21,6 +22,11 @@ public class TraceAutoConfiguration {
     @Bean
     public TraceInterceptor createTraceInterceptor() {
         return new TraceInterceptor();
+    }
+
+    @Bean
+    public TraceConfigurer createTraceConfigurer(TraceInterceptor traceInterceptor) {
+        return new TraceConfigurer(traceInterceptor);
     }
 
 }

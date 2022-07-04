@@ -1,8 +1,10 @@
 package com.starfish.autoconfigure.swagger;
 
 import com.google.common.base.Splitter;
+import com.google.common.base.Strings;
 import com.google.common.collect.Sets;
-import org.assertj.core.util.Strings;
+import com.starfish.extension.swagger.SwaggerConfigurer;
+import com.starfish.extension.swagger.SwaggerInterceptor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -59,7 +61,7 @@ public class SwaggerAutoConfiguration {
                 .useDefaultResponseMessages(false)
                 .select()
                 // 指定controller存放的目录路径
-                .apis((com.google.common.base.Predicate<RequestHandler>) predicate)
+                .apis(predicate)
 //                .paths(PathSelectors.ant("/api/v1/*"))
                 .paths(PathSelectors.any())
                 .build();
@@ -83,6 +85,11 @@ public class SwaggerAutoConfiguration {
         SwaggerInterceptor swaggerInterceptor = new SwaggerInterceptor();
         swaggerInterceptor.setEnabled(swaggerProperties.getEnabled());
         return swaggerInterceptor;
+    }
+
+    @Bean
+    public SwaggerConfigurer createSwaggerConfigurer(SwaggerInterceptor swaggerInterceptor) {
+        return new SwaggerConfigurer(swaggerInterceptor);
     }
 
 }
