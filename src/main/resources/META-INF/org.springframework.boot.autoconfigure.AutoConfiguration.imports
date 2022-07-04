@@ -1,6 +1,6 @@
 com.starfish.extension.SpringPlus
 com.starfish.extension.processor.CustomEnvironmentPostProcessor
-com.starfish.controller.AliveController
+com.starfish.autoconfigure.alive.AliveAutoConfiguration
 com.starfish.autoconfigure.web.WebAutoConfiguration
 com.starfish.autoconfigure.exception.ExceptionAutoConfiguration
 com.starfish.autoconfigure.web.ResponseWrapperAutoConfiguration

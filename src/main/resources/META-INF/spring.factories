@@ -5,7 +5,7 @@
 #  com.starfish.extension.SpringPlus,\
 #  com.starfish.extension.trace.TraceInterceptor,\
 #  com.starfish.interceptor.TimeInterceptor,\
-#  com.starfish.controller.AliveController,\
+#  com.starfish.extension.alive.AliveController,\
 #  com.starfish.autoconfigure.web.WebAutoConfiguration,\
 #  com.starfish.autoconfigure.web.ResponseWrapperAutoConfiguration,\
 #  com.starfish.autoconfigure.exception.ExceptionAutoConfiguration,\
