@@ -17,7 +17,7 @@ public class CaffeineCacheProperties {
     /**
      * 是否启用,true启用，false禁用，默认false
      */
-    private Boolean enabled = false;
+    private Boolean enabled = true;
 
     /**
      * 缓存过期时间，单位秒，默认一小时，expireAfterWrite
