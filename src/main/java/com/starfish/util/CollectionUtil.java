@@ -1,6 +1,5 @@
 package com.starfish.util;
 
-import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import com.starfish.enumeration.ResultEnum;
 import com.starfish.enumeration.SortEnum;
@@ -324,7 +323,7 @@ public class CollectionUtil {
             }
         }
 
-        log.info("continuousList,param={},num={},result={}", JSON.toJSONString(list), num, JSON.toJSONString(result));
+        log.info("continuousList,param={},num={},result={}", JsonUtil.toJson(list), num, JsonUtil.toJson(result));
         return result;
     }
 

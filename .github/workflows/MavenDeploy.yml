@@ -1,4 +1,4 @@
-name: MavenPublish
+name: MavenDeploy
 
 on:
   push:
@@ -6,7 +6,6 @@ on:
       - "2020.*.*"
       - "2021.*.*"
       - "2022.*.*"
-  # 定时执行，北京时间10点执行一次，UTC时间2点即北京时间10点
 #  schedule:
 #    - cron: '0 2 * * *'
 
@@ -27,12 +26,18 @@ jobs:
         uses: actions/checkout@main
 
       - name: Set up JDK
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
-          java-version: "8"
+          java-version: "11"
           distribution: "adopt"
+          cache: maven
 
-      - name: Install and Publish to GitHub Packages
+      - name: Install
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        run: mvn --batch-mode --update-snapshots clean install -Dmaven.test.skip=true
+
+      - name: Deploy
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         run: mvn --batch-mode --update-snapshots clean deploy -Dmaven.test.skip=true

@@ -1,12 +1,14 @@
 package com.starfish.autoconfigure.swagger;
 
 import com.google.common.base.Splitter;
+import com.google.common.base.Strings;
 import com.google.common.collect.Sets;
-import org.assertj.core.util.Strings;
+import com.starfish.extension.swagger.SwaggerConfigurer;
+import com.starfish.extension.swagger.SwaggerInterceptor;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -23,14 +25,14 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * SwaggerConfig
+ * SwaggerConfig TODO
  *
  * @author sunkolin
  * @version 1.0.0
  * @since 2018-03-05
  */
+@AutoConfiguration
 @Profile({"dev", "test"})
-@Configuration
 @ConditionalOnProperty(value = {"application.swagger.enabled"}, matchIfMissing = true)
 @EnableConfigurationProperties({SwaggerProperties.class})
 @EnableSwagger2
@@ -59,7 +61,7 @@ public class SwaggerAutoConfiguration {
                 .useDefaultResponseMessages(false)
                 .select()
                 // 指定controller存放的目录路径
-                .apis((com.google.common.base.Predicate<RequestHandler>) predicate)
+                .apis(predicate)
 //                .paths(PathSelectors.ant("/api/v1/*"))
                 .paths(PathSelectors.any())
                 .build();
@@ -76,7 +78,18 @@ public class SwaggerAutoConfiguration {
         Contact contact = new Contact(swaggerProperties.getName(), swaggerProperties.getUrl(), swaggerProperties.getEmail());
         apiInfoBuilder.contact(contact);
         return apiInfoBuilder.build();
+    }
 
+    @Bean
+    public SwaggerInterceptor newSwaggerInterceptor() {
+        SwaggerInterceptor swaggerInterceptor = new SwaggerInterceptor();
+        swaggerInterceptor.setEnabled(swaggerProperties.getEnabled());
+        return swaggerInterceptor;
+    }
+
+    @Bean
+    public SwaggerConfigurer createSwaggerConfigurer(SwaggerInterceptor swaggerInterceptor) {
+        return new SwaggerConfigurer(swaggerInterceptor);
     }
 
 }

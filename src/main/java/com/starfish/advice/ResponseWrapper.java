@@ -1,9 +1,8 @@
 package com.starfish.advice;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.starfish.model.PageResult;
 import com.starfish.model.Result;
+import com.starfish.util.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -55,7 +54,7 @@ public class ResponseWrapper implements ResponseBodyAdvice<Object> {
         }
         if (body instanceof String) {
             response.getHeaders().set("Content-Type", "application/json;charset=utf-8");
-            return JSON.toJSONString(new Result<>(body), SerializerFeature.WriteMapNullValue);
+           return JsonUtil.toJson(new Result<>(body));
         }
         if (body instanceof ResponseEntity) {
             return body;

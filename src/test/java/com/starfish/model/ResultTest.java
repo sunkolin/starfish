@@ -1,8 +1,8 @@
 package com.starfish.model;
 
-import com.alibaba.fastjson.JSON;
 import com.starfish.enumeration.ResultEnum;
 import com.starfish.exception.CustomException;
+import com.starfish.util.JsonUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -20,19 +20,19 @@ public class ResultTest {
     @Test
     public void test() {
         Result<Object> result = new Result<>(ResultEnum.CAN_NOT_FIND_METHOD);
-        System.out.println(JSON.toJSONString(result));
+        System.out.println(JsonUtil.toJson(result));
         Assert.assertEquals(result.getCode(), ResultEnum.CAN_NOT_FIND_METHOD.getCode());
 
         result = new Result<>(new CustomException(800, "参数错误"));
-        System.out.println(JSON.toJSONString(result));
+        System.out.println(JsonUtil.toJson(result));
         Assert.assertEquals(result.getCode(), Integer.valueOf(800));
 
         result = new Result<>(new ArrayList<>());
-        System.out.println(JSON.toJSONString(result));
+        System.out.println(JsonUtil.toJson(result));
         Assert.assertEquals(result.getCode(), Integer.valueOf(200));
 
         result = new Result<>("你好");
-        System.out.println(JSON.toJSONString(result));
+        System.out.println(JsonUtil.toJson(result));
         Assert.assertEquals(result.getCode(), Integer.valueOf(200));
     }
 

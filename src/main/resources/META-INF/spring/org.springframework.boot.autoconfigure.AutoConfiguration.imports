@@ -1,0 +1,11 @@
+com.starfish.extension.SpringPlus
+com.starfish.extension.processor.CustomEnvironmentPostProcessor
+com.starfish.autoconfigure.alive.AliveAutoConfiguration
+com.starfish.autoconfigure.web.WebAutoConfiguration
+com.starfish.autoconfigure.exception.ExceptionAutoConfiguration
+com.starfish.autoconfigure.web.ResponseWrapperAutoConfiguration
+com.starfish.autoconfigure.trace.TraceAutoConfiguration
+com.starfish.autoconfigure.time.ElapsedTimeAutoConfiguration
+com.starfish.autoconfigure.swagger.SwaggerAutoConfiguration
+com.starfish.autoconfigure.caffeine.CaffeineCacheAutoConfiguration
+com.starfish.autoconfigure.task.XxlJobAutoConfiguration

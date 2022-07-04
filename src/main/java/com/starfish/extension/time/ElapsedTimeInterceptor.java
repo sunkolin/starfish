@@ -1,4 +1,4 @@
-package com.starfish.interceptor;
+package com.starfish.extension.time;
 
 import com.starfish.constant.Constant;
 import lombok.extern.slf4j.Slf4j;
@@ -10,15 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 时间拦截器
+ * 耗时拦截器
  *
  * @author sunkolin
  * @version 1.0.0
- * @since 2015-05-06
+ * @since 2022-07-04
  */
 @SuppressWarnings("unused")
 @Slf4j
-public class TimeInterceptor implements HandlerInterceptor, Ordered {
+public class ElapsedTimeInterceptor implements HandlerInterceptor, Ordered {
 
     /**
      * spend time header name

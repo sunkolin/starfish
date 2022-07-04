@@ -1,6 +1,5 @@
 package com.starfish.util;
 
-import com.alibaba.fastjson.JSON;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -52,7 +51,7 @@ public class CollectionUtilTest {
     public void sortStringTest() {
         String[] array = new String[]{"1", "3", "2", "a", "4"};
         CollectionUtil.sort(array, "desc");
-        System.out.println(JSON.toJSONString(array));
+        System.out.println(JsonUtil.toJson(array));
         Assert.assertArrayEquals(new String[]{"a", "4", "3", "2", "1"}, array);
     }
 
@@ -67,7 +66,7 @@ public class CollectionUtilTest {
         list.add(36L);
         list.add(40L);
         CollectionUtil.sort(list, "desc", null);
-        System.out.println(JSON.toJSONString(list));
+        System.out.println(JsonUtil.toJson(list));
         Assert.assertEquals(12L, list.get(list.size() - 1).longValue());
     }
 
