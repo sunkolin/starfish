@@ -5,6 +5,8 @@ import com.dtflys.forest.callback.OnSuccess;
 import com.dtflys.forest.http.ForestHeaderMap;
 import org.springframework.util.CollectionUtils;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 /**
  * ForestUtil
  *
@@ -21,15 +23,15 @@ public class ForestUtil {
      * @return 结果
      */
     public static ForestHeaderMap head(String url) {
-        ForestHeaderMap forestHeaderMap = new ForestHeaderMap();
+        AtomicReference<ForestHeaderMap> result = new AtomicReference<>();
         OnSuccess<String> onSuccess = (data, req, res) -> {
             ForestHeaderMap headers = res.getHeaders();
             if (!CollectionUtils.isEmpty(headers)) {
-                forestHeaderMap.putAll(headers);
+                result.set(headers);
             }
         };
         Forest.head(url).onSuccess(onSuccess).execute();
-        return forestHeaderMap;
+        return result.get();
     }
 
 }
