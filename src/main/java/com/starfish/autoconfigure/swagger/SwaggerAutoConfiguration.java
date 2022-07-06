@@ -14,11 +14,11 @@ import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -35,7 +35,7 @@ import java.util.function.Predicate;
 @Profile({"dev", "test"})
 @ConditionalOnProperty(value = {"application.swagger.enabled"}, matchIfMissing = true)
 @EnableConfigurationProperties({SwaggerProperties.class})
-@EnableSwagger2
+@EnableOpenApi
 public class SwaggerAutoConfiguration {
 
     @Resource
@@ -54,7 +54,7 @@ public class SwaggerAutoConfiguration {
             Predicate<RequestHandler> p = RequestHandlerSelectors.basePackage(item);
             predicate = predicate.or(p);
         }
-        return new Docket(DocumentationType.SWAGGER_2)
+        return new Docket(DocumentationType.OAS_30)
                 .protocols(Sets.newHashSet("http", "https"))
                 .apiInfo(apiInfo())
                 .forCodeGeneration(true)
