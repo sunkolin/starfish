@@ -5,9 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.starfish.exception.CustomException;
 
-import java.util.Comparator;
-import java.util.List;
-
 /**
  * JsonUtil
  *
