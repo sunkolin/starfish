@@ -1,6 +1,5 @@
 package com.starfish.extension.limiter;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
  * @version 1.0.0
  * @since 2019-07-11
  */
-@Slf4j
 @Service
 public class ClusterRateLimiter extends RollingWindowRateLimiter {
 
