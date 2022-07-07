@@ -1,14 +1,13 @@
 #org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-#  com.starfish.common.cache.CaffeineCacheAutoConfiguration,\
-#  com.starfish.common.task.XxlJobAutoConfiguration,\
-#  com.starfish.common.swagger.SwaggerAutoConfiguration,\
 #  com.starfish.core.SpringPlus,\
-#  com.starfish.common.trace.TraceInterceptor,\
-#  com.starfish.interceptor.TimeInterceptor,\
+#  com.starfish.core.CustomEnvironmentPostProcessor,\
 #  com.starfish.core.web.AliveController,\
 #  com.starfish.core.web.WebAutoConfiguration,\
 #  com.starfish.core.web.ResponseWrapperAutoConfiguration,\
 #  com.starfish.core.exception.ExceptionAutoConfiguration,\
-#  com.starfish.core.CustomEnvironmentPostProcessor
+#  com.starfish.common.trace.TraceInterceptor
+#  com.starfish.common.cache.CaffeineCacheAutoConfiguration,\
+#  com.starfish.common.task.XxlJobAutoConfiguration,\
+#  com.starfish.common.swagger.SwaggerAutoConfiguration
 org.springframework.boot.autoconfigure.AutoConfigurationImportFilter=\
   com.starfish.extension.datasource.DataSourceAutoConfigurationImportFilter
