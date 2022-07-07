@@ -1,23 +1,22 @@
 package com.starfish.extension.limiter;
 
 import cn.hutool.core.date.DateUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * 计数器，单机限流
+ * 单机限流器
+ * 计数器算法
  * 简单介绍4种限流算法：计数器算法、滑动窗口计数器算法、漏桶算法、令牌桶算法
  *
  * @author sunkolin
  * @version 1.0.0
  * @since 2021-01-19
  */
-@Slf4j
 @Service
-public class CounterRateLimiter implements CustomRateLimiter {
+public class CounterRateLimiter implements RateLimiter {
 
     private final long permitsPerSecond;
 

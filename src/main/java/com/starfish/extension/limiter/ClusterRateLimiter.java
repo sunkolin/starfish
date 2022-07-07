@@ -4,8 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
- * 滑动窗口算法限流器
- * 集群限流
+ * 集群限流器
+ * 滑动窗口算法实现
  *
  * @author sunkolin
  * @version 1.0.0
