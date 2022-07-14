@@ -1,6 +1,8 @@
-package com.starfish.common.document;
+package com.starfish.common.swagger;
 
+import org.springdoc.core.GroupedOpenApi;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.context.annotation.Bean;
 
 /**
  * SpringDocAutoConfiguration
