@@ -6,6 +6,6 @@ com.starfish.core.web.WebAutoConfiguration
 com.starfish.core.web.ResponseWrapperAutoConfiguration
 com.starfish.core.web.ElapsedTimeAutoConfiguration
 com.starfish.common.trace.TraceAutoConfiguration
-com.starfish.common.swagger.SwaggerAutoConfiguration
+com.starfish.common.document.SpringDocAutoConfiguration
 com.starfish.common.cache.CaffeineCacheAutoConfiguration
 com.starfish.common.task.TaskAutoConfiguration

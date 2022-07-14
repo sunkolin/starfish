@@ -18,14 +18,14 @@ import javax.annotation.Resource;
  * @version 1.0.0
  * @since 2018-03-05
  */
-@AutoConfiguration
-@Profile({"dev", "test"})
-@ConditionalOnProperty(value = {"application.swagger.enabled"}, matchIfMissing = true)
-@EnableConfigurationProperties({SwaggerProperties.class})
+//@AutoConfiguration
+//@Profile({"dev", "test"})
+//@ConditionalOnProperty(value = {"application.swagger.enabled"}, matchIfMissing = true)
+//@EnableConfigurationProperties({SwaggerProperties.class})
 public class SwaggerAutoConfiguration {
 
-    @Resource
-    private SwaggerProperties swaggerProperties;
+//    @Resource
+//    private SwaggerProperties swaggerProperties;
 
 //    @Bean
 //    public Docket createRestApi() {
@@ -66,16 +66,16 @@ public class SwaggerAutoConfiguration {
 //        return apiInfoBuilder.build();
 //    }
 
-    @Bean
-    public SwaggerInterceptor newSwaggerInterceptor() {
-        SwaggerInterceptor swaggerInterceptor = new SwaggerInterceptor();
-        swaggerInterceptor.setEnabled(swaggerProperties.getEnabled());
-        return swaggerInterceptor;
-    }
-
-    @Bean
-    public SwaggerConfigurer createSwaggerConfigurer(SwaggerInterceptor swaggerInterceptor) {
-        return new SwaggerConfigurer(swaggerInterceptor);
-    }
+//    @Bean
+//    public SwaggerInterceptor newSwaggerInterceptor() {
+//        SwaggerInterceptor swaggerInterceptor = new SwaggerInterceptor();
+//        swaggerInterceptor.setEnabled(swaggerProperties.getEnabled());
+//        return swaggerInterceptor;
+//    }
+//
+//    @Bean
+//    public SwaggerConfigurer createSwaggerConfigurer(SwaggerInterceptor swaggerInterceptor) {
+//        return new SwaggerConfigurer(swaggerInterceptor);
+//    }
 
 }
