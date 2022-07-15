@@ -96,7 +96,7 @@ public class SpringPlus implements ApplicationContextAware, EnvironmentAware {
      * @return 服务名称
      */
     public static String getApplicationName() {
-        return applicationContext.getApplicationName();
+        return environment.getProperty("spring.application.name");
     }
 
     /**
