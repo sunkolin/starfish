@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.env.EnvironmentPostProcessor;
 import org.springframework.boot.env.PropertiesPropertySourceLoader;
 import org.springframework.boot.env.YamlPropertySourceLoader;
+import org.springframework.core.Ordered;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.ClassPathResource;
@@ -20,7 +21,9 @@ import java.util.List;
  * @version 1.0.0
  * @since 2021-06-30
  */
-public class CustomEnvironmentPostProcessor implements EnvironmentPostProcessor {
+public class CustomEnvironmentPostProcessor implements EnvironmentPostProcessor, Ordered {
+
+    private static final Integer POST_PROCESSOR_ORDER = Integer.MIN_VALUE + 10;
 
     private static final YamlPropertySourceLoader YAML_LOADER = new YamlPropertySourceLoader();
 
@@ -34,6 +37,11 @@ public class CustomEnvironmentPostProcessor implements EnvironmentPostProcessor 
         List<PropertySource<?>> propertySourceList = PROPERTIES_LOADER.load("starfish", resource);
         PropertySource<?> propertySource = propertySourceList.get(0);
         environment.getPropertySources().addLast(propertySource);
+    }
+
+    @Override
+    public int getOrder() {
+        return POST_PROCESSOR_ORDER + 1;
     }
 
 }
