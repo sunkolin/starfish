@@ -1,13 +1,17 @@
 package com.starfish.common.cache;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+
 /**
  * CachePlus
  * 使用caffeine做本地缓存
+ * TODO 解决未配置caffeine启动失败问题
  *
  * @author sunkolin
  * @version 1.0.0
  * @since 2021-06-11
  */
+//@ConditionalOnBean("caffeine")
 public class CachePlus implements Cache {
 
     private final com.github.benmanes.caffeine.cache.Cache<Object, Object> caffeineCache;

@@ -23,13 +23,13 @@ import java.util.concurrent.TimeUnit;
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass({Caffeine.class})
-@Conditional({CaffeineCacheCondition.class})
-@EnableConfigurationProperties({CaffeineCacheProperties.class})
+@Conditional({CacheCondition.class})
+@EnableConfigurationProperties({CacheProperties.class})
 @EnableCaching
-public class CaffeineCacheAutoConfiguration {
+public class CacheAutoConfiguration {
 
     @Resource
-    private CaffeineCacheProperties caffeineCacheProperties;
+    private CacheProperties cacheProperties;
 
     /**
      * 默认一小时过期
@@ -39,14 +39,14 @@ public class CaffeineCacheAutoConfiguration {
     @Bean(name = "caffeine")
     public Caffeine<Object, Object> newCaffeine() {
         Caffeine<Object, Object> caffeine = Caffeine.newBuilder();
-        caffeine.expireAfterWrite(caffeineCacheProperties.getExpire(), TimeUnit.SECONDS);
-        if (caffeineCacheProperties.getWeakKeys()) {
+        caffeine.expireAfterWrite(cacheProperties.getExpire(), TimeUnit.SECONDS);
+        if (cacheProperties.getWeakKeys()) {
             caffeine.weakKeys();
         }
-        if (caffeineCacheProperties.getWeakValues()) {
+        if (cacheProperties.getWeakValues()) {
             caffeine.weakValues();
         }
-        if (caffeineCacheProperties.getSoftValues()) {
+        if (cacheProperties.getSoftValues()) {
             caffeine.softValues();
         }
         return caffeine;

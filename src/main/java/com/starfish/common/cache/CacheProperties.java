@@ -11,8 +11,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @since 2018-11-05
  */
 @Data
-@ConfigurationProperties(prefix = "application.cache.caffeine")
-public class CaffeineCacheProperties {
+@ConfigurationProperties(prefix = "application.cache")
+public class CacheProperties {
 
     /**
      * 是否启用,true启用，false禁用，默认启用

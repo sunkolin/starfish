@@ -17,22 +17,12 @@ import java.util.Map;
  * 可以直接调用静态方法SpringPlus.getApplicationContext();这样可以实现在工具类中使用
  * 参考：cn.hutool.extra.spring.SpringUtil
  *
- *  TODO 不配置属性会报错
  * @author sunkolin
  * @version 1.0.0
  * @since 2019-07-04
  */
 @Data
 public class SpringPlus implements ApplicationContextAware, EnvironmentAware {
-
-    @Value("${spring.application.name}")
-    private String name;
-
-    @Value("${server.port}")
-    private String port;
-
-    @Value("${spring.profiles.active}")
-    private String profile;
 
     /**
      * 另外一种方式可以使用注解自动注入ApplicationContext
@@ -98,6 +88,24 @@ public class SpringPlus implements ApplicationContextAware, EnvironmentAware {
      */
     public static String getProperty(String key) {
         return applicationContext.getEnvironment().getProperty(key);
+    }
+
+    /**
+     * 获取服务名称
+     *
+     * @return 服务名称
+     */
+    public static String getApplicationName() {
+        return applicationContext.getApplicationName();
+    }
+
+    /**
+     * 获取端口
+     *
+     * @return 端口
+     */
+    public static String getPort() {
+        return environment.getProperty("server.port");
     }
 
     /**

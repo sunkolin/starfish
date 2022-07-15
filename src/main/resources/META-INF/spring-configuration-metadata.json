@@ -2,8 +2,8 @@
   "groups": [
     {
       "name": "application.cache.caffeine",
-      "type": "com.starfish.common.cache.CaffeineCacheProperties",
-      "sourceType": "com.starfish.common.cache.CaffeineCacheProperties"
+      "type": "com.starfish.common.cache.CacheProperties",
+      "sourceType": "com.starfish.common.cache.CacheProperties"
     },
     {
       "name": "application.exception",
@@ -31,34 +31,34 @@
       "name": "application.cache.caffeine.enabled",
       "type": "java.lang.Boolean",
       "description": "是否启用,true启用，false禁用，默认false",
-      "sourceType": "com.starfish.common.cache.CaffeineCacheProperties",
+      "sourceType": "com.starfish.common.cache.CacheProperties",
       "defaultValue": false
     },
     {
       "name": "application.cache.caffeine.expire",
       "type": "java.lang.Long",
       "description": "缓存过期时间，单位秒，默认一小时，expireAfterWrite",
-      "sourceType": "com.starfish.common.cache.CaffeineCacheProperties"
+      "sourceType": "com.starfish.common.cache.CacheProperties"
     },
     {
       "name": "application.cache.caffeine.soft-values",
       "type": "java.lang.Boolean",
       "description": "将value设置为软引用，在内存溢出前可以直接淘汰，默认false",
-      "sourceType": "com.starfish.common.cache.CaffeineCacheProperties",
+      "sourceType": "com.starfish.common.cache.CacheProperties",
       "defaultValue": false
     },
     {
       "name": "application.cache.caffeine.weak-keys",
       "type": "java.lang.Boolean",
       "description": "将key设置为弱引用，在GC时可以直接淘汰，默认false",
-      "sourceType": "com.starfish.common.cache.CaffeineCacheProperties",
+      "sourceType": "com.starfish.common.cache.CacheProperties",
       "defaultValue": false
     },
     {
       "name": "application.cache.caffeine.weak-values",
       "type": "java.lang.Boolean",
       "description": "将value设置为弱引用，在GC时可以直接淘汰，默认false",
-      "sourceType": "com.starfish.common.cache.CaffeineCacheProperties",
+      "sourceType": "com.starfish.common.cache.CacheProperties",
       "defaultValue": false
     },
     {
