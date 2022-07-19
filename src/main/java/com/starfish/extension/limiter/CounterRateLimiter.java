@@ -24,6 +24,11 @@ public class CounterRateLimiter implements RateLimiter {
 
     private static Date timestamp = DateUtil.dateSecond();
 
+    /**
+     * 时间间隔
+     */
+    private static final long TIME_INTERVAL = 1000L;
+
     public CounterRateLimiter(long permitsPerSecond) {
         this.permitsPerSecond = permitsPerSecond;
     }
@@ -32,7 +37,7 @@ public class CounterRateLimiter implements RateLimiter {
     public boolean acquire(int count) {
         synchronized (this) {
             Date now = DateUtil.dateSecond();
-            if (now.getTime() - timestamp.getTime() < 1000) {
+            if (now.getTime() - timestamp.getTime() < TIME_INTERVAL) {
                 if (counter.get() < permitsPerSecond) {
                     counter.incrementAndGet();
                     return true;

@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 @Data
 public class SwaggerInterceptor implements HandlerInterceptor {
 
-//    @Value("${application.swagger.enabled}")
     private Boolean enabled;
 
     @Override

@@ -5,6 +5,7 @@ import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import org.springframework.util.StringUtils;
 
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -43,6 +44,8 @@ public class StringUtil {
      * 特殊字符，验证字符串是否有特殊字符时使用
      */
     public static final String SPECIAL_CHARACTER = "`~!@#$%^&*()_+-=[]{}|;:'?/.<>,";
+
+    private static final SecureRandom RANDOM = new SecureRandom();
 
     /**
      * 判断字符串是null或空
@@ -193,8 +196,7 @@ public class StringUtil {
     public static String random(String string, int size) {
         char[] chars = new char[size];
         for (int i = 0; i < size; i++) {
-            Random random = new Random();
-            chars[i] = string.charAt(random.nextInt(string.length()));
+            chars[i] = string.charAt(RANDOM.nextInt(string.length()));
         }
         return new String(chars);
     }

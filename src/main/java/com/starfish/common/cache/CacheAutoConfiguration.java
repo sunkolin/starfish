@@ -61,7 +61,6 @@ public class CacheAutoConfiguration {
     public CacheManager cacheManager(Caffeine<Object, Object> caffeine) {
         CaffeineCacheManager cacheManager = new CaffeineCacheManager();
         cacheManager.setCaffeine(caffeine);
-//        cacheManager.setCacheNames(Lists.newArrayList("caffeineCache"));
         return cacheManager;
     }
 

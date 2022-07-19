@@ -1,5 +1,6 @@
 package com.starfish;
 
+import java.util.Base64;
 import java.util.Scanner;
 
 /**
@@ -12,6 +13,9 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        Base64.getEncoder().en
+
+
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
             int count =  scanner.nextInt();
