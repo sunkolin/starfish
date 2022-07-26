@@ -13,7 +13,7 @@ import java.util.Date;
  * @since 2021-02-12
  */
 @Data
-public class JsonWebPayload implements Serializable {
+public class Payload implements Serializable {
 
     /**
      * 签发者

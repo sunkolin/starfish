@@ -26,7 +26,7 @@ public class CustomJsonWebToken {
     public static String createToken(Long userId) {
         Map<String, Object> claims = new HashMap<>(20);
         claims.put(USER_ID_KEY, userId);
-        return JsonWebTokenPlus.createToken(claims);
+        return JsonWebTokenUtil.createToken(claims);
     }
 
     public static String createToken(User user) {
@@ -34,11 +34,11 @@ public class CustomJsonWebToken {
         claims.put(USER_ID_KEY, user.getUserId());
         claims.put(USER_NAME_KEY, user.getUserName());
         claims.put(NICK_NAME_KEY, user.getNickName());
-        return JsonWebTokenPlus.createToken(claims);
+        return JsonWebTokenUtil.createToken(claims);
     }
 
     public static User verifyToken(String token) {
-        DecodedJWT decodedJwt = JsonWebTokenPlus.verifyToken(token);
+        DecodedJWT decodedJwt = JsonWebTokenUtil.verifyToken(token);
         Map<String, Claim> claims = decodedJwt.getClaims();
 
         // 解析claims
