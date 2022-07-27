@@ -1,5 +1,7 @@
 package com.starfish.extension.jwt;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -9,6 +11,7 @@ import java.io.Serializable;
  * @version 1.0.0
  * @since 2022-07-26
  */
+@Data
 public class Signature implements Serializable {
 
     /**

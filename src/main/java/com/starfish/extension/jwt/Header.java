@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * JsonWebTokenHeader
+ * Header
  *
  * @author sunkolin
  * @version 1.0.0
