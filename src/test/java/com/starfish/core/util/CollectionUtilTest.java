@@ -40,6 +40,26 @@ public class CollectionUtilTest {
         Assert.assertEquals(r4.get(0).getUsername(), "tom");
     }
 
+
+    @Test
+    public void continuousTest() {
+        List<Long> list = new ArrayList<>();
+        list.add(1L);
+        list.add(2L);
+        list.add(3L);
+        list.add(4L);
+        list.add(5L);
+
+//        list.add(11L);
+//        list.add(12L);
+//        list.add(13L);
+//        list.add(14L);
+//        list.add(15L);
+
+        CollectionUtil.continuous(list);
+    }
+
+
     @Test
     public void testExistClass() {
         Assert.assertTrue(CommonUtil.existClass("com.starfish.core.util.CommonUtil"));

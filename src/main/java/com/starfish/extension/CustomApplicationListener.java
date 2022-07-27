@@ -3,20 +3,21 @@ package com.starfish.extension;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.context.event.ApplicationFailedEvent;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEvent;
+import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextClosedEvent;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.ContextStartedEvent;
-import org.springframework.context.event.ContextStoppedEvent;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * application start listener
+ * CustomApplicationListener
  *
  * @author sunkolin
  * @version 1.0.0
@@ -25,7 +26,7 @@ import java.util.Date;
 @Slf4j
 @SuppressWarnings("unused")
 @Component
-public class CustomApplicationListener implements org.springframework.context.ApplicationListener<ApplicationEvent>, ApplicationContextAware, InitializingBean {
+public class CustomApplicationListener implements ApplicationListener<ApplicationEvent>, ApplicationContextAware, InitializingBean {
 
     private ApplicationContext applicationContext;
 
@@ -41,42 +42,95 @@ public class CustomApplicationListener implements org.springframework.context.Ap
      */
     @Override
     public void onApplicationEvent(ApplicationEvent event) {
-        if (event instanceof ContextStartedEvent) {
-            if (((ContextStartedEvent) event).getApplicationContext().getParent() == null) {
-                log.info("root container start");
-            } else {
-                log.info("web container start");
-            }
-        } else if (event instanceof ContextRefreshedEvent) {
-            if (((ContextRefreshedEvent) event).getApplicationContext().getParent() == null) {
-                log.info("root container start complete");
-            } else {
-                log.info("web container start complete");
-                // somethings you want to do after spring start complete
-                executeAfterContextRefreshedEvent((ContextRefreshedEvent) event);
-            }
-        } else if (event instanceof ContextStoppedEvent) {
-            if (((ContextStoppedEvent) event).getApplicationContext().getParent() == null) {
-                log.info("root container pause");
-            } else {
-                log.info("web container pause");
-            }
-        } else if (event instanceof ContextClosedEvent) {
-            if (((ContextClosedEvent) event).getApplicationContext().getParent() == null) {
-                log.info("root container close");
-            } else {
-                log.info("web container close");
-            }
+        if (event instanceof ApplicationStartedEvent) {
+            onApplicationEvent((ApplicationStartedEvent) event);
+        }
+        if (event instanceof ApplicationReadyEvent) {
+            onApplicationEvent((ApplicationReadyEvent) event);
+        }
+        if (event instanceof ApplicationFailedEvent) {
+            onApplicationEvent((ApplicationFailedEvent) event);
+        }
+        if (event instanceof ContextClosedEvent) {
+            onApplicationEvent((ContextClosedEvent) event);
         }
     }
+
+    /**
+     * ApplicationStartedEvent
+     *
+     * @param event ApplicationStartedEvent
+     */
+    public void onApplicationEvent(ApplicationStartedEvent event) {
+        log.info("Application Started");
+    }
+
+    /**
+     * ApplicationReadyEvent
+     *
+     * @param event ApplicationReadyEvent
+     */
+    public void onApplicationEvent(ApplicationReadyEvent event) {
+        log.info("Application Ready");
+        onReady(event);
+    }
+
+    /**
+     * ApplicationFailedEvent
+     *
+     * @param event ApplicationFailedEvent
+     */
+    public void onApplicationEvent(ApplicationFailedEvent event) {
+        log.error("Application Failed");
+    }
+
+    /**
+     * ContextClosedEvent
+     * 这两个事件看起来都是等于容器要关闭，其实不然，close是spring容器真正销毁了才会触发，
+     * 而stop事件只是容器把实现了Lifecycle的bean给stop了，还可以使用start将其重新启动。
+     *
+     * @param event ContextClosedEvent
+     */
+    public void onApplicationEvent(ContextClosedEvent event) {
+        log.info("Application Closed");
+    }
+
+    //    @Override
+//    public void onApplicationEvent(ApplicationReadyEvent event) {
+//        if (event instanceof ContextStartedEvent) {
+//            if (((ContextStartedEvent) event).getApplicationContext().getParent() == null) {
+//                log.info("root container start");
+//            } else {
+//                log.info("web container start");
+//            }
+//        } else if (event instanceof ContextRefreshedEvent) {
+//            if (((ContextRefreshedEvent) event).getApplicationContext().getParent() == null) {
+//                log.info("root container start complete");
+//            } else {
+//                log.info("web container start complete");
+//                executeAfterContextRefreshedEvent((ContextRefreshedEvent) event);
+//            }
+//        } else if (event instanceof ContextStoppedEvent) {
+//            if (((ContextStoppedEvent) event).getApplicationContext().getParent() == null) {
+//                log.info("root container pause");
+//            } else {
+//                log.info("web container pause");
+//            }
+//        } else if (event instanceof ContextClosedEvent) {
+//            if (((ContextClosedEvent) event).getApplicationContext().getParent() == null) {
+//                log.info("root container close");
+//            } else {
+//                log.info("web container close");
+//            }
+//        }
+//    }
 
     /**
      * execute after spring start complete
      *
      * @param event event
      */
-    public void executeAfterContextRefreshedEvent(ContextRefreshedEvent event) {
-        // execute after ContextRefreshedEvent
+    public void onReady(ApplicationReadyEvent event) {
         // 打印启动时间
         long startupDate = applicationContext.getStartupDate();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

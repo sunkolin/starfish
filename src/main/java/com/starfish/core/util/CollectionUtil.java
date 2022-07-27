@@ -286,44 +286,14 @@ public class CollectionUtil {
      * 获取列表中连续数据
      *
      * @param list 列表
-     * @param num  连续个数
      * @return 结果
      */
-    public static List<Long> continuousList(List<Long> list, Integer num) {
-        List<Long> result = new ArrayList<>();
-
-        List<Long> tmpList = new ArrayList<>();
-
-        for (int index = 0; index < list.size(); index++) {
-            Long i = list.get(index);
-
-            // 如果列表为空，直接加入第一个
-            if (CollectionUtils.isEmpty(tmpList)) {
-                tmpList.add(i);
-                continue;
-            }
-
-            // 如果当前的数字和列表是连续的，加入列表
-            Long last = tmpList.get(tmpList.size() - 1);
-            if (last + 1 == i) {
-                tmpList.add(i);
-
-                if (index == list.size() - 1) {
-                    if (tmpList.size() >= num) {
-                        result.addAll(tmpList);
-                    }
-                }
-
-            } else {
-                if (tmpList.size() >= num) {
-                    result.addAll(tmpList);
-                }
-                tmpList.clear();
-                tmpList.add(i);
-            }
+    public static boolean continuous(List<Long> list) {
+        boolean result = true;
+        for (int i = 0; i < list.size() - 1; i++) {
+            result = result &&( list.get(i) + 1 == list.get(i + 1) );
         }
-
-        log.info("continuousList,param={},num={},result={}", JsonUtil.toJson(list), num, JsonUtil.toJson(result));
+        log.info("list is continuous,param={},result={}", JsonUtil.toJson(list), JsonUtil.toJson(result));
         return result;
     }
 

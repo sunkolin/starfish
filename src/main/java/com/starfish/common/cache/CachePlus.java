@@ -14,6 +14,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 //@ConditionalOnBean("caffeine")
 public class CachePlus implements Cache {
 
+    /**
+     * exist后缀
+     */
+    public static final String EXIST_SUFFIX = ":exist";
+
     private final com.github.benmanes.caffeine.cache.Cache<Object, Object> caffeineCache;
 
     public CachePlus(com.github.benmanes.caffeine.cache.Cache<Object, Object> caffeineCache) {
@@ -28,20 +33,20 @@ public class CachePlus implements Cache {
 
     @Override
     public boolean exist(Object key) {
-        Boolean exist = get(key + ":exist");
+        Boolean exist = get(key + EXIST_SUFFIX);
         return (exist == null || !exist) ? Boolean.FALSE : Boolean.TRUE;
     }
 
     @Override
     public void set(Object key, Object value) {
         caffeineCache.put(key, value);
-        caffeineCache.put(key + ":exist", true);
+        caffeineCache.put(key + EXIST_SUFFIX, true);
     }
 
     @Override
     public void remove(Object key) {
         caffeineCache.invalidate(key);
-        caffeineCache.invalidate(key + ":exist");
+        caffeineCache.invalidate(key + EXIST_SUFFIX);
     }
 
     @Override
