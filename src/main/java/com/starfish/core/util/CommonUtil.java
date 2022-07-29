@@ -48,6 +48,10 @@ public final class CommonUtil {
      */
     public static final String EQUAL_SYMBOL = "=";
 
+    private CommonUtil() {
+
+    }
+
     /**
      * 比较两个对象是否相等
      *
@@ -65,7 +69,7 @@ public final class CommonUtil {
      * @return uuid
      */
     public static String getUuid() {
-        return UUID.randomUUID().toString().replaceAll("-", "");
+        return UUID.randomUUID().toString().replace("-", "");
     }
 
     /**
