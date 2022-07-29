@@ -264,25 +264,29 @@ public class WebUtil extends HtmlUtils {
     /**
      * 输出内容
      *
-     * @param request  请求
      * @param response 响应
      * @param value    内容
      */
-    public static void write(HttpServletRequest request, HttpServletResponse response, String value) {
-        PrintWriter pw = null;
+    public static void write(HttpServletResponse response, String value) {
+        PrintWriter printWriter = null;
         try {
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json;charset=UTF-8");
-            pw = new PrintWriter(new OutputStreamWriter(response.getOutputStream(), StandardCharsets.UTF_8));
-            pw.println(value);
-            pw.flush();
-        } catch (IOException e) {
+            printWriter = response.getWriter();
+            printWriter.println(value);
+            printWriter.flush();
+        } catch (Exception e) {
             log.error("write value error.value is {}", value, e);
         } finally {
-            if (pw != null) {
-                pw.close();
+            if (printWriter != null) {
+                printWriter.close();
             }
         }
+    }
+
+    public static void write(HttpServletResponse response, Object object) {
+        String json = JsonUtil.toJson(object);
+        write(response, json);
     }
 
     /**
@@ -295,25 +299,11 @@ public class WebUtil extends HtmlUtils {
      * @param data     数据
      */
     public static void write(HttpServletRequest request, HttpServletResponse response, Integer code, String message, Object data) {
-        PrintWriter pw = null;
-        try {
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("application/json;charset=UTF-8");
-            pw = new PrintWriter(new OutputStreamWriter(response.getOutputStream(), StandardCharsets.UTF_8));
-            Result<Object> result = new Result<>();
-            result.setCode(code);
-            result.setMessage(message);
-            result.setData(data);
-            String value = JsonUtil.toJson(result);
-            pw.println(value);
-            pw.flush();
-        } catch (IOException e) {
-            log.error("write value error.code is {},message is {},data is {},", code, message, data, e);
-        } finally {
-            if (pw != null) {
-                pw.close();
-            }
-        }
+        Result<Object> result = new Result<>();
+        result.setCode(code);
+        result.setMessage(message);
+        result.setData(data);
+        write(response, result);
     }
 
     /**

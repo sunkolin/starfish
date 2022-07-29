@@ -280,7 +280,7 @@ public final class FileUtil {
 
     /**
      * 读取项目下文件的全部内容转成字符串
-     * 支持格式：classpath:application.properties，file:/etc/profile
+     * 支持格式：classpath:application-starfish.properties，file:/etc/profile
      *
      * @param path 文件路径
      * @return 文件内容
@@ -346,7 +346,7 @@ public final class FileUtil {
     /**
      * 读取项目下文件，按行转成字符串，以行为单位放入list中，适合读取小文件
      * File file = classPathResource.getFile(); 方式无法获取jar包中的文件
-     * 支持格式：classpath:application.properties，file:/etc/profile
+     * 支持格式：classpath:application-starfish.properties，file:/etc/profile
      *
      * @param path 文件路径
      * @return 文件内容

@@ -34,7 +34,7 @@ public class CustomEnvironmentPostProcessor implements EnvironmentPostProcessor,
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
         // 加载配置文件
-        Resource resource = new ClassPathResource("/application.properties");
+        Resource resource = new ClassPathResource("/application-starfish.properties");
         List<PropertySource<?>> propertySourceList = PROPERTIES_LOADER.load("starfish", resource);
         PropertySource<?> propertySource = propertySourceList.get(0);
         environment.getPropertySources().addLast(propertySource);

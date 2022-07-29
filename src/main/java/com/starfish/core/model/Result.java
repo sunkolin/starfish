@@ -183,6 +183,22 @@ public class Result<T> implements Serializable {
     }
 
     /**
+     * 返回相应，不知结果是成功还是失败时使用
+     *
+     * @param code    编码
+     * @param message 信息
+     * @param <T>     T
+     * @return 结果
+     */
+    public static <T> Result<T> response(Integer code, String message, T data) {
+        Result<T> result = new Result<>();
+        result.setCode(code);
+        result.setMessage(message);
+        result.setData(data);
+        return result;
+    }
+
+    /**
      * 判断是否有code和message字段
      *
      * @param object 对象
