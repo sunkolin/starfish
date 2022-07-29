@@ -45,6 +45,10 @@ public enum ResultEnum {
 
     GET_FILE_NAME_EXCEPTION(1014, "get_file_name_exception", "获取文件名异常"),
 
+    NO_READ_PERMISSION(1015, "no_read_permission", "没有读权限"),
+
+    NO_WRITE_PERMISSION(1016, "no_write_permission", "没有写权限"),
+
     ;
 
     /**

@@ -13,9 +13,9 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@Permission
+@Permission(value = {Permission.READ})
 public @interface ReadPermission {
 
-    String[] values() default {Permission.READ};
+    String[] value() default {Permission.READ};
 
 }

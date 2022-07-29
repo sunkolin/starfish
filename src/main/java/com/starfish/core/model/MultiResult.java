@@ -1,5 +1,7 @@
 package com.starfish.core.model;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -13,7 +15,8 @@ import java.io.Serializable;
  * @since 2021-12-12
  */
 @SuppressWarnings({"unchecked", "unused"})
-public class MultiResult implements Serializable {
+@Data
+public class MultiResult {
 
     private Object first;
 

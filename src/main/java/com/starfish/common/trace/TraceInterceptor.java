@@ -1,6 +1,7 @@
 package com.starfish.common.trace;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.Ordered;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  * @since 2018-12-05
  */
 @Slf4j
-public class TraceInterceptor implements HandlerInterceptor {
+public class TraceInterceptor implements HandlerInterceptor, Ordered {
 
 //    private final Tracer sleuthTracer;
 //
@@ -48,6 +49,11 @@ public class TraceInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         //
+    }
+
+    @Override
+    public int getOrder() {
+        return 0;
     }
 
 }

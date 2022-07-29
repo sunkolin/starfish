@@ -19,6 +19,6 @@ public @interface Permission {
 
     String WRITE = "write";
 
-    String[] values() default {};
+    String[] value() default {};
 
 }
