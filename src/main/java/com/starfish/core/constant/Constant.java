@@ -80,4 +80,8 @@ public class Constant {
      */
     public static final String FRAMEWORK_VERSION = "1.0.0-SNAPSHOT";
 
+    private Constant(){
+
+    }
+
 }

@@ -71,22 +71,17 @@ public class CompressUtil {
         // 遍历文件得到文件字符串list
         List<String> filePathList = traverse(sourcePath);
 
-        ZipOutputStream outputStream = null;
-        try {
+        try (ZipOutputStream outputStream = new ZipOutputStream(new FileOutputStream(targetPath));) {
             FileUtil.create(targetPath);
-            outputStream = new ZipOutputStream(new FileOutputStream(targetPath));
 
             // 遍历添加文件
             for (String filePath : filePathList) {
                 String relativePath = calculateRelativePath(basePath, filePath);
                 addEntry(outputStream, filePath, relativePath);
             }
-
             outputStream.finish();
         } catch (Exception e) {
             throw new CustomException(ResultEnum.COMPRESS_FILE_ERROR);
-        } finally {
-            IoUtil.close(outputStream);
         }
     }
 
@@ -102,9 +97,7 @@ public class CompressUtil {
             throw new CustomException(ResultEnum.PARAM_ERROR);
         }
 
-        ZipFile zipFile = null;
-        try {
-            zipFile = new ZipFile(sourcePath, Charset.forName("GBK"));
+        try (ZipFile zipFile = new ZipFile(sourcePath, Charset.forName("GBK"));) {
             Enumeration<? extends ZipEntry> e = zipFile.entries();
             while (e.hasMoreElements()) {
                 ZipEntry entry = e.nextElement();
@@ -122,14 +115,6 @@ public class CompressUtil {
             }
         } catch (IOException e) {
             throw new CustomException(ResultEnum.DECOMPRESS_FILE_ERROR);
-        } finally {
-            try {
-                if (zipFile != null) {
-                    zipFile.close();
-                }
-            } catch (IOException e) {
-                log.error("解压文件异常", e);
-            }
         }
     }
 

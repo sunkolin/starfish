@@ -8,7 +8,8 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 /**
- * CustomConfig
+ * Config
+ * 如果需要使用静态方法获取Bean，请使用SpringPlus类
  *
  * @author sunkolin
  * @version 1.0.0
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Component("customConfig")
 public class Config implements ApplicationContextAware {
 
-    private static ApplicationContext applicationContext;
+    private ApplicationContext applicationContext;
 
     @Value("${spring.application.name}")
     private String name;
@@ -32,13 +33,13 @@ public class Config implements ApplicationContextAware {
      *
      * @return 结果
      */
-    public static Config getConfig() {
+    public Config getConfig() {
         return applicationContext.getBean(Config.class);
     }
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        Config.applicationContext = applicationContext;
+        this.applicationContext = applicationContext;
     }
 
 }
