@@ -28,7 +28,7 @@ public class SwaggerInterceptor implements HandlerInterceptor {
             log.error("swagger未开启.swaggerEnabled={}", enabled);
             // 此处抛异常在DefaultExceptionResolver中无法捕获，改为write方式
 //            throw new CustomException(ResultEnum.SYSTEM_EXCEPTION);
-            WebUtil.write(request, response, ResultEnum.SYSTEM_EXCEPTION.getCode(), ResultEnum.SYSTEM_EXCEPTION.getMessage(), null);
+            WebUtil.write(response, ResultEnum.SYSTEM_EXCEPTION.getCode(), ResultEnum.SYSTEM_EXCEPTION.getMessage(), null);
         }
 
         return true;

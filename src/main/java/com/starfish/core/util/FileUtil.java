@@ -5,6 +5,7 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.starfish.core.enumeration.ResultEnum;
 import com.starfish.core.constant.Constant;
 import com.starfish.core.exception.CustomException;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.ClassPathResource;
@@ -46,6 +47,11 @@ public final class FileUtil {
      */
     public static final String HTTP_PREFIX = "http";
 
+    public static final String FILE_PREFIX = "file:";
+
+    public static final String CLASSPATH_PREFIX = "classpath:";
+
+
     private static final ThreadFactory NAMED_THREAD_FACTORY = new ThreadFactoryBuilder().setNameFormat("file-util-thread-pool-factory").build();
 
     private static final ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(10, 100, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), NAMED_THREAD_FACTORY);
@@ -81,6 +87,7 @@ public final class FileUtil {
      *
      * @param path 路径
      */
+    @SneakyThrows
     public static void delete(String path) {
         File file = new File(path);
 
@@ -92,7 +99,7 @@ public final class FileUtil {
         // 如果是文件，直接删除
         if (file.isFile()) {
             //noinspection ResultOfMethodCallIgnored
-            file.delete();
+            Files.delete(file.toPath());
         }
 
         // 如果是文件夹，便利文件夹，删除文件下所有文件，再删除文件夹
@@ -103,7 +110,7 @@ public final class FileUtil {
             }
         }
         //noinspection ResultOfMethodCallIgnored
-        file.delete();
+        Files.delete(file.toPath());
     }
 
     /**
@@ -292,19 +299,19 @@ public final class FileUtil {
         }
 
         String result = "";
-        if (path.startsWith("file:")) {
+        if (path.startsWith(FILE_PREFIX)) {
             try {
                 result = readFromSystem(path);
             } catch (IOException e) {
-                log.error("read error", e);
+                log.error("读取文件失败", e);
             }
         }
 
-        if (path.startsWith("classpath:")) {
+        if (path.startsWith(CLASSPATH_PREFIX)) {
             try {
                 result = readFromClassPath(path);
             } catch (IOException e) {
-                log.error("read error", e);
+                log.error("读取文件失败", e);
             }
         }
         return result;
@@ -334,8 +341,8 @@ public final class FileUtil {
      */
     protected static String readFromClassPath(String path) throws IOException {
         // ClassPathResource创建参数不需要classpath:，如果有自动去掉
-        if (path.startsWith("classpath:")) {
-            path = path.replaceFirst("classpath:", "");
+        if (path.startsWith(CLASSPATH_PREFIX)) {
+            path = path.replaceFirst(CLASSPATH_PREFIX, "");
         }
 
         ClassPathResource classPathResource = new ClassPathResource(path);
@@ -358,7 +365,7 @@ public final class FileUtil {
         }
 
         List<String> result = new ArrayList<>();
-        if (path.startsWith("file:")) {
+        if (path.startsWith(FILE_PREFIX)) {
             try {
                 result = readLinesFromSystem(path);
             } catch (IOException e) {
@@ -366,7 +373,7 @@ public final class FileUtil {
             }
         }
 
-        if (path.startsWith("classpath:")) {
+        if (path.startsWith(CLASSPATH_PREFIX)) {
             try {
                 result = readLinesFromClassPath(path);
             } catch (IOException e) {
@@ -401,8 +408,8 @@ public final class FileUtil {
      */
     protected static List<String> readLinesFromClassPath(String path) throws IOException {
         // ClassPathResource创建参数不需要classpath:，如果有自动去掉
-        if (path.startsWith("classpath:")) {
-            path = path.replaceFirst("classpath:", "");
+        if (path.startsWith(CLASSPATH_PREFIX)) {
+            path = path.replaceFirst(CLASSPATH_PREFIX, "");
         }
 
         ClassPathResource classPathResource = new ClassPathResource(path);
@@ -417,8 +424,8 @@ public final class FileUtil {
      */
     private static void write(String file, List<String> list) throws IOException {
         // 如果有file:前缀需要去掉
-        if (file.startsWith("file:")) {
-            file = file.replaceFirst("file:", "");
+        if (file.startsWith(FILE_PREFIX)) {
+            file = file.replaceFirst(FILE_PREFIX, "");
         }
 
         Path filePath = Paths.get(file);
@@ -476,7 +483,7 @@ public final class FileUtil {
 
     public static void main(String[] args) throws IOException {
         MultipartFile f = toMultipartFile("https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png");
-        System.out.println(f.getName());
+        log.info(f.getName());
 
         File target = new File("~/tmp/" + f.getName());
         f.transferTo(target);

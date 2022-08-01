@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Data
 @SuppressWarnings("unused")
-public class PageResult<T> implements Serializable {
+public class PageResult<T> {
 
     /**
      * total count，optional

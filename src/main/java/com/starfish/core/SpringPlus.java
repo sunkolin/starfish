@@ -21,15 +21,7 @@ import java.util.Map;
  * @since 2019-07-04
  */
 @Data
-public class SpringPlus implements ApplicationContextAware, EnvironmentAware {
-
-    /**
-     * 另外一种方式可以使用注解自动注入ApplicationContext
-     * 自动注入的ApplicationContext，无法定义为static的
-     */
-    private static ApplicationContext applicationContext;
-
-    private static Environment environment;
+public class SpringPlus implements ApplicationContextAware, EnvironmentAware  {
 
     /**
      * 通过name获取Bean
@@ -40,7 +32,7 @@ public class SpringPlus implements ApplicationContextAware, EnvironmentAware {
      */
     @SuppressWarnings("unchecked")
     public static <T> T getBean(String name) {
-        return (T) applicationContext.getBean(name);
+        return (T) SpringConstant.APPLICATION_CONTEXT.getBean(name);
     }
 
     /**
@@ -51,7 +43,7 @@ public class SpringPlus implements ApplicationContextAware, EnvironmentAware {
      * @return Bean对象
      */
     public static <T> T getBean(Class<T> clazz) {
-        return applicationContext.getBean(clazz);
+        return SpringConstant.APPLICATION_CONTEXT.getBean(clazz);
     }
 
     /**
@@ -63,7 +55,7 @@ public class SpringPlus implements ApplicationContextAware, EnvironmentAware {
      * @return Bean对象
      */
     public static <T> T getBean(String name, Class<T> clazz) {
-        return applicationContext.getBean(name, clazz);
+        return SpringConstant.APPLICATION_CONTEXT.getBean(name, clazz);
     }
 
     /**
@@ -75,7 +67,7 @@ public class SpringPlus implements ApplicationContextAware, EnvironmentAware {
      * @since 5.3.3
      */
     public static <T> Map<String, T> getBeansOfType(Class<T> type) {
-        return applicationContext.getBeansOfType(type);
+        return SpringConstant.APPLICATION_CONTEXT.getBeansOfType(type);
     }
 
     /**
@@ -86,7 +78,7 @@ public class SpringPlus implements ApplicationContextAware, EnvironmentAware {
      * @since 5.3.3
      */
     public static String getProperty(String key) {
-        return applicationContext.getEnvironment().getProperty(key);
+        return SpringConstant.APPLICATION_CONTEXT.getEnvironment().getProperty(key);
     }
 
     /**
@@ -95,7 +87,7 @@ public class SpringPlus implements ApplicationContextAware, EnvironmentAware {
      * @return 服务名称
      */
     public static String getApplicationName() {
-        return environment.getProperty("spring.application.name");
+        return SpringConstant.ENVIRONMENT.getProperty("spring.application.name");
     }
 
     /**
@@ -104,7 +96,7 @@ public class SpringPlus implements ApplicationContextAware, EnvironmentAware {
      * @return 端口
      */
     public static String getPort() {
-        return environment.getProperty("server.port");
+        return SpringConstant.ENVIRONMENT.getProperty("server.port");
     }
 
     /**
@@ -114,7 +106,7 @@ public class SpringPlus implements ApplicationContextAware, EnvironmentAware {
      * @since 5.3.3
      */
     public static String[] getActiveProfiles() {
-        return applicationContext.getEnvironment().getActiveProfiles();
+        return SpringConstant.APPLICATION_CONTEXT.getEnvironment().getActiveProfiles();
     }
 
     /**
@@ -139,23 +131,23 @@ public class SpringPlus implements ApplicationContextAware, EnvironmentAware {
      * @since 5.4.2
      */
     public static <T> void registerBean(String beanName, T bean) {
-        ConfigurableApplicationContext context = (ConfigurableApplicationContext) applicationContext;
+        ConfigurableApplicationContext context = (ConfigurableApplicationContext) SpringConstant.APPLICATION_CONTEXT;
         context.getBeanFactory().registerSingleton(beanName, bean);
     }
 
     @SuppressWarnings("NullableProblems")
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        SpringPlus.applicationContext = applicationContext;
+        SpringConstant.APPLICATION_CONTEXT = applicationContext;
     }
 
     public static ApplicationContext getApplicationContext() {
-        return applicationContext;
+        return SpringConstant.APPLICATION_CONTEXT;
     }
 
     @Override
     public void setEnvironment(Environment environment) {
-        SpringPlus.environment = environment;
+        SpringConstant.ENVIRONMENT = environment;
     }
 
 }

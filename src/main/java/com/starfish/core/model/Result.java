@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
  * @since 2012-8-15
  */
 @SuppressWarnings({"unused", "unchecked"})
-public class Result<T> implements Serializable {
+public class Result<T> {
 
     private transient static final Integer SUCCESS_CODE = 0;
 

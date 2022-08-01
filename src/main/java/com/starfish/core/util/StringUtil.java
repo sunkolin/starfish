@@ -1,6 +1,6 @@
 package com.starfish.core.util;
 
-import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.text.CharSequenceUtil;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import org.springframework.util.StringUtils;
@@ -348,7 +348,7 @@ public class StringUtil {
         if (Strings.isNullOrEmpty(string)) {
             string = Strings.repeat("{}", params.length);
         }
-        return StrUtil.format(string, params);
+        return CharSequenceUtil.format(string, params);
     }
 
     /**
