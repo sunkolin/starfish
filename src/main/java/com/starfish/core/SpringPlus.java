@@ -146,7 +146,7 @@ public class SpringPlus implements ApplicationContextAware, EnvironmentAware  {
     }
 
     @Override
-    public void setEnvironment(Environment environment) {
+    public  void setEnvironment(Environment environment) {
         SpringConstant.ENVIRONMENT = environment;
     }
 

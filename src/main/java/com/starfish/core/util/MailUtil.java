@@ -24,6 +24,10 @@ import java.util.stream.Collectors;
 @Slf4j
 public class MailUtil {
 
+    private MailUtil(){
+
+    }
+
     public static void send(List<String> to, List<String> carbonCopy, List<String> blindCarbonCopy, String subject, String text) throws MessagingException {
         Properties properties = new Properties();
         properties.put("mail.smtp.host", MailConstant.HOST);
@@ -37,9 +41,10 @@ public class MailUtil {
             properties.setProperty("mail.smtp.port", MailConstant.PORT);
             properties.put("mail.smtp.socketFactory.port", MailConstant.PORT);
             properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            properties.put("mail.smtp.ssl.checkserveridentity", "true");
         }
         //auth
-        Authenticator authenticator;
+        Authenticator authenticator = null;
         if (MailConstant.AUTH) {
             properties.put("mail.smtp.auth", true);
             authenticator = new Authenticator() {
@@ -59,7 +64,7 @@ public class MailUtil {
         }
         message.setRecipients(Message.RecipientType.TO, tos);
         //carbonCopy
-        if (carbonCopy != null && carbonCopy.size() > 0) {
+        if (carbonCopy != null && !carbonCopy.isEmpty()) {
             InternetAddress[] cc = new InternetAddress[carbonCopy.size()];
             for (int i = 0; i < carbonCopy.size(); i++) {
                 cc[i] = new InternetAddress(carbonCopy.get(i));
@@ -67,7 +72,7 @@ public class MailUtil {
             message.setRecipients(Message.RecipientType.CC, cc);
         }
         //blindCarbonCopy
-        if (blindCarbonCopy != null && blindCarbonCopy.size() > 0) {
+        if (blindCarbonCopy != null && !blindCarbonCopy.isEmpty()) {
             InternetAddress[] bcc = new InternetAddress[blindCarbonCopy.size()];
             for (int i = 0; i < blindCarbonCopy.size(); i++) {
                 bcc[i] = new InternetAddress(blindCarbonCopy.get(i));

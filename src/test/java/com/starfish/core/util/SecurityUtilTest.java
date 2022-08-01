@@ -1,10 +1,15 @@
 package com.starfish.core.util;
 
+import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.asymmetric.KeyType;
+import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
 
+import javax.crypto.SecretKey;
+import java.security.KeyPair;
 import java.util.Map;
-
 
 /**
  * SecurityUtilTest
@@ -13,6 +18,7 @@ import java.util.Map;
  * @version 1.0.0
  * @since 2015-01-06
  */
+@Slf4j
 public class SecurityUtilTest {
 
     @Test
@@ -75,7 +81,8 @@ public class SecurityUtilTest {
     @Test
     public void desTest() {
         String data = "jackson";
-        String key = "1234567890";
+        SecretKey secretKey = SecureUtil.generateKey(SymmetricAlgorithm.DES.getValue());
+        String key = SecurityUtil.encodeBase64(secretKey.getEncoded());
         String tmp = SecurityUtil.encodeDes(data, key);
         String result = SecurityUtil.decodeDes(tmp, key);
         Assert.assertEquals(data, result);
@@ -84,19 +91,31 @@ public class SecurityUtilTest {
     @Test
     public void aesTest() {
         String data = "jackson";
-        String key = "1234567890";
-        String tmp = SecurityUtil.encodeAes(data, key);
-        String result = SecurityUtil.decodeAes(tmp, key);
-        Assert.assertEquals(data, result);
+        SecretKey secretKey = SecureUtil.generateKey(SymmetricAlgorithm.AES.getValue());
+        String base64Key = SecurityUtil.encodeBase64(secretKey.getEncoded());
+        String encodeAesResult = SecurityUtil.encodeAes(data, base64Key);
+        String decodeAesResult = SecurityUtil.decodeAes(encodeAesResult, base64Key);
+        Assert.assertEquals(data, decodeAesResult);
     }
 
     @Test
     public void rsaTest() {
         String data = "jackson";
         Map<String, String> keys = SecurityUtil.createRsaKeyPair();
-        String tmp = SecurityUtil.encodeRsa(data, keys.get("PublicKey"));
-        String result = SecurityUtil.decodeRsa(tmp, keys.get("PrivateKey"));
-        Assert.assertEquals(data, result);
+        KeyPair keyPair = SecureUtil.generateKeyPair("RSA");
+        String base64PublicKey = SecurityUtil.encodeBase64(keyPair.getPublic().getEncoded());
+        String base64PrivateKey = SecurityUtil.encodeBase64(keyPair.getPrivate().getEncoded());
+        log.info("base64PublicKey:{}", base64PublicKey);
+        log.info("base64PrivateKey:{}", base64PrivateKey);
+        // 公钥加密私钥解密
+        String encodeRsaResult = SecurityUtil.encodeRsa(data, base64PrivateKey, base64PublicKey, KeyType.PublicKey);
+        String decodeRsaResult = SecurityUtil.decodeRsa(encodeRsaResult, base64PrivateKey, base64PublicKey, KeyType.PrivateKey);
+
+        // 私钥加密公钥解密
+        String encodeRsaResult2 = SecurityUtil.encodeRsa(data, base64PrivateKey, base64PublicKey, KeyType.PrivateKey);
+        String decodeRsaResult2 = SecurityUtil.decodeRsa(encodeRsaResult2, base64PrivateKey, base64PublicKey, KeyType.PublicKey);
+
+        Assert.assertEquals(data, decodeRsaResult);
     }
 
 }

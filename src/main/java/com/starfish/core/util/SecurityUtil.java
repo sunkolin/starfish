@@ -1,22 +1,15 @@
 package com.starfish.core.util;
 
 import cn.hutool.core.util.HexUtil;
+import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.asymmetric.KeyType;
 import com.starfish.core.enumeration.ResultEnum;
 import com.starfish.core.exception.CustomException;
-import org.springframework.util.Base64Utils;
 
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.DESKeySpec;
-import javax.crypto.spec.SecretKeySpec;
-import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,7 +34,7 @@ public final class SecurityUtil {
 
     public static final String ALGORITHM_DES = "DES";
 
-    public static final String ALGORITHM_AES = "AES";
+    public static final String ALGORITHM_AES = "AES/GCM/NoPadding";
 
     public static final String ALGORITHM_RSA = "RSA";
 
@@ -56,11 +49,17 @@ public final class SecurityUtil {
      * @return return
      */
     public static String encodeBase64(byte[] data) {
-        try {
-            return Base64Utils.encodeToString(data);
-        } catch (Exception e) {
-            throw new CustomException(ResultEnum.SYSTEM_EXCEPTION.getCode(), "encode base64 exception");
-        }
+        return Base64.getEncoder().encodeToString(data);
+    }
+
+    /**
+     * encode base64,generally,the result may be convert to String
+     *
+     * @param data data data
+     * @return return
+     */
+    public static String encodeBase64(String data) {
+        return Base64.getEncoder().encodeToString(data.getBytes());
     }
 
     /**
@@ -69,12 +68,12 @@ public final class SecurityUtil {
      * @param data data data
      * @return return
      */
+    public static byte[] decodeBase64String(String data) {
+        return Base64.getDecoder().decode(data);
+    }
+
     public static byte[] decodeBase64(String data) {
-        try {
-            return Base64Utils.decodeFromString(data);
-        } catch (Exception e) {
-            throw new CustomException(ResultEnum.SYSTEM_EXCEPTION.getCode(), "decode base64 exception");
-        }
+        return Base64.getDecoder().decode(data.getBytes());
     }
 
     /**
@@ -155,91 +154,49 @@ public final class SecurityUtil {
     /**
      * Data Encryption Standard,数据加密标准，速度较快，适用于加密大量数据的场合,加密后转出16进制
      *
-     * @param data data
-     * @param key  key length must greater than 8
+     * @param data      data
+     * @param base64Key key length must greater than 8
      * @return return
      */
-    public static String encodeDes(String data, String key) {
-        try {
-            SecureRandom sr = new SecureRandom();
-            DESKeySpec dks = new DESKeySpec(key.getBytes());
-            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(ALGORITHM_DES);
-            SecretKey secureKey = keyFactory.generateSecret(dks);
-            Cipher cipher = Cipher.getInstance(ALGORITHM_DES);
-            cipher.init(Cipher.ENCRYPT_MODE, secureKey, sr);
-            return encodeBase64((cipher.doFinal(data.getBytes())));
-        } catch (Exception e) {
-            throw new CustomException(ResultEnum.SYSTEM_EXCEPTION.getCode(), "encode des exception");
-        }
+    public static String encodeDes(String data, String base64Key) {
+        byte[] key = decodeBase64(base64Key);
+        return SecureUtil.des(key).encryptBase64(data);
     }
 
     /**
      * DES
      *
-     * @param data data
-     * @param key  key
+     * @param data      data
+     * @param base64Key base64Key
      * @return return
      */
-    public static String decodeDes(String data, String key) {
-        try {
-            SecureRandom sr = new SecureRandom();
-            DESKeySpec dks = new DESKeySpec(key.getBytes());
-            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(ALGORITHM_DES);
-            SecretKey secureKey = keyFactory.generateSecret(dks);
-            Cipher cipher = Cipher.getInstance(ALGORITHM_DES);
-            cipher.init(Cipher.DECRYPT_MODE, secureKey, sr);
-            return new String(cipher.doFinal(decodeBase64(data)));
-        } catch (Exception e) {
-            throw new CustomException(ResultEnum.SYSTEM_EXCEPTION.getCode(), "decode des exception");
-        }
+    public static String decodeDes(String data, String base64Key) {
+        byte[] key = decodeBase64(base64Key);
+        return SecureUtil.des(key).decryptStr(data);
     }
 
     /**
      * Advanced Encryption Standard,下一代的加密算法标准,加密后转出16进制
      *
-     * @param data data
-     * @param key  key
+     * @param data      data
+     * @param base64Key base64Key
      * @return return
      */
-    public static String encodeAes(String data, String key) {
-        try {
-            KeyGenerator keyGenerator = KeyGenerator.getInstance(ALGORITHM_AES);
-            SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
-            secureRandom.setSeed(key.getBytes());
-            keyGenerator.init(128, secureRandom);
-            SecretKey secretKey = keyGenerator.generateKey();
-            byte[] enCodeFormat = secretKey.getEncoded();
-            SecretKeySpec secretKeySpec = new SecretKeySpec(enCodeFormat, ALGORITHM_AES);
-            Cipher cipher = Cipher.getInstance(ALGORITHM_AES);
-            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
-            return encodeBase64(cipher.doFinal(data.getBytes()));
-        } catch (Exception e) {
-            throw new CustomException(ResultEnum.SYSTEM_EXCEPTION.getCode(), "encode aes exception");
-        }
+    public static String encodeAes(String data, String base64Key) {
+        byte[] key = decodeBase64(base64Key);
+        return SecureUtil.aes(key).encryptHex(data);
     }
 
     /**
      * decode aes
      *
-     * @param data data
-     * @param key  key
+     * @param data      data
+     * @param base64Key base64Key
      * @return return
      */
-    public static String decodeAes(String data, String key) {
-        try {
-            KeyGenerator keyGenerator = KeyGenerator.getInstance(ALGORITHM_AES);
-            SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
-            secureRandom.setSeed(key.getBytes());
-            keyGenerator.init(128, secureRandom);
-            SecretKey secretKey = keyGenerator.generateKey();
-            byte[] enCodeFormat = secretKey.getEncoded();
-            SecretKeySpec secretKeySpec = new SecretKeySpec(enCodeFormat, ALGORITHM_AES);
-            Cipher cipher = Cipher.getInstance(ALGORITHM_AES);
-            cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
-            return new String(cipher.doFinal(decodeBase64(data)), StandardCharsets.UTF_8);
-        } catch (Exception e) {
-            throw new CustomException(ResultEnum.SYSTEM_EXCEPTION.getCode(), "decode aes exception,message is " + e.getMessage());
-        }
+    public static String decodeAes(String data, String base64Key) {
+        byte[] key = decodeBase64(base64Key);
+        return SecureUtil.aes(key).decryptStr(data);
     }
 
     /**
@@ -250,7 +207,7 @@ public final class SecurityUtil {
     public static Map<String, String> createRsaKeyPair() {
         try {
             KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(ALGORITHM_RSA);
-            keyPairGen.initialize(1024);
+            keyPairGen.initialize(2048);
             KeyPair keyPair = keyPairGen.generateKeyPair();
             RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
             RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
@@ -266,41 +223,25 @@ public final class SecurityUtil {
     /**
      * encode rsa
      *
-     * @param data data
-     * @param key  key
+     * @param data             data
+     * @param base64PrivateKey base64PrivateKey
+     * @param base64PublicKey  base64PublicKey
      * @return return
      */
-    public static String encodeRsa(String data, String key) {
-        try {
-            X509EncodedKeySpec x509KeySpec = new X509EncodedKeySpec(decodeBase64(key));
-            KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM_RSA);
-            Key publicKey = keyFactory.generatePublic(x509KeySpec);
-            Cipher cipher = Cipher.getInstance(keyFactory.getAlgorithm());
-            cipher.init(Cipher.ENCRYPT_MODE, publicKey);
-            return encodeBase64(cipher.doFinal(data.getBytes()));
-        } catch (Exception e) {
-            throw new CustomException(ResultEnum.SYSTEM_EXCEPTION.getCode(), "encode rsa exception");
-        }
+    public static String encodeRsa(String data, String base64PrivateKey, String base64PublicKey, KeyType keyType) {
+        return SecureUtil.rsa(base64PrivateKey, base64PublicKey).encryptHex(data, keyType);
     }
 
     /**
-     * decode rsa
+     * encode rsa
      *
-     * @param data data
-     * @param key  key
+     * @param data             data
+     * @param base64PrivateKey base64PrivateKey
+     * @param base64PublicKey  base64PublicKey
      * @return return
      */
-    public static String decodeRsa(String data, String key) {
-        try {
-            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(decodeBase64(key));
-            KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM_RSA);
-            Key privateKey = keyFactory.generatePrivate(keySpec);
-            Cipher cipher = Cipher.getInstance(keyFactory.getAlgorithm());
-            cipher.init(Cipher.DECRYPT_MODE, privateKey);
-            return new String(cipher.doFinal(decodeBase64(data)));
-        } catch (Exception e) {
-            throw new CustomException(ResultEnum.SYSTEM_EXCEPTION.getCode(), "decode rsa exception");
-        }
+    public static String decodeRsa(String data, String base64PrivateKey, String base64PublicKey, KeyType keyType) {
+        return SecureUtil.rsa(base64PrivateKey, base64PublicKey).decryptStr(data, keyType);
     }
 
     protected static int toDigit(final char ch, final int index) {

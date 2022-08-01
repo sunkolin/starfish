@@ -9,7 +9,7 @@ public class MailUtilTest {
 
     @Test
     public void testSend() throws MessagingException {
-        String receiver = "jinkela008@foxmail.com";
+        String receiver = "jinkela2012@tom.com";
         String subject = "starfish";
         String content = "你好，此邮件由starfish发送。";
         MailUtil.send(Lists.newArrayList(receiver), null, null, subject, content);
