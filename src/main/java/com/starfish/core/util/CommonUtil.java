@@ -13,6 +13,7 @@ import java.io.*;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -275,7 +276,7 @@ public final class CommonUtil {
      * @return 结果
      * @throws Exception 异常
      */
-    public static String getLocalIp() throws Exception {
+    public static String getLocalIp() throws NoSuchElementException, SocketException {
         String result = "";
         Enumeration<NetworkInterface> allNetInterfaces = NetworkInterface.getNetworkInterfaces();
         while (allNetInterfaces.hasMoreElements()) {

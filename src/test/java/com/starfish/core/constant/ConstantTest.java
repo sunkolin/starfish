@@ -14,8 +14,9 @@ public class ConstantTest {
 
     @Test
     public void getVersionTest() {
-        String version = Constant.FRAMEWORK_VERSION;
-        Assert.assertEquals(version, "1.0.0-SNAPSHOT");
+        String expectedValue = "1.0.0-SNAPSHOT";
+        String actualValue = Constant.FRAMEWORK_VERSION;
+        Assert.assertEquals(expectedValue, actualValue);
     }
 
 }

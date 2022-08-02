@@ -45,18 +45,20 @@ public class DateTimeUtilTest {
 
     @Test
     public void dateBetweenTest() {
-        List<String> dates = DateTimeUtil.dateBetween("2020-01-01", "2020-01-03");
-        System.out.println(dates);
-        Assert.assertEquals(dates, Arrays.asList("2020-01-01", "2020-01-02", "2020-01-03"));
+        List<String> expectedValue = Arrays.asList("2020-01-01", "2020-01-02", "2020-01-03");
+        List<String> actualValue = DateTimeUtil.dateBetween("2020-01-01", "2020-01-03");
+        System.out.println(actualValue);
+        Assert.assertEquals(expectedValue, actualValue);
     }
 
     @Test
     public void getMonthStartTest() {
         // 时间是2020-10-15 09:00:00，当月第一天是2020-10-01 00:00:00，时间戳是1601481600000
-        Date date = new Date(1602723600000L);
-        Date monthStart = DateTimeUtil.getMonthStart(date);
-        System.out.println(monthStart);
-        Assert.assertEquals(monthStart.getTime(), 1601481600000L);
+        long expectedValue = 1601481600000L;
+        Date monthStart = DateTimeUtil.getMonthStart( new Date(1602723600000L));
+        long actualValue = monthStart.getTime();
+        System.out.println(actualValue);
+        Assert.assertEquals(expectedValue, actualValue);
     }
 
 }

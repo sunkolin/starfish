@@ -41,7 +41,7 @@ public class CookieUtil {
      */
     private static final List<String> DOMAIN_SUFFIX = Arrays.asList(".com", ".cn", ".com.cn", ".net", ".org", ".org.cn", ".net.cn", ".me", ".gov.cn", ".biz", ".name", ".info", ".cc", ".so", ".space", ".travel", ".tv", ".mobi", ".asia", ".co", ".hk", ".tw", ".us", ".ph", ".cd", ".tel", ".pw", ".jp", ".xyz", ".la", ".tm", ".website", ".host", ".press", ".com.tw", ".wang", ".top", ".club", ".ren", ".pub", ".market", ".cool", ".company", ".city", ".email", ".ninja", ".bike", ".today", ".life", ".rocks", ".band", ".software", ".social", ".lawyer", ".engineer", ".我爱你", ".中国", ".公司", ".网络", ".集团", ".移动", ".在线", ".中文网");
 
-    private CookieUtil(){
+    private CookieUtil() {
         // constructor
     }
 
@@ -66,37 +66,15 @@ public class CookieUtil {
     }
 
     /**
-     * 获取 Cookie
-     *
-     * @param request  请求
-     * @param response 响应
-     * @param name     cookie名称
-     * @return cookie值
-     */
-    public static String getCookie(HttpServletRequest request, HttpServletResponse response, String name) {
-        String result = "";
-        Cookie[] cookieArray = request.getCookies();
-        if (cookieArray != null) {
-            for (Cookie cookie : cookieArray) {
-                if (cookie.getName().equals(name)) {
-                    result = cookie.getValue();
-                }
-            }
-        }
-        return result;
-    }
-
-    /**
      * 设置 Cookie
      *
-     * @param request  请求
      * @param response 响应
      * @param domain   域名
      * @param maxAge   过期时间
      * @param name     名称
      * @param value    值
      */
-    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String domain, int maxAge, String name, String value) {
+    public static void setCookie(HttpServletResponse response, String domain, int maxAge, String name, String value) {
         Cookie cookie = new Cookie(name, value);
         if (isDomain(domain)) {
             cookie.setDomain(getDomain(domain));
@@ -115,20 +93,19 @@ public class CookieUtil {
      * @param value    值
      */
     public static void setCookie(HttpServletRequest request, HttpServletResponse response, String name, String value) {
-        setCookie(request, response, request.getServerName(), DEFAULT_MAX_AGE, name, value);
+        setCookie(response, request.getServerName(), DEFAULT_MAX_AGE, name, value);
     }
 
     /**
      * 设置 Cookie 默认过期时间 7 * 24 小时
      *
-     * @param request  请求
      * @param response 响应
      * @param domain   域名
      * @param name     名称
      * @param value    值
      */
-    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String domain, String name, String value) {
-        setCookie(request, response, domain, DEFAULT_MAX_AGE, name, value);
+    public static void setCookie(HttpServletResponse response, String domain, String name, String value) {
+        setCookie(response, domain, DEFAULT_MAX_AGE, name, value);
     }
 
     /**
@@ -141,7 +118,7 @@ public class CookieUtil {
      * @param value    值
      */
     public static void setCookie(HttpServletRequest request, HttpServletResponse response, int maxAge, String name, String value) {
-        setCookie(request, response, request.getServerName(), maxAge, name, value);
+        setCookie(response, request.getServerName(), maxAge, name, value);
     }
 
     /**
@@ -156,7 +133,6 @@ public class CookieUtil {
                 return true;
             }
         }
-
         return false;
     }
 
