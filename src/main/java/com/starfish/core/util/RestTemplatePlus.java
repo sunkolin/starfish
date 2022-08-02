@@ -1,5 +1,6 @@
 package com.starfish.core.util;
 
+import cn.hutool.core.util.ArrayUtil;
 import org.springframework.http.*;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -14,7 +15,11 @@ import javax.net.ssl.*;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.cert.CertificateExpiredException;
+import java.security.cert.CertificateNotYetValidException;
 import java.security.cert.X509Certificate;
 import java.util.Collections;
 import java.util.List;
@@ -48,9 +53,9 @@ public final class RestTemplatePlus {
 
         // fix javax.net.ssl.SSLProtocolException: handshake alert:unrecognized_name
         // reference:https://blog.csdn.net/leisurelen/article/details/74407817
-        System.setProperty ("jsse.enableSNIExtension", "false");
+        System.setProperty("jsse.enableSNIExtension", "false");
 
-        Ssl factory = new Ssl();
+        SslHttpRequestFactory factory = new SslHttpRequestFactory(true);
         factory.setReadTimeout(5000);
         factory.setConnectTimeout(15000);
         SSL_REST_TEMPLATE = new RestTemplate(factory);
@@ -144,7 +149,7 @@ public final class RestTemplatePlus {
             }
         }
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(innerForm, httpHeaders);
-        return REST_TEMPLATE.exchange(url, HttpMethod.POST, requestEntity, responseType);
+        return REST_TEMPLATE.exchange(url, method, requestEntity, responseType);
     }
 
     /**
@@ -194,7 +199,13 @@ public final class RestTemplatePlus {
 
 }
 
-class Ssl extends SimpleClientHttpRequestFactory {
+class SslHttpRequestFactory extends SimpleClientHttpRequestFactory {
+
+    private final boolean skipSsl;
+
+    public SslHttpRequestFactory(boolean skipSsl) {
+        this.skipSsl = skipSsl;
+    }
 
     @Override
     protected void prepareConnection(HttpURLConnection connection, String httpMethod) throws IOException {
@@ -205,7 +216,7 @@ class Ssl extends SimpleClientHttpRequestFactory {
     }
 
     private void prepareHttpsConnection(HttpsURLConnection connection) {
-        connection.setHostnameVerifier(new SkipHostnameVerifier());
+        connection.setHostnameVerifier(new SkipHostnameVerifier(skipSsl));
         try {
             connection.setSSLSocketFactory(createSslSocketFactory());
         } catch (Exception ex) {
@@ -213,23 +224,35 @@ class Ssl extends SimpleClientHttpRequestFactory {
         }
     }
 
-    private SSLSocketFactory createSslSocketFactory() throws Exception {
+    private SSLSocketFactory createSslSocketFactory() throws NoSuchAlgorithmException, KeyManagementException {
         SSLContext context = SSLContext.getInstance("TLS");
-        context.init(null, new TrustManager[]{new SkipX509TrustManager()},
-                new SecureRandom());
+        context.init(null, new TrustManager[]{new SkipX509TrustManager(skipSsl)}, new SecureRandom());
         return context.getSocketFactory();
     }
 
     private static class SkipHostnameVerifier implements HostnameVerifier {
 
+        private final boolean skipSsl;
+
+        public SkipHostnameVerifier(boolean skipSsl) {
+            this.skipSsl = skipSsl;
+        }
+
         @Override
-        public boolean verify(String s, SSLSession sslSession) {
-            return true;
+        public boolean verify(String hostname, SSLSession sslSession) {
+            // skipSsl
+            return skipSsl;
         }
 
     }
 
     private static class SkipX509TrustManager implements X509TrustManager {
+
+        private final boolean skipSsl;
+
+        public SkipX509TrustManager(boolean skipSsl) {
+            this.skipSsl = skipSsl;
+        }
 
         @Override
         public X509Certificate[] getAcceptedIssuers() {
@@ -237,11 +260,23 @@ class Ssl extends SimpleClientHttpRequestFactory {
         }
 
         @Override
-        public void checkClientTrusted(X509Certificate[] chain, String authType) {
+        public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateNotYetValidException, CertificateExpiredException {
+            // skipSsl
+            if (!skipSsl && !ArrayUtil.isEmpty(chain)) {
+                for (X509Certificate certificate : chain) {
+                    certificate.checkValidity();
+                }
+            }
         }
 
         @Override
-        public void checkServerTrusted(X509Certificate[] chain, String authType) {
+        public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateNotYetValidException, CertificateExpiredException {
+            // skipSsl
+            if (!skipSsl && !ArrayUtil.isEmpty(chain)) {
+                for (X509Certificate certificate : chain) {
+                    certificate.checkValidity();
+                }
+            }
         }
 
     }
