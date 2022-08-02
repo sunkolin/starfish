@@ -145,6 +145,7 @@ public class SpringPlus implements ApplicationContextAware, EnvironmentAware  {
         return SpringConstant.APPLICATION_CONTEXT;
     }
 
+    @SuppressWarnings("NullableProblems")
     @Override
     public  void setEnvironment(Environment environment) {
         SpringConstant.ENVIRONMENT = environment;

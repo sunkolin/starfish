@@ -18,6 +18,10 @@ import java.util.*;
 @Slf4j
 public class DateTimeUtil {
 
+    private DateTimeUtil(){
+
+    }
+
     /**
      * 根据任意日期格式转换成日期对象
      *
