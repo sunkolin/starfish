@@ -14,6 +14,10 @@ public class Trace {
 
     public static final String TRACE_ID_NAME = "traceId";
 
+    private Trace(){
+        // constructor
+    }
+
     /**
      * set trace id
      */

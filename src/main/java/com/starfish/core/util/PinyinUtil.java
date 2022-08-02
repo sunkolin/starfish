@@ -28,6 +28,10 @@ public class PinyinUtil {
         FORMAT.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
     }
 
+    private PinyinUtil(){
+        // constructor
+    }
+
     /**
      * 汉字转拼音
      *

@@ -18,6 +18,10 @@ public class JsonWebTokenPlus {
 
     private static final String KEY = "1234567890";
 
+    public JsonWebTokenPlus(){
+
+    }
+
     /**
      * 生成
      *

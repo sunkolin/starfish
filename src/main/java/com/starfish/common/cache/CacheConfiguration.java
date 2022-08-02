@@ -17,6 +17,9 @@ import java.util.ArrayList;
  * @version 1.0.0
  * @since 2015-05-22
  */
+/**
+ * @deprecated since 2022年08月01日
+ */
 @Deprecated
 public class CacheConfiguration {
 

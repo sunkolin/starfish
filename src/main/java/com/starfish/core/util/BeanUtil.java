@@ -21,6 +21,10 @@ public class BeanUtil {
      */
     private static final String OBJECT_CLASS_NAME = "Object";
 
+    private BeanUtil(){
+        // constructor
+    }
+
     /**
      * 将指定对象属性名称和属性值转化为Map键值对
      * org.apache.commons.beanutils.BeanUtils.describe(Object bean) 返回类型为Map,key类型是String,value类型也是String,

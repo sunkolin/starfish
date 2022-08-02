@@ -24,6 +24,10 @@ public class MathUtil {
      */
     private static final String PER_THOUSAND_SIGN = "‰";
 
+    private MathUtil(){
+        // constructor
+    }
+
     /**
      * 判断字符串是数字
      * copy from commons-lang NumberUtils

@@ -50,6 +50,10 @@ public class BusinessUtil {
      */
     private static final String GET_WEATHER_BY_CITY_NAME_URL = "http://wthrcdn.etouch.cn/weather_mini";
 
+    private BusinessUtil() {
+
+    }
+
     /**
      * 判断一个字符串是否是手机号
      *

@@ -46,6 +46,10 @@ public class StringUtil {
 
     private static final SecureRandom RANDOM = new SecureRandom();
 
+    private StringUtil(){
+        // constructor
+    }
+
     /**
      * 判断字符串是null或空
      *

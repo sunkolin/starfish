@@ -21,6 +21,10 @@ import java.util.Date;
 @SuppressWarnings("unused")
 public class StorageUtil {
 
+    private StorageUtil(){
+        // constructor
+    }
+
     /**
      * 存储文件并返回一个链接地址
      * 使用时根据具体需求改造，不可直接返回服务器文件保存路径

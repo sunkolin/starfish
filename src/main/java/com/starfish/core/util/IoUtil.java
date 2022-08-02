@@ -12,8 +12,8 @@ import java.io.IOException;
  */
 public class IoUtil {
 
-    private IoUtil() {
-
+    private IoUtil(){
+        // constructor
     }
 
     /**

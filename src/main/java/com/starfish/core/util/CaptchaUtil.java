@@ -10,4 +10,8 @@ package com.starfish.core.util;
  */
 public class CaptchaUtil {
 
+    private CaptchaUtil(){
+        // constructor
+    }
+
 }

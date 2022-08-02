@@ -16,6 +16,10 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class ForestUtil {
 
+    private ForestUtil(){
+        // constructor
+    }
+
     /**
      * 获取header
      *

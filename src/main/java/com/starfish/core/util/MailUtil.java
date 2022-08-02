@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class MailUtil {
 
     private MailUtil(){
-
+        // constructor
     }
 
     public static void send(List<String> to, List<String> carbonCopy, List<String> blindCarbonCopy, String subject, String text) throws MessagingException {

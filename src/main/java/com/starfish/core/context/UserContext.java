@@ -28,6 +28,10 @@ public class UserContext {
      */
     public static final String T_CONTEXT_KEY = "t_context";
 
+    private UserContext(){
+        // constructor
+    }
+
     public static HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     }

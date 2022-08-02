@@ -51,10 +51,13 @@ public final class FileUtil {
 
     public static final String CLASSPATH_PREFIX = "classpath:";
 
-
     private static final ThreadFactory NAMED_THREAD_FACTORY = new ThreadFactoryBuilder().setNameFormat("file-util-thread-pool-factory").build();
 
     private static final ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(10, 100, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), NAMED_THREAD_FACTORY);
+
+    private FileUtil(){
+        // constructor
+    }
 
     /**
      * 创建文件及父目录

@@ -35,8 +35,8 @@ public class CompressUtil {
      */
     private static final String ZIP_COMPRESS_FILE_EXTENSION = ".zip";
 
-    private CompressUtil() {
-
+    private CompressUtil(){
+        // constructor
     }
 
     /**

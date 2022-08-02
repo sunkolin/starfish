@@ -14,8 +14,8 @@ import com.starfish.core.exception.CustomException;
  */
 public class JsonUtil {
 
-    private JsonUtil() {
-
+    private JsonUtil(){
+        // constructor
     }
 
     /**

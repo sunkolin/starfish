@@ -63,8 +63,8 @@ public final class RestTemplatePlus {
         supportJavascript(sslMessageConverters);
     }
 
-    private RestTemplatePlus() {
-
+    private RestTemplatePlus(){
+        // constructor
     }
 
     /**

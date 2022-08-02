@@ -35,6 +35,10 @@ public class Validator {
      */
     private static final String HTTPS_URL_PREFIX = "https://";
 
+    private Validator(){
+        // constructor
+    }
+
     /**
      * 验证字符串
      *

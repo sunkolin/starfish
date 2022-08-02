@@ -21,8 +21,8 @@ public class SystemUtil {
      */
     private static final String WINDOWS_SYSTEM_NAME_KEYWORDS = "windows";
 
-    private SystemUtil() {
-
+    private SystemUtil(){
+        // constructor
     }
 
     /**

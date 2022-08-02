@@ -38,8 +38,8 @@ public final class SecurityUtil {
 
     public static final String ALGORITHM_RSA = "RSA";
 
-    private SecurityUtil() {
-
+    private SecurityUtil(){
+        // constructor
     }
 
     /**

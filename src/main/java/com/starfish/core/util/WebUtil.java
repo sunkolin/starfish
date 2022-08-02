@@ -72,6 +72,10 @@ public class WebUtil extends HtmlUtils {
         initStreamType();
     }
 
+    private WebUtil(){
+        // constructor
+    }
+
     /**
      * 获取Scheme
      *

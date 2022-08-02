@@ -23,6 +23,10 @@ import java.util.*;
 @Slf4j
 public class CollectionUtil {
 
+    private CollectionUtil(){
+        // constructor
+    }
+
     /**
      * 数组排序
      *

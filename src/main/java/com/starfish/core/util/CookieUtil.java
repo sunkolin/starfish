@@ -41,6 +41,10 @@ public class CookieUtil {
      */
     private static final List<String> DOMAIN_SUFFIX = Arrays.asList(".com", ".cn", ".com.cn", ".net", ".org", ".org.cn", ".net.cn", ".me", ".gov.cn", ".biz", ".name", ".info", ".cc", ".so", ".space", ".travel", ".tv", ".mobi", ".asia", ".co", ".hk", ".tw", ".us", ".ph", ".cd", ".tel", ".pw", ".jp", ".xyz", ".la", ".tm", ".website", ".host", ".press", ".com.tw", ".wang", ".top", ".club", ".ren", ".pub", ".market", ".cool", ".company", ".city", ".email", ".ninja", ".bike", ".today", ".life", ".rocks", ".band", ".software", ".social", ".lawyer", ".engineer", ".我爱你", ".中国", ".公司", ".网络", ".集团", ".移动", ".在线", ".中文网");
 
+    private CookieUtil(){
+        // constructor
+    }
+
     /**
      * 获取Cookie值
      *

@@ -9,8 +9,8 @@ package com.starfish.core.util;
  */
 public class ZipUtil {
 
-    private ZipUtil() {
-
+    private ZipUtil(){
+        // constructor
     }
 
     /**

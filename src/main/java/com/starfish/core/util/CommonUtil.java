@@ -48,8 +48,8 @@ public final class CommonUtil {
      */
     public static final String EQUAL_SYMBOL = "=";
 
-    private CommonUtil() {
-
+    private CommonUtil(){
+        // constructor
     }
 
     /**

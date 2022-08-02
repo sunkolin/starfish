@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 /**
  * CachePlus
  * 使用caffeine做本地缓存
- * TODO 解决未配置caffeine启动失败问题
  *
  * @author sunkolin
  * @version 1.0.0
