@@ -1,4 +1,4 @@
-package com.starfish.extension.trial;
+package com.starfish.extension.jwt;
 
 import com.starfish.core.context.User;
 import com.starfish.extension.jwt.JsonWebTokenPlus;
@@ -14,9 +14,9 @@ import org.junit.Test;
 public class JsonWebTokenPlusTest {
 
     @Test
-    public void isMobileTest() {
+    public void test() {
         User user = new User();
-        user.setUserId(99L);
+        user.setUserId(100L);
 
         String token = JsonWebTokenPlus.create(user);
         System.out.println(token);

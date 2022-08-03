@@ -40,13 +40,13 @@ public class CacheAutoConfiguration {
     public Caffeine<Object, Object> newCaffeine() {
         Caffeine<Object, Object> caffeine = Caffeine.newBuilder();
         caffeine.expireAfterWrite(cacheProperties.getExpire(), TimeUnit.SECONDS);
-        if (cacheProperties.getWeakKeys()) {
+        if (Boolean.TRUE.equals(cacheProperties.getWeakKeys())) {
             caffeine.weakKeys();
         }
-        if (cacheProperties.getWeakValues()) {
+        if (Boolean.TRUE.equals(cacheProperties.getWeakValues())) {
             caffeine.weakValues();
         }
-        if (cacheProperties.getSoftValues()) {
+        if (Boolean.TRUE.equals(cacheProperties.getSoftValues())) {
             caffeine.softValues();
         }
         return caffeine;

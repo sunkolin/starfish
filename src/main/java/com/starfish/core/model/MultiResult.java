@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * MultiResult
- * 最多支持返回5个结果，不建议同一个方法返回太多结果
+ * 最多支持返回3个结果，不建议同一个方法返回太多结果
  * 如果存入数据格式与取出数据格式不一致，会报类型转换异常
  * 例如Exception in thread "main" java.lang.ClassCastException: java.util.ArrayList cannot be cast to java.lang.Long
  *
@@ -23,10 +23,6 @@ public class MultiResult {
     private Object second;
 
     private Object third;
-
-    private Object fourth;
-
-    private Object fifth;
 
     public <T> T getFirst() {
         return (T) first;
@@ -50,22 +46,6 @@ public class MultiResult {
 
     public void setThird(Object third) {
         this.third = third;
-    }
-
-    public <T> T getFourth() {
-        return (T) fourth;
-    }
-
-    public void setFourth(Object fourth) {
-        this.fourth = fourth;
-    }
-
-    public <T> T getFifth() {
-        return (T) fifth;
-    }
-
-    public void setFifth(Object fifth) {
-        this.fifth = fifth;
     }
 
 }

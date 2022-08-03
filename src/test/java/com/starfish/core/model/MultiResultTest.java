@@ -1,6 +1,8 @@
 package com.starfish.core.model;
 
+import com.starfish.core.constant.Constant;
 import org.assertj.core.util.Lists;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
@@ -15,29 +17,25 @@ import java.util.List;
 public class MultiResultTest {
 
     @Test
-    public void getVersionTest() {
-        MultiResult result = getMultiResult();
+    public void multiResultTest() {
+        MultiResult result = new MultiResult();
+        result.setFirst("123");
+        result.setSecond(10000000);
+        result.setThird(Lists.newArrayList("1", "2", "5"));
         System.out.println(result);
 
         String first = result.getFirst();
         System.out.println(first);
 
-        String second = result.getSecond();
+        int second = result.getSecond();
         System.out.println(second);
 
-//        Long fourth =  result.getFourth();
-//        System.out.println(fourth);
-
-        List<String> fifth = result.getFifth();
+        List<String> fifth = result.getThird();
         System.out.println(fifth);
-    }
 
-    public MultiResult getMultiResult() {
-        MultiResult result = new MultiResult();
-        result.setSecond("123");
-        result.setFourth(10000000);
-        result.setFifth(Lists.newArrayList("1", "2", "5"));
-        return result;
+        int expectedValue = 10000000;
+        int actualValue = result.getSecond();
+        Assert.assertEquals(expectedValue, actualValue);
     }
 
 }
