@@ -1,6 +1,6 @@
 package com.starfish.core.web;
 
-import com.starfish.core.model.ApiResult;
+import com.starfish.core.model.Result;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,8 +18,8 @@ public class AliveController {
      * 健康检查
      */
     @GetMapping({"/api/alive", "/starfish/api/alive", "/${spring.application.name}/api/alive"})
-    public ApiResult<String> alive() {
-        return new ApiResult<>("alive");
+    public Result<String> alive() {
+        return Result.success("alive");
     }
 
 }

@@ -48,18 +48,17 @@ public class ResponseWrapper implements ResponseBodyAdvice<Object> {
 
         // 判断内容为null的情况
         if (body == null) {
-            Result<Object> result = new Result<>();
-            result.setMessage("notice:body is null");
-            return result;
+            log.warn("notice:body is null");
+            return Result.success();
         }
         if (body instanceof String) {
             response.getHeaders().set("Content-Type", "application/json;charset=utf-8");
-           return JsonUtil.toJson(new Result<>(body));
+            return JsonUtil.toJson(Result.success(body));
         }
         if (body instanceof ResponseEntity) {
             return body;
         }
-        return new Result<>(body);
+        return Result.success(body);
     }
 
 }

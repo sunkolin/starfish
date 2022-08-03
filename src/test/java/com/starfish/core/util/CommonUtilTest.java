@@ -1,6 +1,7 @@
 package com.starfish.core.util;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
  */
 class CommonUtilTest {
 
+    @Disabled("Network does not work")
     @Test
     void getPublicAddressTest() {
         String result = CommonUtil.getPublicIp();

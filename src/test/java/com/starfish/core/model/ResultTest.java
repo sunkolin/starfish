@@ -19,21 +19,21 @@ class ResultTest {
 
     @Test
     void test() {
-        Result<Object> result = new Result<>(ResultEnum.CAN_NOT_FIND_METHOD);
+        Result<Object> result = Result.fail(ResultEnum.CAN_NOT_FIND_METHOD);
         System.out.println(JsonUtil.toJson(result));
         Assertions.assertEquals(result.getCode(), ResultEnum.CAN_NOT_FIND_METHOD.getCode());
 
-        result = new Result<>(new CustomException(800, "参数错误"));
+        result = Result.fail(new CustomException(800, "参数错误"));
         System.out.println(JsonUtil.toJson(result));
         Assertions.assertEquals(result.getCode(), Integer.valueOf(800));
 
-        result = new Result<>(new ArrayList<>());
+        result = Result.success(new ArrayList<>());
         System.out.println(JsonUtil.toJson(result));
-        Assertions.assertEquals(result.getCode(), Integer.valueOf(200));
+        Assertions.assertEquals(result.getCode(), Integer.valueOf(0));
 
-        result = new Result<>("你好");
+        result = Result.success("你好");
         System.out.println(JsonUtil.toJson(result));
-        Assertions.assertEquals(result.getCode(), Integer.valueOf(200));
+        Assertions.assertEquals(result.getCode(), Integer.valueOf(0));
     }
 
 }

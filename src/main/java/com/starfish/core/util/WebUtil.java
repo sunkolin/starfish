@@ -72,7 +72,7 @@ public class WebUtil extends HtmlUtils {
         initStreamType();
     }
 
-    private WebUtil(){
+    private WebUtil() {
         // constructor
     }
 
@@ -295,10 +295,7 @@ public class WebUtil extends HtmlUtils {
      * @param data     数据
      */
     public static void write(HttpServletResponse response, Integer code, String message, Object data) {
-        Result<Object> result = new Result<>();
-        result.setCode(code);
-        result.setMessage(message);
-        result.setData(data);
+        Result<Object> result = Result.wrapper(code, message, data);
         write(response, result);
     }
 
