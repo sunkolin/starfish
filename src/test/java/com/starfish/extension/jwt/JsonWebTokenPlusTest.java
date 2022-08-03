@@ -1,8 +1,9 @@
 package com.starfish.extension.jwt;
 
+import com.starfish.core.constant.Constant;
 import com.starfish.core.context.User;
-import com.starfish.extension.jwt.JsonWebTokenPlus;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * JsonWebTokenPlusTest
@@ -11,10 +12,10 @@ import org.junit.Test;
  * @version 1.0.0
  * @since 2022-07-26
  */
-public class JsonWebTokenPlusTest {
+class JsonWebTokenPlusTest {
 
     @Test
-    public void test() {
+    void test() {
         User user = new User();
         user.setUserId(100L);
 
@@ -26,6 +27,10 @@ public class JsonWebTokenPlusTest {
 
         User user1 = JsonWebTokenPlus.parse(token, User.class);
         System.out.println(user1);
+
+        long expectedValue = 100L;
+        long actualValue = user1.getUserId();
+        Assertions.assertEquals(expectedValue, actualValue);
     }
 
 }

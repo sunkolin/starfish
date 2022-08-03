@@ -1,6 +1,5 @@
 package com.starfish.core.model;
 
-import java.io.Serializable;
 import java.lang.reflect.Method;
 
 /**
@@ -13,9 +12,9 @@ import java.lang.reflect.Method;
 @SuppressWarnings({"unused", "unchecked"})
 public class Result<T> {
 
-    private transient static final Integer SUCCESS_CODE = 0;
+    private static final Integer SUCCESS_CODE = 0;
 
-    private transient static final String SUCCESS_MESSAGE = "success";
+    private static final String SUCCESS_MESSAGE = "success";
 
     /**
      * code
@@ -40,9 +39,10 @@ public class Result<T> {
     public Result(Object object) {
         // 验证参数不能为空
         if (object instanceof Result) {
-            this.code = SUCCESS_CODE;
-            this.message = SUCCESS_MESSAGE;
-            this.data = (T) ((Result<?>) object).getData();
+            Result<Object> result = ((Result<Object>) object);
+            this.code = result.getCode();
+            this.message = result.getMessage();
+            this.data = (T) result.getData();
         } else {
             this.code = SUCCESS_CODE;
             this.message = SUCCESS_MESSAGE;
@@ -69,30 +69,6 @@ public class Result<T> {
     public Result(Integer code, String message) {
         this.code = code;
         this.message = message;
-    }
-
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
     }
 
     /**
@@ -175,7 +151,7 @@ public class Result<T> {
      * @param <T>     T
      * @return 结果
      */
-    public static <T> Result<T> response(Integer code, String message) {
+    public static <T> Result<T> wrapper(Integer code, String message) {
         Result<T> result = new Result<>();
         result.setCode(code);
         result.setMessage(message);
@@ -190,7 +166,7 @@ public class Result<T> {
      * @param <T>     T
      * @return 结果
      */
-    public static <T> Result<T> response(Integer code, String message, T data) {
+    public static <T> Result<T> wrapper(Integer code, String message, T data) {
         Result<T> result = new Result<>();
         result.setCode(code);
         result.setMessage(message);
@@ -211,6 +187,30 @@ public class Result<T> {
             return false;
         }
         return true;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 
 }

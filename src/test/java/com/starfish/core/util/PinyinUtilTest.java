@@ -1,7 +1,8 @@
 package com.starfish.core.util;
 
 import com.starfish.core.context.User;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +14,10 @@ import java.util.List;
  * @version 1.0.0
  * @since 2021-03-03
  */
-public class PinyinUtilTest {
+class PinyinUtilTest {
 
     @Test
-    public void sortTest() {
+    void sortTest() {
         List<User> users = new ArrayList<>();
 
         User u1 = new User();
@@ -29,9 +30,10 @@ public class PinyinUtilTest {
         u2.setUserName("马");
         users.add(u2);
 
+        System.out.println("排序前:" + users);
         PinyinUtil.sort(users, User::getUserName);
-
-        System.out.println(users);
+        System.out.println("排序前:" + users);
+        Assertions.assertEquals("马",users.get(0).getUserName());
     }
 
 }

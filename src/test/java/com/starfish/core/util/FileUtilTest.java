@@ -1,7 +1,7 @@
 package com.starfish.core.util;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -12,26 +12,26 @@ import java.util.List;
  * @version 1.0.0
  * @since 2015-11-08
  */
-public class FileUtilTest {
+class FileUtilTest {
 
     @Test
-    public void readTest() {
+    void readTest() {
         String result = FileUtil.read("classpath:application-starfish.properties");
-        Assert.assertNotNull(result);
+        Assertions.assertNotNull(result);
 
         String result2 = FileUtil.read("file:/etc/profile");
         System.out.println(result2);
-        Assert.assertNotNull(result2);
+        Assertions.assertNotNull(result2);
     }
 
     @Test
-    public void readLinesTest() {
+    void readLinesTest() {
         List<String> result = FileUtil.readLines("classpath:application-starfish.properties");
-        Assert.assertTrue(result != null && !result.isEmpty());
+        Assertions.assertTrue(result != null && !result.isEmpty());
 
         List<String> result2 = FileUtil.readLines("file:/etc/profile");
         System.out.println(result2);
-        Assert.assertTrue(result2 != null && !result2.isEmpty());
+        Assertions.assertTrue(result2 != null && !result2.isEmpty());
     }
 
 }

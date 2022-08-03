@@ -1,10 +1,9 @@
 package com.starfish.extension.trial;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.io.Serializable;
 
@@ -16,10 +15,10 @@ import java.io.Serializable;
  * @version 1.0.0
  * @since 2021-12-30
  */
-public class RankListTest {
+ class RankListTest {
 
     @Test
-    public void test() {
+     void test() {
         RankList<Student> rankList = new RankList<>(3, (o1, o2) -> Integer.compare(o2.getScore(), o1.getScore()));
 
         Student student1 = new Student("tom", 98);
@@ -34,7 +33,7 @@ public class RankListTest {
         rankList.add(student4);
         rankList.add(student5);
 
-        Assert.assertEquals(rankList.size(), 3);
+        Assertions.assertEquals(3, rankList.size());
 
         for (Student student : rankList) {
             System.out.println(student);

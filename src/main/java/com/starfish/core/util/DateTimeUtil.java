@@ -18,8 +18,10 @@ import java.util.*;
 @Slf4j
 public class DateTimeUtil {
 
-    private DateTimeUtil(){
-        // constructor
+    /**
+     * constructor
+     */
+    private DateTimeUtil() {
     }
 
     /**

@@ -1,8 +1,8 @@
 //package com.starfish.core.util;
 //
 //import com.starfish.common.cache.EhcacheUtil;
-//import org.junit.Assert;
-//import org.junit.Test;
+//import org.junit.jupiter.api.Assertions;
+//import org.junit.jupiter.api.Test;
 //
 ///**
 // * EhcacheUtilTest

@@ -3,8 +3,8 @@ package com.starfish.core.util;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.io.Serializable;
 import java.util.*;
@@ -16,10 +16,10 @@ import java.util.*;
  * @version 1.0.0
  * @since 2014-11-27
  */
-public class CollectionUtilTest {
+class CollectionUtilTest {
 
     @Test
-    public void selectList() {
+    void selectList() {
         List<UserModel> list = new ArrayList<>();
         UserModel model = new UserModel();
         model.setUsername("tom");
@@ -28,21 +28,21 @@ public class CollectionUtilTest {
         list.add(model);
 
         List<UserModel> r1 = CollectionUtil.select(list, "username", "tom");
-        Assert.assertEquals(r1.get(0).getUsername(), "tom");
+        Assertions.assertEquals("tom", r1.get(0).getUsername());
 
         List<UserModel> r2 = CollectionUtil.select(list, "username", "tomson");
-        Assert.assertEquals(r2.size(), 0);
+        Assertions.assertEquals(0, r2.size());
 
         List<UserModel> r3 = CollectionUtil.remove(list, "username", "tom");
-        Assert.assertEquals(r3.size(), 0);
+        Assertions.assertEquals(0, r3.size());
 
         List<UserModel> r4 = CollectionUtil.select(list, "age", 20);
-        Assert.assertEquals(r4.get(0).getUsername(), "tom");
+        Assertions.assertEquals("tom", r4.get(0).getUsername());
     }
 
 
     @Test
-    public void continuousTest() {
+    void continuousTest() {
         List<Long> list = new ArrayList<>();
         list.add(1L);
         list.add(2L);
@@ -50,33 +50,30 @@ public class CollectionUtilTest {
         list.add(4L);
         list.add(5L);
 
-//        list.add(11L);
-//        list.add(12L);
-//        list.add(13L);
-//        list.add(14L);
-//        list.add(15L);
-
-        CollectionUtil.continuous(list);
+        boolean result = CollectionUtil.continuous(list);
+        Assertions.assertTrue(result);
     }
 
 
     @Test
-    public void testExistClass() {
-        Assert.assertTrue(CommonUtil.existClass("com.starfish.core.util.CommonUtil"));
+    void testExistClass() {
+        boolean result1 = CommonUtil.existClass("com.starfish.core.util.CommonUtil");
+        Assertions.assertTrue(result1);
 
-        Assert.assertFalse(CommonUtil.existClass("com.starfish.core.util.CommonUtil2"));
+        boolean result2 = CommonUtil.existClass("com.starfish.core.util.CommonUtil2");
+        Assertions.assertFalse(result2);
     }
 
     @Test
-    public void sortStringTest() {
+    void sortStringTest() {
         String[] array = new String[]{"1", "3", "2", "a", "4"};
         CollectionUtil.sort(array, "desc");
         System.out.println(JsonUtil.toJson(array));
-        Assert.assertArrayEquals(new String[]{"a", "4", "3", "2", "1"}, array);
+        Assertions.assertArrayEquals(new String[]{"a", "4", "3", "2", "1"}, array);
     }
 
     @Test
-    public void sortLongTest() {
+    void sortLongTest() {
         List<Long> list = new ArrayList<>();
         list.add(99L);
         list.add(48L);
@@ -87,11 +84,11 @@ public class CollectionUtilTest {
         list.add(40L);
         CollectionUtil.sort(list, "desc", null);
         System.out.println(JsonUtil.toJson(list));
-        Assert.assertEquals(12L, list.get(list.size() - 1).longValue());
+        Assertions.assertEquals(12L, list.get(list.size() - 1).longValue());
     }
 
     @Test
-    public void sortMapTest() {
+    void sortMapTest() {
         HashMap<Date, String> map = new HashMap<>();
         map.put(new Date(), "123");
         map.put(new Date(), "456");
@@ -103,11 +100,11 @@ public class CollectionUtilTest {
         for (Date key : keySet) {
             last = key;
         }
-        Assert.assertEquals("873", result.get(last));
+        Assertions.assertEquals("873", result.get(last));
     }
 
     @Test
-    public void sortMapValueTest() {
+    void sortMapValueTest() {
         HashMap<String, UserModel> map = new HashMap<>();
         map.put("Beethoven", new UserModel(1L, "Beethoven", "", 100));
         map.put("Bush", new UserModel(3L, "Bush", "", 100));
@@ -129,7 +126,7 @@ public class CollectionUtilTest {
         for (String key : keySet) {
             last = key;
         }
-        Assert.assertEquals("Beethoven", result.get(last).getUsername());
+        Assertions.assertEquals("Beethoven", result.get(last).getUsername());
     }
 
     /**
@@ -138,7 +135,7 @@ public class CollectionUtilTest {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    class UserModel implements Serializable {
+    static class UserModel implements Serializable {
 
         private Long id;
 

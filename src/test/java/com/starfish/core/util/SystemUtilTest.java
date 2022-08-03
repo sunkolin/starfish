@@ -1,7 +1,7 @@
 package com.starfish.core.util;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * SystemUtilTest
@@ -10,15 +10,15 @@ import org.junit.Test;
  * @version 1.0.0
  * @since 2015-06-26
  */
-public class SystemUtilTest {
+class SystemUtilTest {
 
     @Test
-    public void getSystemTest() {
+    void getSystemTest() {
         String system = SystemUtil.getSystem().toLowerCase();
         String basePath = SystemUtil.getBasePath().toLowerCase();
 
-        Assert.assertTrue(system.contains("windows") || system.contains("linux") || system.contains("unix") || system.contains("mac") || system.contains("os"));
-        Assert.assertTrue(basePath.contains("/"));
+        Assertions.assertTrue(system.contains("windows") || system.contains("linux") || system.contains("unix") || system.contains("mac") || system.contains("os"));
+        Assertions.assertTrue(basePath.contains("/"));
     }
 
 }

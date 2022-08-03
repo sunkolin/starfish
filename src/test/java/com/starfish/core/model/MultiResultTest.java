@@ -1,9 +1,8 @@
 package com.starfish.core.model;
 
-import com.starfish.core.constant.Constant;
 import org.assertj.core.util.Lists;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -14,10 +13,10 @@ import java.util.List;
  * @version 1.0.0
  * @since 2021-12-13
  */
-public class MultiResultTest {
+class MultiResultTest {
 
     @Test
-    public void multiResultTest() {
+    void multiResultTest() {
         MultiResult result = new MultiResult();
         result.setFirst("123");
         result.setSecond(10000000);
@@ -35,7 +34,7 @@ public class MultiResultTest {
 
         int expectedValue = 10000000;
         int actualValue = result.getSecond();
-        Assert.assertEquals(expectedValue, actualValue);
+        Assertions.assertEquals(expectedValue, actualValue);
     }
 
 }

@@ -1,7 +1,7 @@
 package com.starfish.core.util;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * CommonUtilTest
@@ -10,13 +10,13 @@ import org.junit.Test;
  * @version 1.0.0
  * @since 2015-01-21
  */
-public class CommonUtilTest {
+class CommonUtilTest {
 
     @Test
-    public void getPublicAddressTest() {
+    void getPublicAddressTest() {
         String result = CommonUtil.getPublicIp();
         System.out.println(result);
-        Assert.assertNotNull(result);
+        Assertions.assertNotNull(result);
     }
 
 }
