@@ -55,7 +55,7 @@ public final class FileUtil {
 
     private static final ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(10, 100, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), NAMED_THREAD_FACTORY);
 
-    private FileUtil(){
+    private FileUtil() {
         // constructor
     }
 
@@ -92,28 +92,25 @@ public final class FileUtil {
      */
     @SneakyThrows
     public static void delete(String path) {
-        File file = new File(path);
-
         // 判断文件是否存在
+        File file = new File(path);
         if (!file.exists()) {
             return;
         }
 
         // 如果是文件，直接删除
         if (file.isFile()) {
-            //noinspection ResultOfMethodCallIgnored
+            Files.delete(file.toPath());
+        } else {
+            // 如果是文件夹，便利文件夹，删除文件下所有文件，再删除文件夹
+            File[] files = file.listFiles();
+            if (files != null && files.length > 0) {
+                for (File f : files) {
+                    delete(f.getAbsolutePath());
+                }
+            }
             Files.delete(file.toPath());
         }
-
-        // 如果是文件夹，便利文件夹，删除文件下所有文件，再删除文件夹
-        File[] files = file.listFiles();
-        if (files != null && files.length > 0) {
-            for (File f : files) {
-                delete(f.getAbsolutePath());
-            }
-        }
-        //noinspection ResultOfMethodCallIgnored
-        Files.delete(file.toPath());
     }
 
     /**

@@ -69,12 +69,16 @@ public class CompressUtil {
      * 压缩文件列表
      */
     private static void compress(String basePath, String sourcePath, String targetPath) {
+        // 创建文件
+        try {
+            FileUtil.create(targetPath);
+        } catch (Exception e) {
+            throw new CustomException(ResultEnum.COMPRESS_FILE_ERROR);
+        }
+
         // 遍历文件得到文件字符串list
         List<String> filePathList = traverse(sourcePath);
-
-        try (ZipOutputStream outputStream = new ZipOutputStream(new FileOutputStream(targetPath));) {
-            FileUtil.create(targetPath);
-
+        try (ZipOutputStream outputStream = new ZipOutputStream(new FileOutputStream(targetPath))) {
             // 遍历添加文件
             for (String filePath : filePathList) {
                 String relativePath = calculateRelativePath(basePath, filePath);
