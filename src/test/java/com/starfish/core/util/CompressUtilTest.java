@@ -26,7 +26,7 @@ import java.io.IOException;
     }
 
     @Test
-     void test() throws IOException {
+     void compressTest() throws IOException {
         String filePath = basePathPrefix + "/tmp/images/favicon.ico";
         if (!new File(filePath).exists()) {
             WebUtil.download("http://www.baidu.com/favicon.ico", filePath);

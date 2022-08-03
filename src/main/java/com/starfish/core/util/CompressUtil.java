@@ -28,6 +28,7 @@ import java.util.zip.ZipOutputStream;
  */
 @SuppressWarnings("unused")
 @Slf4j
+@Deprecated
 public class CompressUtil {
 
     /**
@@ -35,7 +36,7 @@ public class CompressUtil {
      */
     private static final String ZIP_COMPRESS_FILE_EXTENSION = ".zip";
 
-    private CompressUtil(){
+    private CompressUtil() {
         // constructor
     }
 
