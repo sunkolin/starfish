@@ -27,7 +27,7 @@ public class BusinessUtil {
     /**
      * 参考：https://www.cnblogs.com/zjk1/p/8623965.html
      */
-    private static final String MOBILE_REGEX = "^[1](([3|5|8][\\d])|([4][4,5,6,7,8,9])|([6][2,5,6,7])|([7][^9])|([9][1,8,9]))[\\d]{8}$";
+    private static final String MOBILE_REGEX = "(?:0|86|\\+86)?1[3-9]\\d{9}";
 
     private static final int MOBILE_LENGTH = 11;
 
@@ -39,11 +39,6 @@ public class BusinessUtil {
     static {
         SENSITIVE_WORD_LIST = FileUtil.readLines("classpath:words.txt");
     }
-
-    /**
-     * 请求天气预报接口成功状态码
-     */
-    private static final int SUCCESS_STATUS = 1000;
 
     /**
      * 根据城市名称查询天气接口地址

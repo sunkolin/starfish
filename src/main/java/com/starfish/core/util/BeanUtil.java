@@ -56,7 +56,8 @@ public class BeanUtil {
         }
 
         for (Field field : fields) {
-            field.setAccessible(true);
+            //java:S3011,Reflection should not be used to increase accessibility of classes, methods, or fields
+//            field.setAccessible(true);
             String name = field.getName();
             try {
                 map.put(name, field.get(obj));

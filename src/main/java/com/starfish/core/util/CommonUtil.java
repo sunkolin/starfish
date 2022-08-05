@@ -314,13 +314,7 @@ public final class CommonUtil {
         // <200,{"rs":1,"code":0,"address":"中国  北京 北京市 电信","ip":"106.120.64.78","isDomain":0},[Date:"Thu, 26 Aug 2021 03:13:53 GMT", Content-Type:"application/json", Transfer-Encoding:"chunked", Connection:"keep-alive", CF-Cache-Status:"DYNAMIC", Expect-CT:"max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"", Report-To:"{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=xxR%2FMmp%2FEx8T6u9lgnFthzXhVATlx2oxK%2FBYEXm6QzOsoWagGQIyiDKYYb0MOKflPKrWg8HFCMEOYvxR1IdIIdlAgOo2%2FDw7pGX1%2F6yzb2jAuozjbuTFcA%3D%3D"}],"group":"cf-nel","max_age":604800}", NEL:"{"success_fraction":0,"report_to":"cf-nel","max_age":604800}", Server:"cloudflare", CF-RAY:"6849e3069e0bc3c4-LAX", alt-svc:"h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443"; ma=86400"]>
         String json = result.substring(result.indexOf("{"), result.indexOf("}") + 1);
 
-        // {
-        //   "rs":1,
-        //   "code":0,
-        //   "address":"中国  北京 北京市 电信",
-        //   "ip":"106.120.64.78",
-        //   "isDomain":0
-        // }
+        // 格式如下{"rs":1,"code":0,"address":"中国  北京 北京市 电信","ip":"106.120.64.78","isDomain":0}
         GetPublicAddressResult getPublicAddressResult = JsonUtil.toObject(json, GetPublicAddressResult.class);
 
         return getPublicAddressResult.getIp();

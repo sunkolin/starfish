@@ -26,6 +26,7 @@ public class CustomEnvironmentPostProcessor implements EnvironmentPostProcessor,
 
     private static final Integer POST_PROCESSOR_ORDER = Integer.MIN_VALUE + 10;
 
+    @SuppressWarnings("unused")
     private static final YamlPropertySourceLoader YAML_LOADER = new YamlPropertySourceLoader();
 
     private static final PropertiesPropertySourceLoader PROPERTIES_LOADER = new PropertiesPropertySourceLoader();

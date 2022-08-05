@@ -103,7 +103,8 @@ public class CollectionUtil {
             for (T obj : list) {
                 Class<?> cls = obj.getClass();
                 Method method = cls.getMethod("get" + StringUtil.firstCharToUpperCase(property));
-                method.setAccessible(true);
+                //java:S3011,Reflection should not be used to increase accessibility of classes, methods, or fields
+//                method.setAccessible(true);
                 Object v = method.invoke(obj);
                 if (CommonUtil.equals(v, value)) {
                     result.add(obj);
