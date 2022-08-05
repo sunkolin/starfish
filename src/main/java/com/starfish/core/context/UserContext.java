@@ -1,5 +1,6 @@
 package com.starfish.core.context;
 
+import com.starfish.core.exception.CustomException;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -28,25 +29,39 @@ public class UserContext {
      */
     public static final String T_CONTEXT_KEY = "t_context";
 
-    private UserContext(){
-        // constructor
+    /**
+     * constructor
+     */
+    private UserContext() {
     }
 
     public static HttpServletRequest getRequest() {
-        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        // RequestContextHolder.currentRequestAttributes()代替RequestContextHolder.getRequestAttributes()方法
+        // 这两个方法区别是currentRequestAttributes()方法不会返回null，会直接报异常
+        RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
+        ServletRequestAttributes servletRequestAttributes = ((ServletRequestAttributes) requestAttributes);
+        return servletRequestAttributes.getRequest();
     }
 
     public static HttpServletResponse getResponse() {
-        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
+        RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
+        ServletRequestAttributes servletRequestAttributes = ((ServletRequestAttributes) requestAttributes);
+        return servletRequestAttributes.getResponse();
     }
 
     @SuppressWarnings("unchecked")
     public static <T> T getAttribute(String name) {
-        return (T) (RequestContextHolder.getRequestAttributes()).getAttribute(name, RequestAttributes.SCOPE_REQUEST);
+        RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
+        ServletRequestAttributes servletRequestAttributes = ((ServletRequestAttributes) requestAttributes);
+        return (T) servletRequestAttributes.getAttribute(name, RequestAttributes.SCOPE_REQUEST);
     }
 
     public static Long getUserId() {
-        return getUser().getUserId();
+        User user = getUser();
+        if (user == null) {
+            throw new CustomException("getUserId exception.");
+        }
+        return user.getUserId();
     }
 
     public static User getUser() {
@@ -54,7 +69,7 @@ public class UserContext {
     }
 
     public static void setUser(User user) {
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpServletRequest request = getRequest();
         request.setAttribute(USER_CONTEXT_KEY, user);
     }
 
@@ -63,7 +78,7 @@ public class UserContext {
     }
 
     public static <T> void set(T t) {
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpServletRequest request = getRequest();
         request.setAttribute(T_CONTEXT_KEY, t);
     }
 

@@ -1,5 +1,7 @@
 package com.starfish;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Scanner;
 
 /**
@@ -9,13 +11,14 @@ import java.util.Scanner;
  * @version 1.0.0
  * @since 2021-08-08
  */
+@Slf4j
 public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
             int count =  scanner.nextInt();
-            System.out.println(count);
+            log.info(String.valueOf(count));
         }
         scanner.close();
     }

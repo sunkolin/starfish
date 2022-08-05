@@ -25,6 +25,7 @@ import java.util.zip.ZipOutputStream;
  * @author sunkolin
  * @version 1.0.0
  * @since 2015-03-20
+ * @deprecated since 2022-08-01
  */
 @SuppressWarnings("unused")
 @Slf4j

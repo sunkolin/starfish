@@ -236,7 +236,6 @@ public class Validator {
             throw new CustomException(errorCode, errorMessage);
         }
         validateStringNumber(value, errorCode, errorMessage);
-
     }
 
     /**

@@ -9,6 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author sunkolin
  * @version 1.0.0
  * @since 2018-11-05
+ * @deprecated since 2022-08-01
  */
 @Deprecated
 @Data

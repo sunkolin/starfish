@@ -22,6 +22,7 @@ import java.util.concurrent.RejectedExecutionHandler;
  * @author sunkolin
  * @version 1.0.0
  * @since 2015-08-03
+ * @deprecated since 2022-08-01
  */
 @Deprecated
 @Slf4j

@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
  * @author sunkolin
  * @version 1.0.0
  * @since 2016-12-23
+ * @deprecated since 2022-08-01
  */
 @Deprecated
 public class LoggerUtil {

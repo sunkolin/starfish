@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * @author sunkolin
  * @version 1.0.0
  * @since 2015-08-04
+ * @deprecated since 2022-08-01
  */
 //@Configuration
 //@EnableCaching(proxyTargetClass = true)
