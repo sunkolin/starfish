@@ -73,10 +73,8 @@ public class CustomException extends RuntimeException implements Serializable {
             Method getMessageMethod = object.getClass().getMethod("getMessage");
             Object codeObject = getCodeMethod.invoke(object);
             Object messageObject = getMessageMethod.invoke(object);
-            int code = (codeObject == null ? -1 : (Integer) codeObject);
-            String message = (messageObject == null ? "" : messageObject.toString());
-            this.code = code;
-            this.message = message;
+            this.code = (codeObject == null ? -1 : (Integer) codeObject);
+            this.message = (messageObject == null ? "" : messageObject.toString());
             this.description = message;
         } catch (Exception e) {
             log.error("CustomException", e);

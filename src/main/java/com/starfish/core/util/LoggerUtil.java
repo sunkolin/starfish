@@ -15,8 +15,10 @@ public class LoggerUtil {
 
     private static final Logger LOGGER = LogManager.getRootLogger();
 
-    private LoggerUtil(){
-        // constructor
+    /**
+     * constructor
+     */
+    private LoggerUtil() {
     }
 
     public static Logger getLogger() {

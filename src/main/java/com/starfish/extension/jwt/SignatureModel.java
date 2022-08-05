@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @since 2022-07-26
  */
 @Data
-public class Signature implements Serializable {
+public class SignatureModel implements Serializable {
 
     /**
      * 签名

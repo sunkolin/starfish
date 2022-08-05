@@ -11,7 +11,7 @@ package com.starfish.extension.limiter;
  */
 public class StandaloneRateLimiter implements RateLimiter {
 
-    private static com.google.common.util.concurrent.RateLimiter guavaRateLimiter;
+    private com.google.common.util.concurrent.RateLimiter guavaRateLimiter;
 
     public StandaloneRateLimiter(long permitsPerSecond) {
         guavaRateLimiter = com.google.common.util.concurrent.RateLimiter.create(permitsPerSecond);

@@ -17,10 +17,10 @@ import java.io.Serializable;
 @Data
 public class Token implements Serializable {
 
-    private Header header;
+    private HeaderModel header;
 
-    private Payload payload;
+    private PayloadModel payload;
 
-    private Signature signature;
+    private SignatureModel signature;
 
 }

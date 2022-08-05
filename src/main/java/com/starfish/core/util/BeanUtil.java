@@ -21,8 +21,10 @@ public class BeanUtil {
      */
     private static final String OBJECT_CLASS_NAME = "Object";
 
-    private BeanUtil(){
-        // constructor
+    /**
+     * constructor
+     */
+    private BeanUtil() {
     }
 
     /**

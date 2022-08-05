@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @since 2021-02-12
  */
 @Data
-public class Header implements Serializable {
+public class HeaderModel implements Serializable {
 
     /**
      * 类型

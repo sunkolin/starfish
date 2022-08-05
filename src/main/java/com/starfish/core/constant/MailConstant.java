@@ -25,4 +25,10 @@ public class MailConstant {
 
     public static final String TIMEOUT = "10000";
 
+    /**
+     * constructor
+     */
+    private MailConstant(){
+    }
+
 }
