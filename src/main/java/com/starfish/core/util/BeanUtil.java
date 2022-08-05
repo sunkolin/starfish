@@ -5,6 +5,7 @@ import com.starfish.core.exception.CustomException;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * BeanTool
@@ -35,7 +36,7 @@ public class BeanUtil {
      * @param object 对象
      * @return HashMap, key tape is String,value type is Object
      */
-    public static HashMap<String, Object> describe(Object object) {
+    public static Map<String, Object> describe(Object object) {
         if (object == null) {
             throw new CustomException(ResultEnum.PARAM_ERROR);
         }
