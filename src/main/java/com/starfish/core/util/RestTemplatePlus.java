@@ -1,6 +1,5 @@
 package com.starfish.core.util;
 
-import cn.hutool.core.util.ArrayUtil;
 import org.springframework.http.*;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -63,7 +62,7 @@ public final class RestTemplatePlus {
         supportJavascript(sslMessageConverters);
     }
 
-    private RestTemplatePlus(){
+    private RestTemplatePlus() {
         // constructor
     }
 
@@ -225,7 +224,7 @@ class SslHttpRequestFactory extends SimpleClientHttpRequestFactory {
     }
 
     private SSLSocketFactory createSslSocketFactory() throws NoSuchAlgorithmException, KeyManagementException {
-        SSLContext context = SSLContext.getInstance("TLS");
+        SSLContext context = SSLContext.getInstance("TLSv1.2");
         context.init(null, new TrustManager[]{new SkipX509TrustManager(skipSsl)}, new SecureRandom());
         return context.getSocketFactory();
     }
@@ -262,7 +261,7 @@ class SslHttpRequestFactory extends SimpleClientHttpRequestFactory {
         @Override
         public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateNotYetValidException, CertificateExpiredException {
             // skipSsl
-            if (!skipSsl && !ArrayUtil.isEmpty(chain)) {
+            if (!skipSsl && chain != null && chain.length > 0) {
                 for (X509Certificate certificate : chain) {
                     certificate.checkValidity();
                 }
@@ -272,7 +271,7 @@ class SslHttpRequestFactory extends SimpleClientHttpRequestFactory {
         @Override
         public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateNotYetValidException, CertificateExpiredException {
             // skipSsl
-            if (!skipSsl && !ArrayUtil.isEmpty(chain)) {
+            if (!skipSsl && chain != null && chain.length > 0) {
                 for (X509Certificate certificate : chain) {
                     certificate.checkValidity();
                 }
