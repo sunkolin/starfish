@@ -27,4 +27,9 @@ public class TraceAutoConfiguration {
         return new TraceConfigurer(traceInterceptor);
     }
 
+    @Bean
+    public TraceTaskDecorator createTraceTaskDecorator() {
+        return new TraceTaskDecorator();
+    }
+
 }

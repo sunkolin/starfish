@@ -1,7 +1,9 @@
 package com.starfish.common.executor;
 
 import com.google.common.base.Strings;
+import com.starfish.common.trace.TraceTaskDecorator;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration;
@@ -36,7 +38,7 @@ public class ExecutorAutoConfiguration {
     private ExecutorProperties executorProperties;
 
     @Bean(name = {"executor"}, initMethod = "afterPropertiesSet", destroyMethod = "destroy")
-    public ThreadPoolTaskExecutor threadPoolTaskExecutor() {
+    public ThreadPoolTaskExecutor threadPoolTaskExecutor(ObjectProvider<TraceTaskDecorator> taskDecorator) {
         try {
             ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
 
@@ -62,7 +64,10 @@ public class ExecutorAutoConfiguration {
                 threadPoolTaskExecutor.setKeepAliveSeconds(keepAliveSeconds);
             }
 
-            threadPoolTaskExecutor.setTaskDecorator(new TraceTaskDecorator());
+            TraceTaskDecorator traceTaskDecorator = taskDecorator.getIfUnique();
+            if (traceTaskDecorator !=null){
+                threadPoolTaskExecutor.setTaskDecorator(traceTaskDecorator);
+            }
 
             if (!Strings.isNullOrEmpty(rejectedExecutionHandler)) {
                 threadPoolTaskExecutor.setRejectedExecutionHandler((RejectedExecutionHandler) Class.forName(rejectedExecutionHandler).newInstance());
