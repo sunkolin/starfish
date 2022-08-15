@@ -62,6 +62,8 @@ public class ExecutorAutoConfiguration {
                 threadPoolTaskExecutor.setKeepAliveSeconds(keepAliveSeconds);
             }
 
+            threadPoolTaskExecutor.setTaskDecorator(new TraceTaskDecorator());
+
             if (!Strings.isNullOrEmpty(rejectedExecutionHandler)) {
                 threadPoolTaskExecutor.setRejectedExecutionHandler((RejectedExecutionHandler) Class.forName(rejectedExecutionHandler).newInstance());
             }
