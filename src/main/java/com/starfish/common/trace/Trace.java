@@ -44,4 +44,11 @@ public class Trace {
         return traceId;
     }
 
+    /**
+     * clear
+     */
+    public static void clear() {
+        MDC.clear();
+    }
+
 }

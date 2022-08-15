@@ -48,7 +48,7 @@ public class TraceInterceptor implements HandlerInterceptor, Ordered {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        //
+        Trace.clear();
     }
 
     @Override
