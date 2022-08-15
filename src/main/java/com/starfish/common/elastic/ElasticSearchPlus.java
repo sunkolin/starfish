@@ -1,4 +1,4 @@
-package com.starfish.common.es;
+package com.starfish.common.elastic;
 
 /**
  * ElasticSearchPlus
