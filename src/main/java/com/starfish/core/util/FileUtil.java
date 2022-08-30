@@ -3,7 +3,6 @@ package com.starfish.core.util;
 import com.google.common.base.Strings;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.starfish.core.enumeration.ResultEnum;
-import com.starfish.core.constant.Constant;
 import com.starfish.core.exception.CustomException;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -50,6 +49,8 @@ public final class FileUtil {
     public static final String FILE_PREFIX = "file:";
 
     public static final String CLASSPATH_PREFIX = "classpath:";
+
+    public static final String DOT_SYMBOL = ".";
 
     private static final ThreadFactory NAMED_THREAD_FACTORY = new ThreadFactoryBuilder().setNameFormat("file-util-thread-pool-factory").build();
 
@@ -203,7 +204,7 @@ public final class FileUtil {
      * @return 结果
      */
     private static String getFileName(String fileName) {
-        int index = fileName.lastIndexOf(Constant.DOT_SYMBOL);
+        int index = fileName.lastIndexOf(DOT_SYMBOL);
         return fileName.substring(0, index);
     }
 
@@ -248,8 +249,8 @@ public final class FileUtil {
         String targetName = getFileName(sourceName);
 
         // 如果没有写点，加上点
-        if (!extension.startsWith(Constant.DOT_SYMBOL)) {
-            extension = Constant.DOT_SYMBOL + extension;
+        if (!extension.startsWith(DOT_SYMBOL)) {
+            extension = DOT_SYMBOL + extension;
         }
 
         targetName = targetName + extension;
@@ -444,7 +445,7 @@ public final class FileUtil {
             throw new CustomException(ResultEnum.FILE_TYPE_ERROR);
         }
 
-        int index = name.lastIndexOf(Constant.DOT_SYMBOL);
+        int index = name.lastIndexOf(DOT_SYMBOL);
         return name.substring(index).toLowerCase();
     }
 
@@ -467,7 +468,7 @@ public final class FileUtil {
      * @return 结果
      * @throws IOException 异常
      */
-    public static MultipartFile toMultipartFile(String url) throws IOException {
+    public static MultipartFile getMultipartFile(String url) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
         connection.setReadTimeout(3000);
         connection.setConnectTimeout(3000);
@@ -481,12 +482,16 @@ public final class FileUtil {
         return new MockMultipartFile(fileName, fileName, "application/octet-stream", inputStream);
     }
 
-    public static void main(String[] args) throws IOException {
-        MultipartFile f = toMultipartFile("https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png");
-        log.info(f.getName());
-
-        File target = new File("~/tmp/" + f.getName());
-        f.transferTo(target);
+    /**
+     * getFile
+     *
+     * @param url  url
+     * @param file file
+     * @throws IOException IOException
+     */
+    public static void getFile(String url, File file) throws IOException {
+        MultipartFile multipartFile = getMultipartFile(url);
+        multipartFile.transferTo(file);
     }
 
 }
