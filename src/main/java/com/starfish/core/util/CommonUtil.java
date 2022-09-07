@@ -49,7 +49,7 @@ public final class CommonUtil {
      */
     public static final String EQUAL_SYMBOL = "=";
 
-    private CommonUtil(){
+    private CommonUtil() {
         // constructor
     }
 
@@ -274,7 +274,8 @@ public final class CommonUtil {
      * 获取本机局域网IP地址
      *
      * @return 结果
-     * @throws Exception 异常
+     * @throws NoSuchElementException 异常
+     * @throws SocketException        异常
      */
     public static String getLocalIp() throws NoSuchElementException, SocketException {
         String result = "";
