@@ -196,88 +196,89 @@ public final class RestTemplatePlus {
         return SSL_REST_TEMPLATE.exchange(url, method, httpEntity, responseType);
     }
 
-}
-
-class SslHttpRequestFactory extends SimpleClientHttpRequestFactory {
-
-    private final boolean skipSsl;
-
-    public SslHttpRequestFactory(boolean skipSsl) {
-        this.skipSsl = skipSsl;
-    }
-
-    @Override
-    protected void prepareConnection(HttpURLConnection connection, String httpMethod) throws IOException {
-        if (connection instanceof HttpsURLConnection) {
-            prepareHttpsConnection((HttpsURLConnection) connection);
-        }
-        super.prepareConnection(connection, httpMethod);
-    }
-
-    private void prepareHttpsConnection(HttpsURLConnection connection) {
-        connection.setHostnameVerifier(new SkipHostnameVerifier(skipSsl));
-        try {
-            connection.setSSLSocketFactory(createSslSocketFactory());
-        } catch (Exception ex) {
-            // Ignore
-        }
-    }
-
-    private SSLSocketFactory createSslSocketFactory() throws NoSuchAlgorithmException, KeyManagementException {
-        SSLContext context = SSLContext.getInstance("TLSv1.2");
-        context.init(null, new TrustManager[]{new SkipX509TrustManager(skipSsl)}, new SecureRandom());
-        return context.getSocketFactory();
-    }
-
-    private static class SkipHostnameVerifier implements HostnameVerifier {
+    static class SslHttpRequestFactory extends SimpleClientHttpRequestFactory {
 
         private final boolean skipSsl;
 
-        public SkipHostnameVerifier(boolean skipSsl) {
+        public SslHttpRequestFactory(boolean skipSsl) {
             this.skipSsl = skipSsl;
         }
 
         @Override
-        public boolean verify(String hostname, SSLSession sslSession) {
-            // skipSsl
-            return skipSsl;
+        protected void prepareConnection(HttpURLConnection connection, String httpMethod) throws IOException {
+            if (connection instanceof HttpsURLConnection) {
+                prepareHttpsConnection((HttpsURLConnection) connection);
+            }
+            super.prepareConnection(connection, httpMethod);
         }
 
-    }
-
-    private static class SkipX509TrustManager implements X509TrustManager {
-
-        private final boolean skipSsl;
-
-        public SkipX509TrustManager(boolean skipSsl) {
-            this.skipSsl = skipSsl;
-        }
-
-        @Override
-        public X509Certificate[] getAcceptedIssuers() {
-            return new X509Certificate[0];
-        }
-
-        @Override
-        public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateNotYetValidException, CertificateExpiredException {
-            // skipSsl
-            if (!skipSsl && chain != null && chain.length > 0) {
-                for (X509Certificate certificate : chain) {
-                    certificate.checkValidity();
-                }
+        private void prepareHttpsConnection(HttpsURLConnection connection) {
+            connection.setHostnameVerifier(new SkipHostnameVerifier(skipSsl));
+            try {
+                connection.setSSLSocketFactory(createSslSocketFactory());
+            } catch (Exception ex) {
+                // Ignore
             }
         }
 
-        @Override
-        public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateNotYetValidException, CertificateExpiredException {
-            // skipSsl
-            if (!skipSsl && chain != null && chain.length > 0) {
-                for (X509Certificate certificate : chain) {
-                    certificate.checkValidity();
+        private SSLSocketFactory createSslSocketFactory() throws NoSuchAlgorithmException, KeyManagementException {
+            SSLContext context = SSLContext.getInstance("TLSv1.2");
+            context.init(null, new TrustManager[]{new SkipX509TrustManager(skipSsl)}, new SecureRandom());
+            return context.getSocketFactory();
+        }
+
+        private static class SkipHostnameVerifier implements HostnameVerifier {
+
+            private final boolean skipSsl;
+
+            public SkipHostnameVerifier(boolean skipSsl) {
+                this.skipSsl = skipSsl;
+            }
+
+            @Override
+            public boolean verify(String hostname, SSLSession sslSession) {
+                // skipSsl
+                return skipSsl;
+            }
+
+        }
+
+        private static class SkipX509TrustManager implements X509TrustManager {
+
+            private final boolean skipSsl;
+
+            public SkipX509TrustManager(boolean skipSsl) {
+                this.skipSsl = skipSsl;
+            }
+
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+                return new X509Certificate[0];
+            }
+
+            @Override
+            public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateNotYetValidException, CertificateExpiredException {
+                // skipSsl
+                if (!skipSsl && chain != null && chain.length > 0) {
+                    for (X509Certificate certificate : chain) {
+                        certificate.checkValidity();
+                    }
                 }
             }
+
+            @Override
+            public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateNotYetValidException, CertificateExpiredException {
+                // skipSsl
+                if (!skipSsl && chain != null && chain.length > 0) {
+                    for (X509Certificate certificate : chain) {
+                        certificate.checkValidity();
+                    }
+                }
+            }
+
         }
 
     }
 
 }
+
