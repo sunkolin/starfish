@@ -24,7 +24,7 @@ public class MathUtil {
      */
     private static final String PER_THOUSAND_SIGN = "‰";
 
-    private MathUtil(){
+    private MathUtil() {
         // constructor
     }
 
@@ -173,6 +173,16 @@ public class MathUtil {
             return value;
         }
         return value;
+    }
+
+    /**
+     * 获取5的倍数，向下取数
+     *
+     * @param number 数字
+     * @return 结果
+     */
+    public static int getFiveMultiple(int number) {
+        return (5 * ((int) Math.floor(number / 5D)));
     }
 
 }
