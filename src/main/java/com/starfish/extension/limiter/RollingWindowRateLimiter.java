@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 @Slf4j
 @Service
-public class RollingWindowRateLimiter implements CustomRateLimiter {
+public class RollingWindowRateLimiter implements RateLimiter {
 
     /**
      * 一秒允许的数量

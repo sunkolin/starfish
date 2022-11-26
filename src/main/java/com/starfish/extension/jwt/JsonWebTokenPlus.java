@@ -1,85 +1,72 @@
 package com.starfish.extension.jwt;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTCreator;
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.DecodedJWT;
-import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.json.JSONObject;
+import cn.hutool.jwt.JWT;
+import cn.hutool.jwt.JWTUtil;
 
-import java.util.Date;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * JsonWebTokenPlus
  *
  * @author sunkolin
  * @version 1.0.0
- * @since 2021-02-12
+ * @since 2022-07-26
  */
-@SuppressWarnings("unused")
 public class JsonWebTokenPlus {
 
-    private static final String SECRET = "1234567890";
-
-    private static final Algorithm ALGORITHM = Algorithm.HMAC256(SECRET);
+    private static final String KEY = "1234567890";
 
     /**
-     * 生成token
-     *
-     * @param claims claims
-     * @return 结果
+     * constructor
      */
-    public static String createToken(Map<String, Object> claims) {
-        JsonWebTokenHeader header = new JsonWebTokenHeader();
-        header.setAlg("HS256");
-        header.setTyp("jwt");
-
-        JsonWebPayload payload = new JsonWebPayload();
-        payload.setIss(JsonWebTokenConstant.ISS);
-        Date now = new Date();
-        payload.setIat(now);
-        // 设置有效期30天
-        payload.setExp(DateUtil.offsetDay(now, 30));
-        payload.setJti(UUID.randomUUID().toString().replaceAll("-", ""));
-
-        JWTCreator.Builder builder = JWT.create();
-        builder.withIssuer(payload.getIss());
-        builder.withIssuedAt(payload.getIat());
-        builder.withExpiresAt(payload.getExp());
-        builder.withJWTId(payload.getJti());
-
-        claims.forEach((k, v) -> {
-            if (v instanceof Integer) {
-                builder.withClaim(k, (Integer) v);
-            } else if (v instanceof Long) {
-                builder.withClaim(k, (Long) v);
-            } else if (v instanceof Double) {
-                builder.withClaim(k, (Double) v);
-            } else if (v instanceof Date) {
-                builder.withClaim(k, (Date) v);
-            } else if (v instanceof Boolean) {
-                builder.withClaim(k, (Boolean) v);
-            } else {
-                builder.withClaim(k, (String) v);
-            }
-        });
-
-        return builder.sign(ALGORITHM);
+    private JsonWebTokenPlus() {
     }
 
     /**
-     * 验证token
+     * 生成
+     *
+     * @param param 参数
+     * @return 结果
+     */
+    public static <T> String create(T param) {
+        Map<String, Object> map = BeanUtil.beanToMap(param, false, false);
+        return create(map);
+    }
+
+    /**
+     * 生成
+     *
+     * @param param 参数
+     * @return 结果
+     */
+    public static String create(Map<String, Object> param) {
+        return JWTUtil.createToken(param, KEY.getBytes());
+    }
+
+    /**
+     * 验证
      *
      * @param token token
      * @return 结果
      */
-    public static DecodedJWT verifyToken(String token) {
-        JWTVerifier verifier = JWT.require(ALGORITHM)
-                .withIssuer(JsonWebTokenConstant.ISS)
-                .build();
-        return verifier.verify(token);
+    public static boolean verify(String token) {
+        return JWTUtil.verify(token, KEY.getBytes());
+    }
+
+    /**
+     * 解析
+     *
+     * @param token token
+     * @param cls   class
+     * @param <T>   T
+     * @return 结果
+     */
+    public static <T> T parse(String token, Class<T> cls) {
+        final JWT jwt = JWTUtil.parseToken(token);
+        JSONObject payloads = jwt.getPayloads();
+        return BeanUtil.toBean(payloads, cls);
     }
 
 }
