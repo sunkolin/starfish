@@ -7,6 +7,8 @@ import com.starfish.core.exception.CustomException;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.Strings;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 
 import java.io.*;
@@ -300,25 +302,48 @@ public final class CommonUtil {
         return result;
     }
 
+//    /**
+//     * 获取本机公网IP地址，此接口也能获取地址
+//     *
+//     * @return 结果
+//     */
+//    public static String getPublicInternetProtocolAddress() {
+//        String url = "https://ip.cn/api/index?ip=&type=0";
+//        HttpMethod method = HttpMethod.GET;
+//        Map<String, String> headers = new HashMap<>(20);
+//        headers.put("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
+//        headers.put("user-agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36");
+//        headers.put("cookie", "UM_distinctid=17b80664e762cd-0806aa579995fa-35667c03-13c680-17b80664e777ed; CNZZDATA1278852728=1391488375-1629944092-https%253A%252F%252Fwww.baidu.com%252F%7C1629944092; __51cke__=; __51uvsct__1vGn5KEyNxI88WjH=1; __51vcke__1vGn5KEyNxI88WjH=311712a8-8217-5248-93ec-70cc18e109ba; __51vuft__1vGn5KEyNxI88WjH=1629946793633; INIT_IP_INFO=%E4%B8%AD%E5%9B%BD++%E5%8C%97%E4%BA%AC+%E5%8C%97%E4%BA%AC%E5%B8%82+%E7%94%B5%E4%BF%A1; __tins__20765349=%7B%22sid%22%3A%201629946793615%2C%20%22vd%22%3A%202%2C%20%22expires%22%3A%201629948607357%7D; __51laig__=2; __vtins__1vGn5KEyNxI88WjH=%7B%22sid%22%3A%20%22216c9f22-0d2a-5843-ae6d-37a6f08167c2%22%2C%20%22vd%22%3A%202%2C%20%22stt%22%3A%2013744%2C%20%22dr%22%3A%2013744%2C%20%22expires%22%3A%201629948607372%2C%20%22ct%22%3A%201629946807372%7D");
+//        Map<String, String> params = null;
+//        String body = null;
+//        Class<String> responseType = String.class;
+//        ResponseEntity<String> response = RestTemplatePlus.exchangeSkipSsl(url, method, headers, params, null, responseType);
+//        String result =  response.getBody();
+////
+//        // 解析返回数据
+//        // <200,{"rs":1,"code":0,"address":"中国  北京 北京市 电信","ip":"106.120.64.78","isDomain":0},[Date:"Thu, 26 Aug 2021 03:13:53 GMT", Content-Type:"application/json", Transfer-Encoding:"chunked", Connection:"keep-alive", CF-Cache-Status:"DYNAMIC", Expect-CT:"max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"", Report-To:"{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=xxR%2FMmp%2FEx8T6u9lgnFthzXhVATlx2oxK%2FBYEXm6QzOsoWagGQIyiDKYYb0MOKflPKrWg8HFCMEOYvxR1IdIIdlAgOo2%2FDw7pGX1%2F6yzb2jAuozjbuTFcA%3D%3D"}],"group":"cf-nel","max_age":604800}", NEL:"{"success_fraction":0,"report_to":"cf-nel","max_age":604800}", Server:"cloudflare", CF-RAY:"6849e3069e0bc3c4-LAX", alt-svc:"h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443"; ma=86400"]>
+//        String json = result.substring(result.indexOf("{"), result.indexOf("}") + 1);
+//
+//        // 格式如下{"rs":1,"code":0,"address":"中国  北京 北京市 电信","ip":"106.120.64.78","isDomain":0}
+//        GetPublicAddressResult getPublicAddressResult = JsonUtil.toObject(json, GetPublicAddressResult.class);
+//
+//        return getPublicAddressResult.getIp();
+//    }
+
     /**
-     * 获取本机公网IP地址，此接口也能获取地址
+     * 获取本机公网IP地址，<a href="https://ipv4.icanhazip.com/">接口地址</a>
      *
      * @return 结果
      */
-    public static String getPublicIp() {
-        HashMap<String, String> headers = new HashMap<>(20);
-        headers.put("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
-        headers.put("user-agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36");
-        headers.put("cookie", "UM_distinctid=17b80664e762cd-0806aa579995fa-35667c03-13c680-17b80664e777ed; CNZZDATA1278852728=1391488375-1629944092-https%253A%252F%252Fwww.baidu.com%252F%7C1629944092; __51cke__=; __51uvsct__1vGn5KEyNxI88WjH=1; __51vcke__1vGn5KEyNxI88WjH=311712a8-8217-5248-93ec-70cc18e109ba; __51vuft__1vGn5KEyNxI88WjH=1629946793633; INIT_IP_INFO=%E4%B8%AD%E5%9B%BD++%E5%8C%97%E4%BA%AC+%E5%8C%97%E4%BA%AC%E5%B8%82+%E7%94%B5%E4%BF%A1; __tins__20765349=%7B%22sid%22%3A%201629946793615%2C%20%22vd%22%3A%202%2C%20%22expires%22%3A%201629948607357%7D; __51laig__=2; __vtins__1vGn5KEyNxI88WjH=%7B%22sid%22%3A%20%22216c9f22-0d2a-5843-ae6d-37a6f08167c2%22%2C%20%22vd%22%3A%202%2C%20%22stt%22%3A%2013744%2C%20%22dr%22%3A%2013744%2C%20%22expires%22%3A%201629948607372%2C%20%22ct%22%3A%201629946807372%7D");
-        String result = Forest.get("https://ip.cn/api/index?ip=&type=0").addHeader(headers).executeAsString();
-        // 返回数据格式
-        // <200,{"rs":1,"code":0,"address":"中国  北京 北京市 电信","ip":"106.120.64.78","isDomain":0},[Date:"Thu, 26 Aug 2021 03:13:53 GMT", Content-Type:"application/json", Transfer-Encoding:"chunked", Connection:"keep-alive", CF-Cache-Status:"DYNAMIC", Expect-CT:"max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"", Report-To:"{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=xxR%2FMmp%2FEx8T6u9lgnFthzXhVATlx2oxK%2FBYEXm6QzOsoWagGQIyiDKYYb0MOKflPKrWg8HFCMEOYvxR1IdIIdlAgOo2%2FDw7pGX1%2F6yzb2jAuozjbuTFcA%3D%3D"}],"group":"cf-nel","max_age":604800}", NEL:"{"success_fraction":0,"report_to":"cf-nel","max_age":604800}", Server:"cloudflare", CF-RAY:"6849e3069e0bc3c4-LAX", alt-svc:"h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443"; ma=86400"]>
-        String json = result.substring(result.indexOf("{"), result.indexOf("}") + 1);
-
-        // 格式如下{"rs":1,"code":0,"address":"中国  北京 北京市 电信","ip":"106.120.64.78","isDomain":0}
-        GetPublicAddressResult getPublicAddressResult = JsonUtil.toObject(json, GetPublicAddressResult.class);
-
-        return getPublicAddressResult.getIp();
+    public static String getPublicInternetProtocolAddress() {
+        String url = "https://ipv4.icanhazip.com";
+        HttpMethod method = HttpMethod.GET;
+        Map<String, String> headers = null;
+        Map<String, String> params = null;
+        String body = null;
+        Class<String> responseType = String.class;
+        ResponseEntity<String> response = RestTemplatePlus.exchange(url, method, headers, params, null, responseType);
+        return response.getBody();
     }
 
     @Data
