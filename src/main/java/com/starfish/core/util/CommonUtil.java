@@ -338,8 +338,8 @@ public final class CommonUtil {
     public static String getPublicInternetProtocolAddress() {
         String url = "https://ipv4.icanhazip.com";
         HttpMethod method = HttpMethod.GET;
-        Map<String, String> headers = null;
-        Map<String, String> params = null;
+        Map<String, String> headers = new HashMap<>(8);
+        Map<String, String> params = new HashMap<>(8);
         String body = null;
         Class<String> responseType = String.class;
         ResponseEntity<String> response = RestTemplatePlus.exchange(url, method, headers, params, null, responseType);
