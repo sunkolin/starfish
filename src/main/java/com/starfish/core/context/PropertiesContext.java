@@ -16,7 +16,7 @@ public class PropertiesContext {
 
     }
 
-    public static final Map<String,String> PROPERTIES = new HashMap<>();
+    protected static final Map<String,String> PROPERTIES = new HashMap<>();
 
     public static String get(String key){
         return PROPERTIES.get(key);
