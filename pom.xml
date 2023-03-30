@@ -21,15 +21,6 @@
         <project.spring.cloud>2021.0.3</project.spring.cloud>
     </properties>
 
-    <!--    <profiles>-->
-    <!--        <profile>-->
-    <!--            <id>github</id>-->
-    <!--            <activation>-->
-    <!--                <activeByDefault>true</activeByDefault>-->
-    <!--            </activation>-->
-    <!--        </profile>-->
-    <!--    </profiles>-->
-
     <repositories>
         <repository>
             <id>aliyun</id>
@@ -171,12 +162,12 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.6.14</version>
+            <version>1.6.15</version>
         </dependency>
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.15.3</version>
+            <version>1.15.4</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -191,12 +182,12 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>5.8.12</version>
+            <version>5.8.15</version>
         </dependency>
         <dependency>
             <groupId>com.dtflys.forest</groupId>
             <artifactId>forest-spring-boot-starter</artifactId>
-            <version>1.5.28</version>
+            <version>1.5.30</version>
         </dependency>
         <dependency>
             <groupId>com.xuxueli</groupId>
