@@ -1,5 +1,6 @@
 package com.starfish.core.util;
 
+import com.starfish.core.model.TimeRange;
 import lombok.extern.slf4j.Slf4j;
 import cn.hutool.core.date.DateUtil;
 
@@ -122,6 +123,25 @@ public class DateTimeUtil {
             }
         } catch (Exception e) {
             return result;
+        }
+        return result;
+    }
+
+    public static List<TimeRange> between(Date start, Date end, int seconds) {
+        List<Date> list = new ArrayList<>();
+        Date tmpDate = start;
+        while (tmpDate.before(end)) {
+            Date tmp = tmpDate;
+            list.add(tmp);
+            Calendar calendar = getCalendar(tmp);
+            calendar.add(Calendar.SECOND, seconds);
+            tmpDate = calendar.getTime();
+        }
+        list.add(end);
+
+        List<TimeRange> result = new ArrayList<>();
+        for (int i = 0; i < list.size()-1; i++) {
+            result.add(new TimeRange(list.get(i), list.get(i + 1)));
         }
         return result;
     }
