@@ -47,7 +47,7 @@ public class SwaggerProperties {
     /**
      * 许可证地址
      */
-    private String licenseUrl = "http://www.apache.org/licenses/LICENSE-2.0";
+    private String licenseUrl = "https://www.apache.org/licenses/LICENSE-2.0";
 
     /**
      * 姓名
@@ -57,7 +57,7 @@ public class SwaggerProperties {
     /**
      * 网站
      */
-    private String url = "http://www.xxx.com/";
+    private String url = "https://www.xxx.com/";
 
     /**
      * 邮箱
