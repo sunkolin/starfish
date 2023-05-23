@@ -42,7 +42,7 @@ public class BusinessUtil {
     /**
      * 根据城市名称查询天气接口地址
      */
-    private static final String GET_WEATHER_BY_CITY_NAME_URL = "http://wthrcdn.etouch.cn/weather_mini";
+    private static final String GET_WEATHER_BY_CITY_NAME_URL = "https://wthrcdn.etouch.cn/weather_mini";
 
     private BusinessUtil() {
 
