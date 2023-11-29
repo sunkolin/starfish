@@ -18,18 +18,18 @@ import org.springframework.context.annotation.Bean;
 @Slf4j
 @AutoConfiguration
 @ConditionalOnProperty(prefix = "xxl.job", name = "enabled", havingValue = "true")
-@EnableConfigurationProperties({TaskProperties.class})
-public class TaskAutoConfiguration {
+@EnableConfigurationProperties({XxlJobProperties.class})
+public class XxlJobAutoConfiguration {
 
     @Autowired
-    private TaskProperties properties;
+    private XxlJobProperties properties;
 
     @Bean
     public XxlJobSpringExecutor xxlJobExecutor() {
         log.info(">>>>>>>>>>> xxl-job config init.");
         XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();
-        TaskProperties.Admin admin = properties.getAdmin();
-        TaskProperties.Executor executor = properties.getExecutor();
+        XxlJobProperties.Admin admin = properties.getAdmin();
+        XxlJobProperties.Executor executor = properties.getExecutor();
         xxlJobSpringExecutor.setAdminAddresses(admin.getAddresses());
         xxlJobSpringExecutor.setAddress(executor.getAddress());
         xxlJobSpringExecutor.setAppname(executor.getAppname());

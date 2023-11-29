@@ -12,7 +12,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Data
 @ConfigurationProperties(prefix = "xxl.job")
-public class TaskProperties {
+public class XxlJobProperties {
 
     /**
      * 是否启用
