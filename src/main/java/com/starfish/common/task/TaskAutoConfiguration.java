@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 
 /**
- * XxlJobAutoConfiguration
+ * TaskAutoConfiguration
  *
  * @author sunkolin
  * @version 1.0.0
