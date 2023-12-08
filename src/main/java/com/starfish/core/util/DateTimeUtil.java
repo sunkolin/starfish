@@ -1,5 +1,6 @@
 package com.starfish.core.util;
 
+import com.starfish.core.model.TimeRange;
 import lombok.extern.slf4j.Slf4j;
 import cn.hutool.core.date.DateUtil;
 
@@ -126,24 +127,43 @@ public class DateTimeUtil {
         return result;
     }
 
-    /**
-     * 获取一个月的第一天
-     *
-     * @param date 日期
-     * @return 结果
-     */
-    public static Date getMonthStart(Date date) {
-        return DateUtil.beginOfMonth(date);
+    public static List<TimeRange> between(Date start, Date end, int seconds) {
+        List<Date> list = new ArrayList<>();
+        Date tmpDate = start;
+        while (tmpDate.before(end)) {
+            Date tmp = tmpDate;
+            list.add(tmp);
+            Calendar calendar = getCalendar(tmp);
+            calendar.add(Calendar.SECOND, seconds);
+            tmpDate = calendar.getTime();
+        }
+        list.add(end);
+
+        List<TimeRange> result = new ArrayList<>();
+        for (int i = 0; i < list.size()-1; i++) {
+            result.add(new TimeRange(list.get(i), list.get(i + 1)));
+        }
+        return result;
     }
 
     /**
-     * 获取一个月的最后一天
+     * 获取一天的最小值，第一秒
      *
-     * @param date 日期
+     * @param date 时间
      * @return 结果
      */
-    public static Date getMonthEnd(Date date) {
-        return DateUtil.endOfMonth(date);
+    public static Date getDayStart(Date date) {
+        return DateUtil.beginOfDay(date);
+    }
+
+    /**
+     * 获取一天的最大值，最后一秒
+     *
+     * @param date 时间
+     * @return 结果
+     */
+    public static Date getDayEnd(Date date) {
+        return DateUtil.endOfDay(date);
     }
 
     /**
@@ -187,6 +207,26 @@ public class DateTimeUtil {
     }
 
     /**
+     * 获取一个月的第一天
+     *
+     * @param date 日期
+     * @return 结果
+     */
+    public static Date getMonthStart(Date date) {
+        return DateUtil.beginOfMonth(date);
+    }
+
+    /**
+     * 获取一个月的最后一天
+     *
+     * @param date 日期
+     * @return 结果
+     */
+    public static Date getMonthEnd(Date date) {
+        return DateUtil.endOfMonth(date);
+    }
+
+    /**
      * 获取两个日期之间的月份 包括当前的月份
      *
      * @param start 开始日期
@@ -208,26 +248,6 @@ public class DateTimeUtil {
             s.add(Calendar.MONTH, 1);
         }
         return result;
-    }
-
-    /**
-     * 获取一天的最小值，第一秒
-     *
-     * @param date 时间
-     * @return 结果
-     */
-    public static Date min(Date date) {
-        return DateUtil.beginOfDay(date);
-    }
-
-    /**
-     * 获取一天的最大值，最后一秒
-     *
-     * @param date 时间
-     * @return 结果
-     */
-    public static Date max(Date date) {
-        return DateUtil.endOfDay(date);
     }
 
     /**

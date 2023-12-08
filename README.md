@@ -1,7 +1,6 @@
 ## starfish
 
-### 规划
-- 使用SpringDoc接入swagger，完成
+### 计划
 
 ### 知识
 - Future V get(long timeout, TimeUnit unit)方法是从get的时候开始算超时时间的，而不是从submit的时候开始计算的。

@@ -1,4 +1,4 @@
-package com.starfish.core.web;
+package com.starfish.core.controller;
 
 import com.starfish.core.model.Result;
 import org.springframework.web.bind.annotation.GetMapping;

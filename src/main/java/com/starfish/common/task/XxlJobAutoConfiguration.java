@@ -2,15 +2,14 @@ package com.starfish.common.task;
 
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
-import javax.annotation.Resource;
-
 /**
- * XxlJobAutoConfiguration
+ * TaskAutoConfiguration
  *
  * @author sunkolin
  * @version 1.0.0
@@ -19,18 +18,18 @@ import javax.annotation.Resource;
 @Slf4j
 @AutoConfiguration
 @ConditionalOnProperty(prefix = "xxl.job", name = "enabled", havingValue = "true")
-@EnableConfigurationProperties({TaskProperties.class})
-public class TaskAutoConfiguration {
+@EnableConfigurationProperties({XxlJobProperties.class})
+public class XxlJobAutoConfiguration {
 
-    @Resource
-    private TaskProperties properties;
+    @Autowired
+    private XxlJobProperties properties;
 
     @Bean
     public XxlJobSpringExecutor xxlJobExecutor() {
         log.info(">>>>>>>>>>> xxl-job config init.");
         XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();
-        TaskProperties.Admin admin = properties.getAdmin();
-        TaskProperties.Executor executor = properties.getExecutor();
+        XxlJobProperties.Admin admin = properties.getAdmin();
+        XxlJobProperties.Executor executor = properties.getExecutor();
         xxlJobSpringExecutor.setAdminAddresses(admin.getAddresses());
         xxlJobSpringExecutor.setAddress(executor.getAddress());
         xxlJobSpringExecutor.setAppname(executor.getAppname());

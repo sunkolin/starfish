@@ -4,7 +4,6 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdcardUtil;
 import com.dtflys.forest.Forest;
 import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableMap;
 import com.starfish.core.constant.Constant;
 import com.starfish.core.model.weather.WeatherModel;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +24,7 @@ import java.util.regex.Pattern;
 public class BusinessUtil {
 
     /**
-     * 参考：https://www.cnblogs.com/zjk1/p/8623965.html
+     * <a href="https://www.cnblogs.com/zjk1/p/8623965.html">参考文档</a>
      */
     private static final String MOBILE_REGEX = "(?:0|86|\\+86)?1[3-9]\\d{9}";
 
@@ -43,7 +42,7 @@ public class BusinessUtil {
     /**
      * 根据城市名称查询天气接口地址
      */
-    private static final String GET_WEATHER_BY_CITY_NAME_URL = "http://wthrcdn.etouch.cn/weather_mini";
+    private static final String GET_WEATHER_BY_CITY_NAME_URL = "https://wthrcdn.etouch.cn/weather_mini";
 
     private BusinessUtil() {
 
@@ -104,7 +103,7 @@ public class BusinessUtil {
      * @return 结果
      */
     public static WeatherModel getWeather(String cityName) {
-        Map<String, Object> params = ImmutableMap.of("city", cityName);
+        Map<String, Object> params = Map.of("city", cityName);
         String json = Forest.get(GET_WEATHER_BY_CITY_NAME_URL).addQuery(params).executeAsString();
         return JsonUtil.toObject(json, WeatherModel.class);
     }

@@ -16,7 +16,7 @@ class CommonUtilTest {
     @Disabled("Network does not work")
     @Test
     void getPublicAddressTest() {
-        String result = CommonUtil.getPublicIp();
+        String result = CommonUtil.getPublicInternetProtocolAddress();
         System.out.println(result);
         Assertions.assertNotNull(result);
     }

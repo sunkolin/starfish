@@ -17,8 +17,8 @@ import org.springframework.util.StreamUtils;
 import org.springframework.web.util.HtmlUtils;
 import org.springframework.web.util.JavaScriptUtils;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
