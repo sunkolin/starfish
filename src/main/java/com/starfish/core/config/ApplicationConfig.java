@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 /**
- * Config
+ * ApplicationConfig
  * 如果需要使用静态方法获取Bean，请使用SpringPlus类
  *
  * @author sunkolin
@@ -17,8 +17,8 @@ import org.springframework.stereotype.Component;
  */
 @Data
 //@RefreshScope
-@Component("customConfig")
-public class Config implements ApplicationContextAware {
+@Component("applicationConfig")
+public class ApplicationConfig implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
 
@@ -33,8 +33,8 @@ public class Config implements ApplicationContextAware {
      *
      * @return 结果
      */
-    public Config getConfig() {
-        return applicationContext.getBean(Config.class);
+    public ApplicationConfig getConfig() {
+        return applicationContext.getBean(ApplicationConfig.class);
     }
 
     @Override

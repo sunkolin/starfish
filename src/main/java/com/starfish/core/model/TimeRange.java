@@ -23,18 +23,22 @@ public class TimeRange extends Range<Date> {
         this.end = end;
     }
 
+    @Override
     public Date getStart() {
         return start;
     }
 
+    @Override
     public void setStart(Date start) {
         this.start = start;
     }
 
+    @Override
     public Date getEnd() {
         return end;
     }
 
+    @Override
     public void setEnd(Date end) {
         this.end = end;
     }

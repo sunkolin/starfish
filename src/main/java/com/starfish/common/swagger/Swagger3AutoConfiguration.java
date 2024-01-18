@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Bean;
 public class Swagger3AutoConfiguration {
 
     @Bean
-    public OpenAPI openAPI() {
+    public OpenAPI openApi() {
         License license = new License();
         license.setName("OpenAPI 3.1.0");
         license.setUrl("https://github.com/OAI/OpenAPI-Specification/blob/3.1.0/versions/3.1.0.md");
