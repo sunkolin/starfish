@@ -46,7 +46,7 @@ public class StringUtil {
 
     private static final SecureRandom RANDOM = new SecureRandom();
 
-    private StringUtil(){
+    private StringUtil() {
         // constructor
     }
 
@@ -75,21 +75,20 @@ public class StringUtil {
      *
      * @param string    字符串
      * @param minLength 长度
-     * @param padChar   字符
+     * @param padString 字符
      * @return 结果
      * @see com.google.common.base.Strings
      */
-    public static String padStart(String string, int minLength, char padChar) {
+    public static String padStart(String string, int minLength, String padString) {
         checkNotNull(string);
+        checkNotNull(padString);
+        if (padString.length() > 1) {
+            throw new IllegalArgumentException();
+        }
         if (string.length() >= minLength) {
             return string;
         }
-        StringBuilder sb = new StringBuilder(minLength);
-        for (int i = string.length(); i < minLength; i++) {
-            sb.append(padChar);
-        }
-        sb.append(string);
-        return sb.toString();
+        return padString.repeat(minLength - string.length()) + string;
     }
 
     /**
@@ -97,21 +96,20 @@ public class StringUtil {
      *
      * @param string    字符串
      * @param minLength 最小长度
-     * @param padChar   字符
+     * @param padString 字符
      * @return 结果
      * @see com.google.common.base.Strings
      */
-    public static String padEnd(String string, int minLength, char padChar) {
+    public static String padEnd(String string, int minLength, String padString) {
         checkNotNull(string);
+        checkNotNull(padString);
+        if (padString.length() > 1) {
+            throw new IllegalArgumentException();
+        }
         if (string.length() >= minLength) {
             return string;
         }
-        StringBuilder sb = new StringBuilder(minLength);
-        sb.append(string);
-        for (int i = string.length(); i < minLength; i++) {
-            sb.append(padChar);
-        }
-        return sb.toString();
+        return string + padString.repeat(minLength - string.length());
     }
 
     /**
@@ -383,15 +381,13 @@ public class StringUtil {
      *
      * @param reference an object reference
      * @param <T>       T
-     * @return the non-null reference that was validated
      * @throws NullPointerException if {@code reference} is null
      * @see com.google.common.base.Strings
      */
-    public static <T> T checkNotNull(T reference) {
+    public static <T> void checkNotNull(T reference) {
         if (reference == null) {
             throw new NullPointerException();
         }
-        return reference;
     }
 
     /**
