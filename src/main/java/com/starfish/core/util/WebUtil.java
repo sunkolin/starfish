@@ -5,7 +5,6 @@ import com.dtflys.forest.http.ForestHeaderMap;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableMap;
 import com.starfish.core.enumeration.ResultEnum;
 import com.starfish.core.exception.CustomException;
 import com.starfish.core.model.Result;
@@ -19,6 +18,7 @@ import org.springframework.web.util.JavaScriptUtils;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -61,7 +61,7 @@ public class WebUtil extends HtmlUtils {
 
     public static final String WSS_URL_PREFIX = "wss";
 
-    private static final Map<String, String> STREAM_TYPE = new HashMap<>();
+    private static final Map<String, String> CONTENT_TYPE = new HashMap<>();
 
     /**
      * 多媒体内容的ContentType
@@ -69,11 +69,22 @@ public class WebUtil extends HtmlUtils {
     private static final List<String> MEDIA_CONTENT_TYPE_LIST = Lists.newArrayList("application/x-mpegURL", "application/octet-stream", "video", "audio");
 
     static {
-        initStreamType();
+        initContentType();
     }
 
     private WebUtil() {
         // constructor
+    }
+
+    /**
+     * 初始化content type
+     */
+    private static void initContentType() {
+        List<String> contentTypeList = FileUtil.readLines("classpath:application-content-type.txt");
+        for (String contentType : contentTypeList) {
+            String[] array = contentType.split("=");
+            CONTENT_TYPE.put(array[0], array[1]);
+        }
     }
 
     /**
@@ -220,7 +231,7 @@ public class WebUtil extends HtmlUtils {
     }
 
     public static String getContentType(String ext) {
-        return STREAM_TYPE.getOrDefault(ext.toLowerCase(), "application/octet-stream");
+        return CONTENT_TYPE.getOrDefault(ext.toLowerCase(), "application/octet-stream");
     }
 
     /**
@@ -339,7 +350,7 @@ public class WebUtil extends HtmlUtils {
     }
 
     /**
-     * get the location,use taobao interface default
+     * get the location,use tao bao interface default
      *
      * @param ip ip
      * @return the location
@@ -348,7 +359,7 @@ public class WebUtil extends HtmlUtils {
         String result;
         try {
             //call remote interface
-            Map<String, Object> params = ImmutableMap.of("ip", ip);
+            Map<String, Object> params = Map.of("ip", ip);
             String json = Forest.get(TAOBAO_INTERFACE_URL).addQuery(params).executeAsString();
 
             GetIpAddressResult getIpAddressResult = JsonUtil.toObject(json, GetIpAddressResult.class);
@@ -445,17 +456,6 @@ public class WebUtil extends HtmlUtils {
      */
     public static String javaScriptEscape(String input) {
         return JavaScriptUtils.javaScriptEscape(input);
-    }
-
-    /**
-     * 初始化stream type
-     */
-    private static void initStreamType() {
-        List<String> contentTypeList = FileUtil.readLines("classpath:application-content-type.txt");
-        for (String contentType : contentTypeList) {
-            String[] array = contentType.split("=");
-            STREAM_TYPE.put(array[0], array[1]);
-        }
     }
 
     /**
