@@ -230,8 +230,14 @@ public class WebUtil extends HtmlUtils {
         return result;
     }
 
-    public static String getContentType(String ext) {
-        return CONTENT_TYPE.getOrDefault(ext.toLowerCase(), "application/octet-stream");
+    /**
+     * 获取content type
+     *
+     * @param extension 拓展名,例如.png
+     * @return 结果
+     */
+    public static String getContentType(String extension) {
+        return CONTENT_TYPE.getOrDefault(extension.toLowerCase(), "application/octet-stream");
     }
 
     /**
