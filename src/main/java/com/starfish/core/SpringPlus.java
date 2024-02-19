@@ -100,16 +100,6 @@ public class SpringPlus implements ApplicationContextAware, EnvironmentAware  {
     }
 
     /**
-     * 获取当前的环境配置，无配置返回null
-     *
-     * @return 当前的环境配置
-     * @since 5.3.3
-     */
-    public static String[] getActiveProfiles() {
-        return SpringConstant.APPLICATION_CONTEXT.getEnvironment().getActiveProfiles();
-    }
-
-    /**
      * 获取当前的环境配置，当有多个环境配置时，只获取第一个
      *
      * @return 当前的环境配置
@@ -118,6 +108,16 @@ public class SpringPlus implements ApplicationContextAware, EnvironmentAware  {
     public static String getActiveProfile() {
         final String[] activeProfiles = getActiveProfiles();
         return activeProfiles.length != 0 ? activeProfiles[0] : null;
+    }
+
+    /**
+     * 获取当前的环境配置，无配置返回null
+     *
+     * @return 当前的环境配置
+     * @since 5.3.3
+     */
+    public static String[] getActiveProfiles() {
+        return SpringConstant.APPLICATION_CONTEXT.getEnvironment().getActiveProfiles();
     }
 
     /**

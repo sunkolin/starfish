@@ -28,6 +28,12 @@ public class ApplicationConfig implements ApplicationContextAware {
     @Value("${server.port}")
     private String port;
 
+    @Value("${spring.profiles.active}")
+    private String profile;
+
+    @Value("${spring.profiles.active}")
+    private String env;
+
     /**
      * 获取配置
      *
