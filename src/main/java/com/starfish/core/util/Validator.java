@@ -1,8 +1,8 @@
 package com.starfish.core.util;
 
 import cn.hutool.core.lang.RegexPool;
+import com.google.common.base.Strings;
 import com.starfish.core.exception.CustomException;
-import org.assertj.core.util.Strings;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -1,6 +1,6 @@
 package com.starfish.core.model;
 
-import org.assertj.core.util.Lists;
+import com.google.common.collect.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -1,12 +1,12 @@
 package com.starfish.common.permission;
 
+import com.google.common.collect.Lists;
 import com.starfish.core.annotation.Permission;
 import com.starfish.core.enumeration.ResultEnum;
 import com.starfish.core.exception.CustomException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.util.Lists;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.method.HandlerMethod;

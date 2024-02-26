@@ -10,7 +10,7 @@ import com.starfish.core.exception.CustomException;
 import com.starfish.core.model.Result;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.util.Lists;
+import com.google.common.collect.Lists;
 import org.springframework.lang.Nullable;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.util.HtmlUtils;
