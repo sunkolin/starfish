@@ -1,5 +1,6 @@
 package com.starfish.core.util;
 
+import org.assertj.core.util.Strings;
 import org.springframework.http.*;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -168,6 +169,9 @@ public final class RestTemplatePlus {
         HttpHeaders httpHeaders = new HttpHeaders();
         if (!CollectionUtils.isEmpty(headers)) {
             httpHeaders.setAll(headers);
+        }
+        if(!Strings.isNullOrEmpty(body)){
+            httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         }
         HttpEntity<String> httpEntity = new HttpEntity<>(body, httpHeaders);
         return REST_TEMPLATE.exchange(url, method, httpEntity, responseType);
