@@ -45,26 +45,31 @@ public final class RestTemplatePlus {
 
     private static final RestTemplate SSL_REST_TEMPLATE;
 
-    static {
-        REST_TEMPLATE = new RestTemplate();
-        List<HttpMessageConverter<?>> messageConverters = REST_TEMPLATE.getMessageConverters();
-        supportJavascript(messageConverters);
-        useUtf8(REST_TEMPLATE);
+    private static final int CONNECT_TIMEOUT = 3000;
 
-        // fix javax.net.ssl.SSLProtocolException: handshake alert:unrecognized_name
-        // reference:https://blog.csdn.net/leisurelen/article/details/74407817
-        System.setProperty("jsse.enableSNIExtension", "false");
+    private static final int READ_TIMEOUT = 3000;
+
+    static {
+        SimpleClientHttpRequestFactory simpleClientHttpRequestFactory = new SimpleClientHttpRequestFactory();
+        simpleClientHttpRequestFactory.setConnectTimeout(CONNECT_TIMEOUT);
+        simpleClientHttpRequestFactory.setReadTimeout(READ_TIMEOUT);
+        REST_TEMPLATE = new RestTemplate(simpleClientHttpRequestFactory);
+        init(REST_TEMPLATE);
 
         SslHttpRequestFactory factory = new SslHttpRequestFactory(true);
-        factory.setReadTimeout(5000);
-        factory.setConnectTimeout(15000);
+        factory.setReadTimeout(CONNECT_TIMEOUT);
+        factory.setConnectTimeout(READ_TIMEOUT);
         SSL_REST_TEMPLATE = new RestTemplate(factory);
-        List<HttpMessageConverter<?>> sslMessageConverters = SSL_REST_TEMPLATE.getMessageConverters();
-        supportJavascript(sslMessageConverters);
+        init(SSL_REST_TEMPLATE);
     }
 
     private RestTemplatePlus() {
         // constructor
+    }
+
+    public static void init(RestTemplate restTemplate) {
+        supportUtf8(restTemplate);
+        supportJavascript(restTemplate);
     }
 
     /**
@@ -72,7 +77,7 @@ public final class RestTemplatePlus {
      *
      * @param restTemplate restTemplate
      */
-    public static void useUtf8(RestTemplate restTemplate) {
+    private static void supportUtf8(RestTemplate restTemplate) {
         List<HttpMessageConverter<?>> messageConverters = restTemplate.getMessageConverters();
         for (HttpMessageConverter<?> item : messageConverters) {
             if (item.getClass() == StringHttpMessageConverter.class) {
@@ -84,38 +89,12 @@ public final class RestTemplatePlus {
     }
 
     /**
-     * RestTemplate 解决乱码问题
-     *
-     * @param messageConverters messageConverters
-     */
-    public static void supportUtf8(List<HttpMessageConverter<?>> messageConverters) {
-        HttpMessageConverter<?> converterTarget = null;
-        for (HttpMessageConverter<?> item : messageConverters) {
-            if (item.getClass() == StringHttpMessageConverter.class) {
-                converterTarget = item;
-                break;
-            }
-        }
-        if (converterTarget != null) {
-            messageConverters.remove(converterTarget);
-        }
-        HttpMessageConverter<?> converter = new StringHttpMessageConverter(StandardCharsets.UTF_8);
-        messageConverters.add(converter);
-    }
-
-    public static RestTemplate buildRestTemplate() {
-        RestTemplate restTemplate = new RestTemplate();
-        List<HttpMessageConverter<?>> messageConverters = restTemplate.getMessageConverters();
-        supportJavascript(messageConverters);
-        return restTemplate;
-    }
-
-    /**
      * 支持application/x-javascript类型
      *
-     * @param messageConverters messageConverters
+     * @param restTemplate restTemplate
      */
-    public static void supportJavascript(List<HttpMessageConverter<?>> messageConverters) {
+    public static void supportJavascript(RestTemplate restTemplate) {
+        List<HttpMessageConverter<?>> messageConverters = restTemplate.getMessageConverters();
         MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
         mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Collections.singletonList(new MediaType("application", "x-javascript")));
         messageConverters.add(mappingJackson2HttpMessageConverter);
@@ -170,7 +149,7 @@ public final class RestTemplatePlus {
         if (!CollectionUtils.isEmpty(headers)) {
             httpHeaders.setAll(headers);
         }
-        if(!Strings.isNullOrEmpty(body)){
+        if (!Strings.isNullOrEmpty(body)) {
             httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         }
         HttpEntity<String> httpEntity = new HttpEntity<>(body, httpHeaders);
@@ -178,8 +157,7 @@ public final class RestTemplatePlus {
     }
 
     /**
-     * 发起http请求，支持跳过SSL证书
-     * 参考：https://blog.csdn.net/weixin_39982274/article/details/88818213
+     * 发起http请求，支持跳过SSL证书，<a href="https://blog.csdn.net/weixin_39982274/article/details/88818213">参考文档</a>
      *
      * @param url          请求地址
      * @param method       方法
@@ -196,6 +174,9 @@ public final class RestTemplatePlus {
         if (!CollectionUtils.isEmpty(headers)) {
             httpHeaders.setAll(headers);
         }
+        if (!Strings.isNullOrEmpty(body)) {
+            httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        }
         HttpEntity<String> httpEntity = new HttpEntity<>(body, httpHeaders);
         return SSL_REST_TEMPLATE.exchange(url, method, httpEntity, responseType);
     }
@@ -205,13 +186,17 @@ public final class RestTemplatePlus {
         private final boolean skipSsl;
 
         public SslHttpRequestFactory(boolean skipSsl) {
+            // fix javax.net.ssl.SSLProtocolException: handshake alert:unrecognized_name
+            // reference:https://blog.csdn.net/leisurelen/article/details/74407817
+            System.setProperty("jsse.enableSNIExtension", "false");
+
             this.skipSsl = skipSsl;
         }
 
         @Override
         protected void prepareConnection(HttpURLConnection connection, String httpMethod) throws IOException {
-            if (connection instanceof HttpsURLConnection) {
-                prepareHttpsConnection((HttpsURLConnection) connection);
+            if (connection instanceof HttpsURLConnection httpsUrlConnection) {
+                prepareHttpsConnection(httpsUrlConnection);
             }
             super.prepareConnection(connection, httpMethod);
         }
@@ -263,7 +248,7 @@ public final class RestTemplatePlus {
             @Override
             public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateNotYetValidException, CertificateExpiredException {
                 // skipSsl
-                if (!skipSsl && chain != null && chain.length > 0) {
+                if (!skipSsl && chain != null) {
                     for (X509Certificate certificate : chain) {
                         certificate.checkValidity();
                     }
@@ -273,7 +258,7 @@ public final class RestTemplatePlus {
             @Override
             public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateNotYetValidException, CertificateExpiredException {
                 // skipSsl
-                if (!skipSsl && chain != null && chain.length > 0) {
+                if (!skipSsl && chain != null) {
                     for (X509Certificate certificate : chain) {
                         certificate.checkValidity();
                     }
@@ -285,4 +270,3 @@ public final class RestTemplatePlus {
     }
 
 }
-
