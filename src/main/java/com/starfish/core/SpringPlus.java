@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.EnvironmentAware;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.env.Environment;
 
 import java.util.Map;
@@ -21,6 +22,7 @@ import java.util.Map;
  * @since 2019-07-04
  */
 @Data
+@Lazy(false)
 public class SpringPlus implements ApplicationContextAware, EnvironmentAware  {
 
     /**
