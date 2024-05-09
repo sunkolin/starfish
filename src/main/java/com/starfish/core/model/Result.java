@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
  * @since 2012-8-15
  */
 @Slf4j
-@SuppressWarnings({"unused"})
+@SuppressWarnings({"unused","all"})
 public class Result<T> {
 
     private static final Integer SUCCESS_CODE = 0;
@@ -93,9 +93,7 @@ public class Result<T> {
      * @return true成功，false失败
      */
     public static boolean success(Result<?> result) {
-        return result != null
-                && result.getCode() != null
-                && result.getCode().equals(SUCCESS_CODE);
+        return result != null && result.getCode() != null && result.getCode().equals(SUCCESS_CODE);
     }
 
     /**
@@ -150,9 +148,7 @@ public class Result<T> {
      * @return 结果
      */
     public static boolean fail(Result<?> result) {
-        return result == null
-                || result.getCode() == null
-                || !result.getCode().equals(SUCCESS_CODE);
+        return result == null || result.getCode() == null || !result.getCode().equals(SUCCESS_CODE);
     }
 
     /**
