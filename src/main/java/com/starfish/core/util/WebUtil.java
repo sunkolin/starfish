@@ -1,7 +1,5 @@
 package com.starfish.core.util;
 
-import com.dtflys.forest.Forest;
-import com.dtflys.forest.http.ForestHeaderMap;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
@@ -11,8 +9,12 @@ import com.starfish.core.model.Result;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import com.google.common.collect.Lists;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.util.StreamUtils;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.HtmlUtils;
 import org.springframework.web.util.JavaScriptUtils;
 
@@ -67,6 +69,8 @@ public class WebUtil extends HtmlUtils {
      * 多媒体内容的ContentType
      */
     private static final List<String> MEDIA_CONTENT_TYPE_LIST = Lists.newArrayList("application/x-mpegURL", "application/octet-stream", "video", "audio");
+
+    private static final RestTemplate restTemplate = new RestTemplate();
 
     static {
         initContentType();
@@ -210,10 +214,9 @@ public class WebUtil extends HtmlUtils {
 
         // 判断是否可以访问
         try {
-            ForestHeaderMap forestHeaderMap = ForestUtil.head(url);
-            String contentType = forestHeaderMap.getValue("Content-Type");
+            HttpHeaders httpHeaders = restTemplate.headForHeaders(url);
+            String contentType = httpHeaders.getFirst("Content-Type");
             log.info("get media contentType,url={},contentType={}", url, contentType);
-
             // 如果没有Content-Type，返回false
             if (!Strings.isNullOrEmpty(contentType)) {
                 for (String mediaContentType : MEDIA_CONTENT_TYPE_LIST) {
@@ -365,9 +368,9 @@ public class WebUtil extends HtmlUtils {
         String result;
         try {
             //call remote interface
-            Map<String, Object> params = Map.of("ip", ip);
-            String json = Forest.get(TAOBAO_INTERFACE_URL).addQuery(params).executeAsString();
-
+            Map<String, String> params = Map.of("ip", ip);
+            ResponseEntity<String> responseEntity = RestTemplatePlus.form(TAOBAO_INTERFACE_URL, HttpMethod.GET, null, params, null, String.class);
+            String json = responseEntity.getBody();
             GetIpAddressResult getIpAddressResult = JsonUtil.toObject(json, GetIpAddressResult.class);
             GetIpAddressData data = getIpAddressResult.getData();
 

@@ -67,7 +67,7 @@ public final class RestTemplatePlus {
         // constructor
     }
 
-    public static void init(RestTemplate restTemplate) {
+    private static void init(RestTemplate restTemplate) {
         supportUtf8(restTemplate);
         supportJavascript(restTemplate);
     }
@@ -93,7 +93,7 @@ public final class RestTemplatePlus {
      *
      * @param restTemplate restTemplate
      */
-    public static void supportJavascript(RestTemplate restTemplate) {
+    private static void supportJavascript(RestTemplate restTemplate) {
         List<HttpMessageConverter<?>> messageConverters = restTemplate.getMessageConverters();
         MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
         mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Collections.singletonList(new MediaType("application", "x-javascript")));
