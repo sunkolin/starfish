@@ -56,8 +56,7 @@ public class GlobalExceptionResolver {
 
         // 处理异常成错误码返回
         Result<Object> result;
-        if (ex instanceof CustomException) {
-            CustomException ce = (CustomException) ex;
+        if (ex instanceof CustomException ce) {
             result =  Result.fail(ce.getCode(),ce.getMessage());
             log.error("GlobalExceptionResolver exception.code={},message={},url={},param={},body={}", result.getCode(), result.getMessage(), url, param, body, ex);
         } else {
