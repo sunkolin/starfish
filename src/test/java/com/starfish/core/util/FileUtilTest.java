@@ -47,7 +47,8 @@ class FileUtilTest {
 
     @Test
     void getFile() throws IOException {
-        File file = new File("~/tmp/d9c8750bed0b3c7d089fa7d55720d6cf.png");
+        String fileName = StringUtil.random(16);
+        File file = new File("./.tmp/" + fileName + ".png");
         FileUtil.getFile("https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png", file);
     }
 

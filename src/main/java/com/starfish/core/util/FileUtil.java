@@ -68,10 +68,10 @@ public final class FileUtil {
     public static void create(String path) throws IOException {
         File file = new File(path);
         if (file.isDirectory()) {
-            file.mkdirs();
+            Files.createDirectories(file.toPath());
         } else {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
+            Files.createDirectories(file.getParentFile().toPath());
+            Files.createFile(file.toPath());
         }
     }
 
@@ -105,7 +105,7 @@ public final class FileUtil {
         } else {
             // 如果是文件夹，便利文件夹，删除文件下所有文件，再删除文件夹
             File[] files = file.listFiles();
-            if (files != null && files.length > 0) {
+            if (files != null) {
                 for (File f : files) {
                     delete(f.getAbsolutePath());
                 }
@@ -180,7 +180,7 @@ public final class FileUtil {
     /**
      * 获取文件名，不带后缀
      *
-     * @param fileName      文件名，例如123.txt，https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png等
+     * @param fileName      文件名，例如123.txt，<a href="https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png">PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png</a>等
      * @param extensionSign 是否带拓展名，true带，false不带
      * @return 结果 123，123.txt
      */
@@ -490,6 +490,21 @@ public final class FileUtil {
      * @throws IOException IOException
      */
     public static void getFile(String url, File file) throws IOException {
+        // 判断文件不存在
+        if (file.isDirectory()){
+            throw new CustomException();
+        }
+        if (file.exists()){
+            throw new CustomException();
+        }
+
+        // 创建父目录和文件
+        File parentFile = file.getParentFile();
+        if(!parentFile.exists()){
+            Files.createDirectories(parentFile.toPath());
+        }
+        Files.createFile(file.toPath());
+
         MultipartFile multipartFile = getMultipartFile(url);
         multipartFile.transferTo(file);
     }
