@@ -1,4 +1,4 @@
-package com.starfish.trial;
+package com.starfish.example;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

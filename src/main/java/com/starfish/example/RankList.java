@@ -1,4 +1,4 @@
-package com.starfish.trial;
+package com.starfish.example;
 
 import java.util.Comparator;
 import java.util.List;

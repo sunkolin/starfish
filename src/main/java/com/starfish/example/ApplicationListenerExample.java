@@ -1,4 +1,4 @@
-package com.starfish.trial;
+package com.starfish.example;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
