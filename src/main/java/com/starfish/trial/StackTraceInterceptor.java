@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Slf4j
 @Component
-public class ExecutionChainInterceptor implements HandlerInterceptor {
+public class StackTraceInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

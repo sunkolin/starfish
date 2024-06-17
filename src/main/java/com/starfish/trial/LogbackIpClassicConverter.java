@@ -7,8 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.net.InetAddress;
 
 /**
- * IpClassicConverter
- * reference https://www.freesion.com/article/9551563594/
+ * IpClassicConverter reference <a href="https://www.freesion.com/article/9551563594/">LOGBACK日志名和日志内容配置增加IP等信息</a>
  *
  * @author sunkolin
  * @version 1.0.0
