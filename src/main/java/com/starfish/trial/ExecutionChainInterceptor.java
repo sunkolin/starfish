@@ -1,4 +1,4 @@
-package com.starfish.incubator.trial;
+package com.starfish.trial;
 
 import com.google.common.base.Joiner;
 import lombok.extern.slf4j.Slf4j;

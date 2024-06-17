@@ -1,11 +1,11 @@
-package com.starfish.incubator;
+package com.starfish.trial;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 
 /**
- * ExecuteOnStartup
+ * ApplicationRunnerExample
  * springboot项目启动成功后执行一段代码有两种方式
  * 一种是实现ApplicationRunner
  * 另外一种是实现CommandLineRunner
@@ -15,7 +15,7 @@ import org.springframework.boot.ApplicationRunner;
  * @since 2021-06-09
  */
 @Slf4j
-public class ExecuteOnStartup implements ApplicationRunner {
+public class ApplicationRunnerExample implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {

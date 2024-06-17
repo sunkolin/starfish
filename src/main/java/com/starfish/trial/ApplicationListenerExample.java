@@ -1,4 +1,4 @@
-package com.starfish.incubator;
+package com.starfish.trial;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * CustomApplicationListener
+ * ApplicationListenerExample
  *
  * @author sunkolin
  * @version 1.0.0
@@ -26,7 +26,7 @@ import java.util.Date;
 @Slf4j
 @SuppressWarnings("unused")
 @Component
-public class CustomApplicationListener implements ApplicationListener<ApplicationEvent>, ApplicationContextAware, InitializingBean {
+public class ApplicationListenerExample implements ApplicationListener<ApplicationEvent>, ApplicationContextAware, InitializingBean {
 
     private ApplicationContext applicationContext;
 

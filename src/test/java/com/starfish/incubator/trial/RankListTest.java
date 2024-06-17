@@ -1,5 +1,6 @@
 package com.starfish.incubator.trial;
 
+import com.starfish.trial.RankList;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.junit.jupiter.api.Assertions;
