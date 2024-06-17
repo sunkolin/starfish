@@ -7,6 +7,7 @@ import io.swagger.v3.oas.models.info.License;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 
 /**
  * Swagger3AutoConfiguration
@@ -16,7 +17,10 @@ import org.springframework.context.annotation.Bean;
  * @version 1.0.0
  * @since 2022-07-12
  */
+@Profile({"dev", "test"})
 @AutoConfiguration
+//@ConditionalOnProperty(value = {"application.swagger.enabled"}, matchIfMissing = false)
+//@EnableConfigurationProperties({SwaggerProperties.class})
 public class Swagger3AutoConfiguration {
 
     @Bean
