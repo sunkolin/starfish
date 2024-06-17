@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * GlobalExceptionResolver
+ * DefaultExceptionResolver
  * 需要使用ExceptionResolverAutoConfiguration扫描包，异常处理器才能对controller和拦截器同时生效
  * 直接在spring.factories中配置DefaultExceptionResolver时对拦截器不生效
  * 当前配置对于使用本jar的项目中的controller和interceptor有效，对于starfish中的interceptor无效
@@ -27,7 +27,7 @@ import java.util.Map;
 @SuppressWarnings("unused")
 @Slf4j
 @ControllerAdvice(basePackages = {"com.starfish"})
-public class GlobalExceptionResolver {
+public class DefaultExceptionResolver {
 
     public static final int SYSTEM_EXCEPTION_CODE = 500;
 

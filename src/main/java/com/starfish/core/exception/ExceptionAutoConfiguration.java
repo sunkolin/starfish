@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * ExceptionResolverAutoConfiguration
+ * ExceptionAutoConfiguration
  *
  * @author sunkolin
  * @version 1.0.0
@@ -24,8 +24,8 @@ public class ExceptionAutoConfiguration {
      * @return 结果
      */
     @Bean
-    public GlobalExceptionResolver newExceptionResolver() {
-        return new GlobalExceptionResolver();
+    public DefaultExceptionResolver newExceptionResolver() {
+        return new DefaultExceptionResolver();
     }
 
 }

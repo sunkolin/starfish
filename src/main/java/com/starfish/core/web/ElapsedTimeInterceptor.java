@@ -23,7 +23,7 @@ public class ElapsedTimeInterceptor implements HandlerInterceptor, Ordered {
     /**
      * spend time header name
      */
-    public static final String SPEND_TIME_HEADER_NAME = "spendTime";
+    public static final String SPEND_TIME_HEADER_NAME = "spend_time";
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
