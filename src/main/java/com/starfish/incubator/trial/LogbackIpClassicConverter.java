@@ -1,4 +1,4 @@
-package com.starfish.extension.trial;
+package com.starfish.incubator.trial;
 
 import ch.qos.logback.classic.pattern.ClassicConverter;
 import ch.qos.logback.classic.spi.ILoggingEvent;

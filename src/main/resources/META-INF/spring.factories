@@ -11,4 +11,4 @@
 org.springframework.boot.env.EnvironmentPostProcessor=com.starfish.core.CustomEnvironmentPostProcessor
 
 org.springframework.boot.autoconfigure.AutoConfigurationImportFilter=\
-  com.starfish.extension.datasource.DataSourceAutoConfigurationImportFilter
+  com.starfish.incubator.datasource.DataSourceAutoConfigurationImportFilter

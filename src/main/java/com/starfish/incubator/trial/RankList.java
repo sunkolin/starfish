@@ -1,4 +1,4 @@
-package com.starfish.extension.trial;
+package com.starfish.incubator.trial;
 
 import cn.hutool.core.collection.BoundedPriorityQueue;
 

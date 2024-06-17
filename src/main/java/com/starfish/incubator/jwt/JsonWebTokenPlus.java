@@ -1,4 +1,4 @@
-package com.starfish.extension.jwt;
+package com.starfish.incubator.jwt;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.json.JSONObject;

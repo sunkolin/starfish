@@ -1,4 +1,4 @@
-package com.starfish.extension.limiter;
+package com.starfish.incubator.limiter;
 
 import cn.hutool.core.date.DateUtil;
 import org.springframework.stereotype.Service;

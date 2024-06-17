@@ -1,4 +1,4 @@
-package com.starfish.extension.datasource;
+package com.starfish.incubator.datasource;
 
 import com.starfish.core.annotation.EnableDataSource;
 import com.starfish.core.context.PropertiesContext;

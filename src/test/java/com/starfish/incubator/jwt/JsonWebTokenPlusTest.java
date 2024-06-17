@@ -1,6 +1,5 @@
-package com.starfish.extension.jwt;
+package com.starfish.incubator.jwt;
 
-import com.starfish.core.constant.Constant;
 import com.starfish.core.context.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

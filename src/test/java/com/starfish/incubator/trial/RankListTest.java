@@ -1,4 +1,4 @@
-package com.starfish.extension.trial;
+package com.starfish.incubator.trial;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

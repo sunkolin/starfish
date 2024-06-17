@@ -1,4 +1,4 @@
-package com.starfish.extension.jwt;
+package com.starfish.incubator.jwt;
 
 import lombok.Data;
 

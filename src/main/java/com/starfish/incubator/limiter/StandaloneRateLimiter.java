@@ -1,4 +1,4 @@
-package com.starfish.extension.limiter;
+package com.starfish.incubator.limiter;
 
 /**
  * 单机限流器

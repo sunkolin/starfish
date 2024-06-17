@@ -1,4 +1,4 @@
-package com.starfish.extension.datasource;
+package com.starfish.incubator.datasource;
 
 import com.google.common.collect.Sets;
 import com.starfish.core.context.PropertiesContext;
