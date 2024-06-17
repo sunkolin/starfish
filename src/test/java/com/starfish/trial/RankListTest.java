@@ -1,26 +1,26 @@
-package com.starfish.incubator.trial;
+package com.starfish.trial;
 
-import com.starfish.trial.RankList;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 /**
  * RankListTest
- * 排行榜
  *
  * @author sunkolin
  * @version 1.0.0
  * @since 2021-12-30
  */
- class RankListTest {
+class RankListTest {
 
     @Test
-     void test() {
-        RankList<Student> rankList = new RankList<>(3, (o1, o2) -> Integer.compare(o2.getScore(), o1.getScore()));
+    void test() {
+        Comparator<Student> comparator = Comparator.comparingInt(Student::getScore);
+        RankList<Student> rankList = new RankList<>(3, comparator.reversed());
 
         Student student1 = new Student("tom", 98);
         Student student2 = new Student("jack", 80);
@@ -34,7 +34,11 @@ import java.io.Serializable;
         rankList.add(student4);
         rankList.add(student5);
 
+        // 验证数量
         Assertions.assertEquals(3, rankList.size());
+
+        // 验证排序
+        Assertions.assertEquals(rankList.getList().get(0), student5);
 
         for (Student student : rankList) {
             System.out.println(student);
@@ -46,9 +50,9 @@ import java.io.Serializable;
     @AllArgsConstructor
     static class Student implements Serializable {
 
-        String name;
+        private String name;
 
-        int score;
+        private int score;
 
     }
 
