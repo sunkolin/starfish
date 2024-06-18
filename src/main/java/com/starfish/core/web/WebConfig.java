@@ -1,6 +1,5 @@
 package com.starfish.core.web;
 
-import com.starfish.common.swagger.SwaggerInterceptor;
 import com.starfish.common.trace.TraceInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -21,12 +20,9 @@ public class WebConfig implements WebMvcConfigurer {
 
     private ElapsedTimeInterceptor elapsedTimeInterceptor;
 
-    private SwaggerInterceptor swaggerInterceptor;
-
-    public WebConfig(TraceInterceptor traceInterceptor, ElapsedTimeInterceptor elapsedTimeInterceptor, SwaggerInterceptor swaggerInterceptor) {
+    public WebConfig(TraceInterceptor traceInterceptor, ElapsedTimeInterceptor elapsedTimeInterceptor) {
         this.traceInterceptor = traceInterceptor;
         this.elapsedTimeInterceptor = elapsedTimeInterceptor;
-        this.swaggerInterceptor = swaggerInterceptor;
     }
 
     @Override
@@ -36,9 +32,6 @@ public class WebConfig implements WebMvcConfigurer {
         }
         if (elapsedTimeInterceptor != null) {
             registry.addInterceptor(elapsedTimeInterceptor).addPathPatterns("/**").excludePathPatterns("/excludeUrl");
-        }
-        if (swaggerInterceptor != null) {
-            registry.addInterceptor(swaggerInterceptor).addPathPatterns("/swagger-ui.html");
         }
     }
 
