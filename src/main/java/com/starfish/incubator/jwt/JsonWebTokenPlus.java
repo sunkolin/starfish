@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public class JsonWebTokenPlus {
 
-    private static final String KEY = "1234567890";
+    private static final String KEY = "Ks#ZKmIUTEj3@dU2";
 
     /**
      * constructor
