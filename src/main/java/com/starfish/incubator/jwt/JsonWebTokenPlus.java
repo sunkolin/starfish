@@ -33,6 +33,7 @@ public class JsonWebTokenPlus {
      * @param param 参数
      * @return 结果
      */
+    @Deprecated
     public static <T> String create(T param) {
         Map<String, Object> map = BeanUtil.beanToMap(param, false, false);
         return create(map);
@@ -44,8 +45,30 @@ public class JsonWebTokenPlus {
      * @param param 参数
      * @return 结果
      */
+    public static <T> String create(Long userId, T param) {
+        Map<String, Object> map = BeanUtil.beanToMap(param, false, false);
+        return create(userId, map);
+    }
+
+    /**
+     * 生成
+     *
+     * @param param 参数
+     * @return 结果
+     */
+    @Deprecated
     public static String create(Map<String, Object> param) {
         return JWTUtil.createToken(param, KEY.getBytes());
+    }
+
+    /**
+     * 生成
+     *
+     * @param param 参数
+     * @return 结果
+     */
+    public static String create(Long userId, Map<String, Object> param) {
+        return JWTUtil.createToken(param, (userId.toString() + KEY).getBytes());
     }
 
     /**
@@ -54,8 +77,19 @@ public class JsonWebTokenPlus {
      * @param token token
      * @return 结果
      */
+    @Deprecated
     public static boolean verify(String token) {
         return JWTUtil.verify(token, KEY.getBytes());
+    }
+
+    /**
+     * 验证
+     *
+     * @param token token
+     * @return 结果
+     */
+    public static boolean verify(Long userId, String token) {
+        return JWTUtil.verify(token, (userId.toString() + KEY).getBytes());
     }
 
     /**
@@ -66,7 +100,36 @@ public class JsonWebTokenPlus {
      * @param <T>   T
      * @return 结果
      */
-    public static <T> T parse(String token, Class<T> cls) {
+    @Deprecated
+    public static <T> T verify(String token, Class<T> cls) {
+        // 验证token有效性
+        boolean verifyResult = JWTUtil.verify(token, KEY.getBytes());
+        if (!verifyResult) {
+            return null;
+        }
+
+        // 解析token数据
+        final JWT jwt = JWTUtil.parseToken(token);
+        JSONObject payloads = jwt.getPayloads();
+        return BeanUtil.toBean(payloads, cls);
+    }
+
+    /**
+     * 验证并解析token
+     *
+     * @param token token
+     * @param cls   class
+     * @param <T>   T
+     * @return 结果
+     */
+    public static <T> T verify(Long userId, String token, Class<T> cls) {
+        // 验证token有效性
+        boolean verifyResult = JWTUtil.verify(token, (userId.toString() + KEY).getBytes());
+        if (!verifyResult) {
+            return null;
+        }
+
+        // 解析token数据
         final JWT jwt = JWTUtil.parseToken(token);
         JSONObject payloads = jwt.getPayloads();
         return BeanUtil.toBean(payloads, cls);

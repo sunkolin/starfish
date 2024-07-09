@@ -24,7 +24,27 @@ class JsonWebTokenPlusTest {
         boolean verify = JsonWebTokenPlus.verify(token);
         System.out.println(verify);
 
-        User user1 = JsonWebTokenPlus.parse(token, User.class);
+        User user1 = JsonWebTokenPlus.verify(token, User.class);
+        System.out.println(user1);
+
+        long expectedValue = 100L;
+        long actualValue = user1.getUserId();
+        Assertions.assertEquals(expectedValue, actualValue);
+    }
+
+    @Test
+    void test2() {
+        User user = new User();
+        Long userId = 100L;
+        user.setUserId(userId);
+
+        String token = JsonWebTokenPlus.create(userId, user);
+        System.out.println(token);
+
+        boolean verify = JsonWebTokenPlus.verify(userId, token);
+        System.out.println(verify);
+
+        User user1 = JsonWebTokenPlus.verify(userId, token, User.class);
         System.out.println(user1);
 
         long expectedValue = 100L;
