@@ -347,9 +347,6 @@ public class StringUtil {
      * @return 格式化后的文本
      */
     public static String format(String string, Object... params) {
-        if (Strings.isNullOrEmpty(string)) {
-            string = Strings.repeat("{}", params.length);
-        }
         return CharSequenceUtil.format(string, params);
     }
 
@@ -360,7 +357,8 @@ public class StringUtil {
      * @return 格式化后的文本
      */
     public static String format(Object... params) {
-        return format("", params);
+        String string = Strings.repeat("{}", params.length);
+        return format(string, params);
     }
 
     public static String simpleFormat(String string, Object... arguments) {
