@@ -19,8 +19,6 @@ import org.springframework.context.annotation.Profile;
  */
 @Profile({"dev", "test"})
 @AutoConfiguration
-//@ConditionalOnProperty(value = {"application.swagger.enabled"}, matchIfMissing = false)
-//@EnableConfigurationProperties({SwaggerProperties.class})
 public class Swagger3AutoConfiguration {
 
     @Bean
