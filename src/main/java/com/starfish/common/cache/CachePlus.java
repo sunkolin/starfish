@@ -1,8 +1,7 @@
 package com.starfish.common.cache;
 
 /**
- * CachePlus
- * 使用caffeine做本地缓存
+ * CachePlus,使用caffeine做本地缓存
  *
  * @author sunkolin
  * @version 1.0.0
