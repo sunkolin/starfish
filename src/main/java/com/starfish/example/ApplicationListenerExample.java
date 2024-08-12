@@ -95,36 +95,6 @@ public class ApplicationListenerExample implements ApplicationListener<Applicati
         log.info("Application Closed");
     }
 
-    //    @Override
-//    public void onApplicationEvent(ApplicationReadyEvent event) {
-//        if (event instanceof ContextStartedEvent) {
-//            if (((ContextStartedEvent) event).getApplicationContext().getParent() == null) {
-//                log.info("root container start");
-//            } else {
-//                log.info("web container start");
-//            }
-//        } else if (event instanceof ContextRefreshedEvent) {
-//            if (((ContextRefreshedEvent) event).getApplicationContext().getParent() == null) {
-//                log.info("root container start complete");
-//            } else {
-//                log.info("web container start complete");
-//                executeAfterContextRefreshedEvent((ContextRefreshedEvent) event);
-//            }
-//        } else if (event instanceof ContextStoppedEvent) {
-//            if (((ContextStoppedEvent) event).getApplicationContext().getParent() == null) {
-//                log.info("root container pause");
-//            } else {
-//                log.info("web container pause");
-//            }
-//        } else if (event instanceof ContextClosedEvent) {
-//            if (((ContextClosedEvent) event).getApplicationContext().getParent() == null) {
-//                log.info("root container close");
-//            } else {
-//                log.info("web container close");
-//            }
-//        }
-//    }
-
     /**
      * execute after spring start complete
      *

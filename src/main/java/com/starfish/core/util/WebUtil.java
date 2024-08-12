@@ -70,7 +70,7 @@ public class WebUtil extends HtmlUtils {
      */
     private static final List<String> MEDIA_CONTENT_TYPE_LIST = Lists.newArrayList("application/x-mpegURL", "application/octet-stream", "video", "audio");
 
-    private static final RestTemplate restTemplate = new RestTemplate();
+    private static final RestTemplate REST_TEMPLATE = new RestTemplate();
 
     static {
         initContentType();
@@ -146,8 +146,8 @@ public class WebUtil extends HtmlUtils {
     /**
      * 获取基础url
      *
-     * @param url 链接地址，例如https://m.gmw.cn/baijia/2021-03/11/1302158793.html?a=1&b=2&c=12#34
-     * @return 结果，例如https://m.gmw.cn:80
+     * @param url 链接地址，例如<a href="https://m.gmw.cn/baijia/2021-03/11/1302158793.html?a=1&b=2&c=12#34">https://m.gmw.cn/baijia/2021-03/11/1302158793.html?a=1&b=2&c=12#34</a>
+     * @return 结果，例如<a href="https://m.gmw.cn:80">https://m.gmw.cn:80</a>
      */
     public static String getBaseUrl(String url) {
         String scheme = getScheme(url);
@@ -214,7 +214,7 @@ public class WebUtil extends HtmlUtils {
 
         // 判断是否可以访问
         try {
-            HttpHeaders httpHeaders = restTemplate.headForHeaders(url);
+            HttpHeaders httpHeaders = REST_TEMPLATE.headForHeaders(url);
             String contentType = httpHeaders.getFirst("Content-Type");
             log.info("get media contentType,url={},contentType={}", url, contentType);
             // 如果没有Content-Type，返回false
