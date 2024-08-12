@@ -1,7 +1,5 @@
 package com.starfish.common.cache;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-
 /**
  * CachePlus
  * 使用caffeine做本地缓存
@@ -10,7 +8,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
  * @version 1.0.0
  * @since 2021-06-11
  */
-//@ConditionalOnBean("caffeine")
 public class CachePlus implements Cache {
 
     /**

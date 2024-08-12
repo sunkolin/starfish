@@ -1,10 +1,11 @@
 package com.starfish.core.config;
 
+import jakarta.annotation.Resource;
 import lombok.Data;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,23 +17,29 @@ import org.springframework.stereotype.Component;
  * @since 2021-11-16
  */
 @Data
-//@RefreshScope
 @Component("applicationConfig")
 public class ApplicationConfig implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
 
-    @Value("${spring.application.name}")
-    private String name;
+    @Resource
+    private Environment environment;
 
-    @Value("${server.port}")
-    private String port;
+    public String getName() {
+        return environment.getProperty("spring.application.name");
+    }
 
-    @Value("${spring.profiles.active}")
-    private String profile;
+    public String getPort() {
+        return environment.getProperty("server.port");
+    }
 
-    @Value("${spring.profiles.active}")
-    private String env;
+    public String getProfile() {
+        return environment.getProperty("spring.profiles.active");
+    }
+
+    public String getEnvironment() {
+        return environment.getProperty("spring.profiles.active");
+    }
 
     /**
      * 获取配置
