@@ -1,21 +1,18 @@
 package com.starfish.core.util;
 
 import com.google.common.base.Strings;
+import com.google.common.io.CharStreams;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.starfish.core.enumeration.ResultEnum;
 import com.starfish.core.exception.CustomException;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.EncodedResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -25,7 +22,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.*;
@@ -152,20 +148,20 @@ public final class FileUtil {
      * @return 文件内容
      * @see FileUtil
      */
-    public static String readClassPathFile(String path) {
-        String result = "";
-        try {
-            PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-            Resource[] resources = resolver.getResources("classpath*:" + path);
-            if (resources.length > 0) {
-                EncodedResource enc = new EncodedResource(resources[0], "UTF-8");
-                result = FileCopyUtils.copyToString(enc.getReader());
-            }
-        } catch (IOException e) {
-            log.error("error", e);
-        }
-        return result;
-    }
+//    public static String readClassPathFile(String path) {
+//        String result = "";
+//        try {
+//            PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+//            Resource[] resources = resolver.getResources("classpath*:" + path);
+//            if (resources.length > 0) {
+//                EncodedResource enc = new EncodedResource(resources[0], "UTF-8");
+//                result = FileCopyUtils.copyToString(enc.getReader());
+//            }
+//        } catch (IOException e) {
+//            log.error("error", e);
+//        }
+//        return result;
+//    }
 
     /**
      * 如果文件是使用数字命名的，获取文件名的数字
@@ -211,7 +207,7 @@ public final class FileUtil {
     /**
      * 获取文件名
      *
-     * @param url，链接，例如https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png
+     * @param url，链接，例如<a href="https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png">https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png</a>
      * @return 结果，PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png
      */
     private static String getUrlFileName(String url) {
@@ -276,146 +272,66 @@ public final class FileUtil {
      * @return 结果
      */
     private static String getRandomNameString() {
-        // 第一段：14位，yyyyMMddHHmmss
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+        // 第一段：17位，yyyyMMddHHmmssSSS
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmssSSS");
         String id1 = format.format(new Date());
 
-        //第二段：12位随机字符
-        String id2 = StringUtil.random("abcdefghijklmnopqrstuvwxyz", 10);
+        //第二段：7位随机字符
+        String id2 = StringUtil.random("abcdefghijklmnopqrstuvwxyz", 7);
 
         return id1 + id2;
     }
 
     /**
-     * 读取项目下文件的全部内容转成字符串
-     * 支持格式：classpath:application-starfish.properties，file:/etc/profile
+     * 读取项目下文件,转成字符串,支持格式：/etc/profile,file:/etc/profile,classpath:application-starfish.properties
      *
      * @param path 文件路径
      * @return 文件内容
+     * @throws IOException 异常
      */
-    public static String read(String path) {
+    public static String readString(String path) throws IOException {
         //验证参数
         if (path == null) {
             throw new CustomException(ResultEnum.FILE_PATH_IS_EMPTY);
         }
 
-        String result = "";
-        if (path.startsWith(FILE_PREFIX)) {
-            try {
-                result = readFromSystem(path);
-            } catch (IOException e) {
-                log.error("读取文件失败", e);
-            }
-        }
-
         if (path.startsWith(CLASSPATH_PREFIX)) {
-            try {
-                result = readFromClassPath(path);
-            } catch (IOException e) {
-                log.error("读取文件失败", e);
-            }
-        }
-        return result;
-    }
-
-    /**
-     * 从系统路径下读取文件
-     * 实际本方法也支持从classpath路径下读取文件，但是不支持从jar中读取文件
-     *
-     * @param path 路径
-     * @return 结果
-     * @throws IOException 异常
-     */
-    protected static String readFromSystem(String path) throws IOException {
-        File file = ResourceUtils.getFile(path);
-        FileSystemResource fileSystemResource = new FileSystemResource(file);
-        InputStream inputStream = fileSystemResource.getInputStream();
-        return IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-    }
-
-    /**
-     * 从classpath路径下读取文件
-     *
-     * @param path 路径
-     * @return 结果
-     * @throws IOException 异常
-     */
-    protected static String readFromClassPath(String path) throws IOException {
-        // ClassPathResource创建参数不需要classpath:，如果有自动去掉
-        if (path.startsWith(CLASSPATH_PREFIX)) {
+            // ClassPathResource创建参数不需要classpath:,如果有自动去掉；此方法可以读取到jar中的文件，不可替换
             path = path.replaceFirst(CLASSPATH_PREFIX, "");
+            ClassPathResource resource = new ClassPathResource(path);
+            InputStream inputStream = resource.getInputStream();
+            return CharStreams.toString(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+        } else {
+            File file = ResourceUtils.getFile(path);
+            return CharStreams.toString(new FileReader(file, StandardCharsets.UTF_8));
         }
-
-        ClassPathResource classPathResource = new ClassPathResource(path);
-        InputStream inputStream = classPathResource.getInputStream();
-        return IOUtils.toString(inputStream, StandardCharsets.UTF_8);
     }
 
     /**
      * 读取项目下文件，按行转成字符串，以行为单位放入list中，适合读取小文件
+     * 支持格式：/etc/profile,file:/etc/profile,classpath:application-starfish.properties
      * File file = classPathResource.getFile(); 方式无法获取jar包中的文件
-     * 支持格式：classpath:application-starfish.properties，file:/etc/profile
      *
      * @param path 文件路径
      * @return 文件内容
+     * @throws IOException 异常
      */
-    public static List<String> readLines(String path) {
+    public static List<String> readLines(String path) throws IOException {
         //验证参数
         if (path == null) {
             throw new CustomException(ResultEnum.FILE_PATH_IS_EMPTY);
         }
 
-        List<String> result = new ArrayList<>();
-        if (path.startsWith(FILE_PREFIX)) {
-            try {
-                result = readLinesFromSystem(path);
-            } catch (IOException e) {
-                log.error("read error", e);
-            }
-        }
-
         if (path.startsWith(CLASSPATH_PREFIX)) {
-            try {
-                result = readLinesFromClassPath(path);
-            } catch (IOException e) {
-                log.error("read error", e);
-            }
-        }
-
-        return result;
-    }
-
-    /**
-     * 从系统路径下读取文件
-     * 实际本方法也支持从classpath路径下读取文件，但是不支持从jar中读取文件
-     *
-     * @param path 路径
-     * @return 结果
-     * @throws IOException 异常
-     */
-    protected static List<String> readLinesFromSystem(String path) throws IOException {
-        File file = ResourceUtils.getFile(path);
-        FileSystemResource fileSystemResource = new FileSystemResource(file);
-        InputStream inputStream = fileSystemResource.getInputStream();
-        return IOUtils.readLines(inputStream, StandardCharsets.UTF_8);
-    }
-
-    /**
-     * 从classpath路径下读取文件
-     *
-     * @param path 路径
-     * @return 结果
-     * @throws IOException 异常
-     */
-    protected static List<String> readLinesFromClassPath(String path) throws IOException {
-        // ClassPathResource创建参数不需要classpath:，如果有自动去掉
-        if (path.startsWith(CLASSPATH_PREFIX)) {
+            // ClassPathResource创建参数不需要classpath:,如果有自动去掉
             path = path.replaceFirst(CLASSPATH_PREFIX, "");
+            ClassPathResource resource = new ClassPathResource(path);
+            InputStream inputStream = resource.getInputStream();
+            return CharStreams.readLines(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+        } else {
+            File file = ResourceUtils.getFile(path);
+            return CharStreams.readLines(new FileReader(file, StandardCharsets.UTF_8));
         }
-
-        ClassPathResource classPathResource = new ClassPathResource(path);
-        InputStream inputStream = classPathResource.getInputStream();
-        return IOUtils.readLines(inputStream, StandardCharsets.UTF_8);
     }
 
     /**
@@ -449,64 +365,64 @@ public final class FileUtil {
         return name.substring(index).toLowerCase();
     }
 
-    /**
-     * File转MultipartFile
-     *
-     * @param file 文件
-     * @return 结果
-     * @throws IOException 异常
-     */
-    public static MultipartFile toMultipartFile(File file) throws IOException {
-        FileInputStream fileInputStream = new FileInputStream(file);
-        return new MockMultipartFile(file.getName(), file.getName(), "application/octet-stream", fileInputStream);
-    }
+//    /**
+//     * File转MultipartFile
+//     *
+//     * @param file 文件
+//     * @return 结果
+//     * @throws IOException 异常
+//     */
+//    public static MultipartFile toMultipartFile(File file) throws IOException {
+//        FileInputStream fileInputStream = new FileInputStream(file);
+//        return new MockMultipartFile(file.getName(), file.getName(), "application/octet-stream", fileInputStream);
+//    }
 
-    /**
-     * url转MultipartFile
-     *
-     * @param url 链接地址，例如https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png
-     * @return 结果
-     * @throws IOException 异常
-     */
-    public static MultipartFile getMultipartFile(String url) throws IOException {
-        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-        connection.setReadTimeout(3000);
-        connection.setConnectTimeout(3000);
-        //设置应用程序要从网络链接读取数据
-        connection.setDoInput(true);
-        connection.setRequestMethod("GET");
-        InputStream inputStream = connection.getInputStream();
+//    /**
+//     * url转MultipartFile
+//     *
+//     * @param url 链接地址，例如https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png
+//     * @return 结果
+//     * @throws IOException 异常
+//     */
+//    public static MultipartFile getMultipartFile(String url) throws IOException {
+//        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+//        connection.setReadTimeout(3000);
+//        connection.setConnectTimeout(3000);
+//        //设置应用程序要从网络链接读取数据
+//        connection.setDoInput(true);
+//        connection.setRequestMethod("GET");
+//        InputStream inputStream = connection.getInputStream();
+//
+//        // 获取文件名
+//        String fileName = getFileName(url, true);
+//        return new MockMultipartFile(fileName, fileName, "application/octet-stream", inputStream);
+//    }
 
-        // 获取文件名
-        String fileName = getFileName(url, true);
-        return new MockMultipartFile(fileName, fileName, "application/octet-stream", inputStream);
-    }
-
-    /**
-     * getFile
-     *
-     * @param url  url
-     * @param file file
-     * @throws IOException IOException
-     */
-    public static void getFile(String url, File file) throws IOException {
-        // 判断文件不存在
-        if (file.isDirectory()){
-            throw new CustomException();
-        }
-        if (file.exists()){
-            throw new CustomException();
-        }
-
-        // 创建父目录和文件
-        File parentFile = file.getParentFile();
-        if(!parentFile.exists()){
-            Files.createDirectories(parentFile.toPath());
-        }
-        Files.createFile(file.toPath());
-
-        MultipartFile multipartFile = getMultipartFile(url);
-        multipartFile.transferTo(file);
-    }
+//    /**
+//     * getFile
+//     *
+//     * @param url  url
+//     * @param file file
+//     * @throws IOException IOException
+//     */
+//    public static void getFile(String url, File file) throws IOException {
+//        // 判断文件不存在
+//        if (file.isDirectory()){
+//            throw new CustomException();
+//        }
+//        if (file.exists()){
+//            throw new CustomException();
+//        }
+//
+//        // 创建父目录和文件
+//        File parentFile = file.getParentFile();
+//        if(!parentFile.exists()){
+//            Files.createDirectories(parentFile.toPath());
+//        }
+//        Files.createFile(file.toPath());
+//
+//        MultipartFile multipartFile = getMultipartFile(url);
+//        multipartFile.transferTo(file);
+//    }
 
 }

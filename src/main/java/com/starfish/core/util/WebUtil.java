@@ -26,10 +26,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * WebUtil
@@ -84,7 +81,13 @@ public class WebUtil extends HtmlUtils {
      * 初始化content type
      */
     private static void initContentType() {
-        List<String> contentTypeList = FileUtil.readLines("classpath:application-content-type.txt");
+        List<String> contentTypeList = new ArrayList<>();
+        try {
+            contentTypeList = FileUtil.readLines("classpath:application-content-type.txt");
+        } catch (Exception e) {
+            log.error("init content yype error", e);
+        }
+
         for (String contentType : contentTypeList) {
             String[] array = contentType.split("=");
             CONTENT_TYPE.put(array[0], array[1]);

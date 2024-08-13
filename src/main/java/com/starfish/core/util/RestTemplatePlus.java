@@ -1,6 +1,6 @@
 package com.starfish.core.util;
 
-import org.assertj.core.util.Strings;
+import com.google.common.base.Strings;
 import org.springframework.http.*;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;

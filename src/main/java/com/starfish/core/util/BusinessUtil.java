@@ -4,11 +4,13 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdcardUtil;
 import com.google.common.base.Strings;
 import com.starfish.core.constant.Constant;
+import com.starfish.core.exception.CustomException;
 import com.starfish.core.model.weather.WeatherModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +39,11 @@ public class BusinessUtil {
     private static final List<String> SENSITIVE_WORD_LIST;
 
     static {
-        SENSITIVE_WORD_LIST = FileUtil.readLines("classpath:words.txt");
+        try {
+            SENSITIVE_WORD_LIST = FileUtil.readLines("classpath:words.txt");
+        } catch (IOException e) {
+            throw new CustomException(e);
+        }
     }
 
     /**

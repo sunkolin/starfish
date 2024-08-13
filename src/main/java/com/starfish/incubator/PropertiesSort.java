@@ -3,6 +3,7 @@ package com.starfish.incubator;
 import com.starfish.core.util.FileUtil;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @Slf4j
 public class PropertiesSort {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         PropertiesSort.sort("classpath:application-starfish.properties");
     }
 
@@ -25,7 +26,7 @@ public class PropertiesSort {
      *
      * @param filePath 文件路径，例如classpath:application-starfish.properties
      */
-    public static void sort(String filePath) {
+    public static void sort(String filePath) throws IOException {
         List<String> lines = FileUtil.readLines(filePath);
 
         // 删除空行和注释
