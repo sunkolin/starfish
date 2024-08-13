@@ -38,7 +38,7 @@ class FileUtilTest {
         Assertions.assertFalse(result.isEmpty());
 
         List<String> result2 = FileUtil.readLines("file:/etc/profile");
-        System.out.println(result2);
+        log.info(JsonUtil.toJson(result2));
         Assertions.assertFalse(result2.isEmpty());
     }
 

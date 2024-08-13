@@ -44,10 +44,10 @@ public class PropertiesSort {
                 currentPrefix = prefix;
             }
             if (currentPrefix.equalsIgnoreCase(prefix)) {
-                System.out.println(item);
+                log.info(item);
             } else {
-                System.out.println();
-                System.out.println(item);
+                log.info("\n");
+                log.info(item);
                 currentPrefix = prefix;
             }
         }

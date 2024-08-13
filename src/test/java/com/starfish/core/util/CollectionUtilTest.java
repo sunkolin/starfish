@@ -3,6 +3,7 @@ package com.starfish.core.util;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +17,7 @@ import java.util.*;
  * @version 1.0.0
  * @since 2014-11-27
  */
+@Slf4j
 class CollectionUtilTest {
 
     @Test
@@ -68,7 +70,7 @@ class CollectionUtilTest {
     void sortStringTest() {
         String[] array = new String[]{"1", "3", "2", "a", "4"};
         CollectionUtil.sort(array, "desc");
-        System.out.println(JsonUtil.toJson(array));
+        log.info(JsonUtil.toJson(array));
         Assertions.assertArrayEquals(new String[]{"a", "4", "3", "2", "1"}, array);
     }
 
@@ -83,7 +85,7 @@ class CollectionUtilTest {
         list.add(36L);
         list.add(40L);
         CollectionUtil.sort(list, "desc", null);
-        System.out.println(JsonUtil.toJson(list));
+        log.info(JsonUtil.toJson(list));
         Assertions.assertEquals(12L, list.get(list.size() - 1).longValue());
     }
 

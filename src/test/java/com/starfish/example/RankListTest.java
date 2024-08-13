@@ -1,7 +1,9 @@
 package com.starfish.example;
 
+import com.starfish.core.util.JsonUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +17,7 @@ import java.util.Comparator;
  * @version 1.0.0
  * @since 2021-12-30
  */
+@Slf4j
 class RankListTest {
 
     @Test
@@ -41,7 +44,7 @@ class RankListTest {
         Assertions.assertEquals(rankList.getList().get(0), student5);
 
         for (Student student : rankList) {
-            System.out.println(student);
+            log.info(JsonUtil.toJson(student));
         }
     }
 

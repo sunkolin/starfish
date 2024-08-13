@@ -1,6 +1,7 @@
 package com.starfish.core.util;
 
 import com.starfish.core.context.User;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * @version 1.0.0
  * @since 2021-03-03
  */
+@Slf4j
 class PinyinUtilTest {
 
     @Test
@@ -30,10 +32,10 @@ class PinyinUtilTest {
         u2.setUserName("马");
         users.add(u2);
 
-        System.out.println("排序前:" + users);
+        log.info("排序前={}", users);
         PinyinUtil.sort(users, User::getUserName);
-        System.out.println("排序前:" + users);
-        Assertions.assertEquals("马",users.get(0).getUserName());
+        log.info("排序后={}", users);
+        Assertions.assertEquals("马", users.get(0).getUserName());
     }
 
 }
