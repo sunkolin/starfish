@@ -1,5 +1,6 @@
 package com.starfish.core.util;
 
+import cn.hutool.http.HttpUtil;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
@@ -252,6 +253,7 @@ public class WebUtil extends HtmlUtils {
      * @param url      资源地址
      * @param filePath 文件路径，文件下载后存在本地磁盘上的全路径，包括文件名和类型
      */
+    @Deprecated
     public static void download(String url, String filePath) {
         //判断文件和目录是否存在，不存在则创建
         File file = new File(filePath);
@@ -512,6 +514,16 @@ public class WebUtil extends HtmlUtils {
             log.error("getBody exception.");
         }
         return body;
+    }
+
+    /**
+     * 下载远程文件
+     *
+     * @param url  请求的url
+     * @param dest 目标文件或目录，当为目录时，取URL中的文件名，取不到使用编码后的URL做为文件名
+     */
+    public static void downloadFile(String url, String dest) {
+         HttpUtil.downloadFile(url, cn.hutool.core.io.FileUtil.file(dest));
     }
 
 }
