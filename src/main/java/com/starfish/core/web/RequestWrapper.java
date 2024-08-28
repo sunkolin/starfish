@@ -78,14 +78,7 @@ public class RequestWrapper extends HttpServletRequestWrapper {
 
     public static String getBody(HttpServletRequest request) {
         try {
-            if (request instanceof RequestWrapper) {
-                return StreamUtils.copyToString(request.getInputStream(), StandardCharsets.UTF_8);
-            } else {
-                // 未使用RequestWrapper包装的请求不返回body
-                // 经测试也可以不处理，multipart/form-data类型请求使用
-                // StreamUtils.copyToString(request.getInputStream(), StandardCharsets.UTF_8)获取body数据会返回空字符串
-                return "";
-            }
+            return StreamUtils.copyToString(request.getInputStream(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             return "";
         }
