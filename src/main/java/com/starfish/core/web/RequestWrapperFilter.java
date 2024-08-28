@@ -1,5 +1,6 @@
 package com.starfish.core.web;
 
+import com.google.common.base.Strings;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -19,21 +20,12 @@ public class RequestWrapperFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        RequestWrapper requestWrapper = null;
-
-        // 如果请求不是文件上传，使用RequestWrapper包装
-        if (request instanceof HttpServletRequest httpServletRequest) {
-            String contentType = httpServletRequest.getContentType() == null ? "" : httpServletRequest.getContentType();
-            if (!contentType.contains(MediaType.MULTIPART_FORM_DATA_VALUE)) {
-                requestWrapper = new RequestWrapper(httpServletRequest);
-            }
-        }
-
-        if (requestWrapper == null) {
+        String contentType = request.getContentType();
+        if (!Strings.isNullOrEmpty(contentType) && contentType.contains(MediaType.MULTIPART_FORM_DATA_VALUE)) {
             chain.doFilter(request, response);
         } else {
-            chain.doFilter(requestWrapper, response);
+            HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+            chain.doFilter(new RequestWrapper(httpServletRequest), response);
         }
     }
-
 }
