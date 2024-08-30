@@ -15,7 +15,7 @@
         </filter>
         <encoder>
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
-            <charset>utf8</charset>
+            <charset>UTF-8</charset>
         </encoder>
     </appender>
 
@@ -27,7 +27,7 @@
         </rollingPolicy>
         <encoder>
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
-            <charset>utf8</charset>
+            <charset>UTF-8</charset>
         </encoder>
     </appender>
 
