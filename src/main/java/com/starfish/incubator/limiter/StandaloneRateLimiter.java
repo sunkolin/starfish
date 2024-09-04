@@ -11,10 +11,16 @@ package com.starfish.incubator.limiter;
  */
 public class StandaloneRateLimiter implements RateLimiter {
 
-    private com.google.common.util.concurrent.RateLimiter guavaRateLimiter;
+    private final com.google.common.util.concurrent.RateLimiter guavaRateLimiter;
 
-    public StandaloneRateLimiter(long permitsPerSecond) {
-        guavaRateLimiter = com.google.common.util.concurrent.RateLimiter.create(permitsPerSecond);
+    /**
+     * 构造方法
+     *
+     * @param name             限流器名称，不同业务使用不同的名称
+     * @param permits 每秒限流数量
+     */
+    public StandaloneRateLimiter(String name, long permits) {
+        guavaRateLimiter = com.google.common.util.concurrent.RateLimiter.create(permits);
     }
 
     @Override

@@ -1,43 +1,41 @@
 package com.starfish.incubator.limiter;
 
+import com.starfish.core.SpringPlus;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
-import org.springframework.stereotype.Service;
 
-import jakarta.annotation.Resource;
 import java.util.UUID;
 
 /**
  * 滑动窗口算法
  * 简单介绍4种限流算法：计数器算法、滑动窗口计数器算法、漏桶算法、令牌桶算法
- * 参考：https://www.cnblogs.com/linjiqin/p/9707713.html
+ * 参考：<a href="https://www.cnblogs.com/linjiqin/p/9707713.html">三种常见的限流算法</a>
  *
  * @author sunkolin
  * @version 1.0.0
  * @since 2021-01-19
  */
 @Slf4j
-@Service
 public class RollingWindowRateLimiter implements RateLimiter {
 
     /**
      * 一秒允许的数量
      */
-    public long permits;
+    private final long permits;
 
     /**
      * 限流间隔时间，单位毫秒，默认10毫秒
      */
-    public long intervalMillisecond = 10;
+    public static final long INTERVAL_MILLISECOND = 10;
 
-    public String redisKey;
+    public final String redisKey;
 
-    @Resource
-    private RedisTemplate<String, String> redisTemplate;
+    private final StringRedisTemplate stringRedisTemplate;
 
-    public RollingWindowRateLimiter(String redisKey, long permits) {
-        this.redisKey = redisKey;
+    public RollingWindowRateLimiter(String name, long permits) {
+        stringRedisTemplate = SpringPlus.getBean(StringRedisTemplate.class);
+        this.redisKey = "starfish:RateLimiter:" + name;
         this.permits = permits;
     }
 
@@ -49,7 +47,7 @@ public class RollingWindowRateLimiter implements RateLimiter {
         if (exist() && greaterThanOrEqualToPermits(score)) {
             return false;
         } else {
-            ZSetOperations<String, String> zSetOperations = redisTemplate.opsForZSet();
+            ZSetOperations<String, String> zSetOperations = stringRedisTemplate.opsForZSet();
             String value = UUID.randomUUID().toString();
             zSetOperations.add(redisKey, value, score);
             return true;
@@ -57,7 +55,7 @@ public class RollingWindowRateLimiter implements RateLimiter {
     }
 
     public boolean exist() {
-        return redisTemplate.hasKey(redisKey);
+        return Boolean.TRUE.equals(stringRedisTemplate.hasKey(redisKey));
     }
 
     /**
@@ -67,10 +65,10 @@ public class RollingWindowRateLimiter implements RateLimiter {
      * @return 结果
      */
     public boolean greaterThanOrEqualToPermits(long max) {
-        ZSetOperations<String, String> zSetOperations = redisTemplate.opsForZSet();
-        double min = max - intervalMillisecond;
+        ZSetOperations<String, String> zSetOperations = stringRedisTemplate.opsForZSet();
+        long min = max - INTERVAL_MILLISECOND;
         Long count = zSetOperations.count(redisKey, min, max);
-        long intervalPermits = (long) (permits / (1000D / intervalMillisecond));
+        long intervalPermits = (long) (permits / (1000D / INTERVAL_MILLISECOND));
         return (count != null && count > intervalPermits);
     }
 

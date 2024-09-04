@@ -1,7 +1,5 @@
 package com.starfish.incubator.limiter;
 
-import org.springframework.stereotype.Service;
-
 /**
  * 集群限流器
  * 滑动窗口算法实现
@@ -10,17 +8,16 @@ import org.springframework.stereotype.Service;
  * @version 1.0.0
  * @since 2019-07-11
  */
-@Service
 public class ClusterRateLimiter extends RollingWindowRateLimiter {
 
     /**
      * ClusterRateLimiter
      *
-     * @param redisKey 缓存Key
-     * @param permits  一秒允许的数量
+     * @param name    限流器名称，不同业务使用不同的名称
+     * @param permits 一秒允许的数量
      */
-    public ClusterRateLimiter(String redisKey, long permits) {
-        super(redisKey, permits);
+    public ClusterRateLimiter(String name, long permits) {
+        super(name, permits);
     }
 
 }

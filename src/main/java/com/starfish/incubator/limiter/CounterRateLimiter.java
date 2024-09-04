@@ -1,7 +1,6 @@
 package com.starfish.incubator.limiter;
 
 import cn.hutool.core.date.DateUtil;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicLong;
@@ -15,38 +14,43 @@ import java.util.concurrent.atomic.AtomicLong;
  * @version 1.0.0
  * @since 2021-01-19
  */
-@Service
 public class CounterRateLimiter implements RateLimiter {
 
-    private final long permitsPerSecond;
+    private final long permits;
 
-    private final AtomicLong counter = new AtomicLong(0);
+    private static final AtomicLong COUNTER = new AtomicLong(0);
 
-    private static Date timestamp = DateUtil.dateSecond();
+    private static Date TIMESTAMP = DateUtil.dateSecond();
 
     /**
      * 时间间隔
      */
     private static final long TIME_INTERVAL = 1000L;
 
-    public CounterRateLimiter(long permitsPerSecond) {
-        this.permitsPerSecond = permitsPerSecond;
+    /**
+     * 构造方法
+     *
+     * @param name             限流器名称，不同业务使用不同的名称
+     * @param permits 每秒限流数量
+     */
+    public CounterRateLimiter(String name, long permits) {
+        this.permits = permits;
     }
 
     @Override
     public boolean acquire(int count) {
         synchronized (this) {
             Date now = DateUtil.dateSecond();
-            if (now.getTime() - timestamp.getTime() < TIME_INTERVAL) {
-                if (counter.get() < permitsPerSecond) {
-                    counter.incrementAndGet();
+            if (now.getTime() - TIMESTAMP.getTime() < TIME_INTERVAL) {
+                if (COUNTER.get() < permits) {
+                    COUNTER.incrementAndGet();
                     return true;
                 } else {
                     return false;
                 }
             } else {
-                counter.set(0);
-                timestamp = now;
+                COUNTER.set(0);
+                TIMESTAMP = now;
                 return false;
             }
         }
