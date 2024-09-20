@@ -78,7 +78,15 @@ public class RequestWrapper extends HttpServletRequestWrapper {
 
     public static String getBody(HttpServletRequest request) {
         try {
-            return StreamUtils.copyToString(request.getInputStream(), StandardCharsets.UTF_8);
+            if (request instanceof RequestWrapper) {
+                return StreamUtils.copyToString(request.getInputStream(), StandardCharsets.UTF_8);
+            } else {
+                // 未使用RequestWrapper包装的请求不返回body
+                // 经测试当请求是multipart/form-data类型时，在拦截器中使用
+                // StreamUtils.copyToString(request.getInputStream(), StandardCharsets.UTF_8)获取body数据会返回空字符串
+                // 在filter中StreamUtils.copyToString(request.getInputStream(), StandardCharsets.UTF_8)会获取文件内容
+                return "";
+            }
         } catch (IOException e) {
             return "";
         }
