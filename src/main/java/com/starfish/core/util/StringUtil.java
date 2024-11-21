@@ -322,6 +322,27 @@ public class StringUtil {
     }
 
     /**
+     * 保留字符，第一个字符串中字符，在第二个字符串中出现过就保留，其余字符删除
+     *
+     * @param string 输入
+     * @return 结果
+     */
+    public static String reserve(String string, String chars) {
+        if (string == null) {
+            return null;
+        }
+
+        StringBuilder result = new StringBuilder();
+        for (char c : string.toCharArray()) {
+            if (chars.contains(String.valueOf(c))) {
+                result.append(c);
+            }
+        }
+
+        return result.toString();
+    }
+
+    /**
      * 如果第一个字符串是指定字符串则删除此字符串 如果最后一个字符串是指定字符串则删除此字符串
      *
      * @param string 字符串
