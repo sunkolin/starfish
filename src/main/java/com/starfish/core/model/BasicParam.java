@@ -1,6 +1,7 @@
 package com.starfish.core.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.util.Date;
  * @version 1.0.0
  * @since 2015-06-09
  */
+@Data
 @SuppressWarnings("unused")
 public class BasicParam extends BasicModel implements Serializable {
 
@@ -22,7 +24,7 @@ public class BasicParam extends BasicModel implements Serializable {
     private Integer page;
 
     /**
-     * 偏移量
+     * 偏移量，offset = count * (page - 1);
      */
     private Integer offset;
 
@@ -44,53 +46,5 @@ public class BasicParam extends BasicModel implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date endTime;
-
-    public Integer getOffset() {
-        return offset;
-    }
-
-    public void setOffset(Integer offset) {
-        this.offset = offset;
-    }
-
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
-        setOffset();
-    }
-
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
-
-    public Integer getPage() {
-        return page;
-    }
-
-    public void setPage(Integer page) {
-        this.page = page;
-        setOffset();
-    }
-
-    public void setOffset() {
-        if (count != null && page != null) {
-            offset = count * (page - 1);
-        }
-    }
 
 }
