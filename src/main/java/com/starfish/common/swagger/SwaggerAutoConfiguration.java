@@ -22,7 +22,7 @@ import jakarta.annotation.Resource;
 //@Profile({"dev", "test"})
 //@ConditionalOnProperty(value = {"application.swagger.enabled"}, matchIfMissing = true)
 //@EnableConfigurationProperties({SwaggerProperties.class})
-public class SwaggerAutoConfiguration {
+//public class SwaggerAutoConfiguration {
 
 //    @Resource
 //    private SwaggerProperties swaggerProperties;
@@ -78,4 +78,4 @@ public class SwaggerAutoConfiguration {
 //        return new SwaggerConfigurer(swaggerInterceptor);
 //    }
 
-}
+//}

@@ -2,12 +2,18 @@ package com.starfish.core;
 
 import lombok.Data;
 import org.springframework.beans.BeansException;
+import org.springframework.boot.system.ApplicationHome;
+import org.springframework.boot.system.ApplicationPid;
+import org.springframework.boot.system.ApplicationTemp;
+import org.springframework.boot.system.JavaVersion;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.EnvironmentAware;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.env.Environment;
 
+import java.io.File;
 import java.util.Map;
 
 /**
@@ -21,7 +27,14 @@ import java.util.Map;
  * @since 2019-07-04
  */
 @Data
-public class SpringPlus implements ApplicationContextAware, EnvironmentAware  {
+@Lazy(false)
+public class SpringPlus implements ApplicationContextAware, EnvironmentAware {
+
+    private ApplicationPid applicationPid = new ApplicationPid();
+
+    private ApplicationHome applicationHome = new ApplicationHome();
+
+    private ApplicationTemp applicationTemp = new ApplicationTemp();
 
     /**
      * 通过name获取Bean
@@ -100,16 +113,6 @@ public class SpringPlus implements ApplicationContextAware, EnvironmentAware  {
     }
 
     /**
-     * 获取当前的环境配置，无配置返回null
-     *
-     * @return 当前的环境配置
-     * @since 5.3.3
-     */
-    public static String[] getActiveProfiles() {
-        return SpringConstant.APPLICATION_CONTEXT.getEnvironment().getActiveProfiles();
-    }
-
-    /**
      * 获取当前的环境配置，当有多个环境配置时，只获取第一个
      *
      * @return 当前的环境配置
@@ -118,6 +121,16 @@ public class SpringPlus implements ApplicationContextAware, EnvironmentAware  {
     public static String getActiveProfile() {
         final String[] activeProfiles = getActiveProfiles();
         return activeProfiles.length != 0 ? activeProfiles[0] : null;
+    }
+
+    /**
+     * 获取当前的环境配置，无配置返回null
+     *
+     * @return 当前的环境配置
+     * @since 5.3.3
+     */
+    public static String[] getActiveProfiles() {
+        return SpringConstant.APPLICATION_CONTEXT.getEnvironment().getActiveProfiles();
     }
 
     /**
@@ -147,8 +160,57 @@ public class SpringPlus implements ApplicationContextAware, EnvironmentAware  {
 
     @SuppressWarnings("NullableProblems")
     @Override
-    public  void setEnvironment(Environment environment) {
+    public void setEnvironment(Environment environment) {
         SpringConstant.ENVIRONMENT = environment;
+    }
+
+    /**
+     * 获取当前SpringBoot运行的进程号
+     *
+     * @return 结果
+     */
+    public String getPid() {
+        return applicationPid.toString();
+    }
+
+    /**
+     * 获取程序主目录，例如D:\java\workspace\test-app\target
+     *
+     * @return 结果
+     */
+    public String getApplicationHomeDirectory() {
+        File homeDir = applicationHome.getDir();
+        return homeDir != null ? homeDir.getAbsolutePath() : "";
+    }
+
+    /**
+     * 获取当前运行的jar包路径
+     * IDE中运行输出结果null，打成Jar后运行输出结果D:\java\workspace\test-app\target\test-app-1.0.0.jar
+     *
+     * @return 结果
+     */
+    public String getApplicationHomeSourceDirectory() {
+        File sourceDir = applicationHome.getSource();
+        return sourceDir != null ? sourceDir.getAbsolutePath() : "";
+    }
+
+    /**
+     * 获取临时目录
+     *
+     * @return 结果，例如C:\Users\bob\AppData\Local\Temp\561929B2C764E672DF9DAE26EF121F7E5365
+     */
+    public String getApplicationTempDirectory() {
+        File tempDir = applicationTemp.getDir();
+        return tempDir != null ? tempDir.getAbsolutePath() : "";
+    }
+
+    /**
+     * 获取java版本
+     *
+     * @return 结果，例如17
+     */
+    public String getJavaVersion() {
+        return JavaVersion.getJavaVersion().toString();
     }
 
 }

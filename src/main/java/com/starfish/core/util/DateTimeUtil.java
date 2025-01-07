@@ -26,6 +26,17 @@ public class DateTimeUtil {
     }
 
     /**
+     * 格式化日期时间
+     * @param datetime 日期
+     * @param pattern 格式
+     * @return 结果
+     */
+    public static String format(Date datetime,String pattern) {
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        return format.format(datetime);
+    }
+
+    /**
      * 根据任意日期格式转换成日期对象
      *
      * @param datetime 日期时间字符串

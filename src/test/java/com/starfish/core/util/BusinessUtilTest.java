@@ -1,6 +1,7 @@
 package com.starfish.core.util;
 
 import com.starfish.core.model.weather.WeatherModel;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
  * @version 1.0.0
  * @since 2021-10-13
  */
+@Slf4j
 class BusinessUtilTest {
 
     @Test
@@ -55,7 +57,7 @@ class BusinessUtilTest {
     void getWeatherTest() {
         String cityName = "北京市";
         WeatherModel result = BusinessUtil.getWeather(cityName);
-        System.out.println(JsonUtil.toJson(result));
+        log.info(JsonUtil.toJson(result));
         Assertions.assertNotNull(result);
     }
 

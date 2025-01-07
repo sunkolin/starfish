@@ -4,9 +4,10 @@ import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
-import org.springdoc.core.GroupedOpenApi;
+import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 
 /**
  * Swagger3AutoConfiguration
@@ -16,11 +17,12 @@ import org.springframework.context.annotation.Bean;
  * @version 1.0.0
  * @since 2022-07-12
  */
+@Profile({"dev", "test"})
 @AutoConfiguration
 public class Swagger3AutoConfiguration {
 
     @Bean
-    public OpenAPI openAPI() {
+    public OpenAPI openApi() {
         License license = new License();
         license.setName("OpenAPI 3.1.0");
         license.setUrl("https://github.com/OAI/OpenAPI-Specification/blob/3.1.0/versions/3.1.0.md");

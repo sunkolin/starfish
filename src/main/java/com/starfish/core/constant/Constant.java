@@ -73,7 +73,7 @@ public class Constant {
     /**
      * 请求开始时间
      */
-    public static final String REQUEST_START_TIME = "REQUEST_START_TIME";
+    public static final String REQUEST_START_TIME = "REQUEST-START-TIME";
 
     /**
      * 框架版本

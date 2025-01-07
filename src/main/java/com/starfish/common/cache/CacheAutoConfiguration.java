@@ -28,13 +28,13 @@ import java.util.concurrent.TimeUnit;
 @EnableCaching
 public class CacheAutoConfiguration {
 
-    @Resource
-    private CacheProperties cacheProperties;
-
     /**
      * 默认一小时过期
      */
     public static final long EXPIRE_TIME = 60 * 60L;
+
+    @Resource
+    private CacheProperties cacheProperties;
 
     @Bean(name = "caffeine")
     public Caffeine<Object, Object> newCaffeine() {

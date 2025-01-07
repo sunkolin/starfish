@@ -18,26 +18,9 @@ import jakarta.servlet.http.HttpServletResponse;
 @Slf4j
 public class TraceInterceptor implements HandlerInterceptor, Ordered {
 
-//    private final Tracer sleuthTracer;
-//
-//    @Autowired(required = false)
-//    public TraceInterceptor(Tracer sleuthTracer) {
-//        this.sleuthTracer = sleuthTracer;
-//    }
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
        Trace.setTraceId();
-//        if (sleuthTracer != null) {
-//            try {
-//                // 新的方式获取traceId
-//                sleuthTracer.currentSpan().context().traceId();
-//                // 设置Header
-//                response.setHeader(TRACE_ID_NAME, traceId);
-//            } catch (Exception e) {
-//                log.error("TraceIdInterceptor get trace id error.", e);
-//            }
-//        }
         return true;
     }
 
@@ -53,7 +36,7 @@ public class TraceInterceptor implements HandlerInterceptor, Ordered {
 
     @Override
     public int getOrder() {
-        return 0;
+        return Integer.MIN_VALUE;
     }
 
 }

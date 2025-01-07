@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * ExceptionResolverAutoConfiguration
+ * ExceptionAutoConfiguration
  *
  * @author sunkolin
  * @version 1.0.0
@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(ExceptionProperties.class)
 @ConditionalOnProperty(prefix = "application.exception", name = "enabled", havingValue = "true", matchIfMissing = true)
-//@ComponentScan(basePackages = {"com.starfish"}, excludeFilters = @ComponentScan.Filter(type = FilterType.REGEX, pattern = "com.starfish.extension.trial.*"))
 public class ExceptionAutoConfiguration {
 
     /**
@@ -24,8 +23,8 @@ public class ExceptionAutoConfiguration {
      * @return 结果
      */
     @Bean
-    public GlobalExceptionResolver newExceptionResolver() {
-        return new GlobalExceptionResolver();
+    public DefaultExceptionResolver newExceptionResolver() {
+        return new DefaultExceptionResolver();
     }
 
 }

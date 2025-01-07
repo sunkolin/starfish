@@ -9,3 +9,4 @@ com.starfish.common.trace.TraceAutoConfiguration
 com.starfish.common.swagger.SpringDocAutoConfiguration
 com.starfish.common.cache.CacheAutoConfiguration
 com.starfish.common.task.TaskAutoConfiguration
+com.starfish.common.task.RequestLogAutoConfiguration

@@ -1,6 +1,5 @@
 package com.starfish.core.web;
 
-import com.starfish.common.swagger.SwaggerAutoConfiguration;
 import com.starfish.common.trace.TraceAutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Import;
@@ -12,8 +11,8 @@ import org.springframework.context.annotation.Import;
  * @version 1.0.0
  * @since 2019-07-04
  */
-@Import({TraceAutoConfiguration.class, ElapsedTimeAutoConfiguration.class, SwaggerAutoConfiguration.class})
-@AutoConfiguration(after = {TraceAutoConfiguration.class, ElapsedTimeAutoConfiguration.class, SwaggerAutoConfiguration.class})
+@Import({TraceAutoConfiguration.class, ElapsedTimeAutoConfiguration.class})
+@AutoConfiguration(after = {TraceAutoConfiguration.class, ElapsedTimeAutoConfiguration.class})
 public class WebAutoConfiguration {
 
 //    @Bean

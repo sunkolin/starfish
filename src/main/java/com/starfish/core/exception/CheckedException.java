@@ -18,12 +18,12 @@ public class CheckedException extends Exception implements Serializable {
     /**
      * message
      */
-    public String message = "";
+    public String message;
 
     /**
      * description
      */
-    public String description = "";
+    public String description;
 
     public CheckedException() {
 

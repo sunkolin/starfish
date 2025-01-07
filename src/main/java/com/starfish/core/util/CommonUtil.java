@@ -1,11 +1,11 @@
 package com.starfish.core.util;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Strings;
 import com.starfish.core.enumeration.ResultEnum;
 import com.starfish.core.exception.CustomException;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.util.Strings;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;

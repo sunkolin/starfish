@@ -1,10 +1,7 @@
 package com.starfish.core.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonView;
-import com.starfish.core.model.jsonview.DefaultJsonView;
-import com.starfish.core.model.jsonview.ExtJsonView;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -24,13 +21,11 @@ public class BasicModel implements Serializable {
     /**
      * 创建人
      */
-    @JsonView(DefaultJsonView.class)
     private String creator;
 
     /**
      * 创建时间
      */
-    @JsonView(DefaultJsonView.class)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
@@ -38,13 +33,11 @@ public class BasicModel implements Serializable {
     /**
      * 最后修改人
      */
-    @JsonView(DefaultJsonView.class)
     private String modifier;
 
     /**
      * 最后修改时间
      */
-    @JsonView(DefaultJsonView.class)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date modifyTime;
@@ -52,7 +45,6 @@ public class BasicModel implements Serializable {
     /**
      * 删除状态
      */
-    @JsonView(ExtJsonView.class)
-    private String deleteStatus;
+    private Integer deleteStatus;
 
 }

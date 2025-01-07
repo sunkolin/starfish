@@ -24,7 +24,7 @@ public class Trace {
     public static void setTraceId() {
         String traceId = MDC.get(TRACE_ID_NAME);
         // 如果当前没有traceId，则设置
-        if (traceId == null || traceId.length() <= 0) {
+        if (traceId == null || traceId.isEmpty()) {
             traceId = StringUtil.random(16);
             MDC.put(TRACE_ID_NAME, traceId);
         }

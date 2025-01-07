@@ -9,6 +9,7 @@
 *.rar
 *.iml
 .idea
+.tmp
 *.tar.gz
 /target/*
 hs_err_pid*

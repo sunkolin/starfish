@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * BeanTool
+ * BeanUtil
  *
  * @author sunkolin
  * @version 1.0.0
@@ -69,6 +69,7 @@ public class BeanUtil {
             }
 
         }
+
         //取得父类的字段
         Class<?> superClass = clazz.getSuperclass();
         getClass(superClass, map, obj);

@@ -21,7 +21,7 @@ public class SystemUtil {
      */
     private static final String WINDOWS_SYSTEM_NAME_KEYWORDS = "windows";
 
-    private SystemUtil(){
+    private SystemUtil() {
         // constructor
     }
 
@@ -55,7 +55,7 @@ public class SystemUtil {
      *
      * @return 临时路径字符串
      */
-    public static String getTmpPath() {
+    public static String getTemporaryPath() {
         return getBasePathPrefix() + File.separator + "tmp" + File.separator;
     }
 

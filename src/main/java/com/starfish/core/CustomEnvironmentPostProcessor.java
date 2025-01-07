@@ -24,8 +24,6 @@ import java.util.List;
  */
 public class CustomEnvironmentPostProcessor implements EnvironmentPostProcessor, Ordered {
 
-    private static final Integer POST_PROCESSOR_ORDER = Integer.MIN_VALUE + 10;
-
     @SuppressWarnings("unused")
     private static final YamlPropertySourceLoader YAML_LOADER = new YamlPropertySourceLoader();
 
@@ -38,12 +36,14 @@ public class CustomEnvironmentPostProcessor implements EnvironmentPostProcessor,
         Resource resource = new ClassPathResource("/application-starfish.properties");
         List<PropertySource<?>> propertySourceList = PROPERTIES_LOADER.load("starfish", resource);
         PropertySource<?> propertySource = propertySourceList.get(0);
+
+        // 最低优先级
         environment.getPropertySources().addLast(propertySource);
     }
 
     @Override
     public int getOrder() {
-        return POST_PROCESSOR_ORDER + 1;
+        return Integer.MIN_VALUE + 100;
     }
 
 }

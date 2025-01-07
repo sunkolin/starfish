@@ -1,33 +1,33 @@
 package com.starfish.core.util;
 
-import com.dtflys.forest.Forest;
-import com.dtflys.forest.http.ForestHeaderMap;
+import cn.hutool.http.HttpUtil;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableMap;
 import com.starfish.core.enumeration.ResultEnum;
 import com.starfish.core.exception.CustomException;
 import com.starfish.core.model.Result;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.util.Lists;
+import com.google.common.collect.Lists;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.util.StreamUtils;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.HtmlUtils;
 import org.springframework.web.util.JavaScriptUtils;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * WebUtil
@@ -61,19 +61,38 @@ public class WebUtil extends HtmlUtils {
 
     public static final String WSS_URL_PREFIX = "wss";
 
-    private static final Map<String, String> STREAM_TYPE = new HashMap<>();
+    private static final Map<String, String> CONTENT_TYPE = new HashMap<>();
 
     /**
      * 多媒体内容的ContentType
      */
     private static final List<String> MEDIA_CONTENT_TYPE_LIST = Lists.newArrayList("application/x-mpegURL", "application/octet-stream", "video", "audio");
 
+    private static final RestTemplate REST_TEMPLATE = new RestTemplate();
+
     static {
-        initStreamType();
+        initContentType();
     }
 
     private WebUtil() {
         // constructor
+    }
+
+    /**
+     * 初始化content type
+     */
+    private static void initContentType() {
+        List<String> contentTypeList = new ArrayList<>();
+        try {
+            contentTypeList = FileUtil.readLines("classpath:application-content-type.txt");
+        } catch (Exception e) {
+            log.error("init content yype error", e);
+        }
+
+        for (String contentType : contentTypeList) {
+            String[] array = contentType.split("=");
+            CONTENT_TYPE.put(array[0], array[1]);
+        }
     }
 
     /**
@@ -131,8 +150,8 @@ public class WebUtil extends HtmlUtils {
     /**
      * 获取基础url
      *
-     * @param url 链接地址，例如https://m.gmw.cn/baijia/2021-03/11/1302158793.html?a=1&b=2&c=12#34
-     * @return 结果，例如https://m.gmw.cn:80
+     * @param url 链接地址，例如<a href="https://m.gmw.cn/baijia/2021-03/11/1302158793.html?a=1&b=2&c=12#34">https://m.gmw.cn/baijia/2021-03/11/1302158793.html?a=1&b=2&c=12#34</a>
+     * @return 结果，例如<a href="https://m.gmw.cn:80">https://m.gmw.cn:80</a>
      */
     public static String getBaseUrl(String url) {
         String scheme = getScheme(url);
@@ -199,10 +218,9 @@ public class WebUtil extends HtmlUtils {
 
         // 判断是否可以访问
         try {
-            ForestHeaderMap forestHeaderMap = ForestUtil.head(url);
-            String contentType = forestHeaderMap.getValue("Content-Type");
+            HttpHeaders httpHeaders = REST_TEMPLATE.headForHeaders(url);
+            String contentType = httpHeaders.getFirst("Content-Type");
             log.info("get media contentType,url={},contentType={}", url, contentType);
-
             // 如果没有Content-Type，返回false
             if (!Strings.isNullOrEmpty(contentType)) {
                 for (String mediaContentType : MEDIA_CONTENT_TYPE_LIST) {
@@ -219,8 +237,14 @@ public class WebUtil extends HtmlUtils {
         return result;
     }
 
-    public static String getContentType(String ext) {
-        return STREAM_TYPE.getOrDefault(ext.toLowerCase(), "application/octet-stream");
+    /**
+     * 获取content type
+     *
+     * @param extension 拓展名,例如.png
+     * @return 结果
+     */
+    public static String getContentType(String extension) {
+        return CONTENT_TYPE.getOrDefault(extension.toLowerCase(), "application/octet-stream");
     }
 
     /**
@@ -229,6 +253,7 @@ public class WebUtil extends HtmlUtils {
      * @param url      资源地址
      * @param filePath 文件路径，文件下载后存在本地磁盘上的全路径，包括文件名和类型
      */
+    @Deprecated
     public static void download(String url, String filePath) {
         //判断文件和目录是否存在，不存在则创建
         File file = new File(filePath);
@@ -339,7 +364,7 @@ public class WebUtil extends HtmlUtils {
     }
 
     /**
-     * get the location,use taobao interface default
+     * get the location,use tao bao interface default
      *
      * @param ip ip
      * @return the location
@@ -348,9 +373,9 @@ public class WebUtil extends HtmlUtils {
         String result;
         try {
             //call remote interface
-            Map<String, Object> params = ImmutableMap.of("ip", ip);
-            String json = Forest.get(TAOBAO_INTERFACE_URL).addQuery(params).executeAsString();
-
+            Map<String, String> params = Map.of("ip", ip);
+            ResponseEntity<String> responseEntity = RestTemplatePlus.form(TAOBAO_INTERFACE_URL, HttpMethod.GET, null, params, null, String.class);
+            String json = responseEntity.getBody();
             GetIpAddressResult getIpAddressResult = JsonUtil.toObject(json, GetIpAddressResult.class);
             GetIpAddressData data = getIpAddressResult.getData();
 
@@ -448,17 +473,6 @@ public class WebUtil extends HtmlUtils {
     }
 
     /**
-     * 初始化stream type
-     */
-    private static void initStreamType() {
-        List<String> contentTypeList = FileUtil.readLines("classpath:application-content-type.txt");
-        for (String contentType : contentTypeList) {
-            String[] array = contentType.split("=");
-            STREAM_TYPE.put(array[0], array[1]);
-        }
-    }
-
-    /**
      * 获取Body
      *
      * @param request 请求
@@ -500,6 +514,16 @@ public class WebUtil extends HtmlUtils {
             log.error("getBody exception.");
         }
         return body;
+    }
+
+    /**
+     * 下载远程文件
+     *
+     * @param url  请求的url
+     * @param dest 目标文件或目录，当为目录时，取URL中的文件名，取不到使用编码后的URL做为文件名
+     */
+    public static void downloadFile(String url, String dest) {
+         HttpUtil.downloadFile(url, cn.hutool.core.io.FileUtil.file(dest));
     }
 
 }

@@ -2,12 +2,15 @@ package com.starfish.core.util;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdcardUtil;
-import com.dtflys.forest.Forest;
 import com.google.common.base.Strings;
 import com.starfish.core.constant.Constant;
+import com.starfish.core.exception.CustomException;
 import com.starfish.core.model.weather.WeatherModel;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +39,11 @@ public class BusinessUtil {
     private static final List<String> SENSITIVE_WORD_LIST;
 
     static {
-        SENSITIVE_WORD_LIST = FileUtil.readLines("classpath:words.txt");
+        try {
+            SENSITIVE_WORD_LIST = FileUtil.readLines("classpath:words.txt");
+        } catch (IOException e) {
+            throw new CustomException(e);
+        }
     }
 
     /**
@@ -103,9 +110,9 @@ public class BusinessUtil {
      * @return 结果
      */
     public static WeatherModel getWeather(String cityName) {
-        Map<String, Object> params = Map.of("city", cityName);
-        String json = Forest.get(GET_WEATHER_BY_CITY_NAME_URL).addQuery(params).executeAsString();
-        return JsonUtil.toObject(json, WeatherModel.class);
+        Map<String, String> params = Map.of("city", cityName);
+        ResponseEntity<WeatherModel> responseEntity = RestTemplatePlus.exchange(GET_WEATHER_BY_CITY_NAME_URL, HttpMethod.GET, null, params, null, WeatherModel.class);
+        return responseEntity.getBody();
     }
 
 }
