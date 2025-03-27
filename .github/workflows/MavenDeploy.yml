@@ -38,13 +38,11 @@ jobs:
         run: mvn --batch-mode --update-snapshots package -Dmaven.test.skip=true
 
 #      - name: Install
-#        env:
-#          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 #        run: mvn --batch-mode --update-snapshots install -Dmaven.test.skip=true
 
       - name: Deploy
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+#        env:
+#          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         run: mvn --batch-mode --update-snapshots deploy -Dmaven.test.skip=true
 
 #  - name: Build With Maven
