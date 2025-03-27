@@ -3,7 +3,9 @@ name: MavenDeploy
 on:
   push:
     branches:
-      - "1.0.0"
+      - "main"
+      - "dev"
+      - "*"
 #  schedule:
 #    - cron: '0 2 * * *'
 
@@ -26,19 +28,24 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: "11"
-          distribution: "adopt"
+          java-version: "17"
+          distribution: "temurin"
           cache: maven
 
-      - name: Install
+      - name: Package
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        run: mvn --batch-mode --update-snapshots clean install -Dmaven.test.skip=true
+        run: mvn --batch-mode --update-snapshots package -Dmaven.test.skip=true
+
+#      - name: Install
+#        env:
+#          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+#        run: mvn --batch-mode --update-snapshots install -Dmaven.test.skip=true
 
       - name: Deploy
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        run: mvn --batch-mode --update-snapshots clean deploy -Dmaven.test.skip=true
+        run: mvn --batch-mode --update-snapshots deploy -Dmaven.test.skip=true
 
 #  - name: Build With Maven
 #      run: mvn --batch-mode --update-snapshots clean package -Dmaven.test.skip=true
