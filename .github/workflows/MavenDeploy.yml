@@ -5,6 +5,7 @@ on:
     branches:
       - "main"
       - "dev"
+      - "*"
 #  schedule:
 #    - cron: '0 2 * * *'
 
