@@ -3,9 +3,9 @@ name: MavenDeploy
 on:
   push:
     branches:
-      - "2020.*.*"
-      - "2021.*.*"
-      - "2022.*.*"
+      - "main"
+      - "1.0.0"
+      - "2.0.0"
 #  schedule:
 #    - cron: '0 2 * * *'
 
