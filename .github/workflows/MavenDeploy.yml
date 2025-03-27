@@ -32,15 +32,20 @@ jobs:
           distribution: "temurin"
           cache: maven
 
-      - name: Install
+      - name: Package
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        run: mvn --batch-mode --update-snapshots clean install -Dmaven.test.skip=true
+        run: mvn --batch-mode --update-snapshots package -Dmaven.test.skip=true
+
+#      - name: Install
+#        env:
+#          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+#        run: mvn --batch-mode --update-snapshots install -Dmaven.test.skip=true
 
       - name: Deploy
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        run: mvn --batch-mode --update-snapshots clean deploy -Dmaven.test.skip=true
+        run: mvn --batch-mode --update-snapshots deploy -Dmaven.test.skip=true
 
 #  - name: Build With Maven
 #      run: mvn --batch-mode --update-snapshots clean package -Dmaven.test.skip=true
