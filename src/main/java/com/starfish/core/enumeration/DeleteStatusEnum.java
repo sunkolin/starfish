@@ -33,7 +33,7 @@ public enum DeleteStatusEnum {
     private final String name;
 
     /**
-     * 中文描述
+     * 描述
      */
     private final String message;
 

@@ -1,7 +1,7 @@
 package com.starfish.core.enumeration;
 
 /**
- * 开关枚举
+ * SwitchEnum
  *
  * @author sunkolin
  * @version 1.0.0
@@ -13,46 +13,39 @@ public enum SwitchEnum {
     /**
      * 开
      */
-    ON(1, "on", "开", "开"),
+    ON(1, "on", "开"),
 
     /**
      * 关
      */
-    OFF(2, "off", "关", "关"),
+    OFF(2, "off", "关"),
 
     ;
 
     /**
-     * 数字编码
+     * 编码
      */
     private final Integer code;
 
     /**
-     * 英文编码
-     */
-    private final String englishCode;
-
-    /**
-     * 中文名称
+     * 名称
      */
     private final String name;
 
     /**
-     * 中文描述
+     * 描述
      */
     private final String message;
 
     /**
-     * EnableStatusEnum
+     * SwitchEnum
      *
-     * @param code        code
-     * @param englishCode englishCode
-     * @param name        name
-     * @param message     message
+     * @param code    code
+     * @param name    name
+     * @param message message
      */
-    SwitchEnum(Integer code, String englishCode, String name, String message) {
+    SwitchEnum(Integer code, String name, String message) {
         this.code = code;
-        this.englishCode = englishCode;
         this.name = name;
         this.message = message;
     }
@@ -64,15 +57,6 @@ public enum SwitchEnum {
      */
     public Integer getCode() {
         return this.code;
-    }
-
-    /**
-     * get english code
-     *
-     * @return englishCode
-     */
-    public String getEnglishCode() {
-        return this.englishCode;
     }
 
     /**
@@ -114,14 +98,14 @@ public enum SwitchEnum {
     /**
      * get the enum by name
      *
-     * @param englishCode englishCode
+     * @param name name
      * @return the enum
      */
-    public static SwitchEnum get(String englishCode) {
+    public static SwitchEnum get(String name) {
         SwitchEnum[] values = SwitchEnum.values();
         SwitchEnum v = null;
         for (SwitchEnum value : values) {
-            if (value.getEnglishCode().equalsIgnoreCase(englishCode)) {
+            if (value.getName().equalsIgnoreCase(name)) {
                 v = value;
                 break;
             }
@@ -130,7 +114,7 @@ public enum SwitchEnum {
     }
 
     /**
-     * verify the code exist exist or not exist
+     * verify the code exist or not exist
      *
      * @param code code
      * @return result
@@ -140,13 +124,13 @@ public enum SwitchEnum {
     }
 
     /**
-     * verify the english code exist or not exist
+     * verify the name exist or not exist
      *
-     * @param englishCode english code
+     * @param name name
      * @return result
      */
-    public static boolean exist(String englishCode) {
-        return get(englishCode) != null;
+    public static boolean exist(String name) {
+        return get(name) != null;
     }
 
 }

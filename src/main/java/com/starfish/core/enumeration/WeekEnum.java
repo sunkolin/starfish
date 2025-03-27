@@ -1,7 +1,7 @@
 package com.starfish.core.enumeration;
 
 /**
- * 星期枚举
+ * WeekEnum
  *
  * @author sunkolin
  * @version 1.0.0
@@ -11,55 +11,66 @@ package com.starfish.core.enumeration;
 public enum WeekEnum {
 
     /**
-     * 周一
+     * 星期一
      */
-    MONDAY(1, "monday", "周一", "周一"),
+    MONDAY(1, "monday", "星期一"),
 
-    TUESDAY(2, "tuesday", "周二", "周二"),
+    /**
+     * 星期二
+     */
+    TUESDAY(2, "tuesday",  "星期二"),
 
-    WEDNESDAY(3, "wednesday", "周三", "周三"),
+    /**
+     * 星期三
+     */
+    WEDNESDAY(3, "wednesday",  "星期三"),
 
-    THURSDAY(4, "thursday", "周四", "周四"),
+    /**
+     * 星期四
+     */
+    THURSDAY(4, "thursday",  "星期四"),
 
-    FRIDAY(5, "friday", "周五", "周五"),
+    /**
+     * 星期五
+     */
+    FRIDAY(5, "friday",  "星期五"),
 
-    SATURDAY(6, "saturday", "周六", "周六"),
+    /**
+     * 星期六
+     */
+    SATURDAY(6, "saturday",  "星期六"),
 
-    SUNDAY(7, "sunday", "周日", "周日"),
+    /**
+     * 星期日
+     */
+    SUNDAY(7, "sunday", "星期日"),
 
     ;
 
     /**
-     * 数字编码
+     * 编码
      */
     private final Integer code;
 
     /**
-     * 英文编码
-     */
-    private final String englishCode;
-
-    /**
-     * 中文名称
+     * 名称
      */
     private final String name;
 
     /**
-     * 中文描述
+     * 描述
      */
     private final String message;
 
     /**
      * WeekEnum
      *
-     * @param code        code
-     * @param englishCode englishCode
-     * @param name        name
-     * @param message     message
+     * @param code    code
+     * @param name    name
+     * @param message message
      */
-    WeekEnum(Integer code, String englishCode, String name, String message) {
+    WeekEnum(Integer code, String name, String message) {
         this.code = code;
-        this.englishCode = englishCode;
         this.name = name;
         this.message = message;
     }
@@ -71,15 +82,6 @@ public enum WeekEnum {
      */
     public Integer getCode() {
         return this.code;
-    }
-
-    /**
-     * get english code
-     *
-     * @return englishCode
-     */
-    public String getEnglishCode() {
-        return this.englishCode;
     }
 
     /**
@@ -121,14 +123,14 @@ public enum WeekEnum {
     /**
      * get the enum by name
      *
-     * @param englishCode englishCode
+     * @param name name
      * @return the enum
      */
-    public static WeekEnum get(String englishCode) {
+    public static WeekEnum get(String name) {
         WeekEnum[] values = WeekEnum.values();
         WeekEnum v = null;
         for (WeekEnum value : values) {
-            if (value.getEnglishCode().equalsIgnoreCase(englishCode)) {
+            if (value.getName().equalsIgnoreCase(name)) {
                 v = value;
                 break;
             }
@@ -147,13 +149,13 @@ public enum WeekEnum {
     }
 
     /**
-     * verify the english code exist or not exist
+     * verify the name exist or not exist
      *
-     * @param englishCode english code
+     * @param name name
      * @return result
      */
-    public static boolean exist(String englishCode) {
-        return get(englishCode) != null;
+    public static boolean exist(String name) {
+        return get(name) != null;
     }
 
 }

@@ -1,7 +1,7 @@
 package com.starfish.core.enumeration;
 
 /**
- * 角色枚举
+ * RoleEnum
  *
  * @author sunkolin
  * @version 1.0.0
@@ -13,51 +13,44 @@ public enum RoleEnum {
     /**
      * 游客
      */
-    GUEST(1, "guest", "游客", "游客"),
+    GUEST(1, "guest", "游客"),
 
     /**
      * 普通
      */
-    USER(2, "user", "普通用户", "普通用户"),
+    USER(2, "user", "普通用户"),
 
     /**
      * 管理
      */
-    ADMIN(3, "admin", "管理员", "管理员"),
+    ADMIN(3, "admin", "管理员"),
 
     ;
 
     /**
-     * 数字编码
+     * 编码
      */
     private final Integer code;
 
     /**
-     * 英文编码
-     */
-    private final String englishCode;
-
-    /**
-     * 中文名称
+     * 名称
      */
     private final String name;
 
     /**
-     * 中文描述
+     * 描述
      */
     private final String message;
 
     /**
      * RoleEnum
      *
-     * @param code        code
-     * @param englishCode englishCode
-     * @param name        name
-     * @param message     message
+     * @param code    code
+     * @param name    name
+     * @param message message
      */
-    RoleEnum(Integer code, String englishCode, String name, String message) {
+    RoleEnum(Integer code, String name, String message) {
         this.code = code;
-        this.englishCode = englishCode;
         this.name = name;
         this.message = message;
     }
@@ -69,15 +62,6 @@ public enum RoleEnum {
      */
     public Integer getCode() {
         return this.code;
-    }
-
-    /**
-     * get english code
-     *
-     * @return englishCode
-     */
-    public String getEnglishCode() {
-        return this.englishCode;
     }
 
     /**
@@ -119,14 +103,14 @@ public enum RoleEnum {
     /**
      * get the enum by name
      *
-     * @param englishCode englishCode
+     * @param name name
      * @return the enum
      */
-    public static RoleEnum get(String englishCode) {
+    public static RoleEnum get(String name) {
         RoleEnum[] values = RoleEnum.values();
         RoleEnum v = null;
         for (RoleEnum value : values) {
-            if (value.getEnglishCode().equalsIgnoreCase(englishCode)) {
+            if (value.getName().equalsIgnoreCase(name)) {
                 v = value;
                 break;
             }
@@ -145,13 +129,13 @@ public enum RoleEnum {
     }
 
     /**
-     * verify the english code exist or not exist
+     * verify the name exist or not exist
      *
-     * @param englishCode english code
+     * @param name name
      * @return result
      */
-    public static boolean exist(String englishCode) {
-        return get(englishCode) != null;
+    public static boolean exist(String name) {
+        return get(name) != null;
     }
 
 }

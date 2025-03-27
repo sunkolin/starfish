@@ -1,7 +1,7 @@
 package com.starfish.core.enumeration;
 
 /**
- * 季节枚举
+ * SeasonEnum
  *
  * @author sunkolin
  * @version 1.0.0
@@ -13,56 +13,49 @@ public enum SeasonEnum {
     /**
      * 春
      */
-    SPRING(1, "spring", "春", "春季"),
+    SPRING(1, "spring", "春"),
 
     /**
      * 夏
      */
-    SUMMER(2, "summer", "夏", "夏季"),
+    SUMMER(2, "summer", "夏"),
 
     /**
      * 秋
      */
-    AUTUMN(3, "autumn", "秋", "秋季"),
+    AUTUMN(3, "autumn", "秋"),
 
     /**
      * 冬
      */
-    WINTER(4, "winter", "冬", "冬季"),
+    WINTER(4, "winter", "冬"),
 
     ;
 
     /**
-     * 数字编码
+     * 编码
      */
     private final Integer code;
 
     /**
-     * 英文编码
-     */
-    private final String englishCode;
-
-    /**
-     * 中文名称
+     * 名称
      */
     private final String name;
 
     /**
-     * 中文描述
+     * 描述
      */
     private final String message;
 
     /**
-     * WeekEnum
+     * SeasonEnum
      *
-     * @param code        code
-     * @param englishCode englishCode
-     * @param name        name
-     * @param message     message
+     * @param code    code
+     * @param name    name
+     * @param message message
      */
-    SeasonEnum(Integer code, String englishCode, String name, String message) {
+    SeasonEnum(Integer code, String name, String message) {
         this.code = code;
-        this.englishCode = englishCode;
         this.name = name;
         this.message = message;
     }
@@ -74,15 +67,6 @@ public enum SeasonEnum {
      */
     public Integer getCode() {
         return this.code;
-    }
-
-    /**
-     * get english code
-     *
-     * @return englishCode
-     */
-    public String getEnglishCode() {
-        return this.englishCode;
     }
 
     /**
@@ -124,14 +108,14 @@ public enum SeasonEnum {
     /**
      * get the enum by name
      *
-     * @param englishCode englishCode
+     * @param name name
      * @return the enum
      */
-    public static SeasonEnum get(String englishCode) {
+    public static SeasonEnum get(String name) {
         SeasonEnum[] values = SeasonEnum.values();
         SeasonEnum v = null;
         for (SeasonEnum value : values) {
-            if (value.getEnglishCode().equalsIgnoreCase(englishCode)) {
+            if (value.getName().equalsIgnoreCase(name)) {
                 v = value;
                 break;
             }
@@ -150,13 +134,13 @@ public enum SeasonEnum {
     }
 
     /**
-     * verify the english code exist or not exist
+     * verify the name exist or not exist
      *
-     * @param englishCode english code
+     * @param name name
      * @return result
      */
-    public static boolean exist(String englishCode) {
-        return get(englishCode) != null;
+    public static boolean exist(String name) {
+        return get(name) != null;
     }
 
 }

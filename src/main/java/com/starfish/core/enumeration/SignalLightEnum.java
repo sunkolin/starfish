@@ -1,7 +1,7 @@
 package com.starfish.core.enumeration;
 
 /**
- * 信号灯颜色枚举
+ * SignalLightEnum
  *
  * @author sunkolin
  * @version 1.0.0
@@ -13,51 +13,44 @@ public enum SignalLightEnum {
     /**
      * 红
      */
-    RED(1, "red", "红灯", "红灯"),
+    RED(1, "red", "红灯"),
 
     /**
      * 绿
      */
-    GREEN(2, "green", "绿灯", "绿灯"),
+    GREEN(2, "green", "绿灯"),
 
     /**
      * 黄
      */
-    YELLOW(3, "yellow", "黄灯", "黄灯"),
+    YELLOW(3, "yellow", "黄灯"),
 
     ;
 
     /**
-     * 数字编码
+     * 编码
      */
     private final Integer code;
 
     /**
-     * 英文编码
-     */
-    private final String englishCode;
-
-    /**
-     * 中文名称
+     * 名称
      */
     private final String name;
 
     /**
-     * 中文描述
+     * 描述
      */
     private final String message;
 
     /**
-     * WeekEnum
+     * SignalLightEnum
      *
-     * @param code        code
-     * @param englishCode englishCode
-     * @param name        name
-     * @param message     message
+     * @param code    code
+     * @param name    name
+     * @param message message
      */
-    SignalLightEnum(Integer code, String englishCode, String name, String message) {
+    SignalLightEnum(Integer code, String name, String message) {
         this.code = code;
-        this.englishCode = englishCode;
         this.name = name;
         this.message = message;
     }
@@ -69,15 +62,6 @@ public enum SignalLightEnum {
      */
     public Integer getCode() {
         return this.code;
-    }
-
-    /**
-     * get english code
-     *
-     * @return englishCode
-     */
-    public String getEnglishCode() {
-        return this.englishCode;
     }
 
     /**
@@ -119,14 +103,14 @@ public enum SignalLightEnum {
     /**
      * get the enum by name
      *
-     * @param englishCode englishCode
+     * @param name name
      * @return the enum
      */
-    public static SignalLightEnum get(String englishCode) {
+    public static SignalLightEnum get(String name) {
         SignalLightEnum[] values = SignalLightEnum.values();
         SignalLightEnum v = null;
         for (SignalLightEnum value : values) {
-            if (value.getEnglishCode().equalsIgnoreCase(englishCode)) {
+            if (value.getName().equalsIgnoreCase(name)) {
                 v = value;
                 break;
             }
@@ -145,13 +129,13 @@ public enum SignalLightEnum {
     }
 
     /**
-     * verify the english code exist or not exist
+     * verify the name exist or not exist
      *
-     * @param englishCode english code
+     * @param name name
      * @return result
      */
-    public static boolean exist(String englishCode) {
-        return get(englishCode) != null;
+    public static boolean exist(String name) {
+        return get(name) != null;
     }
 
 }
