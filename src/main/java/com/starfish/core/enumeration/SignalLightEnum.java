@@ -1,24 +1,29 @@
 package com.starfish.core.enumeration;
 
 /**
- * 状态枚举
+ * 信号灯颜色枚举
  *
  * @author sunkolin
  * @version 1.0.0
  * @since 2014-07-07
  */
 @SuppressWarnings("unused")
-public enum StatusEnum {
+public enum SignalLightEnum {
 
     /**
-     * 是
+     * 红
      */
-    YES(1, "yes", "是", "是"),
+    RED(1, "red", "红灯", "红灯"),
 
     /**
-     * 否
+     * 绿
      */
-    NO(2, "no", "是", "否"),
+    GREEN(2, "green", "绿灯", "绿灯"),
+
+    /**
+     * 黄
+     */
+    YELLOW(3, "yellow", "黄灯", "黄灯"),
 
     ;
 
@@ -43,14 +48,14 @@ public enum StatusEnum {
     private final String message;
 
     /**
-     * StatusEnum
+     * WeekEnum
      *
      * @param code        code
      * @param englishCode englishCode
      * @param name        name
      * @param message     message
      */
-    StatusEnum(Integer code, String englishCode, String name, String message) {
+    SignalLightEnum(Integer code, String englishCode, String name, String message) {
         this.code = code;
         this.englishCode = englishCode;
         this.name = name;
@@ -99,10 +104,10 @@ public enum StatusEnum {
      * @param code code
      * @return the enum
      */
-    public static StatusEnum get(Integer code) {
-        StatusEnum[] values = StatusEnum.values();
-        StatusEnum v = null;
-        for (StatusEnum value : values) {
+    public static SignalLightEnum get(Integer code) {
+        SignalLightEnum[] values = SignalLightEnum.values();
+        SignalLightEnum v = null;
+        for (SignalLightEnum value : values) {
             if (value.getCode().equals(code)) {
                 v = value;
                 break;
@@ -117,10 +122,10 @@ public enum StatusEnum {
      * @param englishCode englishCode
      * @return the enum
      */
-    public static StatusEnum get(String englishCode) {
-        StatusEnum[] values = StatusEnum.values();
-        StatusEnum v = null;
-        for (StatusEnum value : values) {
+    public static SignalLightEnum get(String englishCode) {
+        SignalLightEnum[] values = SignalLightEnum.values();
+        SignalLightEnum v = null;
+        for (SignalLightEnum value : values) {
             if (value.getEnglishCode().equalsIgnoreCase(englishCode)) {
                 v = value;
                 break;

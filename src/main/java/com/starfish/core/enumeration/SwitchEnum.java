@@ -1,24 +1,24 @@
 package com.starfish.core.enumeration;
 
 /**
- * 状态枚举
+ * 开关枚举
  *
  * @author sunkolin
  * @version 1.0.0
  * @since 2014-07-07
  */
 @SuppressWarnings("unused")
-public enum StatusEnum {
+public enum SwitchEnum {
 
     /**
-     * 是
+     * 开
      */
-    YES(1, "yes", "是", "是"),
+    ON(1, "on", "开", "开"),
 
     /**
-     * 否
+     * 关
      */
-    NO(2, "no", "是", "否"),
+    OFF(2, "off", "关", "关"),
 
     ;
 
@@ -43,14 +43,14 @@ public enum StatusEnum {
     private final String message;
 
     /**
-     * StatusEnum
+     * EnableStatusEnum
      *
      * @param code        code
      * @param englishCode englishCode
      * @param name        name
      * @param message     message
      */
-    StatusEnum(Integer code, String englishCode, String name, String message) {
+    SwitchEnum(Integer code, String englishCode, String name, String message) {
         this.code = code;
         this.englishCode = englishCode;
         this.name = name;
@@ -99,10 +99,10 @@ public enum StatusEnum {
      * @param code code
      * @return the enum
      */
-    public static StatusEnum get(Integer code) {
-        StatusEnum[] values = StatusEnum.values();
-        StatusEnum v = null;
-        for (StatusEnum value : values) {
+    public static SwitchEnum get(Integer code) {
+        SwitchEnum[] values = SwitchEnum.values();
+        SwitchEnum v = null;
+        for (SwitchEnum value : values) {
             if (value.getCode().equals(code)) {
                 v = value;
                 break;
@@ -117,10 +117,10 @@ public enum StatusEnum {
      * @param englishCode englishCode
      * @return the enum
      */
-    public static StatusEnum get(String englishCode) {
-        StatusEnum[] values = StatusEnum.values();
-        StatusEnum v = null;
-        for (StatusEnum value : values) {
+    public static SwitchEnum get(String englishCode) {
+        SwitchEnum[] values = SwitchEnum.values();
+        SwitchEnum v = null;
+        for (SwitchEnum value : values) {
             if (value.getEnglishCode().equalsIgnoreCase(englishCode)) {
                 v = value;
                 break;
@@ -130,7 +130,7 @@ public enum StatusEnum {
     }
 
     /**
-     * verify the code exist or not exist
+     * verify the code exist exist or not exist
      *
      * @param code code
      * @return result

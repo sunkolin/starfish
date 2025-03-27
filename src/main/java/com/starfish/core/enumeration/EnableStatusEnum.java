@@ -130,7 +130,7 @@ public enum EnableStatusEnum {
     }
 
     /**
-     * verify the code exist exist or not exist
+     * verify the code exist or not exist
      *
      * @param code code
      * @return result
