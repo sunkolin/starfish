@@ -13,46 +13,39 @@ public enum DeleteStatusEnum {
     /**
      * 已删除
      */
-    DELETE(1, "delete", "已删除", "已删除"),
+    DELETE(1, "delete", "已删除"),
 
     /**
      * 未删除
      */
-    NOT_DELETE(2, "not_delete", "未删除", "未删除"),
+    NOT_DELETE(2, "not_delete", "未删除"),
 
     ;
 
     /**
-     * 数字编码
+     * 编码
      */
     private final Integer code;
 
     /**
-     * 英文编码
-     */
-    private final String englishCode;
-
-    /**
-     * 中文名称
+     * 名称
      */
     private final String name;
 
     /**
-     * 中文描述
+     * 描述
      */
     private final String message;
 
     /**
      * DeleteStatusEnum
      *
-     * @param code        code
-     * @param englishCode englishCode
-     * @param name        name
-     * @param message     message
+     * @param code    code
+     * @param name    name
+     * @param message message
      */
-    DeleteStatusEnum(Integer code, String englishCode, String name, String message) {
+    DeleteStatusEnum(Integer code, String name, String message) {
         this.code = code;
-        this.englishCode = englishCode;
         this.name = name;
         this.message = message;
     }
@@ -64,15 +57,6 @@ public enum DeleteStatusEnum {
      */
     public Integer getCode() {
         return this.code;
-    }
-
-    /**
-     * get english code
-     *
-     * @return englishCode
-     */
-    public String getEnglishCode() {
-        return this.englishCode;
     }
 
     /**
@@ -114,14 +98,14 @@ public enum DeleteStatusEnum {
     /**
      * get the enum by name
      *
-     * @param englishCode englishCode
+     * @param name name
      * @return the enum
      */
-    public static DeleteStatusEnum get(String englishCode) {
+    public static DeleteStatusEnum get(String name) {
         DeleteStatusEnum[] values = DeleteStatusEnum.values();
         DeleteStatusEnum v = null;
         for (DeleteStatusEnum value : values) {
-            if (value.getEnglishCode().equalsIgnoreCase(englishCode)) {
+            if (value.getName().equalsIgnoreCase(name)) {
                 v = value;
                 break;
             }
@@ -130,7 +114,7 @@ public enum DeleteStatusEnum {
     }
 
     /**
-     * verify the code exist exist or not exist
+     * verify the code exist or not exist
      *
      * @param code code
      * @return result
@@ -140,13 +124,13 @@ public enum DeleteStatusEnum {
     }
 
     /**
-     * verify the english code exist or not exist
+     * verify the name exist or not exist
      *
-     * @param englishCode english code
+     * @param name name
      * @return result
      */
-    public static boolean exist(String englishCode) {
-        return get(englishCode) != null;
+    public static boolean exist(String name) {
+        return get(name) != null;
     }
 
 }

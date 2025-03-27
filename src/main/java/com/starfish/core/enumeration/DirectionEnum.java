@@ -1,29 +1,34 @@
 package com.starfish.core.enumeration;
 
 /**
- * RoleEnum
+ * DirectionEnum
  *
  * @author sunkolin
  * @version 1.0.0
  * @since 2014-07-07
  */
 @SuppressWarnings("unused")
-public enum RoleEnum {
+public enum DirectionEnum {
 
     /**
-     * 游客
+     * 东
      */
-    GUEST(1, "guest", "游客"),
+    EAST(1, "east", "东"),
 
     /**
-     * 普通
+     * 西
      */
-    USER(2, "user", "普通用户"),
+    WEST(2, "west", "西"),
 
     /**
-     * 管理
+     * 南
      */
-    ADMIN(3, "admin", "管理员"),
+    SOUTH(3, "south", "南"),
+
+    /**
+     * 北
+     */
+    NORTH(4, "north", "北"),
 
     ;
 
@@ -43,13 +48,13 @@ public enum RoleEnum {
     private final String message;
 
     /**
-     * RoleEnum
+     * DirectionEnum
      *
      * @param code    code
      * @param name    name
      * @param message message
      */
-    RoleEnum(Integer code, String name, String message) {
+    DirectionEnum(Integer code, String name, String message) {
         this.code = code;
         this.name = name;
         this.message = message;
@@ -88,10 +93,10 @@ public enum RoleEnum {
      * @param code code
      * @return the enum
      */
-    public static RoleEnum get(Integer code) {
-        RoleEnum[] values = RoleEnum.values();
-        RoleEnum v = null;
-        for (RoleEnum value : values) {
+    public static DirectionEnum get(Integer code) {
+        DirectionEnum[] values = DirectionEnum.values();
+        DirectionEnum v = null;
+        for (DirectionEnum value : values) {
             if (value.getCode().equals(code)) {
                 v = value;
                 break;
@@ -106,10 +111,10 @@ public enum RoleEnum {
      * @param name name
      * @return the enum
      */
-    public static RoleEnum get(String name) {
-        RoleEnum[] values = RoleEnum.values();
-        RoleEnum v = null;
-        for (RoleEnum value : values) {
+    public static DirectionEnum get(String name) {
+        DirectionEnum[] values = DirectionEnum.values();
+        DirectionEnum v = null;
+        for (DirectionEnum value : values) {
             if (value.getName().equalsIgnoreCase(name)) {
                 v = value;
                 break;

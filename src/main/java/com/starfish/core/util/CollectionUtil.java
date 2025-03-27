@@ -40,7 +40,7 @@ public class CollectionUtil {
         Arrays.sort(array);
 
         //反转
-        if (SortEnum.DESC.getEnglishCode().equalsIgnoreCase(order)) {
+        if (SortEnum.DESC.getName().equalsIgnoreCase(order)) {
             List<T> list = Arrays.asList(array);
             Collections.reverse(list);
             list.toArray(array);
@@ -64,7 +64,7 @@ public class CollectionUtil {
         Arrays.sort(array, comparator);
 
         //反转，转数组，反转
-        if (SortEnum.DESC.getEnglishCode().equalsIgnoreCase(order)) {
+        if (SortEnum.DESC.getName().equalsIgnoreCase(order)) {
             List<T> list = Arrays.asList(array);
             Collections.reverse(list);
             list.toArray(array);
@@ -154,7 +154,7 @@ public class CollectionUtil {
      */
     public static <T extends Comparable<? super T>> List<T> sort(List<T> list, String order) {
         Collections.sort(list);
-        if (SortEnum.DESC.getEnglishCode().equalsIgnoreCase(order)) {
+        if (SortEnum.DESC.getName().equalsIgnoreCase(order)) {
             Collections.reverse(list);
         }
         return list;
@@ -171,7 +171,7 @@ public class CollectionUtil {
      */
     public static <T> List<T> sort(List<T> list, String order, Comparator<? super T> comparator) {
         list.sort(comparator);
-        if (SortEnum.DESC.getEnglishCode().equalsIgnoreCase(order)) {
+        if (SortEnum.DESC.getName().equalsIgnoreCase(order)) {
             Collections.reverse(list);
         }
         return list;
@@ -228,7 +228,7 @@ public class CollectionUtil {
         Collections.sort(list);
 
         //反转
-        if (SortEnum.DESC.getEnglishCode().equalsIgnoreCase(order)) {
+        if (SortEnum.DESC.getName().equalsIgnoreCase(order)) {
             Collections.reverse(list);
         }
 
@@ -258,7 +258,7 @@ public class CollectionUtil {
         list.sort(comparator);
 
         //反转
-        if (SortEnum.DESC.getEnglishCode().equalsIgnoreCase(order)) {
+        if (SortEnum.DESC.getName().equalsIgnoreCase(order)) {
             Collections.reverse(list);
         }
 

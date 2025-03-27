@@ -1,7 +1,7 @@
 package com.starfish.core.enumeration;
 
 /**
- * 结果枚举
+ * ResultEnum
  *
  * @author sunkolin
  * @version 1.0.0
@@ -11,12 +11,18 @@ package com.starfish.core.enumeration;
 public enum ResultEnum {
 
     /**
-     * 自定义错误从1001开始
+     * 成功
      */
     SUCCESS(0, "success", "成功"),
 
+    /**
+     * 系统异常
+     */
     SYSTEM_EXCEPTION(500, "system_exception", "系统异常"),
 
+    /**
+     * 自定义错误从1001开始
+     */
     PARAM_ERROR(1001, "param_error", "参数错误"),
 
     DATE_TIME_FORMAT_ERROR(1002, "date_time_format_error", "日期格式有误"),
@@ -52,51 +58,30 @@ public enum ResultEnum {
     ;
 
     /**
-     * 数字编码
+     * 编码
      */
     private final Integer code;
 
     /**
-     * 英文编码
-     */
-    private final String englishCode;
-
-    /**
-     * 中文名称
+     * 名称
      */
     private final String name;
 
     /**
-     * 中文描述
+     * 描述
      */
     private final String message;
 
     /**
      * ResultEnum
      *
-     * @param code        code
-     * @param englishCode englishCode
-     * @param name        name
-     * @param message     message
+     * @param code    code
+     * @param name    name
+     * @param message message
      */
-    ResultEnum(Integer code, String englishCode, String name, String message) {
+    ResultEnum(Integer code, String name, String message) {
         this.code = code;
-        this.englishCode = englishCode;
         this.name = name;
-        this.message = message;
-    }
-
-    /**
-     * ResultEnum
-     *
-     * @param code        code
-     * @param englishCode englishCode
-     * @param message     message
-     */
-    ResultEnum(Integer code, String englishCode, String message) {
-        this.code = code;
-        this.englishCode = englishCode;
-        this.name = "";
         this.message = message;
     }
 
@@ -107,15 +92,6 @@ public enum ResultEnum {
      */
     public Integer getCode() {
         return this.code;
-    }
-
-    /**
-     * get english code
-     *
-     * @return englishCode
-     */
-    public String getEnglishCode() {
-        return this.englishCode;
     }
 
     /**
@@ -157,14 +133,14 @@ public enum ResultEnum {
     /**
      * get the enum by name
      *
-     * @param englishCode englishCode
+     * @param name name
      * @return the enum
      */
-    public static ResultEnum get(String englishCode) {
+    public static ResultEnum get(String name) {
         ResultEnum[] values = ResultEnum.values();
         ResultEnum v = null;
         for (ResultEnum value : values) {
-            if (value.getEnglishCode().equalsIgnoreCase(englishCode)) {
+            if (value.getName().equalsIgnoreCase(name)) {
                 v = value;
                 break;
             }
@@ -173,7 +149,7 @@ public enum ResultEnum {
     }
 
     /**
-     * verify the code exist exist or not exist
+     * verify the code exist or not exist
      *
      * @param code code
      * @return result
@@ -183,13 +159,13 @@ public enum ResultEnum {
     }
 
     /**
-     * verify the english code exist or not exist
+     * verify the name exist or not exist
      *
-     * @param englishCode english code
+     * @param name name
      * @return result
      */
-    public static boolean exist(String englishCode) {
-        return get(englishCode) != null;
+    public static boolean exist(String name) {
+        return get(name) != null;
     }
 
 }

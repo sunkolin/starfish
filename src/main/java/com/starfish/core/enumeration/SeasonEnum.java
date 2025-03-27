@@ -1,29 +1,34 @@
 package com.starfish.core.enumeration;
 
 /**
- * RoleEnum
+ * SeasonEnum
  *
  * @author sunkolin
  * @version 1.0.0
  * @since 2014-07-07
  */
 @SuppressWarnings("unused")
-public enum RoleEnum {
+public enum SeasonEnum {
 
     /**
-     * 游客
+     * 春
      */
-    GUEST(1, "guest", "游客"),
+    SPRING(1, "spring", "春"),
 
     /**
-     * 普通
+     * 夏
      */
-    USER(2, "user", "普通用户"),
+    SUMMER(2, "summer", "夏"),
 
     /**
-     * 管理
+     * 秋
      */
-    ADMIN(3, "admin", "管理员"),
+    AUTUMN(3, "autumn", "秋"),
+
+    /**
+     * 冬
+     */
+    WINTER(4, "winter", "冬"),
 
     ;
 
@@ -43,13 +48,13 @@ public enum RoleEnum {
     private final String message;
 
     /**
-     * RoleEnum
+     * SeasonEnum
      *
      * @param code    code
      * @param name    name
      * @param message message
      */
-    RoleEnum(Integer code, String name, String message) {
+    SeasonEnum(Integer code, String name, String message) {
         this.code = code;
         this.name = name;
         this.message = message;
@@ -88,10 +93,10 @@ public enum RoleEnum {
      * @param code code
      * @return the enum
      */
-    public static RoleEnum get(Integer code) {
-        RoleEnum[] values = RoleEnum.values();
-        RoleEnum v = null;
-        for (RoleEnum value : values) {
+    public static SeasonEnum get(Integer code) {
+        SeasonEnum[] values = SeasonEnum.values();
+        SeasonEnum v = null;
+        for (SeasonEnum value : values) {
             if (value.getCode().equals(code)) {
                 v = value;
                 break;
@@ -106,10 +111,10 @@ public enum RoleEnum {
      * @param name name
      * @return the enum
      */
-    public static RoleEnum get(String name) {
-        RoleEnum[] values = RoleEnum.values();
-        RoleEnum v = null;
-        for (RoleEnum value : values) {
+    public static SeasonEnum get(String name) {
+        SeasonEnum[] values = SeasonEnum.values();
+        SeasonEnum v = null;
+        for (SeasonEnum value : values) {
             if (value.getName().equalsIgnoreCase(name)) {
                 v = value;
                 break;

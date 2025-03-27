@@ -1,29 +1,24 @@
 package com.starfish.core.enumeration;
 
 /**
- * RoleEnum
+ * SwitchEnum
  *
  * @author sunkolin
  * @version 1.0.0
  * @since 2014-07-07
  */
 @SuppressWarnings("unused")
-public enum RoleEnum {
+public enum SwitchEnum {
 
     /**
-     * 游客
+     * 开
      */
-    GUEST(1, "guest", "游客"),
+    ON(1, "on", "开"),
 
     /**
-     * 普通
+     * 关
      */
-    USER(2, "user", "普通用户"),
-
-    /**
-     * 管理
-     */
-    ADMIN(3, "admin", "管理员"),
+    OFF(2, "off", "关"),
 
     ;
 
@@ -43,13 +38,13 @@ public enum RoleEnum {
     private final String message;
 
     /**
-     * RoleEnum
+     * SwitchEnum
      *
      * @param code    code
      * @param name    name
      * @param message message
      */
-    RoleEnum(Integer code, String name, String message) {
+    SwitchEnum(Integer code, String name, String message) {
         this.code = code;
         this.name = name;
         this.message = message;
@@ -88,10 +83,10 @@ public enum RoleEnum {
      * @param code code
      * @return the enum
      */
-    public static RoleEnum get(Integer code) {
-        RoleEnum[] values = RoleEnum.values();
-        RoleEnum v = null;
-        for (RoleEnum value : values) {
+    public static SwitchEnum get(Integer code) {
+        SwitchEnum[] values = SwitchEnum.values();
+        SwitchEnum v = null;
+        for (SwitchEnum value : values) {
             if (value.getCode().equals(code)) {
                 v = value;
                 break;
@@ -106,10 +101,10 @@ public enum RoleEnum {
      * @param name name
      * @return the enum
      */
-    public static RoleEnum get(String name) {
-        RoleEnum[] values = RoleEnum.values();
-        RoleEnum v = null;
-        for (RoleEnum value : values) {
+    public static SwitchEnum get(String name) {
+        SwitchEnum[] values = SwitchEnum.values();
+        SwitchEnum v = null;
+        for (SwitchEnum value : values) {
             if (value.getName().equalsIgnoreCase(name)) {
                 v = value;
                 break;
