@@ -17,7 +17,7 @@ import java.util.Date;
  */
 @Data
 @SuppressWarnings("unused")
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class BasicParam extends BasicModel implements Serializable {
 
     /**
