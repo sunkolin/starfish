@@ -3,6 +3,7 @@ package com.starfish.core.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.starfish.core.enumeration.ResultEnum;
 import com.starfish.core.exception.CustomException;
 
 /**
@@ -26,7 +27,7 @@ public class JsonUtil {
         try {
             return mapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
-            throw new CustomException();
+            throw new CustomException(e);
         }
     }
 
@@ -35,7 +36,7 @@ public class JsonUtil {
         try {
             return objectMapper.readValue(json, cls);
         } catch (JsonProcessingException e) {
-            throw new CustomException();
+            throw new CustomException(e);
         }
     }
 
