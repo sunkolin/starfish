@@ -1,4 +1,4 @@
-package com.starfish.common.permission;
+package com.starfish.core.interceptor.permission;
 
 import com.google.common.collect.Lists;
 import com.starfish.core.annotation.Permission;

@@ -1,5 +1,6 @@
 package com.starfish.common.permission;
 
+import com.starfish.core.interceptor.permission.AbstractPermissionInterceptor;
 import lombok.extern.slf4j.Slf4j;
 
 import jakarta.servlet.http.HttpServletRequest;

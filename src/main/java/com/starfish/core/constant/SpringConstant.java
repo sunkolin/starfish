@@ -1,4 +1,4 @@
-package com.starfish.core;
+package com.starfish.core.constant;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;

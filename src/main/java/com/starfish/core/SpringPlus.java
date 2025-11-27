@@ -1,5 +1,6 @@
 package com.starfish.core;
 
+import com.starfish.core.constant.SpringConstant;
 import lombok.Data;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.system.ApplicationHome;
