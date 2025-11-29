@@ -9,4 +9,4 @@
 #  com.starfish.common.task.XxlJobAutoConfiguration,\
 #  com.starfish.common.swagger.SwaggerAutoConfiguration
 org.springframework.boot.env.EnvironmentPostProcessor=com.starfish.core.CustomEnvironmentPostProcessor
-org.springframework.boot.autoconfigure.AutoConfigurationImportFilter=com.starfish.incubator.datasource.DataSourceAutoConfigurationImportFilter
+org.springframework.boot.autoconfigure.AutoConfigurationImportFilter=com.starfish.experiment.datasource.DataSourceAutoConfigurationImportFilter
