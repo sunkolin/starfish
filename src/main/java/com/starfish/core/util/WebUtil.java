@@ -13,7 +13,7 @@ import com.google.common.collect.Lists;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.HtmlUtils;
@@ -42,16 +42,6 @@ import java.util.*;
 @SuppressWarnings("unused")
 @Slf4j
 public class WebUtil extends HtmlUtils {
-
-    /**
-     * 淘宝查询IP地址接口
-     */
-    private static final String TAOBAO_INTERFACE_URL = "https://ip.taobao.com/outGetIpInfo?accessKey=alibaba-inc";
-
-    /**
-     * 新浪查询IP地址接口
-     */
-    private static final String SINA_INTERFACE_URL = "https://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json";
 
     public static final String HTTP_URL_PREFIX = "http";
 
@@ -330,7 +320,7 @@ public class WebUtil extends HtmlUtils {
      * @param request request
      * @return the ip
      */
-    public static String getInternetProtocolAddress(HttpServletRequest request) {
+    public static String getRequestIp(HttpServletRequest request) {
         String ip = "";
         String[] names = new String[]{"X-Real-IP", "X-Forwarded-For", "Proxy-Client-IP", "WL-Proxy-Client-IP", "HTTP_CLIENT_IP", "HTTP_X_FORWARDED_FOR"};
         for (String string : names) {
@@ -361,90 +351,6 @@ public class WebUtil extends HtmlUtils {
      */
     private static boolean isEmptyOrUnknown(String ip) {
         return ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip);
-    }
-
-    /**
-     * get the location,use tao bao interface default
-     *
-     * @param ip ip
-     * @return the location
-     */
-    public static String getAddress(String ip) {
-        String result;
-        try {
-            //call remote interface
-            Map<String, String> params = Map.of("ip", ip);
-            ResponseEntity<String> responseEntity = RestTemplatePlus.form(TAOBAO_INTERFACE_URL, HttpMethod.GET, null, params, null, String.class);
-            String json = responseEntity.getBody();
-            GetIpAddressResult getIpAddressResult = JsonUtil.toObject(json, GetIpAddressResult.class);
-            GetIpAddressData data = getIpAddressResult.getData();
-
-            //return
-            return data.getCountry() + " " + data.getRegion() + " " + data.getCity();
-        } catch (Exception e) {
-            result = "未知";
-            return result;
-        }
-    }
-
-    @Data
-    static class GetIpAddressResult implements Serializable {
-
-        private Integer code;
-
-        private String msg;
-
-        private GetIpAddressData data;
-
-    }
-
-    @Data
-    static class GetIpAddressData implements Serializable {
-
-        private String area;
-
-        private String country;
-
-        @JsonProperty("isp_id")
-        private String ispId;
-
-        private String queryIp;
-
-        private String city;
-
-        private String ip;
-
-        private String isp;
-
-        private String county;
-
-        @JsonProperty("region_id")
-        private String regionId;
-
-        @JsonProperty("area_id")
-        private String areaId;
-
-        @JsonProperty("county_id")
-        private String countyId;
-
-        private String region;
-
-        @JsonProperty("country_id")
-        private String countryId;
-
-        @JsonProperty("city_id")
-        private String cityId;
-
-    }
-
-    /**
-     * get the location
-     *
-     * @param request request
-     * @return the location
-     */
-    public static String getAddress(HttpServletRequest request) {
-        return getAddress(WebUtil.getInternetProtocolAddress(request));
     }
 
     /**
@@ -520,10 +426,10 @@ public class WebUtil extends HtmlUtils {
      * 下载远程文件
      *
      * @param url  请求的url
-     * @param dest 目标文件或目录，当为目录时，取URL中的文件名，取不到使用编码后的URL做为文件名
+     * @param target 目标文件或目录，当为目录时，取URL中的文件名，取不到使用编码后的URL做为文件名
      */
-    public static void downloadFile(String url, String dest) {
-         HttpUtil.downloadFile(url, cn.hutool.core.io.FileUtil.file(dest));
+    public static void downloadFile(String url, String target) {
+        HttpUtil.downloadFile(url, cn.hutool.core.io.FileUtil.file(target));
     }
 
 }
