@@ -1,5 +1,5 @@
 #org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-#  com.starfish.core.SpringPlus,\
+#  com.starfish.core.Springs,\
 #  com.starfish.core.controller.AliveController,\
 #  com.starfish.core.web.WebAutoConfiguration,\
 #  com.starfish.core.web.ResponseWrapperAutoConfiguration,\

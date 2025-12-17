@@ -1,4 +1,4 @@
-com.starfish.core.SpringPlus
+com.starfish.core.Springs
 com.starfish.core.CustomEnvironmentPostProcessor
 com.starfish.core.exception.ExceptionAutoConfiguration
 com.starfish.core.web.AliveAutoConfiguration

@@ -1,6 +1,6 @@
 package com.starfish.experiment.limiter;
 
-import com.starfish.core.SpringPlus;
+import com.starfish.core.Springs;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
@@ -34,7 +34,7 @@ public class RollingWindowRateLimiter implements RateLimiter {
     private final StringRedisTemplate stringRedisTemplate;
 
     public RollingWindowRateLimiter(String name, long permits) {
-        stringRedisTemplate = SpringPlus.getBean(StringRedisTemplate.class);
+        stringRedisTemplate = Springs.getBean(StringRedisTemplate.class);
         this.redisKey = "starfish:RateLimiter:" + name;
         this.permits = permits;
     }

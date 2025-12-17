@@ -29,7 +29,7 @@ import java.util.Map;
  */
 @Data
 @Lazy(false)
-public class SpringPlus implements ApplicationContextAware, EnvironmentAware {
+public class Springs implements ApplicationContextAware, EnvironmentAware {
 
     private ApplicationPid applicationPid = new ApplicationPid();
 

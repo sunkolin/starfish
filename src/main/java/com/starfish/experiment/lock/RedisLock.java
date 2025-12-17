@@ -1,6 +1,6 @@
 package com.starfish.experiment.lock;
 
-import com.starfish.core.SpringPlus;
+import com.starfish.core.Springs;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.core.script.RedisScript;
@@ -47,7 +47,7 @@ public class RedisLock implements Lock, Closeable {
     private int expire;
 
     public RedisLock(String name, int expire) {
-        stringRedisTemplate = SpringPlus.getBean(StringRedisTemplate.class);
+        stringRedisTemplate = Springs.getBean(StringRedisTemplate.class);
         this.name = name;
         this.redisKey = "starfish:redisLock:" + name;
         this.expire = expire;
