@@ -112,6 +112,7 @@ public final class RestTemplatePlus {
      * @param <T>          T
      * @return 结果
      */
+    @Deprecated
     public static <T> ResponseEntity<T> form(String url, HttpMethod method, Map<String, String> headers, Map<String, String> params, Map<String, String> form, Class<T> responseType) {
         url = CommonUtil.contact(url, params);
 
