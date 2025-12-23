@@ -28,8 +28,8 @@ import java.util.Map;
 /**
  * SuperRestTemplate
  * 使用方式有两种
- * 1 RestTemplate restTemplate = RestTemplatePlus.buildRestTemplate();
- * 2 RestTemplatePlus superRestTemplate = RestTemplatePlus.buildRestTemplatePlus();
+ * 1 RestTemplate restTemplate = RestTemplates.buildRestTemplate();
+ * 2 RestTemplate superRestTemplate = RestTemplates.buildRestTemplatePlus();
  *
  * @author sunkolin
  * @version 1.0.0

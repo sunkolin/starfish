@@ -1,13 +1,13 @@
 package com.starfish.common.cache;
 
 /**
- * CachePlus,使用caffeine做本地缓存
+ * Cache,使用caffeine做本地缓存
  *
  * @author sunkolin
  * @version 1.0.0
  * @since 2021-06-11
  */
-public class CachePlus implements Cache {
+public class CacheImpl implements Cache {
 
     /**
      * exist后缀
@@ -16,7 +16,7 @@ public class CachePlus implements Cache {
 
     private final com.github.benmanes.caffeine.cache.Cache<Object, Object> caffeineCache;
 
-    public CachePlus(com.github.benmanes.caffeine.cache.Cache<Object, Object> caffeineCache) {
+    public CacheImpl(com.github.benmanes.caffeine.cache.Cache<Object, Object> caffeineCache) {
         this.caffeineCache = caffeineCache;
     }
 

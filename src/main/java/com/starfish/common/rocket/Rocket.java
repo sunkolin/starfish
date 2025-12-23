@@ -1,18 +1,18 @@
 package com.starfish.common.rocket;
 
 /**
- * RocketPlus
+ * Rocket
  *
  * @author sunkolin
  * @version 1.0.0
  * @since 2022-08-02
  */
-public class RocketPlus {
+public class Rocket {
 
     /**
      * constructor
      */
-    private RocketPlus() {
+    private Rocket() {
     }
 
 }

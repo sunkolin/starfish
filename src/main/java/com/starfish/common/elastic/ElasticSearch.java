@@ -1,18 +1,18 @@
 package com.starfish.common.elastic;
 
 /**
- * ElasticSearchPlus
+ * ElasticSearch
  *
  * @author sunkolin
  * @version 1.0.0
  * @since 2022-08-02
  */
-public class ElasticSearchPlus {
+public class ElasticSearch {
 
     /**
      * constructor
      */
-    private ElasticSearchPlus() {
+    private ElasticSearch() {
     }
 
 }

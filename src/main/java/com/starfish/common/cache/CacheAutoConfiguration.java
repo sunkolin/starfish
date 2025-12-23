@@ -64,9 +64,9 @@ public class CacheAutoConfiguration {
         return cacheManager;
     }
 
-    @Bean(name = "cachePlus")
-    public CachePlus newCaffeineCachePlus(Cache<Object, Object> caffeineCache) {
-        return new CachePlus(caffeineCache);
+    @Bean(name = "cache")
+    public CacheImpl newCaffeineCache(Cache<Object, Object> caffeineCache) {
+        return new CacheImpl(caffeineCache);
     }
 
 }
