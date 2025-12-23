@@ -17,14 +17,14 @@ import java.util.Map;
  * @version 1.0.0
  * @since 2022-07-26
  */
-public class JsonWebToken {
+public class JsonWebTokens {
 
     private static final String KEY = "Ks#ZKmIUTEj3@dU2";
 
     /**
      * constructor
      */
-    private JsonWebToken() {
+    private JsonWebTokens() {
     }
 
     /**

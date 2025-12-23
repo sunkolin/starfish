@@ -14,20 +14,20 @@ import org.junit.jupiter.api.Test;
  * @since 2022-07-26
  */
 @Slf4j
-class JsonWebTokenTest {
+class JsonWebTokensTest {
 
     @Test
     void test() {
         User user = new User();
         user.setUserId(100L);
 
-        String token = JsonWebToken.create(user);
+        String token = JsonWebTokens.create(user);
         log.info(token);
 
-        boolean verify = JsonWebToken.verify(token);
+        boolean verify = JsonWebTokens.verify(token);
         log.info("{}",verify);
 
-        User user1 = JsonWebToken.verify(token, User.class);
+        User user1 = JsonWebTokens.verify(token, User.class);
         log.info(JsonUtil.toJson(user1));
 
         long expectedValue = 100L;
@@ -41,13 +41,13 @@ class JsonWebTokenTest {
         Long userId = 100L;
         user.setUserId(userId);
 
-        String token = JsonWebToken.create(userId, user);
+        String token = JsonWebTokens.create(userId, user);
         log.info(token);
 
-        boolean verify = JsonWebToken.verify(userId, token);
+        boolean verify = JsonWebTokens.verify(userId, token);
         log.info("{}",verify);
 
-        User user1 = JsonWebToken.verify(userId, token, User.class);
+        User user1 = JsonWebTokens.verify(userId, token, User.class);
         log.info(JsonUtil.toJson(user1));
 
         long expectedValue = 100L;
