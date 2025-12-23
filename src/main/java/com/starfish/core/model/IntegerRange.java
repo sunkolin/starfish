@@ -9,4 +9,12 @@ package com.starfish.core.model;
  */
 public class IntegerRange extends Range<Integer> {
 
+    public IntegerRange() {
+
+    }
+
+    public IntegerRange(Integer start, Integer end) {
+        super(start, end);
+    }
+
 }

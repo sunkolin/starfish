@@ -1,7 +1,5 @@
 package com.starfish.core.model;
 
-import java.util.Date;
-
 /**
  * Range
  *
