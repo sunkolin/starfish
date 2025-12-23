@@ -1,5 +1,7 @@
 package com.starfish.core.model;
 
+import java.util.Date;
+
 /**
  * Range
  *
@@ -12,6 +14,15 @@ public class Range<T> {
     private T start;
 
     private T end;
+
+    public Range() {
+
+    }
+
+    public Range(T start, T end) {
+        this.start = start;
+        this.end = end;
+    }
 
     public T getStart() {
         return start;
