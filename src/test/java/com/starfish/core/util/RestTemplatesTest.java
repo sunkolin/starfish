@@ -9,18 +9,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 @Slf4j
-class RestTemplatePlusTest {
+class RestTemplatesTest {
 
     @Disabled("Network does not work")
     @Test
     void exchangeSkipSsl() {
-        ResponseEntity<String> entity = RestTemplatePlus.exchangeSkipSsl("https://www.baidu.com/sugrec", HttpMethod.GET, null, null, null, String.class);
+        ResponseEntity<String> entity = RestTemplates.exchangeSkipSsl("https://www.baidu.com/sugrec", HttpMethod.GET, null, null, null, String.class);
         Assertions.assertEquals(HttpStatus.OK,entity.getStatusCode());
     }
 
     @Test
     void head() {
-        ResponseEntity<Void> entity = RestTemplatePlus.exchange("https://www.baidu.com/sugrec", HttpMethod.HEAD, null, null, null, Void.class);
+        ResponseEntity<Void> entity = RestTemplates.exchange("https://www.baidu.com/sugrec", HttpMethod.HEAD, null, null, null, Void.class);
         log.info("headers={}",entity.getHeaders());
         Assertions.assertEquals(HttpStatus.OK,entity.getStatusCode());
     }

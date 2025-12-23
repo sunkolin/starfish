@@ -36,7 +36,7 @@ import java.util.Map;
  * @since 2020-10-16
  */
 @SuppressWarnings("unused")
-public final class RestTemplatePlus {
+public final class RestTemplates {
 
     /**
      * RestTemplate
@@ -63,7 +63,7 @@ public final class RestTemplatePlus {
         init(SSL_REST_TEMPLATE);
     }
 
-    private RestTemplatePlus() {
+    private RestTemplates() {
         // constructor
     }
 
@@ -98,38 +98,6 @@ public final class RestTemplatePlus {
         JacksonJsonHttpMessageConverter jacksonJsonHttpMessageConverter = new JacksonJsonHttpMessageConverter();
         jacksonJsonHttpMessageConverter.setSupportedMediaTypes(Collections.singletonList(new MediaType("application", "x-javascript")));
         messageConverters.add(jacksonJsonHttpMessageConverter);
-    }
-
-    /**
-     * 发起http请求
-     *
-     * @param url          请求地址
-     * @param method       方法
-     * @param params       参数
-     * @param headers      headers
-     * @param form         请求体
-     * @param responseType 返回类型
-     * @param <T>          T
-     * @return 结果
-     */
-    @Deprecated
-    public static <T> ResponseEntity<T> form(String url, HttpMethod method, Map<String, String> headers, Map<String, String> params, Map<String, String> form, Class<T> responseType) {
-        url = CommonUtil.contact(url, params);
-
-        HttpHeaders httpHeaders = new HttpHeaders();
-        if (!CollectionUtils.isEmpty(headers)) {
-            httpHeaders.setAll(headers);
-        }
-        httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-        MultiValueMap<String, String> innerForm = new LinkedMultiValueMap<>();
-        if (!CollectionUtils.isEmpty(form)) {
-            for (Map.Entry<String, String> item : form.entrySet()) {
-                innerForm.add(item.getKey(), item.getValue());
-            }
-        }
-        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(innerForm, httpHeaders);
-        return REST_TEMPLATE.exchange(url, method, requestEntity, responseType);
     }
 
     /**

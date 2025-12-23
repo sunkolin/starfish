@@ -1,7 +1,7 @@
 package com.starfish.core.client;
 
-import com.starfish.core.model.weather.WeatherModel;
-import com.starfish.core.util.IdCardUtil;
+import com.starfish.core.client.impl.WeatherClientImpl;
+import com.starfish.core.client.result.WeatherModel;
 import com.starfish.core.util.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
@@ -22,7 +22,7 @@ class WeatherClientTest {
     @Test
     void getWeatherTest() {
         String cityName = "北京市";
-        WeatherModel result = WeatherClient.getWeather(cityName);
+        WeatherModel result = new WeatherClientImpl().getWeather(cityName);
         log.info(JsonUtil.toJson(result));
         Assertions.assertNotNull(result);
     }

@@ -1,4 +1,4 @@
-package com.starfish.core.model.weather;
+package com.starfish.core.client.result;
 
 import lombok.Data;
 

@@ -71,7 +71,7 @@ public class IpUtil {
         Map<String, String> headers = new HashMap<>(8);
         Map<String, String> params = new HashMap<>(8);
         Class<String> responseType = String.class;
-        ResponseEntity<String> response = RestTemplatePlus.exchange(url, method, headers, params, null, responseType);
+        ResponseEntity<String> response = RestTemplates.exchange(url, method, headers, params, null, responseType);
         return response.getBody();
     }
 
@@ -87,7 +87,7 @@ public class IpUtil {
         try {
             //call remote interface
             Map<String, String> params = Map.of("ip", ip);
-            ResponseEntity<String> responseEntity = RestTemplatePlus.form(TAO_BAO_INTERFACE_URL, HttpMethod.GET, null, params, null, String.class);
+            ResponseEntity<String> responseEntity = RestTemplates.exchange(TAO_BAO_INTERFACE_URL, HttpMethod.GET, null, params, null, String.class);
             String json = responseEntity.getBody();
             GetIpAddressResult getIpAddressResult = JsonUtil.toObject(json, GetIpAddressResult.class);
             GetIpAddressData data = getIpAddressResult.getData();
