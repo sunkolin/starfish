@@ -1,9 +1,5 @@
 package com.starfish.core.model;
 
-import lombok.Data;
-
-import java.io.Serializable;
-
 /**
  * MultiResult
  * 最多支持返回3个结果，不建议同一个方法返回太多结果
@@ -15,7 +11,6 @@ import java.io.Serializable;
  * @since 2021-12-12
  */
 @SuppressWarnings({"unchecked", "unused"})
-@Data
 public class MultiResult {
 
     private Object first;
