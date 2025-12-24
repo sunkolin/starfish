@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @since 2024-08-23
  */
 @Data
-@ConfigurationProperties(prefix = "application.request-log")
+@ConfigurationProperties(prefix = "starfish.request-log")
 public class RequestLogProperties {
 
     /**

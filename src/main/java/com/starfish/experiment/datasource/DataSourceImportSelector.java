@@ -21,13 +21,13 @@ public class DataSourceImportSelector implements ImportSelector {
         Map<String, Object> attributes = importingClassMetadata.getAnnotationAttributes(EnableDataSource.class.getName());
         Boolean enableDataSource = (Boolean) (attributes != null ? attributes.get("value") : null);
         if (enableDataSource == null || enableDataSource) {
-            PropertiesContext.set("DataSourceAutoConfiguration", "true");
+            PropertiesContext.set("starfish.dataSource.enabled", "true");
             return new String[]{
                     "org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration",
                     "org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration"
             };
         } else {
-            PropertiesContext.set("DataSourceAutoConfiguration", "false");
+            PropertiesContext.set("starfish.dataSource.enabled", "false");
             return new String[]{};
         }
     }

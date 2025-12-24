@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
  * @since 2022-07-04
  */
 @AutoConfiguration
-@ConditionalOnProperty(value = {"application.elapsed-time.enabled"}, matchIfMissing = true)
+@ConditionalOnProperty(value = {"starfish.elapsed-time.enabled"}, havingValue = "true", matchIfMissing = false)
 @EnableConfigurationProperties({ElapsedTimeProperties.class})
 public class ElapsedTimeAutoConfiguration {
 

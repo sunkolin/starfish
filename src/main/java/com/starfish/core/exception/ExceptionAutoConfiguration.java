@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(ExceptionProperties.class)
-@ConditionalOnProperty(prefix = "application.exception", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "starfish.exception", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class ExceptionAutoConfiguration {
 
     /**

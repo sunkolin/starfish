@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @since 2022-07-04
  */
 @Data
-@ConfigurationProperties(prefix = "application.elapsed-time")
+@ConfigurationProperties(prefix = "starfish.elapsed-time")
 public class ElapsedTimeProperties {
 
     /**

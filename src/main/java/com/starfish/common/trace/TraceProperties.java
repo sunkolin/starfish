@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @since 2022-06-08
  */
 @Data
-@ConfigurationProperties(prefix = "application.trace")
+@ConfigurationProperties(prefix = "starfish.trace")
 public class TraceProperties {
 
     /**

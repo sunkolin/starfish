@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
 import jakarta.annotation.Resource;
+
 import java.util.concurrent.TimeUnit;
 
 /**

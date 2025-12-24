@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Bean;
  * @since 2022-07-04
  */
 @AutoConfiguration
-@ConditionalOnProperty(value = {"application.request-log.enabled"}, matchIfMissing = true)
+@ConditionalOnProperty(value = {"starfish.request-log.enabled"}, havingValue = "true", matchIfMissing = false)
 @EnableConfigurationProperties({RequestLogProperties.class})
 public class RequestLogAutoConfiguration {
 

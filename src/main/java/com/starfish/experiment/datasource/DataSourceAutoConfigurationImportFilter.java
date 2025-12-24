@@ -35,9 +35,9 @@ public class DataSourceAutoConfigurationImportFilter implements AutoConfiguratio
         for (int i = 0; i < classNames.length; i++) {
             String className = classNames[i];
             // 默认移除数据源相关的类
-            String dataSourceAutoConfigurationProperty = PropertiesContext.get("DataSourceAutoConfiguration");
-            // 未配置EnableDataSource注解或value设置未true都通过
-            if (dataSourceAutoConfigurationProperty == null || "true".equalsIgnoreCase(dataSourceAutoConfigurationProperty)) {
+            String dataSourceEnabled = PropertiesContext.get("starfish.dataSource.enabled");
+            // 未配置 EnableDataSource 注解或value设置为true都通过
+            if (dataSourceEnabled == null || "true".equalsIgnoreCase(dataSourceEnabled)) {
                 matches[i] = true;
             } else {
                 matches[i] = !EXCLUDE_CLASSES.contains(className);

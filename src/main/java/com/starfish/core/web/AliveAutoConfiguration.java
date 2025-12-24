@@ -2,6 +2,7 @@ package com.starfish.core.web;
 
 import com.starfish.core.controller.AliveController;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Bean;
  * @since 2022-07-03
  */
 @AutoConfiguration
+@ConditionalOnProperty(prefix = "starfish.alive", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class AliveAutoConfiguration {
 
     @Bean

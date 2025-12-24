@@ -23,21 +23,23 @@ public class ElapsedTimeInterceptor implements HandlerInterceptor, Ordered {
     /**
      * spend time header name
      */
-    public static final String SPEND_TIME_HEADER_NAME = "spend_time";
+    public static final String SPEND_TIME_HEADER_NAME = "starfish_spend_time";
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         long startTime = System.currentTimeMillis();
-        request.setAttribute(Constant.REQUEST_START_TIME, startTime);
+//        request.setAttribute(Constant.REQUEST_START_TIME, startTime);
+        response.setHeader(Constant.REQUEST_START_TIME, String.valueOf(startTime));
         return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object o, ModelAndView modelAndView) throws Exception {
         long endTime = System.currentTimeMillis();
-        long spendTime = endTime - ((Long) request.getAttribute(Constant.REQUEST_START_TIME));
-        log.info("request url is {},spend time is {}", request.getRequestURL(), spendTime);
+        long spendTime = endTime - Long.parseLong(request.getHeader(Constant.REQUEST_START_TIME));
+        response.setHeader(Constant.REQUEST_END_TIME, String.valueOf(endTime));
         response.setHeader(SPEND_TIME_HEADER_NAME, String.valueOf(spendTime));
+        log.info("request url is {},spend time is {}", request.getRequestURL(), spendTime);
     }
 
     @Override
