@@ -13,7 +13,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Deprecated
 @Data
-@ConfigurationProperties(prefix = "application.executor")
+@ConfigurationProperties(prefix = "starfish.executor")
 public class ExecutorProperties {
 
     /**

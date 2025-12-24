@@ -30,7 +30,7 @@ import java.util.concurrent.RejectedExecutionHandler;
 @Slf4j
 @Configuration
 @AutoConfigureAfter(TaskExecutionAutoConfiguration.class)
-@ConditionalOnProperty(prefix = "application.executor", name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = "starfish.executor", name = "enabled", havingValue = "true")
 @EnableConfigurationProperties({ExecutorProperties.class})
 public class ExecutorAutoConfiguration {
 
