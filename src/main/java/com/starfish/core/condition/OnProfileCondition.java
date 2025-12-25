@@ -39,8 +39,8 @@ public class OnProfileCondition extends SpringBootCondition {
         Set<String> set2 = Sets.newHashSet(annotationProfiles);
         Set<String> intersectionResult = Sets.intersection(set1, set2);
         boolean match = CollectionUtils.isEmpty(intersectionResult);
-        String activeProfilesString = Joiner.on(",").skipNulls().join(activeProfiles);
-        String annotationProfilesString = Joiner.on(",").skipNulls().join(annotationProfiles);
+        String activeProfilesString = Joiner.on(",").useForNull("null").join(activeProfiles);
+        String annotationProfilesString = Joiner.on(",").useForNull("null").join(annotationProfiles);
         String message = "ConditionalOnProfile 环境验证结果是" + match + ",生效的环境是" + activeProfilesString + ",注解中环境是" + annotationProfilesString;
 
         return new ConditionOutcome(match, message);
