@@ -9,28 +9,12 @@ package com.starfish.core.model;
  */
 public class IntegerRange extends Range<Integer> {
 
-    private Integer start;
+    public IntegerRange() {
 
-    private Integer end;
-
-    @Override
-    public Integer getStart() {
-        return start;
     }
 
-    @Override
-    public void setStart(Integer start) {
-        this.start = start;
-    }
-
-    @Override
-    public Integer getEnd() {
-        return end;
-    }
-
-    @Override
-    public void setEnd(Integer end) {
-        this.end = end;
+    public IntegerRange(Integer start, Integer end) {
+        super(start, end);
     }
 
 }

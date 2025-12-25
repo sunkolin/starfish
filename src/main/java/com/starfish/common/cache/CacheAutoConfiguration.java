@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
 import jakarta.annotation.Resource;
+
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -64,9 +65,9 @@ public class CacheAutoConfiguration {
         return cacheManager;
     }
 
-    @Bean(name = "cachePlus")
-    public CachePlus newCaffeineCachePlus(Cache<Object, Object> caffeineCache) {
-        return new CachePlus(caffeineCache);
+    @Bean(name = "cache")
+    public CacheImpl newCaffeineCache(Cache<Object, Object> caffeineCache) {
+        return new CacheImpl(caffeineCache);
     }
 
 }

@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
  * @since 2022-07-03
  */
 @AutoConfiguration
-@ConditionalOnProperty(value = {"application.trace.enabled"}, matchIfMissing = true)
+@ConditionalOnProperty(value = {"starfish.trace.enabled"}, havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties({TraceProperties.class})
 public class TraceAutoConfiguration {
 

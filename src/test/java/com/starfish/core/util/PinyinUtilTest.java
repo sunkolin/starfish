@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * PinyinPlusTest
+ * PinyinTest
  *
  * @author sunkolin
  * @version 1.0.0

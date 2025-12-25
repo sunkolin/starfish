@@ -6,6 +6,7 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 
@@ -19,6 +20,7 @@ import org.springframework.context.annotation.Profile;
  */
 @Profile({"dev", "test"})
 @AutoConfiguration
+@ConditionalOnProperty(value = {"starfish.swagger.enabled"}, havingValue = "true")
 public class Swagger3AutoConfiguration {
 
     @Bean
@@ -47,19 +49,12 @@ public class Swagger3AutoConfiguration {
 
     @Bean
     public GroupedOpenApi publicApi() {
-        return GroupedOpenApi.builder()
-                .group("public")
-                .pathsToMatch("/**")
-                .pathsToExclude("/admin/**")
-                .build();
+        return GroupedOpenApi.builder().group("public").pathsToMatch("/**").pathsToExclude("/admin/**").build();
     }
 
     @Bean
     public GroupedOpenApi adminApi() {
-        return GroupedOpenApi.builder()
-                .group("admin")
-                .pathsToMatch("/admin/**")
-                .build();
+        return GroupedOpenApi.builder().group("admin").pathsToMatch("/admin/**").build();
     }
 
 }

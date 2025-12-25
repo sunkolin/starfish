@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * ApplicationConfig
- * 如果需要使用静态方法获取Bean，请使用SpringPlus类
+ * 如果需要使用静态方法获取Bean，请使用Springs类
  *
  * @author sunkolin
  * @version 1.0.0

@@ -18,11 +18,11 @@ public class CacheCondition extends SpringBootCondition {
     @Override
     public ConditionOutcome getMatchOutcome(ConditionContext context, AnnotatedTypeMetadata metadata) {
         Environment environment = context.getEnvironment();
-        Boolean cacheEnabled = environment.getProperty("application.cache.enabled", Boolean.class);
+        Boolean cacheEnabled = environment.getProperty("starfish.cache.enabled", Boolean.class);
         if (cacheEnabled != null && cacheEnabled) {
-            return ConditionOutcome.match("application.cache.enabled=true");
+            return ConditionOutcome.match("starfish.cache.enabled=true");
         } else {
-            return ConditionOutcome.noMatch("application.cache.enabled=false");
+            return ConditionOutcome.noMatch("starfish.cache.enabled=false");
         }
     }
 

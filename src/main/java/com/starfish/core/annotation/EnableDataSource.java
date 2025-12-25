@@ -1,6 +1,6 @@
 package com.starfish.core.annotation;
 
-import com.starfish.incubator.datasource.DataSourceImportSelector;
+import com.starfish.experiment.datasource.DataSourceImportSelector;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;

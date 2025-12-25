@@ -1,0 +1,79 @@
+{
+  "properties": [
+    {
+      "name": "starfish.datasource.enabed",
+      "type": "java.lang.String",
+      "description": "开启连接数据源."
+    },
+    {
+      "name": "starfish.exception.enabled",
+      "type": "java.lang.Boolean",
+      "description": "开启统一异常处理.",
+      "defaultValue": "true",
+      "sourceType": "com.starfish.core.exception.ExceptionProperties"
+    },
+    {
+      "name": "starfish.response-wrapper.enabled",
+      "type": "java.lang.Boolean",
+      "description": "开启结果封装.",
+      "defaultValue": "false",
+      "sourceType": "com.starfish.core.web.ResponseWrapperProperties"
+    },
+    {
+      "name": "starfish.elapsed-time.enabled",
+      "type": "java.lang.Boolean",
+      "description": "开启请求耗时记录.",
+      "defaultValue": "true",
+      "sourceType": "com.starfish.core.web.ElapsedTimeProperties"
+    },
+    {
+      "name": "starfish.trace.enabled",
+      "type": "java.lang.Boolean",
+      "description": "开启生成traceId.",
+      "defaultValue": "true",
+      "sourceType": "com.starfish.common.trace.TraceProperties"
+    },
+    {
+      "name": "starfish.cache.enabled",
+      "type": "java.lang.Boolean",
+      "description": "开启缓存.",
+      "defaultValue": "true",
+      "sourceType": "com.starfish.common.cache.CacheProperties"
+    },
+    {
+      "name": "starfish.cache.expire",
+      "type": "java.lang.Long",
+      "description": "缓存时间.",
+      "defaultValue": "true",
+      "sourceType": "com.starfish.common.cache.CacheProperties"
+    },
+    {
+      "name": "starfish.cache.weakKeys",
+      "type": "java.lang.Boolean",
+      "description": ".",
+      "defaultValue": "false",
+      "sourceType": "com.starfish.common.cache.CacheProperties"
+    },
+    {
+      "name": "starfish.cache.weakValues",
+      "type": "java.lang.Boolean",
+      "description": ".",
+      "defaultValue": "false",
+      "sourceType": "com.starfish.common.cache.CacheProperties"
+    },
+    {
+      "name": "starfish.cache.softValues",
+      "type": "java.lang.Boolean",
+      "description": ".",
+      "defaultValue": "false",
+      "sourceType": "com.starfish.common.cache.CacheProperties"
+    },
+    {
+      "name": "starfish.xxl.job.enabled",
+      "type": "java.lang.Boolean",
+      "description": "开启任务调度.",
+      "defaultValue": "false",
+      "sourceType": "com.starfish.common.cache.CacheProperties"
+    }
+  ]
+}

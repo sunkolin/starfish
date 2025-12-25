@@ -76,6 +76,11 @@ public class Constant {
     public static final String REQUEST_START_TIME = "REQUEST-START-TIME";
 
     /**
+     * 请求结束时间
+     */
+    public static final String REQUEST_END_TIME = "REQUEST-END-TIME";
+
+    /**
      * 框架版本
      */
     public static final String FRAMEWORK_VERSION = "1.0.0-SNAPSHOT";

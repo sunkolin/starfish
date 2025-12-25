@@ -13,3 +13,5 @@
 *.tar.gz
 /target/*
 hs_err_pid*
+/target/
+target

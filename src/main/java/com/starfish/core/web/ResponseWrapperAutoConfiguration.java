@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Bean;
  */
 @AutoConfiguration
 @EnableConfigurationProperties(ResponseWrapperProperties.class)
-@ConditionalOnProperty(prefix = "application.web.response-wrapper", name = "enabled", havingValue = "true")
+@ConditionalOnProperty(value = {"starfish.response-wrapper.enabled"}, havingValue = "true", matchIfMissing = false)
 public class ResponseWrapperAutoConfiguration {
 
     /**

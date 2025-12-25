@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Bean;
  */
 @Slf4j
 @AutoConfiguration
-@ConditionalOnProperty(prefix = "xxl.job", name = "enabled", havingValue = "true")
+@ConditionalOnProperty(value = {"starfish.xxl.job.enabled"}, havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties({XxlJobProperties.class})
 public class XxlJobAutoConfiguration {
 

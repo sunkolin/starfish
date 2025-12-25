@@ -1,13 +1,18 @@
 package com.starfish.core.util;
 
 import cn.hutool.core.text.CharSequenceUtil;
+import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
+import com.google.common.primitives.Ints;
+import com.google.common.primitives.Longs;
 import org.springframework.util.StringUtils;
 
 import java.security.SecureRandom;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -349,7 +354,7 @@ public class StringUtil {
      * @param value  指定字符串
      * @return 结果
      */
-    public static String trimString(String string, String value) {
+    public static String trim(String string, String value) {
         String result = string;
         if (string.startsWith(value)) {
             result = string.substring(1);
@@ -452,6 +457,32 @@ public class StringUtil {
     public static List<Long> splitToLong(String string, String separator) {
         List<String> stringList = Splitter.on(separator).splitToList(string);
         return stringList.stream().map(Long::valueOf).collect(Collectors.toList());
+    }
+
+    public static String toString(Map<?, ?> params) {
+        return Joiner.on("&").useForNull("").withKeyValueSeparator("=").join(params);
+    }
+
+    public static String toString(List<?> list) {
+        return Joiner.on(",").useForNull("null").join(list);
+    }
+
+    public static String toString(int[] array) {
+        List<Integer> list = Ints.asList(array);
+        return Joiner.on(",").useForNull("null").join(list);
+    }
+
+    public static String toString(long[] array) {
+        List<Long> list = Longs.asList(array);
+        return Joiner.on(",").useForNull("null").join(list);
+    }
+
+    public static String toString(String[] array) {
+        return Joiner.on(",").useForNull("null").join(array);
+    }
+
+    public static String toString(Object[] array) {
+        return Joiner.on(",").useForNull("null").join(array);
     }
 
 }

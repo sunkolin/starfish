@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @since 2021-06-08
  */
 @Data
-@ConfigurationProperties(prefix = "application.exception")
+@ConfigurationProperties(prefix = "strafish.exception")
 public class ExceptionProperties {
 
     /**
