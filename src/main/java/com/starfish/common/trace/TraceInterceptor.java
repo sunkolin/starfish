@@ -20,7 +20,7 @@ public class TraceInterceptor implements HandlerInterceptor, Ordered {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-       Trace.setTraceId();
+       Trace.setTraceId(request);
         return true;
     }
 

@@ -1,6 +1,7 @@
 package com.starfish.core.util;
 
 import com.google.common.base.Strings;
+import com.starfish.common.trace.Trace;
 import org.springframework.http.*;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -118,9 +119,12 @@ public final class RestTemplates {
         if (!CollectionUtils.isEmpty(headers)) {
             httpHeaders.setAll(headers);
         }
+        String traceId = Trace.getTraceId();
+        httpHeaders.add(Trace.TRACE_ID_NAME, traceId);
         if (!Strings.isNullOrEmpty(body)) {
             httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         }
+
         HttpEntity<String> httpEntity = new HttpEntity<>(body, httpHeaders);
         return REST_TEMPLATE.exchange(url, method, httpEntity, responseType);
     }
@@ -143,6 +147,8 @@ public final class RestTemplates {
         if (!CollectionUtils.isEmpty(headers)) {
             httpHeaders.setAll(headers);
         }
+        String traceId = Trace.getTraceId();
+        httpHeaders.add(Trace.TRACE_ID_NAME, traceId);
         if (!Strings.isNullOrEmpty(body)) {
             httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         }
