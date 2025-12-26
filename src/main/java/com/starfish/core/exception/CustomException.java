@@ -33,19 +33,12 @@ public class CustomException extends RuntimeException implements Serializable {
      */
     private final String description;
 
-//    public CustomException() {
-//        super(ResultEnum.SYSTEM_EXCEPTION.getMessage());
-//        this.code = ResultEnum.SYSTEM_EXCEPTION.getCode();
-//        this.message = ResultEnum.SYSTEM_EXCEPTION.getMessage();
-//        this.description = ResultEnum.SYSTEM_EXCEPTION.getMessage();
-//    }
-//
-//    public CustomException(Integer code) {
-//        super(ResultEnum.SYSTEM_EXCEPTION.getMessage());
-//        this.code = code;
-//        this.message = ResultEnum.SYSTEM_EXCEPTION.getMessage();
-//        this.description = ResultEnum.SYSTEM_EXCEPTION.getMessage();
-//    }
+    public CustomException() {
+        super(ResultEnum.SYSTEM_EXCEPTION.getMessage());
+        this.code = ResultEnum.SYSTEM_EXCEPTION.getCode();
+        this.message = ResultEnum.SYSTEM_EXCEPTION.getMessage();
+        this.description = ResultEnum.SYSTEM_EXCEPTION.getMessage();
+    }
 
     public CustomException(String message) {
         super(message);
