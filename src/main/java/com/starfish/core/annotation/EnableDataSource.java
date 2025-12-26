@@ -24,6 +24,7 @@ import java.lang.annotation.*;
 @Documented
 @Inherited
 @Import(DataSourceImportSelector.class)
+@Deprecated
 public @interface EnableDataSource {
 
     boolean value() default true;
