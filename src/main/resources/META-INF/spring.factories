@@ -1,2 +1,3 @@
 org.springframework.boot.EnvironmentPostProcessor=com.starfish.core.CustomEnvironmentPostProcessor
+org.springframework.context.ApplicationListener=com.starfish.common.trace.TraceApplicationStartingListener
 #org.springframework.boot.autoconfigure.AutoConfigurationImportFilter=com.starfish.experiment.datasource.DataSourceAutoConfigurationImportFilter
