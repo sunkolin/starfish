@@ -75,4 +75,10 @@ public class CustomException extends RuntimeException implements Serializable {
         this.description = exception.getMessage();
     }
 
+    public CustomException(ExceptionSupplier supplier) {
+        this.code = supplier.getCode();
+        this.message = supplier.getMessage();
+        this.description = supplier.getDescription();
+    }
+
 }

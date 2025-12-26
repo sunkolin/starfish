@@ -7,9 +7,12 @@ package com.starfish.core.exception;
  * @version 1.0.0
  * @since 2025-09-30
  */
-@FunctionalInterface
 public interface ExceptionSupplier {
 
-    ExceptionModel get();
+    Integer getCode();
+
+    String getMessage();
+
+    String getDescription();
 
 }
