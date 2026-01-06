@@ -55,6 +55,10 @@ public enum ResultEnum {
 
     NO_WRITE_PERMISSION(1016, "没有写权限"),
 
+    PUSH_DEER_PUSH_RESPONSE_STATUS_CODE_ERROR(1017, "PushDeer推送请求返回HttpStatusCode错误。"),
+
+    PUSH_DEER_PUSH_RETURN_CODE_ERROR(1018, "PushDeer推送请求返回code错误。"),
+
     ;
 
     /**
