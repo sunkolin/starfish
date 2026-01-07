@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * PushDeerImpl
+ * PushDeer
  * 参考文档1：<a href="https://www.pushdeer.com/official.html">...</a>
  * 参考文档2：<a href="https://ilovintit.github.io/pushdeer-api-doc/#/">...</a>
  *
@@ -22,17 +22,17 @@ import java.util.Map;
  * @version 1.0.0
  * @since 2026-01-06
  */
-public class PushDeerImpl implements Push {
+public class PushDeer implements Push {
 
     public static final int PUSH_DEER_SUCCESS_CODE = 0;
 
     private PushDeerProperties pushDeerProperties;
 
-    public PushDeerImpl() {
+    public PushDeer() {
 
     }
 
-    public PushDeerImpl(PushDeerProperties pushDeerProperties) {
+    public PushDeer(PushDeerProperties pushDeerProperties) {
         this.pushDeerProperties = pushDeerProperties;
     }
 

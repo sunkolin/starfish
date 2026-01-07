@@ -1,6 +1,6 @@
 package com.starfish.common.permission;
 
-import com.starfish.common.push.pushdeer.PushDeerImpl;
+import com.starfish.common.push.pushdeer.PushDeer;
 import com.starfish.common.push.pushdeer.PushDeerParam;
 import com.starfish.common.push.pushdeer.PushDeerProperties;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ public class PushDeerTest {
         param.setPushKey(pushKey);
         param.setText("你好，正在测试PushDeer");
         PushDeerProperties pushDeerProperties = new PushDeerProperties();
-        PushDeerImpl pushDeer = new PushDeerImpl(pushDeerProperties);
+        PushDeer pushDeer = new PushDeer(pushDeerProperties);
         pushDeer.push(param);
     }
 

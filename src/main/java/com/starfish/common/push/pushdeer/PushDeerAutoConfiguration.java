@@ -18,8 +18,8 @@ import org.springframework.context.annotation.Bean;
 public class PushDeerAutoConfiguration {
 
     @Bean("pushDeer")
-    public PushDeerImpl createPushDeer(PushDeerProperties pushDeerProperties) {
-        return new PushDeerImpl(pushDeerProperties);
+    public PushDeer createPushDeer(PushDeerProperties pushDeerProperties) {
+        return new PushDeer(pushDeerProperties);
     }
 
 }
