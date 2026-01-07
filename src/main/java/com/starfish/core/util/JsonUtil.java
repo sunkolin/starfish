@@ -35,72 +35,66 @@ public class JsonUtil {
         return objectMapper.readValue(json, cls);
     }
 
-    public static String getString(String json, String propertyName) {
+    public static JsonNode getJsonNode(String json, String propertyName) {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode rootNode = objectMapper.readTree(json);
         if (propertyName.contains(".")) {
             propertyName = propertyName.replace(".", "/");
-            return rootNode.at(propertyName).asString();
+            return rootNode.at(propertyName);
+        } else {
+            return rootNode.path(propertyName);
         }
-        return rootNode.path(propertyName).asString();
+    }
+
+    public static String getString(String json, String propertyName) {
+        JsonNode jsonNode = getJsonNode(json, propertyName);
+        return jsonNode.asString();
     }
 
     public static int getInt(String json, String propertyName) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode rootNode = objectMapper.readTree(json);
-        return rootNode.path(propertyName).asInt();
+        JsonNode jsonNode = getJsonNode(json, propertyName);
+        return jsonNode.asInt();
     }
 
     public static long getLong(String json, String propertyName) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode rootNode = objectMapper.readTree(json);
-        return rootNode.path(propertyName).asLong();
+        JsonNode jsonNode = getJsonNode(json, propertyName);
+        return jsonNode.asLong();
     }
 
     public static short getShort(String json, String propertyName) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode rootNode = objectMapper.readTree(json);
-        return rootNode.path(propertyName).asShort();
+        JsonNode jsonNode = getJsonNode(json, propertyName);
+        return jsonNode.asShort();
     }
 
     public static boolean getBoolean(String json, String propertyName) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode rootNode = objectMapper.readTree(json);
-        return rootNode.path(propertyName).asBoolean();
+        JsonNode jsonNode = getJsonNode(json, propertyName);
+        return jsonNode.asBoolean();
     }
 
     public static float getFloat(String json, String propertyName) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode rootNode = objectMapper.readTree(json);
-        return rootNode.path(propertyName).asFloat();
+        JsonNode jsonNode = getJsonNode(json, propertyName);
+        return jsonNode.asFloat();
     }
 
     public static double getDouble(String json, String propertyName) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode rootNode = objectMapper.readTree(json);
-        return rootNode.path(propertyName).asDouble();
+        JsonNode jsonNode = getJsonNode(json, propertyName);
+        return jsonNode.asDouble();
     }
 
     public static BigInteger getBigInteger(String json, String propertyName) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode rootNode = objectMapper.readTree(json);
-        return rootNode.path(propertyName).asBigInteger();
+        JsonNode jsonNode = getJsonNode(json, propertyName);
+        return jsonNode.asBigInteger();
     }
 
     public static BigDecimal getBigDecimal(String json, String propertyName) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode rootNode = objectMapper.readTree(json);
-        return rootNode.path(propertyName).asDecimal();
+        JsonNode jsonNode = getJsonNode(json, propertyName);
+        return jsonNode.asDecimal();
     }
 
     public static boolean has(String json, String propertyName) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode rootNode = objectMapper.readTree(json);
-        return rootNode.has(propertyName);
+        JsonNode jsonNode = getJsonNode(json, propertyName);
+        return jsonNode.has(propertyName);
     }
-
-//    JsonNode cityNode = rootNode.at("/user/address/city");
-
 
 }
 
