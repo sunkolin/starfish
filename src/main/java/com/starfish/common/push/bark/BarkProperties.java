@@ -16,7 +16,7 @@ public class BarkProperties {
 
     private boolean enabled = false;
 
-    private String baseUrl = "https://api.day.app";
+    private String baseUrl = "https://bark.day.app";
 
     private String messagePushUrl = "/push";
 

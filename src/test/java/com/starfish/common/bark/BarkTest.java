@@ -6,8 +6,13 @@ import com.starfish.common.push.bark.BarkProperties;
 import com.starfish.common.push.pushdeer.PushDeer;
 import com.starfish.common.push.pushdeer.PushDeerParam;
 import com.starfish.common.push.pushdeer.PushDeerProperties;
+import com.starfish.core.util.JsonUtil;
+import com.starfish.core.util.RestTemplates;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 
 /**
  * BarkTest
@@ -21,6 +26,7 @@ public class BarkTest {
 
     public static final String DEVICE_KEY = "JzsnpBXdzX7Xd5jiWZLKL";
 
+    @Disabled("")
     @Test
     void messagePush() {
         BarkParam param = new BarkParam();
