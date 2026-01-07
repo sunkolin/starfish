@@ -1,4 +1,4 @@
-package com.starfish.common.permission;
+package com.starfish.common.pushdeer;
 
 import com.starfish.common.push.pushdeer.PushDeer;
 import com.starfish.common.push.pushdeer.PushDeerParam;
