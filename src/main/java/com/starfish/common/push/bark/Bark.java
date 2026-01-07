@@ -17,7 +17,6 @@ import java.util.Map;
 /**
  * Bark
  * 参考文档1：<a href="https://bark.day.app/#/tutorial?id=%e5%8f%91%e9%80%81%e6%8e%a8%e9%80%81">...</a>
- * 参考文档2：<a href="https://ilovintit.github.io/pushdeer-api-doc/#/">...</a>
  *
  * @author sunkolin
  * @version 1.0.0
