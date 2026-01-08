@@ -1,17 +1,20 @@
 package com.starfish.common.push.bark;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.util.List;
 
 /**
  * PushDeerParam
+ * JsonInclude设置对象转json，如果对象中字段是null，不输出。原因：传null到bark接口中会有各种奇怪的错误
  *
  * @author sunkolin
  * @version 1.0.0
  * @since 2026-01-06
  */
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class BarkParam {
 
     /**

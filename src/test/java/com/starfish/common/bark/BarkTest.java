@@ -24,9 +24,9 @@ import org.springframework.http.ResponseEntity;
 @Slf4j
 public class BarkTest {
 
-    public static final String DEVICE_KEY = "JzsnpBXdzX7Xd5jiWZLKL";
+    public static final String DEVICE_KEY = "NxUUkyn3avVJtWq7aHNZMC";
 
-    @Disabled("")
+    @Disabled
     @Test
     void messagePush() {
         BarkParam param = new BarkParam();
@@ -34,6 +34,7 @@ public class BarkTest {
         param.setBody("你好，正在测试Bark");
         param.setDevice_key(DEVICE_KEY);
         BarkProperties barkProperties = new BarkProperties();
+        barkProperties.setBaseUrl("http://sunkolin.xyz:28080");
         Bark bark = new Bark(barkProperties);
         bark.push(param);
     }

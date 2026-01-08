@@ -1,5 +1,6 @@
 package com.starfish.common.push.bark;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.starfish.common.push.Push;
 import com.starfish.core.enumeration.ResultEnum;
 import com.starfish.core.model.Result;
@@ -9,7 +10,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.MapperFeature;
 import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.SerializationFeature;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +42,8 @@ public class Bark implements Push {
 
     public Result<Object> push(BarkParam param) {
         String url = barkProperties.getBaseUrl() + barkProperties.getMessagePushUrl();
+
+        // 对象转json，如果对象中字段是null，不输出。原因：传null到bark接口中会有各种奇怪的错误。
         String body = JsonUtil.toJson(param);
         ResponseEntity<String> responseEntity = RestTemplates.exchange(url, HttpMethod.POST, null, null, body, String.class);
         if (!HttpStatus.OK.equals(responseEntity.getStatusCode())) {
