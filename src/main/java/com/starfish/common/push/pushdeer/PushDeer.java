@@ -15,13 +15,15 @@ import java.util.Map;
 
 /**
  * PushDeer
- * 参考文档1：<a href="https://www.pushdeer.com/official.html">...</a>
- * 参考文档2：<a href="https://ilovintit.github.io/pushdeer-api-doc/#/">...</a>
+ * PushDeer已停止更新，建议使用Bark
+ * <a href="https://www.pushdeer.com/official.html">参考文档1</a>
+ * <a href="https://ilovintit.github.io/pushdeer-api-doc/#/">参考文档2</a>
  *
  * @author sunkolin
  * @version 1.0.0
  * @since 2026-01-06
  */
+@Deprecated
 public class PushDeer implements Push {
 
     public static final int PUSH_DEER_SUCCESS_CODE = 0;
