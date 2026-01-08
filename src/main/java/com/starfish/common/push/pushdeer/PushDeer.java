@@ -17,10 +17,12 @@ import java.util.Map;
  * PushDeer
  * PushDeer已停止更新，建议使用Bark
  * <a href="https://www.pushdeer.com/official.html">参考文档1</a>
- * <a href="https://ilovintit.github.io/pushdeer-api-doc/#/">参考文档2</a>
+ * <a href="https://ilovintit.github.io/pushdeer-api-doc/">参考文档2</a>
  *
  * @author sunkolin
  * @version 1.0.0
+ *
+ *
  * @since 2026-01-06
  */
 @Deprecated
