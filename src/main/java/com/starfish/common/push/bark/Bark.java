@@ -1,6 +1,5 @@
 package com.starfish.common.push.bark;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.starfish.common.push.Push;
 import com.starfish.core.enumeration.ResultEnum;
 import com.starfish.core.model.Result;
@@ -10,13 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.MapperFeature;
 import tools.jackson.databind.ObjectMapper;
-import tools.jackson.databind.SerializationFeature;
-import tools.jackson.databind.json.JsonMapper;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Bark
@@ -33,7 +26,7 @@ public class Bark implements Push {
     private BarkProperties barkProperties;
 
     public Bark() {
-
+        // Bark construct
     }
 
     public Bark(BarkProperties barkProperties) {

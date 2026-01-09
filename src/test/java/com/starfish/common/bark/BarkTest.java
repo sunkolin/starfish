@@ -3,16 +3,8 @@ package com.starfish.common.bark;
 import com.starfish.common.push.bark.Bark;
 import com.starfish.common.push.bark.BarkParam;
 import com.starfish.common.push.bark.BarkProperties;
-import com.starfish.common.push.pushdeer.PushDeer;
-import com.starfish.common.push.pushdeer.PushDeerParam;
-import com.starfish.common.push.pushdeer.PushDeerProperties;
-import com.starfish.core.util.JsonUtil;
-import com.starfish.core.util.RestTemplates;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 
 /**
  * BarkTest
