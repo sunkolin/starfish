@@ -45,7 +45,7 @@ public class Bark implements Push {
 
         // 对象转json，如果对象中字段是null，不输出。原因：传null到bark接口中会有各种奇怪的错误。
         String body = JsonUtil.toJson(param);
-        ResponseEntity<String> responseEntity = RestTemplates.exchange(url, HttpMethod.POST, null, null, body, String.class);
+        ResponseEntity<String> responseEntity = RestTemplates.exchangeSkipSsl(url, HttpMethod.POST, null, null, body, String.class);
         if (!HttpStatus.OK.equals(responseEntity.getStatusCode())) {
             return Result.fail(ResultEnum.BARK_PUSH_RESPONSE_STATUS_CODE_ERROR);
         }

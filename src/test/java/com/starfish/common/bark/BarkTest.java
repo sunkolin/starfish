@@ -24,15 +24,27 @@ import org.springframework.http.ResponseEntity;
 @Slf4j
 public class BarkTest {
 
-    public static final String DEVICE_KEY = "NxUUkyn3avVJtWq7aHNZMC";
+    public static final String OFFICIAL_CHANNEL_DEVICE_KEY = "JzsnpBXdzX7Xd5jiWZLKL";
 
-    @Disabled
+    public static final String OWN_CHANNEL_DEVICE_KEY = "NxUUkyn3avVJtWq7aHNZMC";
+
     @Test
-    void messagePush() {
+    void pushByOfficialChannel() {
         BarkParam param = new BarkParam();
         param.setTitle("Bark 通知");
         param.setBody("你好，正在测试Bark");
-        param.setDevice_key(DEVICE_KEY);
+        param.setDevice_key(OFFICIAL_CHANNEL_DEVICE_KEY);
+        BarkProperties barkProperties = new BarkProperties();
+        Bark bark = new Bark(barkProperties);
+        bark.push(param);
+    }
+
+    @Test
+    void pushByOwnChannel() {
+        BarkParam param = new BarkParam();
+        param.setTitle("Bark 通知");
+        param.setBody("你好，正在测试Bark");
+        param.setDevice_key(OWN_CHANNEL_DEVICE_KEY);
         BarkProperties barkProperties = new BarkProperties();
         barkProperties.setBaseUrl("http://sunkolin.xyz:28080");
         Bark bark = new Bark(barkProperties);
