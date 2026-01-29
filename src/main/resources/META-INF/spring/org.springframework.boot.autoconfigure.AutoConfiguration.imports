@@ -1,14 +1,15 @@
 com.starfish.core.SpringsAutoConfiguration
 
 com.starfish.core.web.AliveAutoConfiguration
-com.starfish.common.trace.TraceAutoConfiguration
 com.starfish.core.exception.ExceptionAutoConfiguration
-
-com.starfish.core.datasource.StarfishDataSourceAutoConfiguration
-com.starfish.common.cache.CacheAutoConfiguration
-com.starfish.common.task.XxlJobAutoConfiguration
-com.starfish.common.swagger.Swagger3AutoConfiguration
-
+com.starfish.common.trace.TraceAutoConfiguration
 com.starfish.core.web.RequestLogAutoConfiguration
 com.starfish.core.web.ResponseWrapperAutoConfiguration
 com.starfish.core.web.ElapsedTimeAutoConfiguration
+com.starfish.core.datasource.StarfishDataSourceAutoConfiguration
+
+com.starfish.common.cache.CacheAutoConfiguration
+com.starfish.common.task.XxlJobAutoConfiguration
+com.starfish.common.swagger.Swagger3AutoConfiguration
+com.starfish.common.push.bark.BarkAutoConfiguration
+com.starfish.common.storage.minio.MinioAutoConfiguration
