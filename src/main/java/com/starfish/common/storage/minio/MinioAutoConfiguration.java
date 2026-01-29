@@ -27,7 +27,7 @@ public class MinioAutoConfiguration {
     }
 
     @Bean("minioService")
-    public MinioService minioClient(MinioClient minioClient, MinioProperties minioProperties) {
+    public MinioService minioService(MinioClient minioClient, MinioProperties minioProperties) {
         return new MinioService(minioClient, minioProperties);
     }
 

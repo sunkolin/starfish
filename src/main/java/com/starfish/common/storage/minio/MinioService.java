@@ -52,7 +52,7 @@ public class MinioService {
      * @param objectName 存储到MinIO的文件名（如：images/2026/1.jpg）
      */
     public String uploadFile(MultipartFile file, String objectName) {
-        return uploadFile(file, objectName, minioProperties.getBucket());
+        return uploadFile(file, objectName, minioProperties.getBucketName());
     }
 
     /**
@@ -83,7 +83,7 @@ public class MinioService {
      * 下载文件（返回InputStream，适配SpringMVC响应流）
      */
     public InputStream downloadFile(String objectName) {
-        return downloadFile(objectName, minioProperties.getBucket());
+        return downloadFile(objectName, minioProperties.getBucketName());
     }
 
     /**
@@ -106,7 +106,7 @@ public class MinioService {
      * 删除文件
      */
     public void deleteFile(String objectName) {
-        deleteFile(objectName, minioProperties.getBucket());
+        deleteFile(objectName, minioProperties.getBucketName());
     }
 
     /**
@@ -129,7 +129,7 @@ public class MinioService {
      * 生成文件临时访问链接
      */
     public String getPresignedUrl(String objectName) {
-        return getPresignedUrl(objectName, minioProperties.getBucket(), minioProperties.getExpire());
+        return getPresignedUrl(objectName, minioProperties.getBucketName(), minioProperties.getExpire());
     }
 
     /**

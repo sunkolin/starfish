@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @since 2026-01-29
  */
 @Data
-@ConfigurationProperties(prefix = "starfish.s")
+@ConfigurationProperties(prefix = "starfish.minio")
 public class MinioProperties {
 
     private boolean enabled = false;
@@ -22,7 +22,7 @@ public class MinioProperties {
 
     private String secretKey;
 
-    private String bucket;
+    private String bucketName;
 
     private int expire;
 
