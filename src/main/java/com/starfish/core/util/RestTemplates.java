@@ -8,8 +8,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.JacksonJsonHttpMessageConverter;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.net.ssl.*;
@@ -114,7 +112,7 @@ public final class RestTemplates {
      * @return 结果
      */
     public static <T> ResponseEntity<T> exchange(String url, HttpMethod method, Map<String, String> headers, Map<String, String> params, String body, Class<T> responseType) {
-        url = CommonUtil.contact(url, params);
+        url = ObjectUtil.contact(url, params);
         HttpHeaders httpHeaders = new HttpHeaders();
         if (!CollectionUtils.isEmpty(headers)) {
             httpHeaders.setAll(headers);
@@ -142,7 +140,7 @@ public final class RestTemplates {
      * @return 结果
      */
     public static <T> ResponseEntity<T> exchangeSkipSsl(String url, HttpMethod method, Map<String, String> headers, Map<String, String> params, String body, Class<T> responseType) {
-        url = CommonUtil.contact(url, params);
+        url = ObjectUtil.contact(url, params);
         HttpHeaders httpHeaders = new HttpHeaders();
         if (!CollectionUtils.isEmpty(headers)) {
             httpHeaders.setAll(headers);

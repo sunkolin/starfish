@@ -4,9 +4,9 @@ import cn.hutool.core.text.CharSequenceUtil;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
 import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.security.SecureRandom;
@@ -30,9 +30,32 @@ public class StringUtil {
      */
     private static final String DELIMITER = "{}";
 
+    /**
+     * 空字符串
+     */
     private static final String EMPTY = "";
 
     private static final int INDEX_NOT_FOUND = -1;
+
+    /**
+     * &号
+     */
+    public static final String AMPERSAND_SYMBOL = "&";
+
+    /**
+     * 冒号
+     */
+    public static final String COLON_SYMBOL = ":";
+
+    /**
+     * 问号
+     */
+    public static final String QUESTION_MARK_SYMBOL = "?";
+
+    /**
+     * 等于号
+     */
+    public static final String EQUAL_SYMBOL = "=";
 
     /**
      * 英文字母
@@ -445,6 +468,66 @@ public class StringUtil {
     public static List<Integer> splitToInteger(String string, String separator) {
         List<String> stringList = Splitter.on(separator).splitToList(string);
         return stringList.stream().map(Integer::valueOf).collect(Collectors.toList());
+    }
+
+    /**
+     * 截取字符串，从第一个字符串中截取第二个字符串之前的内容
+     *
+     * @param sourceString    字符串1，例如http//:www.baidu.com/xxx.png?a=123456
+     * @param separatorString 字符串2，例如?
+     * @return 结果，例如http//:www.baidu.com/xxx.png
+     */
+    public static String substring(String sourceString, String separatorString) {
+        int index = sourceString.indexOf(separatorString);
+        if (index != -1) {
+            return sourceString.substring(0, index);
+        }
+        return sourceString;
+    }
+
+    /**
+     * 拼接参数到链接后
+     *
+     * @param url    链接地址
+     * @param params 参数
+     * @return 结果
+     */
+    public static String contact(String url, Map<?, ?> params) {
+        // 参数为空，则直接返回url
+        if (CollectionUtils.isEmpty(params)) {
+            return url == null ? "" : url;
+        }
+
+        // 参数不为空，拼接k=v字符串
+        String paramsString = Joiner.on("&").useForNull("").withKeyValueSeparator("=").join(params);
+
+        // 链接为空，直接返回拼接的字符串
+        if (Strings.isNullOrEmpty(url)) {
+            return paramsString;
+        }
+
+        // 链接不为空，拼接字符串
+        if (url.contains(QUESTION_MARK_SYMBOL)) {
+            url = url.concat(AMPERSAND_SYMBOL).concat(paramsString);
+        } else {
+            url = url.concat(QUESTION_MARK_SYMBOL).concat(paramsString);
+        }
+
+        return url;
+    }
+
+    public static String contact(Map<?, ?> params) {
+        return Joiner.on("&").useForNull("").withKeyValueSeparator("=").join(params);
+    }
+
+    /**
+     * 移除特殊字符
+     *
+     * @param string 字符串
+     * @return 结果
+     */
+    public static String removeSpecialCharacter(String string) {
+        return string.replace("\\", "").replace("/", "").replace("*", "").replace("?", "").replace("\"", "").replace(":", "").replace("<", "").replace(">", "").replace("|", "");
     }
 
     /**

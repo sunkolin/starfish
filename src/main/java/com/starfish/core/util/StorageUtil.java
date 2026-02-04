@@ -87,7 +87,7 @@ public class StorageUtil {
         //自动生成文件名称，不使用原名称
         // 日期17位，随机数字3位，uuid16位，一共36位
         String date = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
-        String uuid = CommonUtil.getUuid();
+        String uuid = ObjectUtil.getUuid();
         String number = StringUtil.random("0123456789", 3);
         String filename = date + uuid + number;
 
