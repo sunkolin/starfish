@@ -5,7 +5,6 @@ import com.starfish.core.enumeration.ResultEnum;
 import com.starfish.core.enumeration.SortEnum;
 import com.starfish.core.exception.CustomException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.CollectionUtils;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
@@ -106,7 +105,7 @@ public class CollectionUtil {
                 //java:S3011,Reflection should not be used to increase accessibility of classes, methods, or fields
 //                method.setAccessible(true);
                 Object v = method.invoke(obj);
-                if (CommonUtil.equals(v, value)) {
+                if (ObjectUtil.equals(v, value)) {
                     result.add(obj);
                 }
             }
