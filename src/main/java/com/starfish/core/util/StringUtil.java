@@ -471,6 +471,18 @@ public class StringUtil {
     }
 
     /**
+     * 切分字符串
+     *
+     * @param string    字符串
+     * @param separator 分割字符串
+     * @return 结果
+     */
+    public static List<Long> splitToLong(String string, String separator) {
+        List<String> stringList = Splitter.on(separator).splitToList(string);
+        return stringList.stream().map(Long::valueOf).collect(Collectors.toList());
+    }
+
+    /**
      * 截取字符串，从第一个字符串中截取第二个字符串之前的内容
      *
      * @param sourceString    字符串1，例如http//:www.baidu.com/xxx.png?a=123456
@@ -528,18 +540,6 @@ public class StringUtil {
      */
     public static String removeSpecialCharacter(String string) {
         return string.replace("\\", "").replace("/", "").replace("*", "").replace("?", "").replace("\"", "").replace(":", "").replace("<", "").replace(">", "").replace("|", "");
-    }
-
-    /**
-     * 切分字符串
-     *
-     * @param string    字符串
-     * @param separator 分割字符串
-     * @return 结果
-     */
-    public static List<Long> splitToLong(String string, String separator) {
-        List<String> stringList = Splitter.on(separator).splitToList(string);
-        return stringList.stream().map(Long::valueOf).collect(Collectors.toList());
     }
 
     public static String toString(Map<?, ?> params) {
