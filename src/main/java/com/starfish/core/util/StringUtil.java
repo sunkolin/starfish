@@ -196,6 +196,17 @@ public class StringUtil {
     }
 
     /**
+     * 删除字符串中所有指定子串
+     *
+     * @param string    字符串
+     * @param oldString 需要替换的字符串
+     * @return 结果
+     */
+    public static String delete(String string, String oldString) {
+        return StringUtils.delete(string, oldString);
+    }
+
+    /**
      * null转空字符串
      *
      * @param string 字符串
