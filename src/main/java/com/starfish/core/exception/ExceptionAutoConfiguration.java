@@ -1,9 +1,11 @@
 package com.starfish.core.exception;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 
 /**
  * ExceptionAutoConfiguration
@@ -13,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021-06-04
  */
 @Configuration(proxyBeanMethods = false)
+@ConditionalOnClass(HandlerExceptionResolver.class)
 @EnableConfigurationProperties(ExceptionProperties.class)
 @ConditionalOnProperty(prefix = "starfish.exception", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class ExceptionAutoConfiguration {
@@ -23,7 +26,7 @@ public class ExceptionAutoConfiguration {
      * @return 结果
      */
     @Bean
-    public DefaultExceptionResolver newExceptionResolver() {
+    public DefaultExceptionResolver defaultExceptionResolver() {
         return new DefaultExceptionResolver();
     }
 
