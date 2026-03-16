@@ -39,14 +39,23 @@ starfish:
     bucket-name: my-bucket-dev
     expire: 3600
 
-# spring.autoconfigure.exclude=org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration
 spring:
+  # 项目名称
+  application:
+    name: starfish
   # 数据库配置
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/xxx?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&autoReconnect=true
     username: xxx
     password: xxx
+  data:
+    # redis
+    redis:
+      host:
+      port: 6379
+      username: default
+      password:
   # 线程池配置
   task:
     execution:
@@ -60,16 +69,6 @@ spring:
         await-termination: true
         await-termination-period:
       thread-name-prefix: task-
-  data:
-    # redis
-    redis:
-      host:
-      port: 6379
-      username: default
-      password:
-  # 项目名称
-  application:
-    name: starfish
 
 server:
   # 服务端口
