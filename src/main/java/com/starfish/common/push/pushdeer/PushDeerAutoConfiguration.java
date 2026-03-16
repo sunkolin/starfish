@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
  * @since 2026-01-06
  */
 @AutoConfiguration
-@ConditionalOnProperty(value = {"starfish.pushdeer.enabled"}, havingValue = "true")
+@ConditionalOnProperty(value = {"starfish.push.pushdeer.enabled"}, havingValue = "true")
 @EnableConfigurationProperties({PushDeerProperties.class})
 public class PushDeerAutoConfiguration {
 

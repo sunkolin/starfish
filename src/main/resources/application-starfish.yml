@@ -47,10 +47,6 @@ springdoc:
     path: /swagger-ui.html
 
 starfish:
-  bark:
-    base-url: https://api.day.app
-    enabled: true
-    message-push-url: /push
   cache:
     enabled: true
     expire: 3600
@@ -74,9 +70,14 @@ starfish:
     endpoint: http://127.0.0.1:9000
     expire: 3600
     secret-key: OZGbQ31lTGptvH1Io6Wc5wfKfwvMxuQvuOZA3TtZ
-  pushdeer:
-    base-url: https://api2.pushdeer.com
-    enabled: false
-    message-push-url: /message/push
+  push:
+    pushdeer:
+      base-url: https://api2.pushdeer.com
+      enabled: false
+      message-push-url: /message/push
+    bark:
+      base-url: https://api.day.app
+      enabled: true
+      message-push-url: /push
   response-wrapper:
     enabled: false

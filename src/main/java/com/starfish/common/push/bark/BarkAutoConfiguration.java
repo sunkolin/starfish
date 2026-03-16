@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
  * @since 2026-01-06
  */
 @AutoConfiguration
-@ConditionalOnProperty(value = {"starfish.bark.enabled"}, havingValue = "true")
+@ConditionalOnProperty(value = {"starfish.push.bark.enabled"}, havingValue = "true")
 @EnableConfigurationProperties({BarkProperties.class})
 public class BarkAutoConfiguration {
 
