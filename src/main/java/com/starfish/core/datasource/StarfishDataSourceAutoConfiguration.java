@@ -2,6 +2,7 @@ package com.starfish.core.datasource;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
 import org.springframework.boot.jdbc.autoconfigure.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.boot.jdbc.autoconfigure.JdbcTemplateAutoConfiguration;
@@ -18,7 +19,8 @@ import org.springframework.context.annotation.Import;
  * @since 2025-12-24
  */
 @AutoConfiguration
-@ConditionalOnProperty(value = "spring.datasource.enabled", havingValue = "true")
+@ConditionalOnProperty(value = "starfish.datasource.enabled", havingValue = "true")
+@EnableConfigurationProperties({StarfishDataSourceProperties.class})
 @Import({DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, JdbcTemplateAutoConfiguration.class})
 public class StarfishDataSourceAutoConfiguration {
 

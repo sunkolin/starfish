@@ -1,0 +1,95 @@
+# datasource
+starfish:
+  datasource:
+    enabled: true
+  # 缓存
+  cache:
+    enabled: true
+    expire: 3600
+  # 异常处理，默认开启
+  exception:
+    enabled: true
+  elapsed-time:
+    enabled: false
+  # 自定义线程池配置
+  executor:
+    corePoolSize: 10
+    enabled: false
+    keepAliveSeconds: 60
+    maxPoolSize: 10
+    queueCapacity: 2147483647
+    rejectedExecutionHandler: java.util.concurrent.ThreadPoolExecutor$AbortPolicy
+  response-wrapper:
+    enabled: false
+  # bark 推送
+  bark:
+    enabled: true
+    base-url: https://api.day.app
+    message-push-url: /push
+  pushdeer:
+    enabled: false
+    base-url: https://api2.pushdeer.com
+    message-push-url: /message/push
+  # minio配置
+  minio:
+    enabled: false
+    endpoint: http://127.0.0.1:9000
+    access-key: yLYYn14VnYcdLyOnOY12
+    secret-key: OZGbQ31lTGptvH1Io6Wc5wfKfwvMxuQvuOZA3TtZ
+    bucket-name: my-bucket-dev
+    expire: 3600
+
+# spring.autoconfigure.exclude=org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration
+spring:
+  # 数据库配置
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/xxx?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&autoReconnect=true
+    username: xxx
+    password: xxx
+  # 线程池配置
+  task:
+    execution:
+      pool:
+        allow-core-thread-timeout: true
+        core-size: 8
+        keep-alive: 60s
+        max-size: 8
+        queue-capacity: 2147483647
+      shutdown:
+        await-termination: true
+        await-termination-period:
+      thread-name-prefix: task-
+  data:
+    # redis
+    redis:
+      host:
+      port: 6379
+      username: default
+      password:
+  # 项目名称
+  application:
+    name: starfish
+
+server:
+  # 服务端口
+  port: 8080
+
+# swagger 接口文档配置
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  group-configs:
+    - group: public
+      paths-to-exclude:
+        - /api/admin/**
+      paths-to-match:
+        - /api/**
+    - group: admin
+      paths-to-match:
+        - /api/admin/**
+  packages-to-scan: com.starfish.core.controller
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
