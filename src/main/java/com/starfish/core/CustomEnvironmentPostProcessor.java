@@ -24,20 +24,24 @@ import java.util.List;
  */
 public class CustomEnvironmentPostProcessor implements EnvironmentPostProcessor, Ordered {
 
-    @SuppressWarnings("unused")
     private static final YamlPropertySourceLoader YAML_LOADER = new YamlPropertySourceLoader();
 
+    @SuppressWarnings("unused")
     private static final PropertiesPropertySourceLoader PROPERTIES_LOADER = new PropertiesPropertySourceLoader();
 
     @SneakyThrows
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
-        // 加载配置文件
-        Resource resource = new ClassPathResource("/application-starfish.properties");
-        List<PropertySource<?>> propertySourceList = PROPERTIES_LOADER.load("starfish", resource);
-        PropertySource<?> propertySource = propertySourceList.get(0);
+        // 加载配置文件,最低优先级
+//        Resource resource = new ClassPathResource("/application-starfish.properties");
+//        List<PropertySource<?>> propertySourceList = PROPERTIES_LOADER.load("starfish", resource);
+//        PropertySource<?> propertySource = propertySourceList.get(0);
+//        environment.getPropertySources().addLast(propertySource);
 
-        // 最低优先级
+        // 加载配置文件,最低优先级
+        Resource resource = new ClassPathResource("/application-starfish.yml");
+        List<PropertySource<?>> propertySourceList = YAML_LOADER.load("starfish", resource);
+        PropertySource<?> propertySource = propertySourceList.get(0);
         environment.getPropertySources().addLast(propertySource);
     }
 
