@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * SuperRestTemplate
+ * RestTemplates
  * 使用方式有两种
  * 1 RestTemplate restTemplate = RestTemplates.buildRestTemplate();
  * 2 RestTemplate superRestTemplate = RestTemplates.buildRestTemplatePlus();
