@@ -1,7 +1,7 @@
 package com.starfish.example;
 
 import com.starfish.core.util.JsonUtil;
-import com.starfish.experiment.RankList;
+import com.starfish.core.model.RankList;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -23,8 +23,8 @@ class RankListTest {
 
     @Test
     void test() {
-        Comparator<Student> comparator = Comparator.comparingInt(Student::getScore);
-        RankList<Student> rankList = new RankList<>(3, comparator.reversed());
+        Comparator<Student> comparator = Comparator.comparingInt(Student::getScore).reversed();
+        RankList<Student> rankList = new RankList<>(3, comparator);
 
         Student student1 = new Student("tom", 98);
         Student student2 = new Student("jack", 80);
@@ -42,7 +42,7 @@ class RankListTest {
         Assertions.assertEquals(3, rankList.size());
 
         // 验证排序
-        Assertions.assertEquals(rankList.getList().get(0), student5);
+        Assertions.assertEquals(rankList.getRank().get(0), student5);
 
         for (Student student : rankList) {
             log.info(JsonUtil.toJson(student));
