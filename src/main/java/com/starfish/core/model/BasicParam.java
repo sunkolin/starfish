@@ -23,17 +23,17 @@ public class BasicParam extends BasicModel implements Serializable {
     /**
      * 当前页数
      */
-    private Integer page;
+    private Long page;
 
     /**
      * 偏移量，offset = count * (page - 1);
      */
-    private Integer offset;
+    private Long offset;
 
     /**
      * 查询参数 一页查询条数
      */
-    private Integer count;
+    private Long pageSize;
 
     /**
      * 开始时间，查询时候用到参数
