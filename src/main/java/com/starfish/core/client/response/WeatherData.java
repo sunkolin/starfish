@@ -1,4 +1,4 @@
-package com.starfish.core.client.result;
+package com.starfish.core.client.response;
 
 import lombok.Data;
 

@@ -1,6 +1,7 @@
 package com.starfish.core.client;
 
-import com.starfish.core.client.result.WeatherModel;
+import com.starfish.core.client.request.WeatherRequest;
+import com.starfish.core.client.response.WeatherResponse;
 
 /**
  * WeatherClient
@@ -14,8 +15,8 @@ public interface WeatherClient {
     /**
      * 根据城市名称查询天气
      *
-     * @param cityName 城市名称
+     * @param weatherRequest 参数
      * @return 结果
      */
-    WeatherModel getWeather(String cityName);
+    WeatherResponse getWeather(WeatherRequest weatherRequest);
 }
