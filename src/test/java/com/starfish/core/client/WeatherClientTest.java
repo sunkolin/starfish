@@ -1,7 +1,8 @@
 package com.starfish.core.client;
 
 import com.starfish.core.client.impl.WeatherClientImpl;
-import com.starfish.core.client.result.WeatherModel;
+import com.starfish.core.client.request.WeatherRequest;
+import com.starfish.core.client.response.WeatherResponse;
 import com.starfish.core.util.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
@@ -21,8 +22,9 @@ class WeatherClientTest {
     @Disabled("Network does not work")
     @Test
     void getWeatherTest() {
-        String cityName = "北京市";
-        WeatherModel result = new WeatherClientImpl().getWeather(cityName);
+        WeatherRequest weatherRequest = new WeatherRequest();
+        weatherRequest.setCityName("北京市");
+        WeatherResponse result = new WeatherClientImpl().getWeather(weatherRequest);
         log.info(JsonUtil.toJson(result));
         Assertions.assertNotNull(result);
     }
