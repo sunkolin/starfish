@@ -4,12 +4,12 @@ server:
 spring:
   application:
     name: starfish
-  data:
-    redis:
-      host:
-      password:
-      port: 6379
-      username: default
+#  data:
+#    redis:
+#      host:
+#      username: default
+#      password:
+#      port: 6379
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     password: xxx
