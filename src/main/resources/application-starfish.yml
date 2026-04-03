@@ -1,53 +1,20 @@
-# datasource
-starfish:
-  datasource:
-    enabled: true
-  # 缓存
-  cache:
-    enabled: true
-    expire: 3600
-  # 异常处理，默认开启
-  exception:
-    enabled: true
-  elapsed-time:
-    enabled: false
-  # 自定义线程池配置
-  executor:
-    corePoolSize: 10
-    enabled: false
-    keepAliveSeconds: 60
-    maxPoolSize: 10
-    queueCapacity: 2147483647
-    rejectedExecutionHandler: java.util.concurrent.ThreadPoolExecutor$AbortPolicy
-  response-wrapper:
-    enabled: false
-  # bark 推送
-  bark:
-    enabled: true
-    base-url: https://api.day.app
-    message-push-url: /push
-  pushdeer:
-    enabled: false
-    base-url: https://api2.pushdeer.com
-    message-push-url: /message/push
-  # minio配置
-  minio:
-    enabled: false
-    endpoint: http://127.0.0.1:9000
-    access-key: yLYYn14VnYcdLyOnOY12
-    secret-key: OZGbQ31lTGptvH1Io6Wc5wfKfwvMxuQvuOZA3TtZ
-    bucket-name: my-bucket-dev
-    expire: 3600
+server:
+  port: 8080
 
-# spring.autoconfigure.exclude=org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration
 spring:
-  # 数据库配置
+  application:
+    name: starfish
+#  data:
+#    redis:
+#      host:
+#      username: default
+#      password:
+#      port: 6379
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
+    password: xxx
     url: jdbc:mysql://127.0.0.1:3306/xxx?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&autoReconnect=true
     username: xxx
-    password: xxx
-  # 线程池配置
   task:
     execution:
       pool:
@@ -60,36 +27,57 @@ spring:
         await-termination: true
         await-termination-period:
       thread-name-prefix: task-
-  data:
-    # redis
-    redis:
-      host:
-      port: 6379
-      username: default
-      password:
-  # 项目名称
-  application:
-    name: starfish
 
-server:
-  # 服务端口
-  port: 8080
-
-# swagger 接口文档配置
 springdoc:
   api-docs:
     enabled: true
     path: /v3/api-docs
   group-configs:
+    - group: admin
+      paths-to-match:
+        - /api/admin/**
     - group: public
       paths-to-exclude:
         - /api/admin/**
       paths-to-match:
         - /api/**
-    - group: admin
-      paths-to-match:
-        - /api/admin/**
   packages-to-scan: com.starfish.core.controller
   swagger-ui:
     enabled: true
     path: /swagger-ui.html
+
+starfish:
+  cache:
+    enabled: true
+    expire: 3600
+  datasource:
+    enabled: true
+  elapsed-time:
+    enabled: false
+  exception:
+    enabled: true
+  executor:
+    corePoolSize: 10
+    enabled: false
+    keepAliveSeconds: 60
+    maxPoolSize: 10
+    queueCapacity: 2147483647
+    rejectedExecutionHandler: java.util.concurrent.ThreadPoolExecutor$AbortPolicy
+  minio:
+    access-key: yLYYn14VnYcdLyOnOY12
+    bucket-name: my-bucket-dev
+    enabled: false
+    endpoint: http://127.0.0.1:9000
+    expire: 3600
+    secret-key: OZGbQ31lTGptvH1Io6Wc5wfKfwvMxuQvuOZA3TtZ
+  push:
+    pushdeer:
+      base-url: https://api2.pushdeer.com
+      enabled: false
+      message-push-url: /message/push
+    bark:
+      base-url: https://api.day.app
+      enabled: true
+      message-push-url: /push
+  response-wrapper:
+    enabled: false

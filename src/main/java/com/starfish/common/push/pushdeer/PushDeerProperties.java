@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @since 2026-01-06
  */
 @Data
-@ConfigurationProperties(prefix = "starfish.pushdeer")
+@ConfigurationProperties(prefix = "starfish.push.pushdeer")
 public class PushDeerProperties {
 
     private boolean enabled = false;

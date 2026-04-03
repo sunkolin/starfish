@@ -1,4 +1,4 @@
-package com.starfish.core.client.result;
+package com.starfish.core.client.response;
 
 import lombok.Data;
 
@@ -70,7 +70,7 @@ import lombok.Data;
  * @since 2021-03-08
  */
 @Data
-public class WeatherModel {
+public class WeatherResponse {
 
     /**
      * 状态

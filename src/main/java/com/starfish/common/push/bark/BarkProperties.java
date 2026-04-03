@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @since 2026-01-07
  */
 @Data
-@ConfigurationProperties(prefix = "starfish.bark")
+@ConfigurationProperties(prefix = "starfish.push.bark")
 public class BarkProperties {
 
     private boolean enabled = false;

@@ -1,4 +1,4 @@
-package com.starfish.experiment;
+package com.starfish.core.model;
 
 import java.util.Comparator;
 import java.util.List;
@@ -31,7 +31,7 @@ public class RankList<E> extends cn.hutool.core.collection.BoundedPriorityQueue<
         return super.offer(e);
     }
 
-    public List<E> getList() {
+    public List<E> getRank() {
         return super.toList();
     }
 
