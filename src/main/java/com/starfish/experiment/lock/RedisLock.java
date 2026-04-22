@@ -33,10 +33,8 @@ public class RedisLock implements Lock, Closeable {
     private final StringRedisTemplate stringRedisTemplate;
 
     /**
-     * 锁名称
+     * 锁名称 用于生成redis key
      */
-    private final String name;
-
     private final String redisKey;
 
     private static final String REDIS_VALUE_PREFIX = UUID.randomUUID() + "-";
@@ -48,8 +46,7 @@ public class RedisLock implements Lock, Closeable {
 
     public RedisLock(String name, int expire) {
         stringRedisTemplate = Springs.getBean(StringRedisTemplate.class);
-        this.name = name;
-        this.redisKey = "starfish:redisLock:" + name;
+        this.redisKey = name;
         this.expire = expire;
     }
 
@@ -58,7 +55,8 @@ public class RedisLock implements Lock, Closeable {
         String threadId = String.valueOf(Thread.currentThread().getId());
         String redisValue = REDIS_VALUE_PREFIX + threadId;
         ValueOperations<String, String> valueOperations = stringRedisTemplate.opsForValue();
-        return Boolean.TRUE.equals(valueOperations.setIfAbsent(redisKey, redisValue, expire, TimeUnit.MILLISECONDS));
+        return Boolean.TRUE.equals(
+                valueOperations.setIfAbsent(redisKey, redisValue, expire, TimeUnit.MILLISECONDS));
     }
 
     @Override

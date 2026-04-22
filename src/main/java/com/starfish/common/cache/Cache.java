@@ -16,13 +16,12 @@ public interface Cache {
      * @param <T> T
      * @return 结果
      */
-    @SuppressWarnings("unchecked")
     <T> T get(Object key);
 
     /**
      * 设置
      *
-     * @param key   键
+     * @param key 键
      * @param value 值
      */
     void set(Object key, Object value);

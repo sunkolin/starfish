@@ -17,9 +17,11 @@ public class RankList<E> extends cn.hutool.core.collection.BoundedPriorityQueue<
      *
      * @param capacity 条数
      */
+    @SuppressWarnings("unchecked")
     public RankList(int capacity) {
-        //noinspection unchecked
-        super(capacity, ((Comparator<E>) (o1, o2) -> ((Comparable<E>) o1).compareTo(o2)).reversed());
+        // noinspection unchecked
+        super(capacity,
+                ((Comparator<E>) (o1, o2) -> ((Comparable<E>) o1).compareTo(o2)).reversed());
     }
 
     public RankList(int capacity, Comparator<? super E> comparator) {

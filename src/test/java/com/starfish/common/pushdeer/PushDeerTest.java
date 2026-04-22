@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
  * @since 2026-01-06
  */
 @Slf4j
+@Deprecated
 public class PushDeerTest {
 
     public static final String pushKey = "PDU32883T0Odg11tOI7DT366uZztGMY4INwV967j7";
