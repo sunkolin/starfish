@@ -1,7 +1,7 @@
 package com.starfish.core.web;
 
 import com.starfish.core.constant.Constant;
-import com.starfish.core.model.TimeBasedResult;
+import com.starfish.core.model.ElapsedTimeResult;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServletRequest;
  * @since 2019-07-03
  */
 @ControllerAdvice
-public class TimeBasedResultAdvice implements ResponseBodyAdvice<TimeBasedResult<Object>> {
+public class ElapsedTimeAdvice implements ResponseBodyAdvice<ElapsedTimeResult<Object>> {
 
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
@@ -29,7 +29,7 @@ public class TimeBasedResultAdvice implements ResponseBodyAdvice<TimeBasedResult
     }
 
     @Override
-    public TimeBasedResult<Object> beforeBodyWrite(TimeBasedResult<Object> body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
+    public ElapsedTimeResult<Object> beforeBodyWrite(ElapsedTimeResult<Object> body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
         ServletServerHttpRequest servletServerHttpRequest = (ServletServerHttpRequest) request;
         HttpServletRequest httpServletRequest = servletServerHttpRequest.getServletRequest();
 

@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class TimeBasedResult<T> extends Result<T> implements Serializable {
+public class ElapsedTimeResult<T> extends Result<T> implements Serializable {
 
     /**
      * 请求时间
