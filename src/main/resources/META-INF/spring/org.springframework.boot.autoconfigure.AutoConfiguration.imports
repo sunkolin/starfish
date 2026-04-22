@@ -10,6 +10,6 @@ com.starfish.core.datasource.StarfishDataSourceAutoConfiguration
 
 com.starfish.common.cache.CacheAutoConfiguration
 com.starfish.common.task.XxlJobAutoConfiguration
-com.starfish.common.swagger.Swagger3AutoConfiguration
-com.starfish.common.push.bark.BarkAutoConfiguration
+com.starfish.common.document.swagger.Swagger3AutoConfiguration
+com.starfish.common.push.barkPushService.BarkAutoConfiguration
 com.starfish.common.storage.minio.MinioAutoConfiguration

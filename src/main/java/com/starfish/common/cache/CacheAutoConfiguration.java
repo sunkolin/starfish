@@ -2,6 +2,7 @@ package com.starfish.common.cache;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.starfish.common.cache.guava.GuavaCacheImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.CacheManager;
@@ -65,9 +66,9 @@ public class CacheAutoConfiguration {
         return cacheManager;
     }
 
-    @Bean(name = "cacheImpl")
-    public CacheImpl newCaffeineCacheImpl(Cache<Object, Object> caffeineCache) {
-        return new CacheImpl(caffeineCache);
+    @Bean(name = "guavaCacheImpl")
+    public GuavaCacheImpl newCaffeineCacheImpl(Cache<Object, Object> caffeineCache) {
+        return new GuavaCacheImpl(caffeineCache);
     }
 
 }

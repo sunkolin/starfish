@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BarkParam {
+public class BarkRequest {
 
     /**
      * 推送标题

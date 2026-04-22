@@ -10,7 +10,7 @@ import lombok.Data;
  * @since 2026-01-06
  */
 @Data
-public class PushDeerParam {
+public class PushDeerRequest {
 
     /**
      * PushKey

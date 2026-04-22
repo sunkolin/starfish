@@ -1,5 +1,7 @@
 package com.starfish.common.cache;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Cache
  *
@@ -8,6 +10,14 @@ package com.starfish.common.cache;
  * @since 2021-06-11
  */
 public interface Cache {
+
+    /**
+     * 判断一个key是否已经缓存
+     *
+     * @param key 键
+     * @return 结果
+     */
+    boolean exist(Object key);
 
     /**
      * 获取，如果不存在则返回null
@@ -21,25 +31,25 @@ public interface Cache {
     /**
      * 设置
      *
-     * @param key 键
+     * @param key   键
      * @param value 值
      */
     void set(Object key, Object value);
 
     /**
-     * 判断一个key是否已经缓存
+     * 设置
      *
-     * @param key 键
-     * @return 结果
+     * @param key   键
+     * @param value 值
      */
-    boolean exist(Object key);
+    void set(Object key, Object value, long time, TimeUnit timeUnit);
 
     /**
      * 移除
      *
      * @param key 键
      */
-    void remove(Object key);
+    void delete(Object key);
 
     /**
      * 清除

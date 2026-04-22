@@ -1,4 +1,4 @@
-package com.starfish.common.swagger;
+package com.starfish.common.document.swagger;
 
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;

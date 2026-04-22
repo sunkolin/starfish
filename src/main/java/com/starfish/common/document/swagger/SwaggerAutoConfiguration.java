@@ -1,4 +1,4 @@
-package com.starfish.common.swagger;
+package com.starfish.common.document.swagger;
 
 /**
  * SwaggerConfig

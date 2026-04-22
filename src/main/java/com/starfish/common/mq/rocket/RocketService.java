@@ -1,18 +1,18 @@
-package com.starfish.common.elastic;
+package com.starfish.common.mq.rocket;
 
 /**
- * ElasticSearch
+ * Rocket
  *
  * @author sunkolin
  * @version 1.0.0
  * @since 2022-08-02
  */
-public class ElasticSearch {
+public class RocketService {
 
     /**
      * constructor
      */
-    private ElasticSearch() {
+    private RocketService() {
     }
 
 }

@@ -18,8 +18,8 @@ import org.springframework.context.annotation.Bean;
 public class BarkAutoConfiguration {
 
     @Bean("bark")
-    public Bark createPushDeer(BarkProperties barkProperties) {
-        return new Bark(barkProperties);
+    public BarkPushService createPushDeer(BarkProperties barkProperties) {
+        return new BarkPushService(barkProperties);
     }
 
 }

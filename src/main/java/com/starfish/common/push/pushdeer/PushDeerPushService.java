@@ -24,7 +24,7 @@ import java.util.Map;
  * @since 2026-01-06
  */
 @Deprecated
-public class PushDeer implements Push {
+public class PushDeerPushService implements Push {
 
     @Deprecated
     public static final int PUSH_DEER_SUCCESS_CODE = 0;
@@ -32,17 +32,17 @@ public class PushDeer implements Push {
     private PushDeerProperties pushDeerProperties;
 
     @Deprecated
-    public PushDeer() {
+    public PushDeerPushService() {
 
     }
 
     @Deprecated
-    public PushDeer(PushDeerProperties pushDeerProperties) {
+    public PushDeerPushService(PushDeerProperties pushDeerProperties) {
         this.pushDeerProperties = pushDeerProperties;
     }
 
     @Deprecated
-    public Result<Object> push(PushDeerParam param) {
+    public Result<Object> push(PushDeerRequest param) {
         Map<String, String> params = new HashMap<>();
         params.put("pushkey", param.getPushKey());
         params.put("text", param.getText());

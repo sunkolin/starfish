@@ -20,8 +20,8 @@ public class PushDeerAutoConfiguration {
 
     @Bean("pushDeer")
     @Deprecated
-    public PushDeer createPushDeer(PushDeerProperties pushDeerProperties) {
-        return new PushDeer(pushDeerProperties);
+    public PushDeerPushService createPushDeer(PushDeerProperties pushDeerProperties) {
+        return new PushDeerPushService(pushDeerProperties);
     }
 
 }

@@ -1,4 +1,6 @@
-package com.starfish.common.cache;
+package com.starfish.common.cache.guava;
+
+import com.starfish.common.cache.Cache;
 
 /**
  * Cache,使用caffeine做本地缓存
@@ -7,7 +9,7 @@ package com.starfish.common.cache;
  * @version 1.0.0
  * @since 2021-06-11
  */
-public class CacheImpl implements Cache {
+public class GuavaCacheImpl implements GuavaCache {
 
     /**
      * exist后缀
@@ -16,7 +18,7 @@ public class CacheImpl implements Cache {
 
     private final com.github.benmanes.caffeine.cache.Cache<Object, Object> caffeineCache;
 
-    public CacheImpl(com.github.benmanes.caffeine.cache.Cache<Object, Object> caffeineCache) {
+    public GuavaCacheImpl(com.github.benmanes.caffeine.cache.Cache<Object, Object> caffeineCache) {
         this.caffeineCache = caffeineCache;
     }
 
@@ -39,7 +41,7 @@ public class CacheImpl implements Cache {
     }
 
     @Override
-    public void remove(Object key) {
+    public void delete(Object key) {
         caffeineCache.invalidate(key);
         caffeineCache.invalidate(key + EXIST_SUFFIX);
     }

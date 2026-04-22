@@ -19,21 +19,21 @@ import tools.jackson.databind.ObjectMapper;
  * @version 1.0.0
  * @since 2026-01-06
  */
-public class Bark implements Push {
+public class BarkPushService implements Push {
 
     public static final int PUSH_DEER_SUCCESS_CODE = 0;
 
     private BarkProperties barkProperties;
 
-    public Bark() {
+    public BarkPushService() {
         // Bark construct
     }
 
-    public Bark(BarkProperties barkProperties) {
+    public BarkPushService(BarkProperties barkProperties) {
         this.barkProperties = barkProperties;
     }
 
-    public Result<Object> push(BarkParam param) {
+    public Result<Object> push(BarkRequest param) {
         String url = barkProperties.getBaseUrl() + barkProperties.getMessagePushUrl();
 
         // 对象转json，如果对象中字段是null，不输出。原因：传null到bark接口中会有各种奇怪的错误。

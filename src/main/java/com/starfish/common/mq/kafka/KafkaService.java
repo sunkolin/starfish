@@ -1,18 +1,18 @@
-package com.starfish.common.nacos;
+package com.starfish.common.mq.kafka;
 
 /**
- * Nacos
+ * Kafka
  *
  * @author sunkolin
  * @version 1.0.0
  * @since 2022-08-02
  */
-public class Nacos {
+public class KafkaService {
 
     /**
      * constructor
      */
-    private Nacos() {
+    private KafkaService() {
     }
 
 }
