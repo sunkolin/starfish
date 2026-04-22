@@ -15,10 +15,5 @@ import org.springframework.context.annotation.Import;
 @AutoConfiguration(after = {TraceAutoConfiguration.class, ElapsedTimeAutoConfiguration.class})
 public class WebAutoConfiguration {
 
-    // @Bean
-    // public WebConfig createWebConfig(TraceInterceptor traceInterceptor, ElapsedTimeInterceptor
-    // elapsedTimeInterceptor, SwaggerInterceptor swaggerInterceptor) {
-    // return new WebConfig(traceInterceptor, elapsedTimeInterceptor, swaggerInterceptor);
-    // }
 
 }
