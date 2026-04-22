@@ -1,4 +1,4 @@
-package com.starfish.common.cache;
+package com.starfish.common.cache.caffeine;
 
 import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
 import org.springframework.boot.autoconfigure.condition.SpringBootCondition;
@@ -13,12 +13,12 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
  * @version 1.0.0
  * @since 2021-06-11
  */
-public class CacheCondition extends SpringBootCondition {
+public class CaffeineCacheCondition extends SpringBootCondition {
 
     @Override
     public ConditionOutcome getMatchOutcome(ConditionContext context, AnnotatedTypeMetadata metadata) {
         Environment environment = context.getEnvironment();
-        Boolean cacheEnabled = environment.getProperty("starfish.cache.enabled", Boolean.class);
+        Boolean cacheEnabled = environment.getProperty("starfish.cache.caffeine.enabled", Boolean.class);
         if (cacheEnabled != null && cacheEnabled) {
             return ConditionOutcome.match("starfish.cache.enabled=true");
         } else {

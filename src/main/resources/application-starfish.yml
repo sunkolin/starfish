@@ -48,8 +48,9 @@ springdoc:
 
 starfish:
   cache:
-    enabled: true
-    expire: 3600
+    caffeine:
+      enabled: true
+      expire: 3600
   datasource:
     enabled: true
   elapsed-time:

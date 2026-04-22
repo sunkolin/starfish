@@ -1,8 +1,7 @@
-package com.starfish.common.cache;
+package com.starfish.common.cache.caffeine;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.starfish.common.cache.guava.GuavaCacheImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.CacheManager;
@@ -11,8 +10,6 @@ import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
-
-import jakarta.annotation.Resource;
 
 import java.util.concurrent.TimeUnit;
 
@@ -25,30 +22,22 @@ import java.util.concurrent.TimeUnit;
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass({Caffeine.class})
-@Conditional({CacheCondition.class})
-@EnableConfigurationProperties({CacheProperties.class})
+@Conditional({CaffeineCacheCondition.class})
+@EnableConfigurationProperties({CaffeineCacheProperties.class})
 @EnableCaching
-public class CacheAutoConfiguration {
-
-    /**
-     * 默认一小时过期
-     */
-    public static final long EXPIRE_TIME = 60 * 60L;
-
-    @Resource
-    private CacheProperties cacheProperties;
+public class CaffeineCacheAutoConfiguration {
 
     @Bean(name = "caffeine")
-    public Caffeine<Object, Object> newCaffeine() {
+    public Caffeine<Object, Object> newCaffeine(CaffeineCacheProperties caffeineCacheProperties) {
         Caffeine<Object, Object> caffeine = Caffeine.newBuilder();
-        caffeine.expireAfterWrite(cacheProperties.getExpire(), TimeUnit.SECONDS);
-        if (Boolean.TRUE.equals(cacheProperties.getWeakKeys())) {
+        caffeine.expireAfterWrite(caffeineCacheProperties.getExpire(), TimeUnit.SECONDS);
+        if (Boolean.TRUE.equals(caffeineCacheProperties.getWeakKeys())) {
             caffeine.weakKeys();
         }
-        if (Boolean.TRUE.equals(cacheProperties.getWeakValues())) {
+        if (Boolean.TRUE.equals(caffeineCacheProperties.getWeakValues())) {
             caffeine.weakValues();
         }
-        if (Boolean.TRUE.equals(cacheProperties.getSoftValues())) {
+        if (Boolean.TRUE.equals(caffeineCacheProperties.getSoftValues())) {
             caffeine.softValues();
         }
         return caffeine;
@@ -59,16 +48,16 @@ public class CacheAutoConfiguration {
         return caffeine.build();
     }
 
+    @Bean(name = "caffeineService")
+    public CaffeineService caffeineService(Cache<Object, Object> caffeineCache) {
+        return new CaffeineService(caffeineCache);
+    }
+
     @Bean(name = "caffeineCacheManager")
     public CacheManager cacheManager(Caffeine<Object, Object> caffeine) {
         CaffeineCacheManager cacheManager = new CaffeineCacheManager();
         cacheManager.setCaffeine(caffeine);
         return cacheManager;
-    }
-
-    @Bean(name = "guavaCacheImpl")
-    public GuavaCacheImpl newCaffeineCacheImpl(Cache<Object, Object> caffeineCache) {
-        return new GuavaCacheImpl(caffeineCache);
     }
 
 }

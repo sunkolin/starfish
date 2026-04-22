@@ -17,7 +17,7 @@ public interface Cache {
      * @param key 键
      * @return 结果
      */
-    boolean exist(Object key);
+    Boolean exist(String key);
 
     /**
      * 获取，如果不存在则返回null
@@ -26,7 +26,7 @@ public interface Cache {
      * @param <T> T
      * @return 结果
      */
-    <T> T get(Object key);
+    <T> T get(String key);
 
     /**
      * 设置
@@ -34,7 +34,7 @@ public interface Cache {
      * @param key   键
      * @param value 值
      */
-    void set(Object key, Object value);
+    void set(String key, Object value);
 
     /**
      * 设置
@@ -42,14 +42,14 @@ public interface Cache {
      * @param key   键
      * @param value 值
      */
-    void set(Object key, Object value, long time, TimeUnit timeUnit);
+    void set(String key, Object value, long time, TimeUnit timeUnit);
 
     /**
      * 移除
      *
      * @param key 键
      */
-    void delete(Object key);
+    void delete(String key);
 
     /**
      * 清除

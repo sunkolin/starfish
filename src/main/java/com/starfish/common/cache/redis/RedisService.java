@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0.0
  * @since 2026-04-22
  */
-public class RedisService {
+public class RedisService implements RedisCache {
 
     private final RedisTemplate<Object, Object> redisTemplate;
 
@@ -59,6 +59,18 @@ public class RedisService {
      */
     public void set(String key, Object value) {
         redisTemplate.opsForValue().set(key, value);
+    }
+
+    @Override
+    public void set(String key, Object value, long time, TimeUnit timeUnit) {
+        if (time > 0) {
+            redisTemplate.opsForValue().set(key, value, time, timeUnit);
+        }
+    }
+
+    @Override
+    public void delete(String key) {
+        redisTemplate.delete(key);
     }
 
     /**

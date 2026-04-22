@@ -1,4 +1,4 @@
-package com.starfish.common.cache;
+package com.starfish.common.cache.caffeine;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -11,8 +11,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @since 2018-11-05
  */
 @Data
-@ConfigurationProperties(prefix = "starfish.cache")
-public class CacheProperties {
+@ConfigurationProperties(prefix = "starfish.cache.caffeine")
+public class CaffeineCacheProperties {
 
     /**
      * 是否启用,true启用，false禁用，默认启用

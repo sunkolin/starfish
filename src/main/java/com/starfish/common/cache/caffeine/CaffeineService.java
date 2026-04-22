@@ -1,6 +1,4 @@
-package com.starfish.common.cache.guava;
-
-import com.starfish.common.cache.Cache;
+package com.starfish.common.cache.caffeine;
 
 /**
  * Cache,使用caffeine做本地缓存
@@ -9,7 +7,7 @@ import com.starfish.common.cache.Cache;
  * @version 1.0.0
  * @since 2021-06-11
  */
-public class GuavaCacheImpl implements GuavaCache {
+public class CaffeineService implements CaffeineCache {
 
     /**
      * exist后缀
@@ -18,30 +16,30 @@ public class GuavaCacheImpl implements GuavaCache {
 
     private final com.github.benmanes.caffeine.cache.Cache<Object, Object> caffeineCache;
 
-    public GuavaCacheImpl(com.github.benmanes.caffeine.cache.Cache<Object, Object> caffeineCache) {
+    public CaffeineService(com.github.benmanes.caffeine.cache.Cache<Object, Object> caffeineCache) {
         this.caffeineCache = caffeineCache;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> T get(Object key) {
+    public <T> T get(String key) {
         return (T) caffeineCache.getIfPresent(key);
     }
 
     @Override
-    public boolean exist(Object key) {
+    public Boolean exist(String key) {
         Boolean exist = get(key + EXIST_SUFFIX);
         return (exist == null || !exist) ? Boolean.FALSE : Boolean.TRUE;
     }
 
     @Override
-    public void set(Object key, Object value) {
+    public void set(String key, Object value) {
         caffeineCache.put(key, value);
         caffeineCache.put(key + EXIST_SUFFIX, true);
     }
 
     @Override
-    public void delete(Object key) {
+    public void delete(String key) {
         caffeineCache.invalidate(key);
         caffeineCache.invalidate(key + EXIST_SUFFIX);
     }

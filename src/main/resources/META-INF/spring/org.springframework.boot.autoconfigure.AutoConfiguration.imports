@@ -8,7 +8,7 @@ com.starfish.core.web.ResponseWrapperAutoConfiguration
 com.starfish.core.web.ElapsedTimeAutoConfiguration
 com.starfish.core.datasource.StarfishDataSourceAutoConfiguration
 
-com.starfish.common.cache.CacheAutoConfiguration
+com.starfish.common.cache.caffeine.CaffeineCacheAutoConfiguration
 com.starfish.common.cache.redis.RedisAutoConfiguration
 com.starfish.common.task.XxlJobAutoConfiguration
 com.starfish.common.document.swagger.Swagger3AutoConfiguration

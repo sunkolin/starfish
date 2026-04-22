@@ -1,4 +1,4 @@
-package com.starfish.common.cache.guava;
+package com.starfish.common.cache.caffeine;
 
 import com.starfish.common.cache.Cache;
 
@@ -11,9 +11,9 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0.0
  * @since 2026-04-22
  */
-public interface GuavaCache extends Cache {
+public interface CaffeineCache extends Cache {
 
-    default void set(Object key, Object value, long time, TimeUnit timeUnit) {
+    default void set(String key, Object value, long time, TimeUnit timeUnit) {
         throw new UnsupportedOperationException();
     }
 
