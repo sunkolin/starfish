@@ -9,15 +9,15 @@ package com.starfish.common.cache.caffeine;
  */
 public class CaffeineService implements CaffeineCache {
 
-    /**
-     * exist后缀
-     */
-    public static final String EXIST_SUFFIX = ":exist";
-
     private final com.github.benmanes.caffeine.cache.Cache<Object, Object> caffeineCache;
 
     public CaffeineService(com.github.benmanes.caffeine.cache.Cache<Object, Object> caffeineCache) {
         this.caffeineCache = caffeineCache;
+    }
+
+    @Override
+    public Boolean exist(String key) {
+        return caffeineCache.getIfPresent(key) != null;
     }
 
     @SuppressWarnings("unchecked")
@@ -27,21 +27,13 @@ public class CaffeineService implements CaffeineCache {
     }
 
     @Override
-    public Boolean exist(String key) {
-        Boolean exist = get(key + EXIST_SUFFIX);
-        return (exist == null || !exist) ? Boolean.FALSE : Boolean.TRUE;
-    }
-
-    @Override
     public void set(String key, Object value) {
         caffeineCache.put(key, value);
-        caffeineCache.put(key + EXIST_SUFFIX, true);
     }
 
     @Override
     public void delete(String key) {
         caffeineCache.invalidate(key);
-        caffeineCache.invalidate(key + EXIST_SUFFIX);
     }
 
     @Override
