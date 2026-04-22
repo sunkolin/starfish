@@ -9,6 +9,7 @@ com.starfish.core.web.ElapsedTimeAutoConfiguration
 com.starfish.core.datasource.StarfishDataSourceAutoConfiguration
 
 com.starfish.common.cache.CacheAutoConfiguration
+com.starfish.common.cache.redis.RedisAutoConfiguration
 com.starfish.common.task.XxlJobAutoConfiguration
 com.starfish.common.document.swagger.Swagger3AutoConfiguration
 com.starfish.common.push.barkPushService.BarkAutoConfiguration

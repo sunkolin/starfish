@@ -19,7 +19,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 @ConditionalOnClass(RedisTemplate.class)
 @ConditionalOnBean(RedisTemplate.class)
 @ConditionalOnProperty(prefix = "spring.data.redis", name = "host")
-public class RedisServiceAutoConfiguration {
+public class RedisAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
