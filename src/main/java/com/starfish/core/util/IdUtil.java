@@ -48,10 +48,7 @@ public class IdUtil {
         //第二段：4位随机数
         String id2 = StringUtil.random("0123456789", 4);
 
-        String id = id1 + id2;
-        log.info("get id,id={}", id);
-
-        return id;
+        return id1 + id2;
     }
 
     /**
