@@ -4,6 +4,7 @@ import com.starfish.common.push.pushdeer.PushDeerPushService;
 import com.starfish.common.push.pushdeer.PushDeerRequest;
 import com.starfish.common.push.pushdeer.PushDeerProperties;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test;
  */
 @Slf4j
 @Deprecated
+@Disabled("push deer offline ")
 public class PushDeerPushServiceTest {
 
     public static final String pushKey = "PDU32883T0Odg11tOI7DT366uZztGMY4INwV967j7";
