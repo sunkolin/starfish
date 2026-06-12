@@ -2,6 +2,7 @@ package com.starfish.common.cache.caffeine;
 
 import com.starfish.common.cache.Cache;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -13,7 +14,8 @@ import java.util.concurrent.TimeUnit;
  */
 public interface CaffeineCache extends Cache {
 
-    default void set(String key, Object value, long time, TimeUnit timeUnit) {
+    @Override
+    default void set(String key, Object value, Duration duration) {
         throw new UnsupportedOperationException();
     }
 

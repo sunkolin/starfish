@@ -3,6 +3,7 @@ package com.starfish.common.cache.redis;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.CollectionUtils;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -23,9 +24,9 @@ public class RedisService implements RedisCache {
     /**
      * 指定缓存过期时间
      */
-    public void expire(String key, long time) {
-        if (time > 0) {
-            redisTemplate.expire(key, time, TimeUnit.SECONDS);
+    public void expire(String key, long seconds) {
+        if (seconds > 0) {
+            redisTemplate.expire(key, Duration.ofSeconds(seconds));
         }
     }
 
@@ -48,6 +49,7 @@ public class RedisService implements RedisCache {
     /**
      * 获取缓存
      */
+    @SuppressWarnings("unchecked")
     public <T> T get(String key) {
         return key == null ? null : (T) redisTemplate.opsForValue().get(key);
     }
@@ -59,10 +61,17 @@ public class RedisService implements RedisCache {
         redisTemplate.opsForValue().set(key, value);
     }
 
+//    @Override
+//    public void set(String key, Object value, long time, TimeUnit timeUnit) {
+//        if (time > 0) {
+//            redisTemplate.opsForValue().set(key, value, Duration.ofSeconds(time));
+//        }
+//    }
+
     @Override
-    public void set(String key, Object value, long time, TimeUnit timeUnit) {
-        if (time > 0) {
-            redisTemplate.opsForValue().set(key, value, time, timeUnit);
+    public void set(String key, Object value, Duration duration) {
+        if (duration != null) {
+            redisTemplate.opsForValue().set(key, value, duration);
         }
     }
 
@@ -74,9 +83,9 @@ public class RedisService implements RedisCache {
     /**
      * 设置缓存并指定过期时间（秒）
      */
-    public void set(String key, Object value, long time) {
-        if (time > 0) {
-            redisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
+    public void set(String key, Object value, long seconds) {
+        if (seconds > 0) {
+            redisTemplate.opsForValue().set(key, value, Duration.ofSeconds(seconds));
         }
     }
 

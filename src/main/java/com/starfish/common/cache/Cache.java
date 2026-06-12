@@ -1,5 +1,6 @@
 package com.starfish.common.cache;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -36,13 +37,22 @@ public interface Cache {
      */
     void set(String key, Object value);
 
+//    /**
+//     * 设置
+//     *
+//     * @param key   键
+//     * @param value 值
+//     */
+//    void set(String key, Object value, long time, TimeUnit timeUnit);
+
     /**
      * 设置
      *
-     * @param key   键
-     * @param value 值
+     * @param key      键
+     * @param value    值
+     * @param duration 过期时间
      */
-    void set(String key, Object value, long time, TimeUnit timeUnit);
+    void set(String key, Object value, Duration duration);
 
     /**
      * 移除
