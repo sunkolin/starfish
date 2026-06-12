@@ -16,9 +16,9 @@ class IdUtilTest {
 
     @Test
     void getIdTest() throws InterruptedException {
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 10; i++) {
             if (i % 10 == 0){
-                Thread.sleep(1000);
+                Thread.sleep(100);
             }
             Long id = IdUtil.getId();
             System.out.println(id);

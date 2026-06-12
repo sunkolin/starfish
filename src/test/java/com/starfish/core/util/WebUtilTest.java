@@ -33,29 +33,24 @@ class WebUtilTest {
 
     @Test
     void existMedia() {
-        String url =
-                "https://vd3.bdstatic.com/mda-mj84pad7qad8hhur/sc/cae_h264_clips/1633750377008601665/mda-mj84pad7qad8hhur.mp4";
-        Assertions.assertTrue(WebUtil.existMedia(url));
+        String url = "https://vd3.bdstatic.com/mda-mj84pad7qad8hhur/sc/cae_h264_clips/1633750377008601665/mda-mj84pad7qad8hhur.mp4";
+        boolean result = WebUtil.existMedia(url);
+        log.info("url={},existMedia={}", url, result);
+        Assertions.assertTrue(result);
     }
 
     @Test
     void webTest() {
-        log.info(WebUtil
-                .getBaseUrl("http://new.dongying.gov.cn/art/2018/8/31/art_43576_3069835.html"));
-        log.info(WebUtil
-                .getBaseUrl("https://10.10.20.30:8080/art/2018/8/31/art_43576_3069835.html"));
+        log.info(WebUtil.getBaseUrl("http://new.dongying.gov.cn/art/2018/8/31/art_43576_3069835.html"));
+        log.info(WebUtil.getBaseUrl("https://10.10.20.30:8080/art/2018/8/31/art_43576_3069835.html"));
 
-        log.info(WebUtil
-                .getScheme("http://new.dongying.gov.cn/art/2018/8/31/art_43576_3069835.html"));
-        log.info(
-                WebUtil.getScheme("https://10.10.20.30:8080/art/2018/8/31/art_43576_3069835.html"));
+        log.info(WebUtil.getScheme("http://new.dongying.gov.cn/art/2018/8/31/art_43576_3069835.html"));
+        log.info(WebUtil.getScheme("https://10.10.20.30:8080/art/2018/8/31/art_43576_3069835.html"));
 
-        log.info(
-                WebUtil.getHost("http://new.dongying.gov.cn/art/2018/8/31/art_43576_3069835.html"));
+        log.info(WebUtil.getHost("http://new.dongying.gov.cn/art/2018/8/31/art_43576_3069835.html"));
         log.info(WebUtil.getHost("http://10.10.20.30:8080/art/2018/8/31/art_43576_3069835.html"));
 
-        String port1 =
-                WebUtil.getPort("http://new.dongying.gov.cn/art/2018/8/31/art_43576_3069835.html");
+        String port1 = WebUtil.getPort("http://new.dongying.gov.cn/art/2018/8/31/art_43576_3069835.html");
         log.info(port1);
         Assertions.assertEquals("80", port1);
         log.info(WebUtil.getPort("http://10.10.20.30:8080/art/2018/8/31/art_43576_3069835.html"));

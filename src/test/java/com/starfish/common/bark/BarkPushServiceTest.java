@@ -5,6 +5,7 @@ import com.starfish.common.push.bark.BarkRequest;
 import com.starfish.common.push.bark.BarkProperties;
 import com.starfish.core.util.DateTimeUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
@@ -17,6 +18,7 @@ import java.util.Date;
  * @since 2026-01-06
  */
 @Slf4j
+@Disabled("Bark offline")
 public class BarkPushServiceTest {
 
     public static final String OFFICIAL_CHANNEL_DEVICE_KEY = "JzsnpBXdzX7Xd5jiWZLKL";
