@@ -56,7 +56,8 @@ public class WebUtil extends HtmlUtils {
     /**
      * 多媒体内容的ContentType
      */
-    private static final List<String> MEDIA_CONTENT_TYPE_LIST = Lists.newArrayList("application/x-mpegURL", "application/octet-stream", "video", "audio");
+    private static final List<String> MEDIA_CONTENT_TYPE_LIST = Lists
+            .newArrayList("application/x-mpegURL", "application/octet-stream", "video", "audio");
 
     private static final RestTemplate REST_TEMPLATE = new RestTemplate();
 
@@ -140,7 +141,8 @@ public class WebUtil extends HtmlUtils {
     /**
      * 获取基础url
      *
-     * @param url 链接地址，例如<a href="https://m.gmw.cn/baijia/2021-03/11/1302158793.html?a=1&b=2&c=12#34">https://m.gmw.cn/baijia/2021-03/11/1302158793.html?a=1&b=2&c=12#34</a>
+     * @param url 链接地址，例如<a href=
+     *        "https://m.gmw.cn/baijia/2021-03/11/1302158793.html?a=1&b=2&c=12#34">https://m.gmw.cn/baijia/2021-03/11/1302158793.html?a=1&b=2&c=12#34</a>
      * @return 结果，例如<a href="https://m.gmw.cn:80">https://m.gmw.cn:80</a>
      */
     public static String getBaseUrl(String url) {
@@ -172,7 +174,7 @@ public class WebUtil extends HtmlUtils {
      * 获取端口，如果没有写明端口号，也会返回
      *
      * @param scheme scheme
-     * @param port   端口
+     * @param port 端口
      * @return 结果
      */
     private static int getPort(@Nullable String scheme, int port) {
@@ -197,8 +199,7 @@ public class WebUtil extends HtmlUtils {
     }
 
     /**
-     * 判断一个链接是否是视频链接
-     * 验证规则：http开头，mp4，ts，m3u8，flv，mp3，avi，rm，rmvb，mov，vob，asf，wmv，3gp，mkv，mpeg等格式
+     * 判断一个链接是否是视频链接 验证规则：http开头，mp4，ts，m3u8，flv，mp3，avi，rm，rmvb，mov，vob，asf，wmv，3gp，mkv，mpeg等格式
      *
      * @param url 链接地址
      * @return 结果
@@ -214,7 +215,8 @@ public class WebUtil extends HtmlUtils {
             // 如果没有Content-Type，返回false
             if (!Strings.isNullOrEmpty(contentType)) {
                 for (String mediaContentType : MEDIA_CONTENT_TYPE_LIST) {
-                    if (contentType.startsWith(mediaContentType) || contentType.equalsIgnoreCase(mediaContentType)) {
+                    if (contentType.startsWith(mediaContentType)
+                            || contentType.equalsIgnoreCase(mediaContentType)) {
                         result = true;
                         break;
                     }
@@ -238,14 +240,14 @@ public class WebUtil extends HtmlUtils {
     }
 
     /**
-     * 下载网络资源
+     * 下载网络资源，使用@see downloadFile方法替代
      *
-     * @param url      资源地址
+     * @param url 资源地址
      * @param filePath 文件路径，文件下载后存在本地磁盘上的全路径，包括文件名和类型
      */
     @Deprecated
     public static void download(String url, String filePath) {
-        //判断文件和目录是否存在，不存在则创建
+        // 判断文件和目录是否存在，不存在则创建
         File file = new File(filePath);
         if (file.exists()) {
             throw new CustomException(ResultEnum.FILE_ALREADY_EXIST);
@@ -261,8 +263,9 @@ public class WebUtil extends HtmlUtils {
         } catch (IOException e) {
             log.info("文件不存在，创建文件，创建失败");
         }
-        try (InputStream is = new URL(url).openConnection().getInputStream(); FileOutputStream fs = new FileOutputStream(filePath)) {
-            //下载
+        try (InputStream is = new URL(url).openConnection().getInputStream();
+                FileOutputStream fs = new FileOutputStream(filePath)) {
+            // 下载
             int byteRead;
             byte[] buffer = new byte[4 * 1024];
             while ((byteRead = is.read(buffer)) != -1) {
@@ -277,7 +280,7 @@ public class WebUtil extends HtmlUtils {
      * 输出内容
      *
      * @param response 响应
-     * @param value    内容
+     * @param value 内容
      */
     public static void write(HttpServletResponse response, String value) {
         PrintWriter printWriter = null;
@@ -305,11 +308,12 @@ public class WebUtil extends HtmlUtils {
      * 输出错误
      *
      * @param response 响应
-     * @param code     编码
-     * @param message  消息
-     * @param data     数据
+     * @param code 编码
+     * @param message 消息
+     * @param data 数据
      */
-    public static void write(HttpServletResponse response, Integer code, String message, Object data) {
+    public static void write(HttpServletResponse response, Integer code, String message,
+            Object data) {
         Result<Object> result = Result.wrapper(code, message, data);
         write(response, result);
     }
@@ -322,7 +326,8 @@ public class WebUtil extends HtmlUtils {
      */
     public static String getRequestIp(HttpServletRequest request) {
         String ip = "";
-        String[] names = new String[]{"X-Real-IP", "X-Forwarded-For", "Proxy-Client-IP", "WL-Proxy-Client-IP", "HTTP_CLIENT_IP", "HTTP_X_FORWARDED_FOR"};
+        String[] names = new String[] {"X-Real-IP", "X-Forwarded-For", "Proxy-Client-IP",
+                "WL-Proxy-Client-IP", "HTTP_CLIENT_IP", "HTTP_X_FORWARDED_FOR"};
         for (String string : names) {
             if (WebUtil.isEmptyOrUnknown(ip)) {
                 ip = request.getHeader(string);
@@ -362,7 +367,8 @@ public class WebUtil extends HtmlUtils {
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Credentials", "true");
         response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
-        response.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type,Accept, Access-Control-Request-Headers, Cookie, Access-Control-Request-Method,Cache-Control, User-Agent, Connection, Accept, u, ck, X-Cookie");
+        response.addHeader("Access-Control-Allow-Headers",
+                "Origin, X-Requested-With, Content-Type,Accept, Access-Control-Request-Headers, Cookie, Access-Control-Request-Method,Cache-Control, User-Agent, Connection, Accept, u, ck, X-Cookie");
         response.setHeader("Cache-Control", "no-cache, must-revalidate");
         response.addHeader("Expires", "Thu, 01 Jan 1970 00:00:01 GMT");
         response.addHeader("If-Modified-Since", "0");
@@ -425,7 +431,7 @@ public class WebUtil extends HtmlUtils {
     /**
      * 下载远程文件
      *
-     * @param url  请求的url
+     * @param url 请求的url
      * @param target 目标文件或目录，当为目录时，取URL中的文件名，取不到使用编码后的URL做为文件名
      */
     public static void downloadFile(String url, String target) {

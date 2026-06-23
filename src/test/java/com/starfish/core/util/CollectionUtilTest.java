@@ -59,10 +59,10 @@ class CollectionUtilTest {
 
     @Test
     void testExistClass() {
-        boolean result1 = ObjectUtil.existClass("com.starfish.core.util.CommonUtil");
+        boolean result1 = ObjectUtil.existClass("com.starfish.core.model.Result");
         Assertions.assertTrue(result1);
 
-        boolean result2 = ObjectUtil.existClass("com.starfish.core.util.CommonUtil2");
+        boolean result2 = ObjectUtil.existClass("com.starfish.core.model.Result2");
         Assertions.assertFalse(result2);
     }
 

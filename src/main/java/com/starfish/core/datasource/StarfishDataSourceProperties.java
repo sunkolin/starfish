@@ -1,13 +1,7 @@
 package com.starfish.core.datasource;
 
 import lombok.Data;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
-import org.springframework.boot.jdbc.autoconfigure.DataSourceTransactionManagerAutoConfiguration;
-import org.springframework.boot.jdbc.autoconfigure.JdbcTemplateAutoConfiguration;
-import org.springframework.context.annotation.Import;
 
 /**
  * StarfishDataSourceProperties

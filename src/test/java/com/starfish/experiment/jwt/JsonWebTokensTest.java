@@ -19,15 +19,16 @@ class JsonWebTokensTest {
     @Test
     void test() {
         User user = new User();
-        user.setUserId(100L);
+        Long userId = 100L;
+        user.setUserId(userId);
 
-        String token = JsonWebTokens.create(user);
+        String token = JsonWebTokens.create(userId, user);
         log.info(token);
 
-        boolean verify = JsonWebTokens.verify(token);
-        log.info("{}",verify);
+        boolean verify = JsonWebTokens.verify(userId, token);
+        log.info("{}", verify);
 
-        User user1 = JsonWebTokens.verify(token, User.class);
+        User user1 = JsonWebTokens.verify(userId, token, User.class);
         log.info(JsonUtil.toJson(user1));
 
         long expectedValue = 100L;
@@ -45,7 +46,7 @@ class JsonWebTokensTest {
         log.info(token);
 
         boolean verify = JsonWebTokens.verify(userId, token);
-        log.info("{}",verify);
+        log.info("{}", verify);
 
         User user1 = JsonWebTokens.verify(userId, token, User.class);
         log.info(JsonUtil.toJson(user1));

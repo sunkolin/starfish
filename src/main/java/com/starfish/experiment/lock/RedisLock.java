@@ -7,10 +7,10 @@ import org.springframework.data.redis.core.script.RedisScript;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 /**
  * RedisLock
@@ -33,10 +33,8 @@ public class RedisLock implements Lock, Closeable {
     private final StringRedisTemplate stringRedisTemplate;
 
     /**
-     * 锁名称
+     * 锁名称 用于生成redis key
      */
-    private final String name;
-
     private final String redisKey;
 
     private static final String REDIS_VALUE_PREFIX = UUID.randomUUID() + "-";
@@ -44,12 +42,11 @@ public class RedisLock implements Lock, Closeable {
     /**
      * 过期时间，单位毫秒
      */
-    private int expire;
+    private final int expire;
 
     public RedisLock(String name, int expire) {
         stringRedisTemplate = Springs.getBean(StringRedisTemplate.class);
-        this.name = name;
-        this.redisKey = "starfish:redisLock:" + name;
+        this.redisKey = name;
         this.expire = expire;
     }
 
@@ -58,7 +55,7 @@ public class RedisLock implements Lock, Closeable {
         String threadId = String.valueOf(Thread.currentThread().getId());
         String redisValue = REDIS_VALUE_PREFIX + threadId;
         ValueOperations<String, String> valueOperations = stringRedisTemplate.opsForValue();
-        return Boolean.TRUE.equals(valueOperations.setIfAbsent(redisKey, redisValue, expire, TimeUnit.MILLISECONDS));
+        return Boolean.TRUE.equals(valueOperations.setIfAbsent(redisKey, redisValue, Duration.ofMillis(expire)));
     }
 
     @Override

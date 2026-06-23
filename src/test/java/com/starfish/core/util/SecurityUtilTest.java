@@ -67,14 +67,17 @@ class SecurityUtilTest {
     void encodeSha256Test() {
         String data = "jackson";
         String result = SecurityUtil.encodeSha256(data);
-        Assertions.assertEquals("dc355ec75a2dc4a1d29582933b52f9f2ed71061432d72e1991d8b15445b2ff03", result);
+        Assertions.assertEquals("dc355ec75a2dc4a1d29582933b52f9f2ed71061432d72e1991d8b15445b2ff03",
+                result);
     }
 
     @Test
     void encodeSha512Test() {
         String data = "jackson";
         String result = SecurityUtil.encodeSha512(data);
-        Assertions.assertEquals("64bb0ae3efdd054aff98d1c04432967b8e5bde522feffc55f85234b27990a8fa8d2cc553e7af34595e8c48de97768e929a15c2a183657c42c172e0f9269c95ec", result);
+        Assertions.assertEquals(
+                "64bb0ae3efdd054aff98d1c04432967b8e5bde522feffc55f85234b27990a8fa8d2cc553e7af34595e8c48de97768e929a15c2a183657c42c172e0f9269c95ec",
+                result);
     }
 
 
@@ -101,6 +104,7 @@ class SecurityUtilTest {
     @Test
     void rsaTest() {
         String data = "jackson";
+        @SuppressWarnings("unused")
         Map<String, String> keys = SecurityUtil.createRsaKeyPair();
         KeyPair keyPair = SecureUtil.generateKeyPair("RSA");
         String base64PublicKey = SecurityUtil.encodeBase64(keyPair.getPublic().getEncoded());
@@ -108,12 +112,17 @@ class SecurityUtilTest {
         log.info("base64PublicKey:{}", base64PublicKey);
         log.info("base64PrivateKey:{}", base64PrivateKey);
         // 公钥加密私钥解密
-        String encodeRsaResult = SecurityUtil.encodeRsa(data, base64PrivateKey, base64PublicKey, KeyType.PublicKey);
-        String decodeRsaResult = SecurityUtil.decodeRsa(encodeRsaResult, base64PrivateKey, base64PublicKey, KeyType.PrivateKey);
+        String encodeRsaResult =
+                SecurityUtil.encodeRsa(data, base64PrivateKey, base64PublicKey, KeyType.PublicKey);
+        String decodeRsaResult = SecurityUtil.decodeRsa(encodeRsaResult, base64PrivateKey,
+                base64PublicKey, KeyType.PrivateKey);
 
         // 私钥加密公钥解密
-        String encodeRsaResult2 = SecurityUtil.encodeRsa(data, base64PrivateKey, base64PublicKey, KeyType.PrivateKey);
-        String decodeRsaResult2 = SecurityUtil.decodeRsa(encodeRsaResult2, base64PrivateKey, base64PublicKey, KeyType.PublicKey);
+        String encodeRsaResult2 =
+                SecurityUtil.encodeRsa(data, base64PrivateKey, base64PublicKey, KeyType.PrivateKey);
+        @SuppressWarnings("unused")
+        String decodeRsaResult2 = SecurityUtil.decodeRsa(encodeRsaResult2, base64PrivateKey,
+                base64PublicKey, KeyType.PublicKey);
 
         Assertions.assertEquals(data, decodeRsaResult);
     }

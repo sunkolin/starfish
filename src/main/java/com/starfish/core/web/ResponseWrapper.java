@@ -4,9 +4,11 @@ import com.starfish.core.model.PageResult;
 import com.starfish.core.model.Result;
 import com.starfish.core.util.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -27,14 +29,19 @@ import java.lang.reflect.Method;
 public class ResponseWrapper implements ResponseBodyAdvice<Object> {
 
     @Override
-    public boolean supports(MethodParameter returnType, Class converterType) {
+    public boolean supports(MethodParameter returnType,
+            Class<? extends HttpMessageConverter<?>> converterType) {
         // 返回值是ModelAndView或ResponseEntity时不处理
         Method method = returnType.getMethod();
-        return method != null && method.getReturnType() != ResponseEntity.class && method.getReturnType() != ModelAndView.class;
+        return method != null && method.getReturnType() != ResponseEntity.class
+                && method.getReturnType() != ModelAndView.class;
     }
 
     @Override
-    public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
+    public Object beforeBodyWrite(@Nullable Object body, MethodParameter returnType,
+            MediaType selectedContentType,
+            Class<? extends HttpMessageConverter<?>> selectedConverterType,
+            ServerHttpRequest request, ServerHttpResponse response) {
         if (body instanceof Result) {
             return body;
         }

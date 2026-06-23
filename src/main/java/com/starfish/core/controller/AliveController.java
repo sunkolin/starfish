@@ -19,7 +19,7 @@ public class AliveController {
     /**
      * 健康检查
      */
-    @GetMapping({"/api/alive", "/starfish/api/alive", "/${spring.application.name}/api/alive"})
+    @GetMapping({"/alive","/api/alive", "/starfish/alive","/starfish/api/alive", "/${spring.application.name}/alive","/${spring.application.name}/api/alive"})
     public Result<String> alive() {
         log.info("service is alive.");
         return Result.success("alive");

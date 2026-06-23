@@ -4,6 +4,9 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * ElapsedTimeAutoConfiguration
@@ -22,9 +25,15 @@ public class ElapsedTimeAutoConfiguration {
         return new ElapsedTimeInterceptor();
     }
 
-    @Bean
-    public ElapsedTimeConfigurer createElapsedTimeConfigurer(ElapsedTimeInterceptor elapsedTimeInterceptor) {
-        return new ElapsedTimeConfigurer(elapsedTimeInterceptor);
+    @Bean("elapsedTimeConfigurer")
+    public WebMvcConfigurer traceWebMvcConfigurer(HandlerInterceptor elapsedTimeInterceptor) {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addInterceptors(InterceptorRegistry registry) {
+                registry.addInterceptor(elapsedTimeInterceptor)
+                        .addPathPatterns("/**");
+            }
+        };
     }
 
 }

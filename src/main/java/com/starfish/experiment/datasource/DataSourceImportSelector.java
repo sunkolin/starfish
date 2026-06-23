@@ -16,19 +16,20 @@ import java.util.Map;
  */
 public class DataSourceImportSelector implements ImportSelector {
 
+    @SuppressWarnings("deprecation")
     @Override
     public String[] selectImports(AnnotationMetadata importingClassMetadata) {
-        Map<String, Object> attributes = importingClassMetadata.getAnnotationAttributes(EnableDataSource.class.getName());
+        Map<String, Object> attributes =
+                importingClassMetadata.getAnnotationAttributes(EnableDataSource.class.getName());
         Boolean enableDataSource = (Boolean) (attributes != null ? attributes.get("value") : null);
         if (enableDataSource == null || enableDataSource) {
             PropertiesContext.set("starfish.dataSource.enabled", "true");
-            return new String[]{
+            return new String[] {
                     "org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration",
-                    "org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration"
-            };
+                    "org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration"};
         } else {
             PropertiesContext.set("starfish.dataSource.enabled", "false");
-            return new String[]{};
+            return new String[] {};
         }
     }
 

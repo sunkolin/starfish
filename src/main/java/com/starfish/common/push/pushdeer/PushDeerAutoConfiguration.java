@@ -12,14 +12,16 @@ import org.springframework.context.annotation.Bean;
  * @version 1.0.0
  * @since 2026-01-06
  */
+@Deprecated
 @AutoConfiguration
 @ConditionalOnProperty(value = {"starfish.push.pushdeer.enabled"}, havingValue = "true")
 @EnableConfigurationProperties({PushDeerProperties.class})
 public class PushDeerAutoConfiguration {
 
     @Bean("pushDeer")
-    public PushDeer createPushDeer(PushDeerProperties pushDeerProperties) {
-        return new PushDeer(pushDeerProperties);
+    @Deprecated
+    public PushDeerPushService createPushDeer(PushDeerProperties pushDeerProperties) {
+        return new PushDeerPushService(pushDeerProperties);
     }
 
 }

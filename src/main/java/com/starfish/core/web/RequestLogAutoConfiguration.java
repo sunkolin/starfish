@@ -5,6 +5,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * RequestLogAutoConfiguration
@@ -35,8 +38,13 @@ public class RequestLogAutoConfiguration {
     }
 
     @Bean
-    public RequestLogInterceptorConfig createRequestLogInterceptorConfig(RequestLogInterceptor requestLogInterceptor) {
-        return new RequestLogInterceptorConfig(requestLogInterceptor);
+    public WebMvcConfigurer traceWebMvcConfigurer(HandlerInterceptor requestLogInterceptor) {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addInterceptors(InterceptorRegistry registry) {
+                registry.addInterceptor(requestLogInterceptor).addPathPatterns("/**");
+            }
+        };
     }
 
 }
