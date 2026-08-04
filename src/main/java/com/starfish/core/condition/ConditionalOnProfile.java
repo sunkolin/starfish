@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Conditional;
 import java.lang.annotation.*;
 
 /**
- * ConditionalOnDevProfile
+ * ConditionalOnProfile
  *
  * @author sunkolin
  * @version 1.0.0
