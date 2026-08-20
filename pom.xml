@@ -125,10 +125,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-        </dependency>
+        <!-- elasticsearch 默认注释掉-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -164,7 +165,7 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>3.0.1</version>
+            <version>3.1.0</version>
         </dependency>
         <dependency>
             <groupId>org.jsoup</groupId>
@@ -193,17 +194,17 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-spring-boot4-starter</artifactId>
-            <version>3.5.14</version>
+            <version>3.5.17</version>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-jsqlparser</artifactId>
-            <version>3.5.14</version>
+            <version>3.5.17</version>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
-            <version>3.5.14</version>
+            <version>3.5.17</version>
         </dependency>
 <!--        <dependency>-->
 <!--            <groupId>org.mybatis.spring.boot</groupId>-->
@@ -222,7 +223,7 @@
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk18on</artifactId>
-            <version>1.84</version>
+            <version>1.85.2</version>
         </dependency>
         <!-- MinIO Java SDK -->
         <dependency>
