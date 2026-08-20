@@ -28,6 +28,8 @@ public class PomFileEditor {
      * 遍历 filePath，如果是目录则递归查找所有 pom.xml 文件；
      * 如果是文件则直接处理。在 pom.xml 中查找 groupId 和 artifactId
      * 同时匹配旧值的 {@code <dependency>} 元素，替换为新的 groupId、artifactId 和 version。
+     * 当 oldVersion 为空时，直接替换 version 值；当 oldVersion 不为空时，
+     * 需当前 dependency 的 version 与 oldVersion 一致才进行替换。
      * </p>
      *
      * @param filePath      pom.xml 文件或目录路径
@@ -35,9 +37,10 @@ public class PomFileEditor {
      * @param oldArtifactId 要替换的原 artifactId
      * @param newGroupId    替换后的新 groupId
      * @param newArtifactId 替换后的新 artifactId
-     * @param version       替换后的 version
+     * @param oldVersion    要匹配的原 version，为空则不匹配版本直接替换
+     * @param newVersion    替换后的新 version
      */
-    public static void replaceDependency(String filePath, String oldGroupId, String oldArtifactId, String newGroupId, String newArtifactId, String version) {
+    public static void replaceDependency(String filePath, String oldGroupId, String oldArtifactId, String newGroupId, String newArtifactId, String oldVersion, String newVersion) {
         Path path = Paths.get(filePath);
         if (!Files.exists(path)) {
             System.err.println("Path does not exist: " + filePath);
@@ -49,7 +52,7 @@ public class PomFileEditor {
                 try (Stream<Path> walk = Files.walk(path)) {
                     walk.filter(Files::isRegularFile).filter(p -> "pom.xml".equalsIgnoreCase(p.getFileName().toString())).forEach(p -> {
                         try {
-                            replaceDependencyInPomFile(p, oldGroupId, oldArtifactId, newGroupId, newArtifactId, version);
+                            replaceDependencyInPomFile(p, oldGroupId, oldArtifactId, newGroupId, newArtifactId, oldVersion, newVersion);
                         } catch (Exception e) {
                             System.err.println("Error processing file: " + p + " - " + e.getMessage());
                         }
@@ -57,7 +60,7 @@ public class PomFileEditor {
                 }
             } else if (Files.isRegularFile(path)) {
                 if ("pom.xml".equalsIgnoreCase(path.getFileName().toString())) {
-                    replaceDependencyInPomFile(path, oldGroupId, oldArtifactId, newGroupId, newArtifactId, version);
+                    replaceDependencyInPomFile(path, oldGroupId, oldArtifactId, newGroupId, newArtifactId, oldVersion, newVersion);
                 } else {
                     System.err.println("File is not pom.xml: " + filePath);
                 }
@@ -75,10 +78,11 @@ public class PomFileEditor {
      * @param oldArtifactId 要匹配的原 artifactId
      * @param newGroupId    替换后的新 groupId
      * @param newArtifactId 替换后的新 artifactId
-     * @param version       替换后的 version
+     * @param oldVersion    要匹配的原 version，为空则不匹配版本直接替换
+     * @param newVersion    替换后的新 version
      * @throws Exception 解析或写入 XML 时发生的异常
      */
-    private static void replaceDependencyInPomFile(Path file, String oldGroupId, String oldArtifactId, String newGroupId, String newArtifactId, String version) throws Exception {
+    private static void replaceDependencyInPomFile(Path file, String oldGroupId, String oldArtifactId, String newGroupId, String newArtifactId, String oldVersion, String newVersion) throws Exception {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(false);
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -101,21 +105,34 @@ public class PomFileEditor {
             String currentGroupId = groupIdElement.getTextContent().trim();
             String currentArtifactId = artifactIdElement.getTextContent().trim();
 
-            if (oldGroupId.equals(currentGroupId) && oldArtifactId.equals(currentArtifactId)) {
-                groupIdElement.setTextContent(newGroupId);
-                artifactIdElement.setTextContent(newArtifactId);
-
-                Element versionElement = findChildElement(dependency, "version");
-                if (versionElement != null) {
-                    versionElement.setTextContent(version);
-                } else {
-                    versionElement = doc.createElement("version");
-                    versionElement.setTextContent(version);
-                    dependency.appendChild(versionElement);
-                }
-
-                updatedCount++;
+            if (!oldGroupId.equals(currentGroupId) || !oldArtifactId.equals(currentArtifactId)) {
+                continue;
             }
+
+            Element versionElement = findChildElement(dependency, "version");
+
+            if (oldVersion != null && !oldVersion.isEmpty()) {
+                if (versionElement == null) {
+                    continue;
+                }
+                String currentVersion = versionElement.getTextContent().trim();
+                if (!oldVersion.equals(currentVersion)) {
+                    continue;
+                }
+            }
+
+            groupIdElement.setTextContent(newGroupId);
+            artifactIdElement.setTextContent(newArtifactId);
+
+            if (versionElement != null) {
+                versionElement.setTextContent(newVersion);
+            } else {
+                versionElement = doc.createElement("version");
+                versionElement.setTextContent(newVersion);
+                dependency.appendChild(versionElement);
+            }
+
+            updatedCount++;
         }
 
         if (updatedCount > 0) {
@@ -218,7 +235,7 @@ public class PomFileEditor {
 
     public static void main(String[] args) {
         PomFileEditor.replaceProperties("./pom.xml", "java.version", "21");
-        PomFileEditor.replaceDependency("./pom.xml", "com.belerweb", "pinyin4j", "com.belerweb.1", "pinyin4j.1", "2.5.1.1");
+        PomFileEditor.replaceDependency("./pom.xml", "com.belerweb", "pinyin4j", "com.belerweb.1", "pinyin4j.1", "2.5.1", "2.5.1.1");
     }
 
 }
