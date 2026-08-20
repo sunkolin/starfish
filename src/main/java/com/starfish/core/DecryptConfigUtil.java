@@ -5,6 +5,7 @@ import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MapPropertySource;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,26 +37,41 @@ public class DecryptConfigUtil {
      * @param environment 环境
      */
     public static void decrypt(String key, ConfigurableEnvironment environment) {
-        decrypt(null, key, DEFAULT_PASSWORD_ENCRYPT_TYPE, DEFAULT_PASSWORD_ENCRYPT_SECRET, environment);
+        decrypt(key, DEFAULT_PASSWORD_ENCRYPT_TYPE, DEFAULT_PASSWORD_ENCRYPT_SECRET, environment);
     }
 
-    public static void decrypt(String key, String encryptType, String encryptSecret, ConfigurableEnvironment environment) {
-        decrypt(null, key, encryptType, encryptSecret, environment);
+    /**
+     * 解密
+     *
+     * @param key              配置项key
+     * @param encryptTypeKey   加密类型
+     * @param encryptSecretKey 加密密钥
+     * @param environment      环境
+     */
+    public static void decrypt(String key, String encryptTypeKey, String encryptSecretKey, ConfigurableEnvironment environment) {
+        decrypt(new ArrayList<>(), key, encryptTypeKey, encryptSecretKey, environment);
     }
 
+    /**
+     * 解密
+     *
+     * @param enabledKeys 启用解密的keys
+     * @param key         需要解密的key
+     * @param environment 环境
+     */
     public static void decrypt(List<String> enabledKeys, String key, ConfigurableEnvironment environment) {
-        decrypt(null, key, DEFAULT_PASSWORD_ENCRYPT_TYPE, DEFAULT_PASSWORD_ENCRYPT_SECRET, environment);
+        decrypt(enabledKeys, key, DEFAULT_PASSWORD_ENCRYPT_TYPE, DEFAULT_PASSWORD_ENCRYPT_SECRET, environment);
     }
 
     /**
      * 解密配置并应用
      *
      * @param enabledKeys 启用解密的keys
-     * @param key         需要解密的key
+     * @param passwordKey 需要解密的key
      * @param environment 环境
      *
      */
-    public static void decrypt(List<String> enabledKeys, String key, String encryptType, String encryptSecret, ConfigurableEnvironment environment) {
+    public static void decrypt(List<String> enabledKeys, String passwordKey, String encryptTypeKey, String encryptSecretKey, ConfigurableEnvironment environment) {
         try {
             Binder binder = Binder.get(environment);
             Boolean enabled = enabled(enabledKeys, binder);
@@ -66,15 +82,15 @@ public class DecryptConfigUtil {
             }
 
             // 解密，如果解密后数据为空，直接返回
-            String decryptValue = decrypt(key, binder);
+            String decryptValue = decrypt(passwordKey, encryptTypeKey, encryptSecretKey, binder);
             if (Strings.isNullOrEmpty(decryptValue)) {
                 return;
             }
 
             // 应用
-            apply(key, decryptValue, environment);
+            apply(passwordKey, decryptValue, environment);
         } catch (Throwable e) {
-            System.out.println("配置解密失败，key是" + key + "异常是" + e.getMessage());
+            System.out.println("配置解密失败，key是" + passwordKey + "异常是" + e.getMessage());
         }
     }
 
@@ -102,13 +118,28 @@ public class DecryptConfigUtil {
      * @param binder binder
      * @return 值
      */
-    private static String decrypt(String key, Binder binder) {
+    private static String decrypt(String key, String encryptTypeKey, String encryptSecretKey, Binder binder) {
         String value = binder.bind(key, String.class).orElse("");
+        String encryptType = binder.bind(encryptTypeKey, String.class).orElse("");
+        String encryptSecret = binder.bind(encryptSecretKey, String.class).orElse("");
         if (Strings.isNullOrEmpty(value)) {
             return "";
         }
         try {
-            String v = Sm4Util.decrypt(value, "2WSX#edc4RFV%tgb");
+            // 判断加密类型，目前只支持国密4加密
+            if (Strings.isNullOrEmpty(encryptType)) {
+                encryptType = DEFAULT_PASSWORD_ENCRYPT_TYPE;
+            }
+            if (!"sm4".equalsIgnoreCase(encryptType)) {
+                throw new IllegalArgumentException("不支持的加密类型，key=" + key + "，加密类型=" + encryptType);
+            }
+
+            // 判断加密密钥是否为空，为空则使用默认密钥
+            if (Strings.isNullOrEmpty(encryptSecret)) {
+                encryptSecret = DEFAULT_PASSWORD_ENCRYPT_SECRET;
+            }
+
+            String v = Sm4Util.decrypt(value, encryptSecret);
 
             if (!Strings.isNullOrEmpty(v)) {
                 return v;
