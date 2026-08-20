@@ -19,8 +19,32 @@ import java.util.Map;
  */
 public class DecryptConfigUtil {
 
+    /**
+     * 默认密码加密类型
+     */
+    public static final String DEFAULT_PASSWORD_ENCRYPT_TYPE = "sm4";
+
+    /**
+     * 默认密码加密密钥
+     */
+    public static final String DEFAULT_PASSWORD_ENCRYPT_SECRET = "jYsoqkOFZZKXIVotxV1YxA";
+
+    /**
+     * 解密
+     *
+     * @param key         配置项key
+     * @param environment 环境
+     */
     public static void decrypt(String key, ConfigurableEnvironment environment) {
-        decrypt(null, key, environment);
+        decrypt(null, key, DEFAULT_PASSWORD_ENCRYPT_TYPE, DEFAULT_PASSWORD_ENCRYPT_SECRET, environment);
+    }
+
+    public static void decrypt(String key, String encryptType, String encryptSecret, ConfigurableEnvironment environment) {
+        decrypt(null, key, encryptType, encryptSecret, environment);
+    }
+
+    public static void decrypt(List<String> enabledKeys, String key, ConfigurableEnvironment environment) {
+        decrypt(null, key, DEFAULT_PASSWORD_ENCRYPT_TYPE, DEFAULT_PASSWORD_ENCRYPT_SECRET, environment);
     }
 
     /**
@@ -31,7 +55,7 @@ public class DecryptConfigUtil {
      * @param environment 环境
      *
      */
-    public static void decrypt(List<String> enabledKeys, String key, ConfigurableEnvironment environment) {
+    public static void decrypt(List<String> enabledKeys, String key, String encryptType, String encryptSecret, ConfigurableEnvironment environment) {
         try {
             Binder binder = Binder.get(environment);
             Boolean enabled = enabled(enabledKeys, binder);
