@@ -21,6 +21,13 @@ import org.w3c.dom.NodeList;
 
 public class PomFileEditor {
 
+    public static void replace(String filePath, String oldGroupId, String oldArtifactId, String newGroupId, String newArtifactId, String oldVersion, String newVersion) {
+        replaceDependency(filePath, oldGroupId, oldArtifactId, newGroupId, newArtifactId, oldVersion, newVersion);
+    }
+
+    public static void replace(String filePath, String element, String text) {
+        replaceProperties(filePath, element, text);
+    }
 
     /**
      * 替换 pom.xml 文件中匹配的 dependency 元素。
