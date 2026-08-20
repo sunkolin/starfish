@@ -38,6 +38,11 @@ public class ConfigDecryptListener implements ApplicationListener<ApplicationPre
      */
     public static final String KNIFE4J_BASIC_PASSWORD_SECRET_KEY = "knife4j.basic.password-encrypt-secret";
 
+    /**
+     * 数据库密码配置项
+     */
+    public static final String SPRING_DATA_SOURCE_PASSWORD_KEY = "spring.datasource.password";
+
     @Override
     public void onApplicationEvent(@NonNull ApplicationPreparedEvent event) {
         log.info("ConfigDecryptListener start.");
@@ -48,6 +53,14 @@ public class ConfigDecryptListener implements ApplicationListener<ApplicationPre
             DecryptConfigUtil.decrypt(KNIFE4J_BASIC_PASSWORD_ENABLED_KEYS, KNIFE4J_BASIC_PASSWORD_KEY, KNIFE4J_BASIC_PASSWORD_TYPE_KEY, KNIFE4J_BASIC_PASSWORD_SECRET_KEY, environment);
         } catch (Exception e) {
             System.out.println("配置解密失败，key是" + KNIFE4J_BASIC_PASSWORD_ENABLED_KEYS + "异常是" + e.getMessage());
+        }
+
+        try {
+            ConfigurableEnvironment environment = event.getApplicationContext().getEnvironment();
+            // 解密并应用配置
+            DecryptConfigUtil.decrypt(SPRING_DATA_SOURCE_PASSWORD_KEY, environment);
+        } catch (Exception e) {
+            System.out.println("配置解密失败，key是" + SPRING_DATA_SOURCE_PASSWORD_KEY + "异常是" + e.getMessage());
         }
 
         log.info("ConfigDecryptListener end.");

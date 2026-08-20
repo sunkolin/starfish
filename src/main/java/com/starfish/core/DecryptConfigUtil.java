@@ -37,7 +37,7 @@ public class DecryptConfigUtil {
      * @param environment 环境
      */
     public static void decrypt(String key, ConfigurableEnvironment environment) {
-        decrypt(new ArrayList<>(), key, DEFAULT_PASSWORD_ENCRYPT_TYPE, DEFAULT_PASSWORD_ENCRYPT_SECRET, environment);
+        decrypt(new ArrayList<>(), key, "", "", environment);
     }
 
     /**
@@ -60,7 +60,7 @@ public class DecryptConfigUtil {
      * @param environment 环境
      */
     public static void decrypt(List<String> enabledKeys, String key, ConfigurableEnvironment environment) {
-        decrypt(enabledKeys, key, DEFAULT_PASSWORD_ENCRYPT_TYPE, DEFAULT_PASSWORD_ENCRYPT_SECRET, environment);
+        decrypt(enabledKeys, key, "", "", environment);
     }
 
     /**
