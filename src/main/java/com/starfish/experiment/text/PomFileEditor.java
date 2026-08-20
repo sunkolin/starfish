@@ -241,8 +241,8 @@ public class PomFileEditor {
     }
 
     public static void main(String[] args) {
-        PomFileEditor.replaceProperties("./pom.xml", "java.version", "21");
-        PomFileEditor.replaceDependency("./pom.xml", "com.belerweb", "pinyin4j", "com.belerweb.1", "pinyin4j.1", "2.5.1", "2.5.1.1");
+        PomFileEditor.replace("./pom.xml", "java.version", "21");
+        PomFileEditor.replace("./pom.xml", "com.belerweb", "pinyin4j", "com.belerweb.1", "pinyin4j.1", "2.5.1", "2.5.1.1");
     }
 
 }

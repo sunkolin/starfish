@@ -56,7 +56,7 @@ public class TextFileEditor {
      * @param oldText 要被替换的原字符串
      * @param newText 替换后的新字符串
      */
-    public static void replaceText(String filePath, String oldText, String newText) {
+    public static void replace(String filePath, String oldText, String newText) {
         Path path = Paths.get(filePath);
         if (!Files.exists(path)) {
             System.err.println("Path does not exist: " + filePath);
