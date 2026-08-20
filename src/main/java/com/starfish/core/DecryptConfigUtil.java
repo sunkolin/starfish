@@ -37,7 +37,7 @@ public class DecryptConfigUtil {
      * @param environment 环境
      */
     public static void decrypt(String key, ConfigurableEnvironment environment) {
-        decrypt(key, DEFAULT_PASSWORD_ENCRYPT_TYPE, DEFAULT_PASSWORD_ENCRYPT_SECRET, environment);
+        decrypt(new ArrayList<>(), key, DEFAULT_PASSWORD_ENCRYPT_TYPE, DEFAULT_PASSWORD_ENCRYPT_SECRET, environment);
     }
 
     /**
@@ -103,7 +103,7 @@ public class DecryptConfigUtil {
         // 所有条件都为true才启用，遍历所有的条件，如果都不是false，则启用返回true
         for (String enabledKey : enabledKeys) {
             Boolean enabled = binder.bind(enabledKey, Boolean.class).orElse(false);
-            if (enabled == false) {
+            if (!enabled) {
                 return false;
             }
         }
