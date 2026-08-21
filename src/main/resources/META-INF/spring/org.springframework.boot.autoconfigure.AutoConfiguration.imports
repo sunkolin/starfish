@@ -12,5 +12,5 @@ com.starfish.common.cache.caffeine.CaffeineCacheAutoConfiguration
 com.starfish.common.cache.redis.RedisAutoConfiguration
 com.starfish.common.task.XxlJobAutoConfiguration
 com.starfish.common.document.swagger.Swagger3AutoConfiguration
-com.starfish.common.push.barkPushService.BarkAutoConfiguration
+com.starfish.common.push.bark.BarkAutoConfiguration
 com.starfish.common.storage.minio.MinioAutoConfiguration
