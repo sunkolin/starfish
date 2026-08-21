@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - "main"
+      - "dev"
       - "2.3.x"
-#      - "dev"
 #      - "*"
 #  schedule:
 #    - cron: '0 2 * * *'
