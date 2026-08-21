@@ -1,11 +1,12 @@
 name: MavenDeploy
 
+# 如果需要打快照包，可以把代码合并到dev分支，会触发MavenDeploy.yml工作流自动打包
 on:
   push:
     branches:
       - "main"
       - "dev"
-      - "2.3.x"
+#      - "2.3.x"
 #      - "*"
 #  schedule:
 #    - cron: '0 2 * * *'
