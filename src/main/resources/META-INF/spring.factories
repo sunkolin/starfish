@@ -1,4 +1,4 @@
-# deprecated
+# this file is in use,org.springframework.context.ApplicationListener.imports is not in use.
 
 org.springframework.boot.EnvironmentPostProcessor=com.starfish.core.CustomEnvironmentPostProcessor
 org.springframework.context.ApplicationListener=com.starfish.common.trace.TraceApplicationStartingListener,com.starfish.core.ConfigDecryptListener
