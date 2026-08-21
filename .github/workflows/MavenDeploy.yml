@@ -6,14 +6,14 @@ on:
       - "main"
       # 如果需要打快照包，可以把代码合并到dev分支，会触发MavenDeploy.yml工作流自动打包
       - "dev"
-#      - "2.3.x"
+      - "2.3.x"
 #      - "*"
 #  schedule:
 #    - cron: '0 2 * * *'
 
 env:
   APPLICATION_NAME: "starfish"
-  MAVEN_TOKEN: "${{ secrets.MAVEN_TOKEN }}"
+  MAVEN_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
 #  APPLICATION_VERSION: "1.0.0"
 #  APPLICATION_ENV: "dev"
@@ -42,7 +42,7 @@ jobs:
 
       - name: Deploy
         env:
-          MAVEN_TOKEN: ${{ secrets.MAVEN_TOKEN }}
+          MAVEN_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mvn --batch-mode --update-snapshots deploy -Dmaven.test.skip=true
 
 #  - name: Build With Maven
