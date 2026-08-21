@@ -1,18 +1,18 @@
-package com.starfish.common.mq.rocket;
+package com.starfish.common.message.kafka;
 
 /**
- * Rocket
+ * Kafka
  *
  * @author sunkolin
  * @version 1.0.0
  * @since 2022-08-02
  */
-public class RocketService {
+public class KafkaService {
 
     /**
      * constructor
      */
-    private RocketService() {
+    private KafkaService() {
     }
 
 }
