@@ -37,7 +37,7 @@ jobs:
         run: mvn --batch-mode --update-snapshots package -Dmaven.test.skip=true
 
       - name: Deploy
-        env:
+#        env:
 #          MAVEN_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mvn --batch-mode --update-snapshots deploy -Dmaven.test.skip=true
 
