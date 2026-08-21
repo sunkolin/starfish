@@ -37,20 +37,5 @@ jobs:
 
       - name: Deploy
         env:
-          MAVEN_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         run: mvn --batch-mode --update-snapshots deploy -Dmaven.test.skip=true
-
-#  - name: Build With Maven
-#      run: mvn --batch-mode --update-snapshots clean package -Dmaven.test.skip=true
-#      env:
-#        MAVEN_PASSWORD: ${{ secrets.PACKAGES_TOKEN }}
-
-#      - name: Deploy
-#        uses: easingthemes/ssh-deploy@v2.2.11
-#        env:
-#          SSH_PRIVATE_KEY: ${{ secrets.TENCENT_SERVER_PRIVATE_KEY }}
-#          ARGS: "-rltgoDzvO --delete"
-#          SOURCE: "target/starfish-1.0.0-SNAPSHOT.jar"
-#          REMOTE_HOST: "101.34.149.151"
-#          REMOTE_USER: "root"
-#          TARGET: "/opt/starfish"
