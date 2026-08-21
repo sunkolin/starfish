@@ -31,7 +31,7 @@ jobs:
           java-version: "17"
           distribution: "temurin"
           cache: maven
-          settings-path: .mvn/settings.xml
+#          settings-path: .mvn/settings.xml
 
       - name: Package
         run: mvn --batch-mode --update-snapshots package -Dmaven.test.skip=true
