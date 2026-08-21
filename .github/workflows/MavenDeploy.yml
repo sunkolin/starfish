@@ -12,7 +12,7 @@ on:
 
 env:
   APPLICATION_NAME: "starfish"
-  GITHUB_TOKEN: "${{ secrets.MAVEN_TOKEN }}"
+#  GITHUB_TOKEN: "${{ secrets.MAVEN_TOKEN }}"
 
 jobs:
   MavenDeploy:
@@ -37,8 +37,10 @@ jobs:
         run: mvn --batch-mode --update-snapshots package -Dmaven.test.skip=true
 
       - name: Deploy
-#        env:
+        env:
 #          MAVEN_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAVEN_USERNAME: "sunkolin"
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
         run: mvn --batch-mode --update-snapshots deploy -Dmaven.test.skip=true
 
 #  - name: Build With Maven
