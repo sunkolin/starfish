@@ -14,9 +14,6 @@ env:
   APPLICATION_NAME: "starfish"
   GITHUB_TOKEN: "${{ secrets.MAVEN_TOKEN }}"
 
-#  APPLICATION_VERSION: "1.0.0"
-#  APPLICATION_ENV: "dev"
-
 jobs:
   MavenDeploy:
     runs-on: ubuntu-latest
