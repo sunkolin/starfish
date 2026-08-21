@@ -40,7 +40,7 @@ jobs:
         env:
 #          MAVEN_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MAVEN_USERNAME: "sunkolin"
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+          MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: mvn --batch-mode --update-snapshots deploy -Dmaven.test.skip=true
 
 #  - name: Build With Maven
