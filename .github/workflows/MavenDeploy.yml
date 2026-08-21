@@ -34,16 +34,14 @@ jobs:
           java-version: "17"
           distribution: "temurin"
           cache: maven
+          settings-path: .mvn
 
       - name: Package
         run: mvn --batch-mode --update-snapshots package -Dmaven.test.skip=true
 
-#      - name: Install
-#        run: mvn --batch-mode --update-snapshots install -Dmaven.test.skip=true
-
       - name: Deploy
-#        env:
-#          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        env:
+          MAVEN_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mvn --batch-mode --update-snapshots deploy -Dmaven.test.skip=true
 
 #  - name: Build With Maven
