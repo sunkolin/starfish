@@ -82,3 +82,7 @@ starfish:
       message-push-url: /push
   response-wrapper:
     enabled: false
+  configuration:
+    enabled-print: true
+    print-keys: "spring.application.name,server.port,spring.profiles.active"
+
