@@ -24,14 +24,14 @@ public class ConfigurationLoadListener implements ApplicationListener<Applicatio
         ConfigurableEnvironment environment = event.getApplicationContext().getEnvironment();
         Boolean enabledPrint = environment.getProperty("starfish.configuration.enabled-print", Boolean.class, false);
         if (!enabledPrint) {
-            log.info("======= 打印配置未开启 =======");
+            log.info("======= 配置打印未开启 =======");
             return;
         } else {
-            log.info("======= 打印配置已开启 =======");
+            log.info("======= 配置打印已开启 =======");
         }
 
         // 打印配置
-        log.info("======= 开始打印配置 =======");
+        log.info("======= 配置打印开始 =======");
         String keys = environment.getProperty("starfish.configuration.print-keys", String.class, "");
         if (keys.trim().isEmpty()) {
             return;
