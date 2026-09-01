@@ -4,17 +4,17 @@ server:
 spring:
   application:
     name: starfish
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    password: xxx
+    url: jdbc:mysql://127.0.0.1:3306/xxx?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&autoReconnect=true
+    username: xxx
 #  data:
 #    redis:
 #      host:
 #      username: default
 #      password:
 #      port: 6379
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    password: xxx
-    url: jdbc:mysql://127.0.0.1:3306/xxx?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&autoReconnect=true
-    username: xxx
   task:
     execution:
       pool:
