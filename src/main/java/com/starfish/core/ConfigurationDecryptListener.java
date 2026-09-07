@@ -16,7 +16,7 @@ import java.util.List;
  *
  */
 @Slf4j
-public class ConfigDecryptListener implements ApplicationListener<ApplicationPreparedEvent> {
+public class ConfigurationDecryptListener implements ApplicationListener<ApplicationPreparedEvent> {
 
     /**
      * knife4j基本密码配置项是否启用
