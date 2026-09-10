@@ -41,7 +41,6 @@
         <repository>
             <id>aliyun</id>
             <name>aliyun</name>
-            <layout>default</layout>
             <url>https://maven.aliyun.com/repository/central</url>
             <snapshots>
                 <enabled>false</enabled>
