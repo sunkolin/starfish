@@ -39,8 +39,7 @@
 
     <repositories>
         <repository>
-            <id>aliyun</id>
-            <name>aliyun</name>
+            <id>aliyun-maven</id>
             <url>https://maven.aliyun.com/repository/central</url>
             <snapshots>
                 <enabled>false</enabled>
@@ -50,11 +49,11 @@
             </releases>
         </repository>
         <repository>
-            <id>central</id>
+            <id>central-maven</id>
             <url>https://repo1.maven.org/maven2</url>
         </repository>
         <repository>
-            <id>github</id>
+            <id>github-maven</id>
             <url>https://maven.pkg.github.com/sunkolin/*</url>
             <snapshots>
                 <enabled>true</enabled>
