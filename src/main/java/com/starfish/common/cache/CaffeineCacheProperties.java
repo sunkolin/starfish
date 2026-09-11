@@ -1,4 +1,4 @@
-package com.starfish.common.cache.caffeine;
+package com.starfish.common.cache;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

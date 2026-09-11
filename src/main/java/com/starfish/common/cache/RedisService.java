@@ -1,4 +1,4 @@
-package com.starfish.common.cache.redis;
+package com.starfish.common.cache;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.CollectionUtils;

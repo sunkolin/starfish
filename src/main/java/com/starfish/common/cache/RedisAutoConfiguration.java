@@ -1,4 +1,4 @@
-package com.starfish.common.cache.redis;
+package com.starfish.common.cache;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

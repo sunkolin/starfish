@@ -1,4 +1,4 @@
-package com.starfish.common.cache.caffeine;
+package com.starfish.common.cache;
 
 /**
  * Cache,使用caffeine做本地缓存

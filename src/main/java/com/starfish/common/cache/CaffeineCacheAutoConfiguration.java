@@ -1,4 +1,4 @@
-package com.starfish.common.cache.caffeine;
+package com.starfish.common.cache;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;

@@ -1,9 +1,6 @@
-package com.starfish.common.cache.caffeine;
-
-import com.starfish.common.cache.Cache;
+package com.starfish.common.cache;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 /**
  * GuavaCache

@@ -1,4 +1,4 @@
-package com.starfish.common.cache.caffeine;
+package com.starfish.common.cache;
 
 import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
 import org.springframework.boot.autoconfigure.condition.SpringBootCondition;

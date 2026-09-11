@@ -1,6 +1,4 @@
-package com.starfish.common.cache.redis;
-
-import com.starfish.common.cache.Cache;
+package com.starfish.common.cache;
 
 /**
  * RedisCache
