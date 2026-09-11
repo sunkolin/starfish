@@ -1,4 +1,4 @@
-package com.starfish.common.push.pushdeer;
+package com.starfish.common.push;
 
 import lombok.Data;
 
@@ -9,6 +9,7 @@ import lombok.Data;
  * @version 1.0.0
  * @since 2026-01-06
  */
+@Deprecated
 @Data
 public class PushDeerRequest {
 

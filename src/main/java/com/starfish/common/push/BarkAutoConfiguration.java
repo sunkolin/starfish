@@ -1,4 +1,4 @@
-package com.starfish.common.push.bark;
+package com.starfish.common.push;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

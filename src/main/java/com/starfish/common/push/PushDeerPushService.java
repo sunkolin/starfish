@@ -1,6 +1,5 @@
-package com.starfish.common.push.pushdeer;
+package com.starfish.common.push;
 
-import com.starfish.common.push.Push;
 import com.starfish.core.enumeration.ResultEnum;
 import com.starfish.core.model.Result;
 import com.starfish.core.util.RestTemplates;

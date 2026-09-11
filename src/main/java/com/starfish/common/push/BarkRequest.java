@@ -1,4 +1,4 @@
-package com.starfish.common.push.bark;
+package com.starfish.common.push;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;

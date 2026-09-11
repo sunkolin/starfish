@@ -1,4 +1,4 @@
-package com.starfish.common.storage.minio;
+package com.starfish.common.storage;
 
 import io.minio.MinioClient;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

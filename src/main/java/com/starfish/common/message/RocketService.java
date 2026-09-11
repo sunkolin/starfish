@@ -1,18 +1,18 @@
-package com.starfish.common.config.nacos;
+package com.starfish.common.message;
 
 /**
- * Nacos
+ * Rocket
  *
  * @author sunkolin
  * @version 1.0.0
  * @since 2022-08-02
  */
-public class NacosService {
+public class RocketService {
 
     /**
      * constructor
      */
-    private NacosService() {
+    private RocketService() {
     }
 
 }

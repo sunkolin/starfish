@@ -1,4 +1,4 @@
-package com.starfish.common.storage.rustfs;
+package com.starfish.common.storage;
 
 /**
  * RustFS

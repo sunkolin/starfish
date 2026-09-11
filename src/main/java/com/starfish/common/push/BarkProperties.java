@@ -1,4 +1,4 @@
-package com.starfish.common.push.bark;
+package com.starfish.common.push;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

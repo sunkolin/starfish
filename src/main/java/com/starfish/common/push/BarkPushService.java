@@ -1,6 +1,5 @@
-package com.starfish.common.push.bark;
+package com.starfish.common.push;
 
-import com.starfish.common.push.Push;
 import com.starfish.core.enumeration.ResultEnum;
 import com.starfish.core.model.Result;
 import com.starfish.core.util.JsonUtil;

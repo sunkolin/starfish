@@ -1,4 +1,4 @@
-package com.starfish.common.push.pushdeer;
+package com.starfish.common.push;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

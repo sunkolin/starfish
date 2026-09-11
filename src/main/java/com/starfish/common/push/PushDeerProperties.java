@@ -1,4 +1,4 @@
-package com.starfish.common.push.pushdeer;
+package com.starfish.common.push;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -10,6 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @version 1.0.0
  * @since 2026-01-06
  */
+@Deprecated
 @Data
 @ConfigurationProperties(prefix = "starfish.push.pushdeer")
 public class PushDeerProperties {

@@ -1,8 +1,8 @@
 package com.starfish.common.pushdeer;
 
-import com.starfish.common.push.pushdeer.PushDeerPushService;
-import com.starfish.common.push.pushdeer.PushDeerRequest;
-import com.starfish.common.push.pushdeer.PushDeerProperties;
+import com.starfish.common.push.PushDeerPushService;
+import com.starfish.common.push.PushDeerRequest;
+import com.starfish.common.push.PushDeerProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
