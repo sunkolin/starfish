@@ -5,12 +5,11 @@
         <server>
             <id>github</id>
             <username>sunkolin</username>
-            <!-- GitHub Personal Access Token，Github工作流中使用-->
+            <!-- GitHub Personal Access Token-->
+            <!-- GitHub工作流中使用 -->
             <password>${env.GITHUB_TOKEN}</password>
-
-            <!-- GitHub Personal Access Token，本地使用，不要提交到Github-->
+            <!-- 本地开发环境使用-->
 <!--            <password>xxx</password>-->
-
         </server>
     </servers>
 </settings>
