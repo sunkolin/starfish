@@ -1,0 +1,27 @@
+package com.starfish.common.push;
+
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+
+/**
+ * PushDeerAutoConfiguration
+ *
+ * @author sunkolin
+ * @version 1.0.0
+ * @since 2026-01-06
+ */
+@Deprecated
+@AutoConfiguration
+@ConditionalOnProperty(value = {"starfish.push.pushdeer.enabled"}, havingValue = "true")
+@EnableConfigurationProperties({PushDeerProperties.class})
+public class PushDeerAutoConfiguration {
+
+    @Bean("pushDeer")
+    @Deprecated
+    public PushDeerPushService createPushDeer(PushDeerProperties pushDeerProperties) {
+        return new PushDeerPushService(pushDeerProperties);
+    }
+
+}

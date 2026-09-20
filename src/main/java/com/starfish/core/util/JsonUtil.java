@@ -1,7 +1,6 @@
 package com.starfish.core.util;
 
 import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.SerializationFeature;
 import tools.jackson.databind.json.JsonMapper;
 
@@ -26,18 +25,18 @@ public class JsonUtil {
      */
     public static String toJson(Object object) {
 //        ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
-        ObjectMapper mapper = JsonMapper.builder().enable(SerializationFeature.INDENT_OUTPUT).build();
-        return mapper.writeValueAsString(object);
+        JsonMapper jsonMapper = JsonMapper.builder().enable(SerializationFeature.INDENT_OUTPUT).build();
+        return jsonMapper.writeValueAsString(object);
     }
 
     public static <T> T toObject(String json, Class<T> cls) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(json, cls);
+        JsonMapper jsonMapper = JsonMapper.builder().enable(SerializationFeature.INDENT_OUTPUT).build();
+        return jsonMapper.readValue(json, cls);
     }
 
     public static JsonNode getJsonNode(String json, String propertyName) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode rootNode = objectMapper.readTree(json);
+        JsonMapper jsonMapper = JsonMapper.builder().enable(SerializationFeature.INDENT_OUTPUT).build();
+        JsonNode rootNode = jsonMapper.readTree(json);
         if (propertyName.contains(".")) {
             propertyName = propertyName.replace(".", "/");
             return rootNode.at(propertyName);
