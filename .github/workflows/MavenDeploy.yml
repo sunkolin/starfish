@@ -6,7 +6,7 @@ on:
     branches:
       - "main"
       - "dev"
-      - "2.3.x"
+#      - "2.3.x"
 #      - "*"
 #  schedule:
 #    - cron: '0 2 * * *'
