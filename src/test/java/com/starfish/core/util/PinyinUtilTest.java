@@ -24,18 +24,18 @@ class PinyinUtilTest {
 
         User u1 = new User();
         u1.setUserId(1L);
-        u1.setUserName("孙");
+        u1.setUsername("李");
         users.add(u1);
 
         User u2 = new User();
         u2.setUserId(2L);
-        u2.setUserName("马");
+        u2.setUsername("马");
         users.add(u2);
 
         log.info("排序前={}", users);
-        PinyinUtil.sort(users, User::getUserName);
+        PinyinUtil.sort(users, User::getUsername);
         log.info("排序后={}", users);
-        Assertions.assertEquals("马", users.get(0).getUserName());
+        Assertions.assertEquals("马", users.get(0).getUsername());
     }
 
 }

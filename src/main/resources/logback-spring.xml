@@ -5,7 +5,14 @@
 
     <springProperty scope="context" name="spring_application_name" source="spring.application.name" defaultValue="default" />
 
-    <property name="LOG_FILE" value="/opt/logs/${spring_application_name}"/>
+    <!--日志路径使用当前目录-->
+    <property name="LOG_PATH" value="./log/"/>
+
+    <!-- 日志路径使用固定路径 -->
+<!--    <property name="LOG_FILE" value="/opt/logs/${spring_application_name}"/>-->
+
+    <!-- 日志路径使用用户目录 -->
+<!--    <property name="LOG_FILE" value="${user.home}/logs/${spring_application_name}"/>-->
 
     <property name="LOG_PATTERN" value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%-5level){faint} %clr(${PID:- }){faint} %clr([%4.15t]){faint} [%clr(%X{traceId}){red}] %clr(%-40.40logger{39}){cyan} %clr(%-5line){faint} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
 
