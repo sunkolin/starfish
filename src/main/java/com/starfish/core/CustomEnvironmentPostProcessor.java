@@ -17,6 +17,7 @@ import java.util.List;
  * CustomEnvironmentPostProcessor
  * 属性加载，加载在jar中的属性文件
  * application.properties需要通过CustomEnvironmentPostProcessor读取
+ * 从本地配置文件中加载配置并处理，在加载配置中心之前，无法处理配置中心中的配置
  *
  * @author sunkolin
  * @version 1.0.0

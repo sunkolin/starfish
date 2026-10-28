@@ -1,5 +1,7 @@
 package com.starfish.core.controller;
 
+import com.starfish.core.annotation.RequireLogin;
+import com.starfish.core.annotation.RequireToken;
 import com.starfish.core.model.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,8 @@ public class AliveController {
     /**
      * 健康检查
      */
+    @RequireLogin(false)
+    @RequireToken(false)
     @GetMapping({"/alive","/api/alive", "/starfish/alive","/starfish/api/alive", "/${spring.application.name}/alive","/${spring.application.name}/api/alive"})
     public Result<String> alive() {
         log.info("service is alive.");

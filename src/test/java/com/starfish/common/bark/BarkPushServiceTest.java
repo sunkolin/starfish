@@ -1,8 +1,8 @@
 package com.starfish.common.bark;
 
-import com.starfish.common.push.bark.BarkPushService;
-import com.starfish.common.push.bark.BarkRequest;
-import com.starfish.common.push.bark.BarkProperties;
+import com.starfish.common.push.BarkPushService;
+import com.starfish.common.push.BarkRequest;
+import com.starfish.common.push.BarkProperties;
 import com.starfish.core.util.DateTimeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;

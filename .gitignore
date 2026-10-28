@@ -14,3 +14,6 @@
 hs_err_pid*
 /target/
 target
+.mvn/.env
+./log/*.log
+./log/*.json
