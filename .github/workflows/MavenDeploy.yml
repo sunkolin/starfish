@@ -1,15 +1,13 @@
 name: MavenDeploy
 
-# 如果需要打快照包，可以把代码合并到dev分支，会触发MavenDeploy.yml工作流自动打包
+# dev是开发分支，开发完成后，修改版本号为正式版本号，合并到具体分支，例如2.x.x，再合并到main分支
+# dev 分支只打 SNAPSHOT 包，
+# main 分支只打 Release 包
 on:
   push:
     branches:
       - "main"
       - "dev"
-#      - "2.4.0"
-#      - "*"
-#  schedule:
-#    - cron: '0 2 * * *'
 
 env:
   APPLICATION_NAME: "starfish"
@@ -35,7 +33,14 @@ jobs:
       - name: Package
         run: mvn --batch-mode --update-snapshots package -Dmaven.test.skip=true
 
-      - name: Deploy
+      - name: Deploy SNAPSHOT (dev branch)
+        if: github.ref_name == 'dev'
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         run: mvn --batch-mode --update-snapshots deploy -Dmaven.test.skip=true
+
+      - name: Deploy Release (main branch)
+        if: github.ref_name == 'main'
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        run: mvn --batch-mode deploy -Dmaven.test.skip=true
