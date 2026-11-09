@@ -113,7 +113,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-        <!-- elasticsearch 默认注释掉-->
+        <!-- ElasticSearch 默认注释掉-->
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.boot</groupId>-->
 <!--            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>-->
