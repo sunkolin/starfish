@@ -1,6 +1,6 @@
 name: MavenDeploy
 
-# dev是开发分支，开发完成后，修改版本号为正式版本号，合并到具体分支，例如2.x.x，再合并到main分支
+# dev是开发分支，开发完成后，修改版本号为正式版本号，合并到具体分支，例如2.4.0，再合并到main分支，触发流程打正式包
 # dev 分支只打 SNAPSHOT 包，
 # main 分支只打 Release 包
 on:
@@ -8,7 +8,12 @@ on:
     branches:
       - "main"
       - "dev"
-
+#      - "2.4.0"
+#      - "2.3.x"
+#      - "dev"
+#      - "*"
+#  schedule:
+#    - cron: '0 2 * * *'
 env:
   APPLICATION_NAME: "starfish"
 
