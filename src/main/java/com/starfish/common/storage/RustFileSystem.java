@@ -7,5 +7,6 @@ package com.starfish.common.storage;
  * @version 1.0.0
  * @since 2026-01-29
  */
-public class RustFS {
+public class RustFileSystem {
+
 }
