@@ -81,7 +81,7 @@ starfish:
   minio:
     enabled: false
     endpoint: http://127.0.0.1:9000
-    access-key: yLYYn14VnYcdLyOnOY12
-    secret-key: OZGbQ31lTGptvH1Io6Wc5wfKfwvMxuQvuOZA3TtZ
-    bucket-name: my-bucket-dev
+    access-key: xxx
+    secret-key: xxx
+    bucket-name: mybucket
     expire: 3600
