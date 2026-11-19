@@ -7,6 +7,7 @@ import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.S3Configuration;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 import software.amazon.awssdk.services.s3.model.*;
 import software.amazon.awssdk.services.s3.paginators.ListObjectsV2Iterable;
@@ -45,12 +46,14 @@ public class RustFSService {
                 .endpointOverride(URI.create(rustFSProperties.getEndpoint()))
                 .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(rustFSProperties.getAccessKey(), rustFSProperties.getSecretKey())))
                 .region(Region.US_EAST_1)
+                .forcePathStyle(true)
                 .build();
 
         this.s3Presigner = S3Presigner.builder()
                 .endpointOverride(URI.create(rustFSProperties.getEndpoint()))
                 .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(rustFSProperties.getAccessKey(), rustFSProperties.getSecretKey())))
                 .region(Region.US_EAST_1)
+                .serviceConfiguration(S3Configuration.builder().pathStyleAccessEnabled(true).build())
                 .build();
     }
 
