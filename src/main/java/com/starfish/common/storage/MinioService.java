@@ -3,6 +3,7 @@ package com.starfish.common.storage;
 import io.minio.*;
 import io.minio.http.Method;
 import io.minio.messages.Item;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -19,6 +20,7 @@ import java.util.List;
  * @version 1.0.0
  * @since 2026-01-29
  */
+@Slf4j
 @SuppressWarnings("unused")
 public class MinioService {
 
@@ -38,7 +40,7 @@ public class MinioService {
         try {
             if (!minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build())) {
                 minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
-                System.out.println("桶 " + bucketName + " 创建成功");
+                log.info("桶 {} 创建成功",bucketName);
             }
         } catch (Exception e) {
             throw new RuntimeException("创建MinIO桶失败：" + e.getMessage(), e);
