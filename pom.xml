@@ -132,7 +132,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>33.7.2-jre</version>
+            <version>33.8.0-jre</version>
         </dependency>
         <dependency>
             <groupId>tools.jackson.core</groupId>
@@ -173,7 +173,7 @@
         <dependency>
             <groupId>com.xuxueli</groupId>
             <artifactId>xxl-job-core</artifactId>
-            <version>3.4.2</version>
+            <version>3.5.0</version>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
