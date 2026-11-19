@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 import software.amazon.awssdk.services.s3.model.*;
@@ -37,10 +38,20 @@ public class RustFSService {
 
     private final S3Presigner s3Presigner;
 
-    public RustFSService(S3Client rustFSClient, RustFSProperties rustFSProperties) {
-        this.rustFSClient = rustFSClient;
+    public RustFSService(RustFSProperties rustFSProperties) {
         this.rustFSProperties = rustFSProperties;
-        this.s3Presigner = S3Presigner.builder().endpointOverride(URI.create(rustFSProperties.getEndpoint())).credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(rustFSProperties.getAccessKey(), rustFSProperties.getSecretKey()))).build();
+
+        this.rustFSClient = S3Client.builder()
+                .endpointOverride(URI.create(rustFSProperties.getEndpoint()))
+                .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(rustFSProperties.getAccessKey(), rustFSProperties.getSecretKey())))
+                .region(Region.US_EAST_1)
+                .build();
+
+        this.s3Presigner = S3Presigner.builder()
+                .endpointOverride(URI.create(rustFSProperties.getEndpoint()))
+                .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(rustFSProperties.getAccessKey(), rustFSProperties.getSecretKey())))
+                .region(Region.US_EAST_1)
+                .build();
     }
 
     /**

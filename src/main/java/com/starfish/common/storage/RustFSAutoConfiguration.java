@@ -4,9 +4,6 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
-import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
-import software.amazon.awssdk.services.s3.S3Client;
 
 import java.net.URI;
 
@@ -22,14 +19,9 @@ import java.net.URI;
 @EnableConfigurationProperties({RustFSProperties.class})
 public class RustFSAutoConfiguration {
 
-    @Bean("rustFSClient")
-    public S3Client rustFSClient(RustFSProperties rustFSProperties) {
-        return S3Client.builder().endpointOverride(URI.create(rustFSProperties.getEndpoint())).credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(rustFSProperties.getAccessKey(), rustFSProperties.getSecretKey()))).build();
-    }
-
     @Bean("rustFSService")
-    public RustFSService rustFSService(S3Client rustFSClient, RustFSProperties rustFSProperties) {
-        return new RustFSService(rustFSClient, rustFSProperties);
+    public RustFSService rustFSService(RustFSProperties rustFSProperties) {
+        return new RustFSService(rustFSProperties);
     }
 
 }
