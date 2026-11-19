@@ -85,3 +85,10 @@ starfish:
     secret-key: xxx
     bucket-name: mybucket
     expire: 3600
+  rustfs:
+    enabled: false
+    endpoint: http://127.0.0.1:9000
+    access-key: xxx
+    secret-key: xxx
+    bucket-name: mybucket
+    expire: 3600
