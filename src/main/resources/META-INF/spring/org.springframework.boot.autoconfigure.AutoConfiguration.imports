@@ -14,3 +14,4 @@ com.starfish.common.task.XxlJobAutoConfiguration
 com.starfish.common.document.Swagger3AutoConfiguration
 com.starfish.common.push.BarkAutoConfiguration
 com.starfish.common.storage.MinioAutoConfiguration
+com.starfish.common.storage.RustFSAutoConfiguration

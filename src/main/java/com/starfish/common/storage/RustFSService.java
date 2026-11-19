@@ -1,12 +1,23 @@
 package com.starfish.common.storage;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.core.ResponseInputStream;
+import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
+import software.amazon.awssdk.services.s3.model.*;
+import software.amazon.awssdk.services.s3.paginators.ListObjectsV2Iterable;
+import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignRequest;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +28,7 @@ import java.util.List;
  * @version 1.0.0
  * @since 2026-11-19
  */
+@Slf4j
 @SuppressWarnings("unused")
 public class RustFSService {
 
@@ -24,9 +36,12 @@ public class RustFSService {
 
     private final RustFSProperties rustFSProperties;
 
+    private final S3Presigner s3Presigner;
+
     public RustFSService(S3Client rustFSClient, RustFSProperties rustFSProperties) {
         this.rustFSClient = rustFSClient;
         this.rustFSProperties = rustFSProperties;
+        this.s3Presigner = S3Presigner.builder().endpointOverride(URI.create(rustFSProperties.getEndpoint())).credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(rustFSProperties.getAccessKey(), rustFSProperties.getSecretKey()))).build();
     }
 
     /**
@@ -34,12 +49,12 @@ public class RustFSService {
      */
     public void createBucket(String bucketName) {
         try {
-            if (!rustFSClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build())) {
-                rustFSClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
-                System.out.println("桶 " + bucketName + " 创建成功");
-            }
+            rustFSClient.headBucket(HeadBucketRequest.builder().bucket(bucketName).build());
+        } catch (NoSuchBucketException e) {
+            rustFSClient.createBucket(CreateBucketRequest.builder().bucket(bucketName).build());
+            log.info("桶 {} 创建成功", bucketName);
         } catch (Exception e) {
-            throw new RuntimeException("创建MinIO桶失败：" + e.getMessage(), e);
+            throw new RuntimeException("创建桶失败：" + e.getMessage(), e);
         }
     }
 
@@ -58,15 +73,11 @@ public class RustFSService {
      */
     public String uploadFile(MultipartFile file, String objectName, String bucketName) {
         try {
-            // 先创建桶（确保桶存在）
             createBucket(bucketName);
-
-            // 上传MultipartFile（通过InputStream）
-            rustFSClient.putObject(PutObjectArgs.builder().bucket(bucketName).object(objectName).stream(file.getInputStream(), file.getSize(), -1).contentType(file.getContentType()).build());
-            // 返回文件临时访问链接
+            rustFSClient.putObject(PutObjectRequest.builder().bucket(bucketName).key(objectName).contentType(file.getContentType()).build(), RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
             return getPresignedUrl(objectName, bucketName, rustFSProperties.getExpire());
         } catch (Exception e) {
-            throw new RuntimeException("上传文件到MinIO失败：" + e.getMessage(), e);
+            throw new RuntimeException("上传文件失败：" + e.getMessage(), e);
         }
     }
 
@@ -82,9 +93,9 @@ public class RustFSService {
      */
     public InputStream downloadFile(String objectName, String bucketName) {
         try {
-            return rustFSClient.getObject(GetObjectArgs.builder().bucket(bucketName).object(objectName).build());
+            return rustFSClient.getObject(GetObjectRequest.builder().bucket(bucketName).key(objectName).build());
         } catch (Exception e) {
-            throw new RuntimeException("下载MinIO文件失败：" + e.getMessage(), e);
+            throw new RuntimeException("下载文件失败：" + e.getMessage(), e);
         }
     }
 
@@ -100,9 +111,9 @@ public class RustFSService {
      */
     public void deleteFile(String objectName, String bucketName) {
         try {
-            rustFSClient.removeObject(RemoveObjectArgs.builder().bucket(bucketName).object(objectName).build());
+            rustFSClient.deleteObject(DeleteObjectRequest.builder().bucket(bucketName).key(objectName).build());
         } catch (Exception e) {
-            throw new RuntimeException("删除MinIO文件失败：" + e.getMessage(), e);
+            throw new RuntimeException("删除文件失败：" + e.getMessage(), e);
         }
     }
 
@@ -118,9 +129,10 @@ public class RustFSService {
      */
     public String getPresignedUrl(String objectName, String bucketName, int expire) {
         try {
-            return rustFSClient.getPresignedObjectUrl(GetPresignedObjectUrlArgs.builder().method(Method.GET).bucket(bucketName).object(objectName).expiry(expire).build());
+            GetObjectPresignRequest presignRequest = GetObjectPresignRequest.builder().signatureDuration(Duration.ofSeconds(expire)).getObjectRequest(GetObjectRequest.builder().bucket(bucketName).key(objectName).build()).build();
+            return s3Presigner.presignGetObject(presignRequest).url().toString();
         } catch (Exception e) {
-            throw new RuntimeException("生成MinIO临时链接失败：" + e.getMessage(), e);
+            throw new RuntimeException("生成临时链接失败：" + e.getMessage(), e);
         }
     }
 
@@ -130,13 +142,12 @@ public class RustFSService {
     public List<String> listFiles(String bucketName) {
         List<String> fileNames = new ArrayList<>();
         try {
-            Iterable<Result<Item>> results = rustFSClient.listObjects(ListObjectsArgs.builder().bucket(bucketName).build());
-            for (Result<Item> result : results) {
-                Item item = result.get();
-                fileNames.add(item.objectName());
+            ListObjectsV2Iterable results = rustFSClient.listObjectsV2Paginator(ListObjectsV2Request.builder().bucket(bucketName).build());
+            for (S3Object object : results.contents()) {
+                fileNames.add(object.key());
             }
         } catch (Exception e) {
-            throw new RuntimeException("列出MinIO文件失败：" + e.getMessage(), e);
+            throw new RuntimeException("列出文件失败：" + e.getMessage(), e);
         }
         return fileNames;
     }
@@ -149,10 +160,8 @@ public class RustFSService {
         try (FileOutputStream fos = new FileOutputStream(tempFile)) {
             fos.write(file.getBytes());
         }
-        // JVM 退出时删除临时文件
         tempFile.deleteOnExit();
         return tempFile;
     }
 
 }
-
