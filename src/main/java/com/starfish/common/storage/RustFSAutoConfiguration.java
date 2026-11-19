@@ -19,7 +19,7 @@ import java.net.URI;
  */
 @AutoConfiguration
 @ConditionalOnProperty(value = {"starfish.rustfs.enabled"}, havingValue = "true")
-@EnableConfigurationProperties({MinioProperties.class})
+@EnableConfigurationProperties({RustFSProperties.class})
 public class RustFSAutoConfiguration {
 
     @Bean("rustFSClient")
